@@ -1,0 +1,23 @@
+header {
+    height: 7em;
+    width: 100%;
+    background: transparent;
+    position: fixed;
+    z-index: 1;
+}
+
+.logo-container {
+    height: 100%;
+
+    .logo-top {
+        height: 100%;
+    }
+
+    #logo-white {
+        display: none;
+    }
+
+    #logo-black {
+        padding: 4em 3em;
+    }
+}

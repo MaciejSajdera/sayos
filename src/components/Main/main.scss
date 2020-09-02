@@ -1,0 +1,40 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1;
+}
+
+.single-project-container {
+    height: 100vh;
+    position: relative;
+
+    .gatsby-image-wrapper {
+        height: 100%;
+
+        img {
+            object-position: top!important;
+        }
+    }
+
+    .title-container {
+        bottom: 14%;
+        position: absolute;
+        left: 2.5em;
+    }
+
+    h2 {
+        color: #fff;
+        font-size: 2.5rem;
+
+        font-family: 'Mulish', sans-serif;
+        letter-spacing: 1px;
+    }
+
+    h2.project-title-1 {
+
+    }
+
+    h2.project-title-2 {
+
+    }
+}
