@@ -10,7 +10,10 @@ const IndexPage = () => (
   
   <Layout>
     <Main />
+    <div className="test"></div>
   </Layout>
+
+
 )
 
 export default IndexPage
