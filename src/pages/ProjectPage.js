@@ -4,13 +4,15 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import Main from "../components/Main/main"
-
-const IndexPage = () => (
+const ProjectPage = () => (
   
   <Layout>
-    <Main />
+  <div>
+    strona danego projektu
+  </div>
   </Layout>
+
+
 )
 
-export default IndexPage
+export default ProjectPage

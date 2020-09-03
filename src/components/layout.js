@@ -5,26 +5,34 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useState}  from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./Header/header"
-import Main from "./Main/main"
+import Menu from "./Menu/menu"
 import "./layout.css"
 
 const Layout = ({ children }) => {
 
+  const [navActive, setNavState] = useState(false)
+  const [langChosen, setLang] = useState(false)
+
+  const commonProps = {
+      setNavState: setNavState,
+      navActive: navActive,
+      setLang: setLang,
+      langChosen: langChosen,
+  }
+
   return (
     <>
-      <Header />
-      <Main />
+      <Header {...commonProps}/>
+      <Menu {...commonProps}/>
+      <main>{children}</main>
     </>
   )
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default Layout

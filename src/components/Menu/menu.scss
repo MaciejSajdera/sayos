@@ -1,0 +1,19 @@
+.menu {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: #0c0c0c;
+    opacity: 0;
+    z-index: 1;
+    transform: translateY(-100%);
+    transition: transform 0s;
+    transition: opacity 0.3s ease-in-out;
+
+}
+
+.menu.active {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: transform 0s;
+    transition: opacity 0.3s ease-in-out;
+}
