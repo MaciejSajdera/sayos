@@ -18,21 +18,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     locales.map(locale => {
       graphql(`
         {
-          homePL: allDatoCmsProject(filter: {locale: {eq: "pl"}}) {
+          home: allDatoCmsProject(filter: {locale: {eq: "${locale}" }}) {
             nodes {
                 id
                 slug
                 locale
                 }
             }
-
-          homeEN: allDatoCmsProject(filter: {locale: {eq: "en"}}) {
-            nodes {
-              id
-              slug
-              locale
-              }
-          }
 
           offer: datoCmsOffer(locale: { eq: "${locale}" }) {
             id
@@ -43,8 +35,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
       `).then(result => {
         console.log(result);
-
-        // const myLocale = 
 
         ["offer"].forEach(template => {
             let page = result.data[template];
@@ -57,31 +47,38 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             });
           });
 
-        result.data.homePL.nodes.forEach(item => {
+        result.data.home.nodes.forEach(item => {
           const postfix = locale === "pl" ? "" : `${locale}`;
           let url = `/${item.slug}/${postfix}`;
           createPage({
             path: url,
-            component: path.resolve(`./src/templates/home.js`),
+            component: path.resolve(`./src/pages/index.js`),
             context: {
               slug: item.slug,
-              locale
+              locale: item.locale
             }
           });
         });
 
-        result.data.homeEN.nodes.forEach(item => {
-            const postfix = locale === "pl" ? "" : `${locale}`;
-            let url = `/${item.slug}/${postfix}`;
-            createPage({
-              path: url,
-              component: path.resolve(`./src/templates/home.js`),
-              context: {
-                slug: item.slug,
-                locale
-              }
-            });
-          });
+        // result.data.homeEN.nodes.forEach(item => {
+        //     const postfix = locale === "pl" ? "" : `${locale}`;
+        //     let url = `/${item.slug}/${postfix}`;
+        //     createPage({
+        //       path: url,
+        //       component: path.resolve(`./src/templates/home.js`),
+        //       context: {
+        //         slug: item.slug,
+        //         locale
+        //       }
+        //     });
+        //   });
+
+         const myLocale = result.data
+
+         const obj = JSON.parse(JSON.stringify(myLocale));
+
+         console.log(obj);
+
       });
     })
   );

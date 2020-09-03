@@ -8,8 +8,8 @@ import Home from "../templates/home"
 
 
 class IndexPage extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       language: 'pl',
@@ -55,7 +55,7 @@ export default IndexPage
 export const data = graphql`
 
 query MyDataQuery {
-    allDatoCmsProject {
+    home: allDatoCmsProject(filter: {locale: {eq: "en" }}) {
       nodes {
         id
         position
