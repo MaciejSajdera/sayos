@@ -2,9 +2,9 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 
 
-const Menu = ({ navActive }) => {
+const Menu = ({ navToggled }) => {
     return (
-        <div className={`menu ${navActive ? `active` : ""}`}>
+        <div className={`menu ${navToggled ? `active` : ""}`}>
             <div className="menu-left">
 
             </div>
@@ -15,9 +15,5 @@ const Menu = ({ navActive }) => {
         </div>
     )
 }
-
-// menu.propTypes = {
-
-// }
 
 export default Menu

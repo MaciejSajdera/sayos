@@ -5,30 +5,18 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useState}  from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./Header/header"
-import Menu from "./Menu/menu"
+import React from "react"
 import "./layout.css"
 
-const Layout = ({ children }) => {
+import Header from "../components/Header/header"
+import Menu from "../components/Menu/menu"
 
-  const [navActive, setNavState] = useState(false)
-  const [langChosen, setLang] = useState(false)
-
-  const commonProps = {
-      setNavState: setNavState,
-      navActive: navActive,
-      setLang: setLang,
-      langChosen: langChosen,
-  }
+const Layout = ({handleNavToggle, navToggled, handleLanguageChange, language, children }) => {
 
   return (
     <>
-      <Header {...commonProps}/>
-      <Menu {...commonProps}/>
+      <Header handleNavToggle={handleNavToggle} navToggled={navToggled} handleLanguageChange={handleLanguageChange} language={language}/>
+      <Menu navToggled={navToggled} />
       <main>{children}</main>
     </>
   )

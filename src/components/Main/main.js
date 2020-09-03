@@ -2,52 +2,7 @@ import React from 'react'
 import { Link, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 
-const Main = () => {
-
-    const data = useStaticQuery(graphql`
-    query MyQuery {
-        allDatoCmsProject(filter: {locale: {eq: "pl"}}) {
-          nodes {
-            id
-            position
-            thumbnail {
-              fluid {
-                src
-                base64
-                srcSet
-              }
-            }
-            titlePart1
-            titlePart2
-            readMore
-            fullScreenPhoto {
-              fluid {
-                src
-                base64
-                srcSet
-              }
-            }
-            secondaryPhoto {
-              fluid {
-                src
-                base64
-                srcSet
-              }
-            }
-            projectDescription
-            areaText
-            areaValue
-            fullScreenPhotoTwo {
-              fluid {
-                src
-                base64
-                srcSet
-              }
-            }
-          }
-        }
-      }
-    `)
+const Main = ({ data }) => {
 
     return (
       <>

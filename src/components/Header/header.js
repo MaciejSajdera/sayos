@@ -1,8 +1,16 @@
+import React, { useState}  from "react"
 import { Link, useStaticQuery } from "gatsby"
 import PropTypes from "prop-types"
-import React from 'react'
 
-const Header = ({ setNavState, navActive }) => {
+
+const Header = ({ handleNavToggle, navToggled, handleLanguageChange, language }) => {
+
+  // const [navActive, setNavState] = useState(false)
+
+  // const navProps = {
+  //   navActive: navActive,
+  //   setNavState: setNavState,
+  // }
 
   const data = useStaticQuery(graphql`
   query MyLogoQuery {
@@ -19,11 +27,9 @@ const Header = ({ setNavState, navActive }) => {
   }
   `)
 
-
   return (
     <header>
 
-      <Link to="/">
       <div className={`logo-container`}>
 
         {data.allDatoCmsHeaderLogo.edges.map((file, index) => (
@@ -35,32 +41,30 @@ const Header = ({ setNavState, navActive }) => {
       ))}
 
       </div>
-      </Link>
+
+      <div className={`lang-switch`} onClick={() => handleLanguageChange() }>{language}</div>
 
       <div className={`menu-container`}>
-        <div className="menu-box" onClick={() => { navActive ? setNavState(false) : setNavState(true)}}>
+        <div className="menu-box" onClick={() => handleNavToggle() }>
 
-
-          <a href="#" className={`menu-trigger ${navActive ? "active" : ""}`} id={`menu10`} >
+          <div className={`menu-trigger ${navToggled ? "active" : ""}`} id={`menu10`} >
             <span></span>
             <span></span>
             <span></span>
-          </a>
+          </div>
 
         </div>
       </div>
-
     </header>
   )
-
 }
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+// Header.propTypes = {
+//   siteTitle: PropTypes.string,
+// }
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
+// Header.defaultProps = {
+//   siteTitle: ``,
+// }
 
 export default Header
