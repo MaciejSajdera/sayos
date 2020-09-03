@@ -6,7 +6,7 @@ const Main = ({ data }) => {
 
     return (
       <>
-            {data.home.nodes.sort(
+            {data.nodes.sort(
                         (a, b) => {
                         const positionA = a.position;
                         const positionB = b.position;

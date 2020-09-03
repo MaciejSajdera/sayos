@@ -12,13 +12,13 @@ class IndexPage extends React.Component {
     super();
 
     this.state = {
-      language: 'pl',
+      language: true,
       navToggled: false,
     }
   }
 
   handleLanguageChange = () => {
-    this.setState({language: 'en'})
+    this.setState(prevState => ({language: !prevState.language}));
   }
 
   handleNavToggle = () => {
@@ -28,7 +28,11 @@ class IndexPage extends React.Component {
 
   render() {
 
-    let data = this.props.data;
+    // let allData = this.props.data;
+    const language = this.state.language;
+
+    let allData;
+    this.state.language ? allData = this.props.data.homePL : allData = this.props.data.homeEN;
 
       const commonProps = {
         handleNavToggle: this.handleNavToggle,
@@ -37,12 +41,10 @@ class IndexPage extends React.Component {
         language: language,
       }
 
-    const language = this.state.language;
-
     return (
       <>
       <Layout {...commonProps}>
-        <Home data={data}/>
+        <Home data={allData}/>
       </Layout>
       </>
     )
@@ -55,7 +57,47 @@ export default IndexPage
 export const data = graphql`
 
 query MyDataQuery {
-    home: allDatoCmsProject(filter: {locale: {eq: "en" }}) {
+    homePL: allDatoCmsProject(filter: {locale: {eq: "pl" }}) {
+      nodes {
+        id
+        position
+        thumbnail {
+          fluid {
+            src
+            base64
+            srcSet
+          }
+        }
+        titlePart1
+        titlePart2
+        readMore
+        fullScreenPhoto {
+          fluid {
+            src
+            base64
+            srcSet
+          }
+        }
+        secondaryPhoto {
+          fluid {
+            src
+            base64
+            srcSet
+          }
+        }
+        projectDescription
+        areaText
+        areaValue
+        fullScreenPhotoTwo {
+          fluid {
+            src
+            base64
+            srcSet
+          }
+        }
+      }
+    }
+    homeEN: allDatoCmsProject(filter: {locale: {eq: "en" }}) {
       nodes {
         id
         position

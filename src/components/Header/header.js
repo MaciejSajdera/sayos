@@ -14,7 +14,7 @@ const Header = ({ handleNavToggle, navToggled, handleLanguageChange, language })
 
   const data = useStaticQuery(graphql`
   query MyLogoQuery {
-    allDatoCmsHeaderLogo {
+    allDatoCmsHeaderLogo(filter: {locale: {eq: "pl" }}) {
       edges {
         node {
           logoImage {
@@ -42,7 +42,7 @@ const Header = ({ handleNavToggle, navToggled, handleLanguageChange, language })
 
       </div>
 
-      <div className={`lang-switch`} onClick={() => handleLanguageChange() }>{language}</div>
+      <div className={`lang-switch`} onClick={() => handleLanguageChange() }>{language ? `pl` : `en`}</div>
 
       <div className={`menu-container`}>
         <div className="menu-box" onClick={() => handleNavToggle() }>
