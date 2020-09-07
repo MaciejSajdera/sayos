@@ -11,13 +11,13 @@ import "./layout.css"
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
 
-const Layout = ({handleNavToggle, navToggled, handleLanguageChange, language, children }) => {
+const Layout = ({handleNavToggle, navToggled, languagePL, children }) => {
 
   return (
     <>
-      <Header handleNavToggle={handleNavToggle} navToggled={navToggled} handleLanguageChange={handleLanguageChange} language={language}/>
+      <Header handleNavToggle={handleNavToggle} navToggled={navToggled} languagePL={languagePL}/>
       <Menu navToggled={navToggled} />
-      <main>{children}</main>
+      {children}
     </>
   )
 }

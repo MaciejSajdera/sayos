@@ -1,25 +1,51 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, navigate } from "gatsby"
 
+import Layout from "../components/layout"
 import Main from "../components/Main/main"
 
 class Home extends React.Component  {
 
+  constructor() {
+    super();
+
+    this.state = {
+      // languagePL: true,
+      navToggled: false,
+
+    }
+  }
+
+  // handleLanguageText = () => {
+  //   this.setState(prevState => ({languagePL: !prevState.languagePL}));
+  // }
+
+
+  handleNavToggle = () => {
+    this.setState(prevState => ({navToggled: !prevState.navToggled}));
+  }
+
   render() {
 
-  // let { home } = this.props.data;
+    const { myHomeData } = this.props.pageContext;
+
+      const commonProps = {
+        handleNavToggle: this.handleNavToggle,
+        navToggled: this.state.navToggled,
+        handleLanguageText: this.handleLanguageText,
+        languagePL: this.state.languagePL,
+        handleLanguageSwitch: this.handleLanguageSwitch
+      }
 
   return (
     <>
-      <Main data={this.props.data}/>
-      {/* <p>{this.props.data.slug}</p> */}
-    {/* <pre>{JSON.stringify(pageContext)}</pre> */}
+      <Layout {...commonProps}>
+         <Main data={myHomeData}/>
+      </Layout>
     </>
   )
-
 
   }
 }
 
 export default Home
-

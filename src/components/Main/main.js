@@ -5,8 +5,8 @@ import Img from "gatsby-image"
 const Main = ({ data }) => {
 
     return (
-      <>
-            {data.nodes.sort(
+      <main>
+            {data.sort(
                         (a, b) => {
                         const positionA = a.position;
                         const positionB = b.position;
@@ -20,16 +20,18 @@ const Main = ({ data }) => {
                         }
                       )
                       .map((element, index) => (
+                          
+                        <Link to={`/${element.slug}/${element.locale}`}>
                           <div className={`single-project-container`} key={index}>
                               <Img fluid={element.thumbnail.fluid} />
                               <div className={`title-container`}>
                               <h2 className={`project-title-1`}>{element.titlePart1}</h2>
                               <h2 className={`project-title-2`}>{element.titlePart2}</h2>
                               </div>
-
                           </div>
+                        </Link>
                       ))}
-      </>
+      </main>
     )
 }
 

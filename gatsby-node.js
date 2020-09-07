@@ -1,85 +1,152 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
-  const locales = ["pl", "en"];
+exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
-  locales.forEach(locale => {
-    const prefix = locale === "pl" ? "" : `/${locale}`;
-    createPage({
-      path: `${prefix}/`,
-      component: path.resolve(`./src/pages/index.js`),
-      context: { locale }
+
+  const result = await graphql(`
+    query myData{
+      pl: allDatoCmsProject(filter: {locale: {eq: "pl" }}) {
+        nodes {
+          slug
+          locale
+          id
+          position
+          thumbnail {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          titlePart1
+          titlePart2
+          readMore
+          fullScreenPhoto {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          secondaryPhoto {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          projectDescription
+          areaText
+          areaValue
+          fullScreenPhotoTwo {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+        }
+      }
+      en: allDatoCmsProject(filter: {locale: {eq: "en" }}) {
+        nodes {
+          slug
+          locale
+          id
+          position
+          thumbnail {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          titlePart1
+          titlePart2
+          readMore
+          fullScreenPhoto {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          secondaryPhoto {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          projectDescription
+          areaText
+          areaValue
+          fullScreenPhotoTwo {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  // console.log(result);
+
+  const locales = result.data;
+
+  const componentTemplate = path.resolve(`src/templates/home.js`);
+
+  // console.log(locales);
+
+  Object.entries(locales).forEach(([locale, nodes]) => {
+
+    const urlBase = `${locale}`;
+
+    Object.entries(nodes).forEach((node) => {
+      
+      node.forEach((item) => {
+
+      createPage({
+      path: `/${urlBase}/`,
+      component: componentTemplate,
+      context: {
+         myHomeData: item
+         }
     });
+
+
+      })
+    })
+
   });
 
-  Promise.all(
-    locales.map(locale => {
-      graphql(`
-        {
-          home: allDatoCmsProject(filter: {locale: {eq: "${locale}" }}) {
-            nodes {
-                id
-                slug
-                locale
-                }
-            }
+  console.log(result.data.pl.nodes)
 
-          offer: datoCmsOffer(locale: { eq: "${locale}" }) {
-            id
-            locale
-            slug
-          }
+        result.data.pl.nodes.forEach(item => {
 
-        }
-      `).then(result => {
-        console.log(result);
-
-        ["offer"].forEach(template => {
-            let page = result.data[template];
-            const postfix = locale === "pl" ? "" : `${page.locale}`;
-            let slug = page.slug;
-            createPage({
-              path: `${slug}/${postfix}`,
-              component: path.resolve(`./src/templates/${template}.js`),
-              context: { locale: page.locale }
-            });
-          });
-
-        result.data.home.nodes.forEach(item => {
-          const postfix = locale === "pl" ? "" : `${locale}`;
-          let url = `/${item.slug}/${postfix}`;
+          let url = `/${item.slug}/${item.locale}`;
           createPage({
             path: url,
-            component: path.resolve(`./src/pages/index.js`),
+            component: path.resolve(`src/pages/ProjectPage.js`),
             context: {
-              slug: item.slug,
-              locale: item.locale
+              myProjectData: item,
             }
           });
         });
 
-        // result.data.homeEN.nodes.forEach(item => {
-        //     const postfix = locale === "pl" ? "" : `${locale}`;
-        //     let url = `/${item.slug}/${postfix}`;
-        //     createPage({
-        //       path: url,
-        //       component: path.resolve(`./src/templates/home.js`),
-        //       context: {
-        //         slug: item.slug,
-        //         locale
-        //       }
-        //     });
-        //   });
+        result.data.en.nodes.forEach(item => {
 
-         const myLocale = result.data
+          let url = `/${item.slug}/${item.locale}`;
+          createPage({
+            path: url,
+            component: path.resolve(`src/pages/ProjectPage.js`),
+            context: {
+              myProjectData: item,
+            }
+          });
+        });
 
-         const obj = JSON.parse(JSON.stringify(myLocale));
-
-         console.log(obj);
-
-      });
-    })
-  );
 };

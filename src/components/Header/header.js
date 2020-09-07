@@ -3,7 +3,7 @@ import { Link, useStaticQuery } from "gatsby"
 import PropTypes from "prop-types"
 
 
-const Header = ({ handleNavToggle, navToggled, handleLanguageChange, language }) => {
+const Header = ({ handleNavToggle, navToggled, languagePL }) => {
 
   // const [navActive, setNavState] = useState(false)
 
@@ -42,7 +42,10 @@ const Header = ({ handleNavToggle, navToggled, handleLanguageChange, language })
 
       </div>
 
-      <div className={`lang-switch`} onClick={() => handleLanguageChange() }>{language ? `pl` : `en`}</div>
+      <div className={`lang-switch`}>
+        <Link to="/pl">PL</Link>
+        <Link to="/en">EN</Link>
+      </div>
 
       <div className={`menu-container`}>
         <div className="menu-box" onClick={() => handleNavToggle() }>
