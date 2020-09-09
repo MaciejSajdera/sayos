@@ -6,8 +6,8 @@ import Main from "../components/Main/main"
 
 class Home extends React.Component  {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       // languagePL: true,
@@ -19,7 +19,6 @@ class Home extends React.Component  {
   // handleLanguageText = () => {
   //   this.setState(prevState => ({languagePL: !prevState.languagePL}));
   // }
-
 
   handleNavToggle = () => {
     this.setState(prevState => ({navToggled: !prevState.navToggled}));
@@ -39,7 +38,7 @@ class Home extends React.Component  {
 
   return (
     <>
-      <Layout {...commonProps}>
+      <Layout {...commonProps} data={myHomeData}>
          <Main data={myHomeData}/>
       </Layout>
     </>

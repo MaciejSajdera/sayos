@@ -32,7 +32,7 @@ class ProjectPage extends React.Component {
 
     return (
   
-      <Layout {...commonProps}>
+      <Layout {...commonProps} data={myProjectData}>
       <div>
         strona projektu: {myProjectData.slug}
       </div>

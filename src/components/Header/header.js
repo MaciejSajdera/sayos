@@ -34,6 +34,7 @@ const Header = ({ handleNavToggle, navToggled, languagePL }) => {
 
         {data.allDatoCmsHeaderLogo.edges.map((file, index) => (
         
+        
             <div className={`logo-top`} id={file.node.logoImage.title} key={index}>
               <img src={file.node.logoImage.url}></img>
             </div>

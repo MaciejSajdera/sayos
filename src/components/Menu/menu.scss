@@ -9,6 +9,10 @@
     transition: transform 0s;
     transition: opacity 0.3s ease-in-out;
 
+    .menu-left {
+        color: white;
+    }
+
 }
 
 .menu.active {

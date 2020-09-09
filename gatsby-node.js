@@ -127,10 +127,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
         result.data.pl.nodes.forEach(item => {
 
-          let url = `/${item.slug}/${item.locale}`;
+          let url = `/${item.locale}/${item.slug}`;
           createPage({
             path: url,
-            component: path.resolve(`src/pages/ProjectPage.js`),
+            component: path.resolve(`src/templates/ProjectPage.js`),
             context: {
               myProjectData: item,
             }
@@ -139,10 +139,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
         result.data.en.nodes.forEach(item => {
 
-          let url = `/${item.slug}/${item.locale}`;
+          let url = `/${item.locale}/${item.slug}`;
           createPage({
             path: url,
-            component: path.resolve(`src/pages/ProjectPage.js`),
+            component: path.resolve(`src/templates/ProjectPage.js`),
             context: {
               myProjectData: item,
             }
