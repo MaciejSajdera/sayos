@@ -6,3 +6,7 @@
 
 // You can delete this file if you're not using it
 import "./src/styles/styles.scss"
+
+import CustomLayout from "./wrapPageElement"
+
+export const wrapPageElement = CustomLayout

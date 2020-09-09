@@ -1,19 +1,32 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
+class Menu extends React.Component {
 
-const Menu = ({ navToggled, data }) => {
-    return (
-        <div className={`menu ${navToggled ? `active` : ""}`}>
-            <div className="menu-left">
-                {data.adressData1}
+    render() {
+
+        const LocaleContext = this.props.LocaleContext;
+
+        return (
+            <>
+
+            <div className={`menu ${this.props.navToggled ? `active` : ""}`}>
+                <div className="menu-left">
+                <LocaleContext.Consumer>
+                  {value => <p>{value.menuRight.adressData1}</p>}  
+                </LocaleContext.Consumer>
+                </div>
+    
+                <div className="menu-right">
+                    test
+                </div>
             </div>
 
-            <div className="menu-right">
-                
-            </div>
-        </div>
-    )
+            </>
+        )
+    }
+
+
 }
 
 export default Menu

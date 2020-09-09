@@ -1,51 +1,17 @@
 import React from "react"
-import { Link, graphql, navigate } from "gatsby"
+import { Layout } from "./src/components/layout"
 
-import Layout from "../components/layout"
-import Main from "../components/Main/main"
+export const LocaleContext = React.createContext();
 
-class Home extends React.Component  {
+// Pass all props (hence the ...props) to the layout component so it has access to things like pageContext or location
+const wrapPageElement = ({ element, props }) => (
+  <Layout {...props} LocaleContext={LocaleContext}>{element}</Layout>
+)
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      navToggled: false,
-
-    }
-  }
-
-  handleNavToggle = () => {
-    this.setState(prevState => ({navToggled: !prevState.navToggled}));
-  }
-
-  render() {
-
-    let { projects, menuRight } = this.props.data;
-
-      const commonProps = {
-        handleNavToggle: this.handleNavToggle,
-        navToggled: this.state.navToggled,
-        handleLanguageText: this.handleLanguageText,
-        languagePL: this.state.languagePL,
-        handleLanguageSwitch: this.handleLanguageSwitch
-      }
-
-  return (
-    <>
-      <Layout {...commonProps} data={menuRight}>
-         <Main data={projects}/>
-      </Layout>
-    </>
-  )
-
-  }
-}
-
-export default Home
+export default wrapPageElement
 
 export const query = graphql`
-query myData($locale: String!) {
+query myData3($locale: String!) {
   projects: allDatoCmsProject(filter: {locale: {eq: $locale }}) {
     nodes {
       slug
