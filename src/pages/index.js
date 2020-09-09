@@ -7,13 +7,12 @@ import SEO from "../components/seo"
 import Home from "../templates/home"
 
 
-const IndexPage = () => {
-
+const  IndexPage = () => {
 
     return (
-      <Layout>
-        <Home />
-      </Layout>
+      <>
+      <p className="test">Index Page</p>
+      </>
     )
 }
 

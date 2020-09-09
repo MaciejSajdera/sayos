@@ -8,15 +8,15 @@
 import React from "react"
 import "./layout.css"
 
-import Header from "../components/Header/header"
-import Menu from "../components/Menu/menu"
+import Header from "./Header/header"
+import Menu from "./Menu/menu"
 
-const Layout = ({handleNavToggle, navToggled, languagePL, children, data } ) => {
+const Layout = ({ handleNavToggle, navToggled, languagePL, children, data } ) => {
 
   return (
     <>
       <Header handleNavToggle={handleNavToggle} navToggled={navToggled} languagePL={languagePL}/>
-      <Menu navToggled={navToggled} data={data} />
+      <Menu navToggled={navToggled} data={data}/>
       {children}
     </>
   )

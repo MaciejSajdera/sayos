@@ -6,11 +6,7 @@ const Menu = ({ navToggled, data }) => {
     return (
         <div className={`menu ${navToggled ? `active` : ""}`}>
             <div className="menu-left">
-                {/* {data.map((element, index) => (
-                    <div key={index}>
-                        {element.locale}
-                    </div>
-                ))} */}
+                {data.adressData1}
             </div>
 
             <div className="menu-right">
