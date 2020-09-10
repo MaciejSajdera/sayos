@@ -44,7 +44,7 @@ const Header = ({ handleNavToggle, navToggled, languagePL }) => {
       </div>
 
       <div className={`lang-switch`}>
-        <Link to="/pl">PL</Link>
+        <Link to="/">PL</Link>
         <Link to="/en">EN</Link>
       </div>
 

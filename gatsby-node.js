@@ -6,10 +6,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   const locales = ["pl", "en"];
 
-  const componentTemplate = path.resolve(`src/templates/home.js`);
+  const componentTemplate = path.resolve(`src/templates/index.js`);
 
   locales.forEach(locale => {
-    const prefix = `${locale}`;
+    const prefix = locale === 'pl' ? "" : `${locale}`;
     createPage({
       path: `/${prefix}`,
       component: componentTemplate,
