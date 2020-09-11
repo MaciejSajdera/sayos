@@ -5,22 +5,26 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { Component } from 'react'
 import "./layout.css"
+import { graphql, useStaticQuery } from "gatsby"
 
 import Header from "./Header/header"
-import Menu from "./Menu/menu"
 
-const Layout = ({ handleNavToggle, navToggled, languagePL, children, data } ) => {
+import { ContextProviderComponent } from "../../context"
 
-  return (
-    <>
-      <Header handleNavToggle={handleNavToggle} navToggled={navToggled} languagePL={languagePL}/>
-      <Menu navToggled={navToggled} data={data}/>
-      {children}
-    </>
-  )
+
+const Layout = (props) => {
+
+    return (
+      <>
+      <ContextProviderComponent>
+        <Header />
+        {props.children}
+      </ContextProviderComponent>
+      </>
+    )
+
 }
-
 
 export default Layout

@@ -1,4 +1,4 @@
-header {
+.menu-wrapper {
     height: 10em;
     width: 100%;
     background: transparent;
@@ -31,6 +31,7 @@ header {
         color: white;
         text-align: center; 
         text-transform: uppercase;
+        display: none;
 
         a {
             text-decoration: none;
@@ -121,10 +122,31 @@ header {
         -webkit-transform: translateY(-16px) rotate(45deg);
         transform: translateY(-16px) rotate(45deg);
       }
-
 }
 
+.nav {
+    position: absolute;
+    border: 1px solid red;
+    height: 100%;
+    width: 100%;
+    z-index:-1;
+    background: #0c0c0c;
+    opacity: 0;
+    transition: transform 0s;
+    transition: opacity 0.3s ease-in-out;
+}
 
+header.active {
+    height: 100%;
 
+    .lang-switch {
+        display: block;
+    }
 
+    .nav {
+        z-index: 1;
+        opacity: 1;
+    }
+}
+  
   

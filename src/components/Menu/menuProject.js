@@ -2,14 +2,14 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 import Consumer from "../../../context"
 
-const Menu = ({ data }) => {
+const MenuProject = ({ data }) => {
     return (
 
         <Consumer>
-        {({navToggled}) => (
+        {({navToggled, menuData}) => (
         <div className={`menu ${navToggled ? `active` : ""}`}>
             <div className="menu-left">
-                {data.adressData1}
+                {menuData.adressData1}
             </div>
 
             <div className="menu-right">
@@ -21,4 +21,4 @@ const Menu = ({ data }) => {
     )
 }
 
-export default Menu
+export default MenuProject

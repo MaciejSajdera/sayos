@@ -1,8 +1,10 @@
 import React from "react"
 import { Link, graphql, navigate } from "gatsby"
 
-import Layout from "../components/layout"
 import Main from "../components/Main/main"
+import Menu from "../components/Menu/menu"
+
+import Consumer from "../../context"
 
 class Home extends React.Component  {
 
@@ -10,32 +12,21 @@ class Home extends React.Component  {
     super(props);
 
     this.state = {
-      navToggled: false,
+      locale: this.props.data.menuRight.locale
 
     }
   }
 
-  handleNavToggle = () => {
-    this.setState(prevState => ({navToggled: !prevState.navToggled}));
-  }
 
   render() {
 
     let { projects, menuRight } = this.props.data;
 
-      const commonProps = {
-        handleNavToggle: this.handleNavToggle,
-        navToggled: this.state.navToggled,
-        handleLanguageText: this.handleLanguageText,
-        languagePL: this.state.languagePL,
-        handleLanguageSwitch: this.handleLanguageSwitch
-      }
-
   return (
-    <>
-      <Layout {...commonProps} data={menuRight}>
+    <>  {console.log(`index.js state locale: ${this.state.locale}`), console.log(`this props data: ${this.props.data}`)}
+        <Menu data={menuRight}/>
+
          <Main data={projects}/>
-      </Layout>
     </>
   )
 
@@ -93,15 +84,7 @@ query myData($locale: String!) {
     adressData2
     phoneNumber
     emailAdress
-    socialMedia {
-      myIcon {
-        fixed {
-          src
-          srcSet
-          base64
-        }
-      }
-    }
+    locale
   }
 }
 `;

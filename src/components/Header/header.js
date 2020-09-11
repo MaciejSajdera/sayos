@@ -2,8 +2,9 @@ import React, { useState}  from "react"
 import { Link, useStaticQuery } from "gatsby"
 import PropTypes from "prop-types"
 
+import Consumer from "../../../context"
 
-const Header = ({ handleNavToggle, navToggled, languagePL }) => {
+const Header = () => {
 
   // const [navActive, setNavState] = useState(false)
 
@@ -13,7 +14,7 @@ const Header = ({ handleNavToggle, navToggled, languagePL }) => {
   // }
 
   const data = useStaticQuery(graphql`
-  query MyLogoQuery {
+  query MyHeaderQuery {
     allDatoCmsHeaderLogo(filter: {locale: {eq: "pl" }}) {
       edges {
         node {
@@ -28,38 +29,65 @@ const Header = ({ handleNavToggle, navToggled, languagePL }) => {
   `)
 
   return (
-    <header>
 
-      <div className={`logo-container`}>
+        <Consumer>
 
-        {data.allDatoCmsHeaderLogo.edges.map((file, index) => (
-        
-        
+        {({handleNavToggle, navToggled }) => (
+
+
+        <>
+
+        <header className={`${navToggled ? "active" : ""}`}>
+
+        <div className="menu-wrapper">
+
+        <div className={`logo-container`}>
+            {data.allDatoCmsHeaderLogo.edges.map((file, index) => (
+
             <div className={`logo-top`} id={file.node.logoImage.title} key={index}>
-              <img src={file.node.logoImage.url}></img>
+             <img src={file.node.logoImage.url}></img>
             </div>
 
-      ))}
+              ))}
+        </div>
 
-      </div>
+        <div className={`lang-switch`}>
+          <Link to="/" onClick={() => {
+            // set(data.menuRightPL)
+            // langSwitch(false)
+          } }>PL</Link>
+         <Link to="/en" onClick={() => {
+            // set(data.menuRightEN)
+            // langToggle()
+            // langSwitch(true)
+          } }>EN</Link>
+        </div>
 
-      <div className={`lang-switch`}>
-        <Link to="/">PL</Link>
-        <Link to="/en">EN</Link>
-      </div>
+        <div className={`menu-container`}>
 
-      <div className={`menu-container`}>
-        <div className="menu-box" onClick={() => handleNavToggle() }>
+           <div className="menu-box" onClick={() => handleNavToggle() }>
 
-          <div className={`menu-trigger ${navToggled ? "active" : ""}`} id={`menu10`} >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+              <div className={`menu-trigger ${navToggled ? "active" : ""}`} id={`menu10`} >
+                <span></span>
+                <span></span>
+                <span></span>
+             </div>
+
+            </div>
 
         </div>
-      </div>
-    </header>
+
+        </div>
+
+        </header>
+        </>
+
+        
+
+        )}
+        </Consumer>
+        
+
   )
 }
 
