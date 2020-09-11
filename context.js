@@ -19,37 +19,27 @@ class ContextProviderComponent extends React.Component {
     this.state = {
       set: this.setData,
       setLocale: this.setLocale,
-      langChosen: true,
+      langChosen: '',
       langToggle: this.langToggle,
       handleNavToggle: this.handleNavToggle,
     }
   }
 
   setData(newData) {
-    this.setState(state => ({
+    this.setState({
       menuData: {
-        ...state.data,
-        ...newData,
+        newData,
       },
-    }))
+    })
   }
 
   setLocale(myLocale) {
     this.setState(state => ({
-      langChosen: {
+      data: {
         myLocale,
       },
     }))
   }
-
-  // langSwitch(newData) {
-  //   this.setState(state => ({
-  //     langChosen: {
-  //       ...state.data,
-  //       ...newData,
-  //     },
-  //   }))
-  // }
 
 
   handleNavToggle = () => {

@@ -22,9 +22,11 @@ class Home extends React.Component  {
 
     let { projects, menuRight } = this.props.data;
 
+    const menuStyle = `menuStyleAbsolute`;
+
   return (
     <>  {console.log(`index.js state locale: ${this.state.locale}`), console.log(`this props data: ${this.props.data}`)}
-        <Menu data={menuRight}/>
+        <Menu dataMenu={menuRight} dataProjects={projects} menuStyle={menuStyle}/>
 
          <Main data={projects}/>
     </>

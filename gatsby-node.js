@@ -18,29 +18,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   });
 
 
-  locales.forEach(locale => {
-    const prefix = `allprojects`;
-    createPage({
-      path: `/${prefix}`,
-      component: path.resolve(`src/templates/ProjectPage.js`),
-      context: { locale }
-    });
-  });
-
   const projectsQuery = await graphql(`
     query myData{
-
-      menuRight: allDatoCmsMenuRight(filter: {locale: {eq: "pl"}}) {
-        nodes {
-          locale
-          id
-          adressData1
-          adressData2
-          phoneNumber
-          emailAdress
-        }
-      }
-
 
       pl: allDatoCmsProject(filter: {locale: {eq: "pl" }}) {
         nodes {
@@ -84,6 +63,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           }
         }
       }
+
       en: allDatoCmsProject(filter: {locale: {eq: "en" }}) {
         nodes {
           slug
@@ -131,13 +111,14 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   projectsQuery.data.pl.nodes.forEach(item => {
 
-          let url = `/${item.locale}/${item.slug}`;
+          let url = `/${item.slug}`;
           createPage({
             path: url,
             component: path.resolve(`src/templates/ProjectPage.js`),
             context: {
               myProjectData: item,
-              locale: item.locale
+              locale: item.locale,
+              fullScreenPhoto: item.fullScreenPhoto
             }
           });
   });
@@ -150,7 +131,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             component: path.resolve(`src/templates/ProjectPage.js`),
             context: {
               myProjectData: item,
-              locale: item.locale
+              locale: item.locale,
+              fullScreenPhoto: item.fullScreenPhoto
             }
           });
   });

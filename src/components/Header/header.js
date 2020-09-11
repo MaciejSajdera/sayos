@@ -1,5 +1,5 @@
 import React, { useState}  from "react"
-import { Link, useStaticQuery } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import PropTypes from "prop-types"
 
 import Consumer from "../../../context"
@@ -39,7 +39,7 @@ const Header = () => {
 
         <header className={`${navToggled ? "active" : ""}`}>
 
-        <div className="menu-wrapper">
+        {/* <div className="menu-wrapper"> */}
 
         <div className={`logo-container`}>
             {data.allDatoCmsHeaderLogo.edges.map((file, index) => (
@@ -51,7 +51,7 @@ const Header = () => {
               ))}
         </div>
 
-        <div className={`lang-switch`}>
+        {/* <div className={`lang-switch`}>
           <Link to="/" onClick={() => {
             // set(data.menuRightPL)
             // langSwitch(false)
@@ -61,11 +61,11 @@ const Header = () => {
             // langToggle()
             // langSwitch(true)
           } }>EN</Link>
-        </div>
+        </div> */}
 
-        <div className={`menu-container`}>
+        {/* <div className={`menu-container`}> */}
 
-           <div className="menu-box" onClick={() => handleNavToggle() }>
+           {/* <div className="menu-box" onClick={() => handleNavToggle() }>
 
               <div className={`menu-trigger ${navToggled ? "active" : ""}`} id={`menu10`} >
                 <span></span>
@@ -73,11 +73,11 @@ const Header = () => {
                 <span></span>
              </div>
 
-            </div>
+            </div> */}
 
-        </div>
+        {/* </div> */}
 
-        </div>
+        {/* </div> */}
 
         </header>
         </>

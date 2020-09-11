@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, graphql, navigate } from "gatsby"
+import { Link, graphql, navigate, Img } from "gatsby"
 
 import Menu from "../components/Menu/menu"
 
@@ -10,6 +10,12 @@ class ProjectPage extends Component {
 
     const { myProjectData } = this.props.pageContext;
 
+    const menuStyle = `menuStyleFixed`;
+
+    // const { locale } = this.props.pageContext.locale;
+
+    // const { fullScreenPhoto } = this.props.pageContext.fullScreenPhoto;
+
     return (
       <>
 
@@ -18,14 +24,23 @@ class ProjectPage extends Component {
       console.log(`this props data: ${this.props.data}`)
       }
 
-      <Menu data={menuRight}/>
+      <Menu dataMenu={menuRight} dataProjects={projects} menuStyle={menuStyle}/>
 
       {/* {this.props.data.menuRight.phoneNumber} */}
-      <div>
+      {/* <div> */}
 
-      strona projektu: {myProjectData.slug}
+      {/* strona projektu: {myProjectData.slug} */}
       {/* testmenudata: {menuRight.phoneNumber} */}
+      {/* </div> */}
+
+      <div className="fullscreen-project-image">
+              <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} />
       </div>
+
+      <div className="project-content">
+        content
+      </div>
+
       </>
     )
   }
