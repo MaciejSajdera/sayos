@@ -40,7 +40,7 @@ const Header = () => {
         <header className={`${navToggled ? "active" : ""}`}>
 
         {/* <div className="menu-wrapper"> */}
-
+        <a href={`/`}>
         <div className={`logo-container`}>
             {data.allDatoCmsHeaderLogo.edges.map((file, index) => (
 
@@ -50,6 +50,7 @@ const Header = () => {
 
               ))}
         </div>
+        </a>
 
         {/* <div className={`lang-switch`}>
           <Link to="/" onClick={() => {

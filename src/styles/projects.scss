@@ -1,8 +1,28 @@
-.fullscreen-project-image {
+.fullscreen-project-image img {
     height: 100vh;
+    width: 100%;
     object-fit: cover;
 }
 
 .project-content {
-    height: 50vh;
+    height: 100vh;
+}
+
+.arrow-box {
+    top: 85%;
+    right: 2em;
+    position: fixed;
+
+    svg {
+        height: 100%;
+    }
+}
+
+.box-bt-left {
+    right: auto;
+    left: 4%;
+}
+
+.box-bt-right {
+    right: 4%;
 }
