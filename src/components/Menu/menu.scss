@@ -102,17 +102,81 @@ div.menu-trigger {
     // border: 1px solid purple;
 
     .menu-inner {
-        display: none;
+        z-index: -1;
         background: #0c0c0c;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         opacity: 0;
-        transition: transform 0s;
-        transition: opacity 0.3s ease-in-out;
+        // transition: all 0.1s ease-in-out;
+        color: white;
+
+
+            h3 {
+                font-weight: 400;
+                letter-spacing: 1px;
+                margin-bottom: 2em;
+            }
+
+            p {
+                color: #7c7c7c;
+                margin-bottom: 0.5em;
+            }
+
+        .menu-wrapper {
+            height: 70%;
+            width: 50%;
+            text-align: left;
+
+            .menu-grouped-items {
+                padding-bottom: 2rem;
+
+                h3 { 
+                    margin-bottom: 0.5em;
+                }
+            }
+        }
+
+        .menu-left {
+            width: 50%;
+            position: relative;
+
+            .contact-form-title {
+                cursor: pointer;
+            }
+
+            .form-active {
+                transform: translateY(0%);
+            }
+        }
+
+        .menu-right {
+
+            .menu-grouped-items {
+                padding-bottom: 1rem;
+            }
+
+            img.menu-logo {
+                width: 12rem;
+            }
+
+            .icons {
+                img {
+                    padding: 0 1em;
+
+                    &:nth-of-type(1) {
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
     }
 
 }
 
 .menuStyleAbsolute {
     position: absolute;
+    
 }
 
 .menuStyleFixed {
@@ -120,54 +184,38 @@ div.menu-trigger {
 }
 
 .menu.active {
-
+    
     .menu-inner {
-        position: absolute;
         z-index: 1;
-        display: flex;
+        opacity: 1;
         height: 100vh;
         width: 100vw;
-        top: 0;
-        right: 0;
-        opacity: 1;
-        transform: translateY(0%);
-        transition: transform 0s;
-        transition: opacity 0.3s ease-in-out;
-        color: white;
-
-
-
-        .menu-left {
-            width: 50%;
-        }
-
-        .menu-right {
-            width: 50%;
-
-            .lang-switch {
-                position: absolute;
-                z-index:9999;
-                width: 150px;
-                height: 50px;
-                background: rgba(54, 52, 52, 0.4);
-                color: white;
-                text-align: center; 
-                text-transform: uppercase;
-        
-                a {
-                    text-decoration: none;
-                    padding: 1em;
-        
-                    &:visited{
-                        color: white;
-                    }
-                }
-        
-            }
-        }
 
     }
+}
 
+.lang-switch {
+    position: absolute;
+    z-index:9999;
+    width: 150px;
+    height: 50px;
+    background: rgba(54, 52, 52, 0.4);
+    color: white;
+    text-align: center; 
+    text-transform: uppercase;
+    top: 2em;
+    left: calc(50% - 75px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    a {
+        text-decoration: none;
+        padding: 1em;
+
+        &:visited{
+            color: white;
+        }
+    }
 }
 

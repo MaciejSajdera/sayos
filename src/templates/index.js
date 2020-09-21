@@ -12,7 +12,7 @@ class Home extends React.Component  {
     super(props);
 
     this.state = {
-      locale: this.props.data.menuRight.locale
+      locale: this.props.data.menuRightIndex.locale
 
     }
   }
@@ -20,18 +20,17 @@ class Home extends React.Component  {
 
   render() {
 
-    let { projects, menuRight } = this.props.data;
+    let { projects, menuRightIndex, menuLeftIndex, about } = this.props.data;
 
     const menuStyle = `menuStyleAbsolute`;
 
   return (
     <>  {console.log(`index.js state locale: ${this.state.locale}`), console.log(`this props data: ${this.props.data}`)}
-        <Menu dataMenu={menuRight} dataProjects={projects} menuStyle={menuStyle}/>
+        <Menu dataMenu={ menuRightIndex} dataMenuLeft={ menuLeftIndex} dataProjects={projects} menuStyle={menuStyle} about={about} />
 
          <Main data={projects}/>
     </>
   )
-
   }
 }
 
@@ -52,6 +51,7 @@ query myData($locale: String!) {
           srcSet
         }
       }
+      projectCategory
       titlePart1
       titlePart2
       readMore
@@ -81,11 +81,45 @@ query myData($locale: String!) {
       }
     }
   }
-  menuRight: datoCmsMenuRight(locale: {eq: $locale}) {
+  menuRightIndex: datoCmsMenuRight(locale: {eq: $locale}) {
     adressData1
     adressData2
     phoneNumber
     emailAdress
+    locale
+    instagramicon {
+      fixed(height: 35) {
+        src
+        tracedSVG
+        base64
+      }
+    }
+    facebookicon {
+      fixed(height: 35) {
+        src
+        tracedSVG
+        base64
+      }
+    }
+  }
+
+  menuLeftIndex: datoCmsMenuLeft(locale: {eq: $locale}) {
+    projectsHeader
+    projectsSubfield1
+    projectsSubfield2
+    offerHeader
+    aboutHeader
+    individualCustomer
+    individualSubfield1
+    individualSubfield2
+    contactHeader
+    locale
+  }
+
+  about: datoCmsAbout(locale: {eq: $locale}) {
+    aboutTitle
+    aboutContent
+    slug
     locale
   }
 }

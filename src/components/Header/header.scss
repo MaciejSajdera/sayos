@@ -1,5 +1,4 @@
 .menu-wrapper {
-    height: 10em;
     width: 100%;
     background: transparent;
     position: fixed;
@@ -23,7 +22,7 @@
 
 header {
     position: fixed;
-    z-index:999;
+    z-index: 1;
     top: 3em;
 
     .logo-container {
@@ -31,7 +30,8 @@ header {
         .logo-top {
             height: 100%;
             img {
-                padding-left: 2em;
+                padding-left: 3em;
+                width: 15rem;
             }
         }
     

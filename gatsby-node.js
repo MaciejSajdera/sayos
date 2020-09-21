@@ -17,6 +17,55 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     });
   });
 
+  const menuPagesQuery = await graphql(`
+  query MyMenuPagesQuery {
+    pl: allDatoCmsAbout(filter: {locale: {eq: "pl"}}) {
+      nodes {
+        aboutTitle
+        aboutContent
+        slug
+        locale
+      }
+    }
+    en: allDatoCmsAbout(filter: {locale: {eq: "en"}}) {
+      nodes {
+        aboutTitle
+        aboutContent
+        slug
+        locale
+      }
+    }
+  }
+  `)
+
+  menuPagesQuery.data.pl.nodes.forEach(item => {
+    let url = `/${item.slug}`;
+    createPage({
+      path: url,
+      component: path.resolve(`src/templates/about.js`),
+      context: {
+        aboutData: item.aboutTitle,
+        locale: item.locale,
+      }
+    });
+});
+
+
+menuPagesQuery.data.en.nodes.forEach(item => {
+  let url = `/${item.slug}`;
+  createPage({
+    path: url,
+    component: path.resolve(`src/templates/about.js`),
+    context: {
+      aboutData: item,
+      aboutTitle: item.aboutTitle,
+      locale: item.locale,
+    }
+  });
+});
+
+
+
 
   const projectsQuery = await graphql(`
     query myData{
@@ -34,6 +83,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               srcSet
             }
           }
+          projectCategory
           titlePart1
           titlePart2
           readMore
@@ -77,6 +127,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               srcSet
             }
           }
+          projectCategory
           titlePart1
           titlePart2
           readMore
@@ -111,7 +162,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   projectsQuery.data.pl.nodes.forEach(item => {
 
-          let url = `/${item.slug}`;
+          let url = `${item.projectCategory}/${item.slug}`;
           createPage({
             path: url,
             component: path.resolve(`src/templates/ProjectPage.js`),
@@ -125,7 +176,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   projectsQuery.data.en.nodes.forEach(item => {
 
-          let url = `/${item.locale}/${item.slug}`;
+          let url = `/${item.locale}/${item.projectCategory}/${item.slug}`;
           createPage({
             path: url,
             component: path.resolve(`src/templates/ProjectPage.js`),

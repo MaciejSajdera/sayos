@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react'
 import { Link, graphql, navigate, Img } from "gatsby"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import Consumer from "../../context"
+import Consumer from "../../context";
 import { HiArrowNarrowUp, HiArrowNarrowDown } from 'react-icons/hi';
 import { IconContext } from "react-icons";
 
@@ -10,16 +10,10 @@ import Menu from "../components/Menu/menu"
 
 class ProjectPage extends Component {
 
-  constructor() {
-    super()
-
-
-
-  }
 
   render() {
 
-    let { projects, menuRight } = this.props.data;
+    let { projects, menuRightProject, menuLeftProject, about } = this.props.data;
 
     const { myProjectData } = this.props.pageContext;
 
@@ -32,17 +26,27 @@ class ProjectPage extends Component {
 
     // const { fullScreenPhoto } = this.props.pageContext.fullScreenPhoto;
 
-    const handleArrowTop = () =>
-    this.topRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
+    const handleArrowPrev = (e) => {
+      let pageHeight = window.innerHeight;
+      window.scrollBy({
+        top: -pageHeight,
+        behavior: 'smooth'
+      });
+    }
 
-    const handleArrowNext = () =>
-    this.nextSectionRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
+    // const handleArrowNext = () =>
+    // this.nextSectionRef.current.scrollIntoView({
+    //   behavior: 'smooth',
+    //   block: 'start',
+    // });
+
+    const handleArrowNext = (e) => {
+      let pageHeight = window.innerHeight;
+      window.scrollBy({
+        top: pageHeight,
+        behavior: 'smooth'
+      });
+    }
 
     return (
       <>
@@ -52,7 +56,7 @@ class ProjectPage extends Component {
       console.log(`this props data: ${this.props.data}`)
       }
 
-      <Menu dataMenu={menuRight} dataProjects={projects} menuStyle={menuStyle}/>
+      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } dataProjects={projects} menuStyle={menuStyle} about={about}/>
 
       {/* {this.props.data.menuRight.phoneNumber} */}
       {/* <div> */}
@@ -61,28 +65,17 @@ class ProjectPage extends Component {
       {/* testmenudata: {menuRight.phoneNumber} */}
       {/* </div> */}
 
-      <div className="fullscreen-project-image" ref={this.topRef}>
-              {/* <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} /> */}
-              <LazyLoadImage
-                // alt={image.alt}
-                // height={image.height}
-                effect="blur"
-                src={myProjectData.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
-                // width={image.width}
-                 />
-      </div>
-
-      <div className="arrow-box box-bt-left" onClick={handleArrowTop}>
+      <div className="arrow-box box-bt-left" onClick={handleArrowPrev}>
 
         <div className={`menu-trigger`}>
             <IconContext.Provider value={{ color: "white", size: "4em", height: "100" }}>
-             <HiArrowNarrowUp />
+            <HiArrowNarrowUp />
             </IconContext.Provider>
         </div>
 
-      </div>
+        </div>
 
-      <div className="arrow-box box-bt-right" onClick={handleArrowNext}>
+        <div className="arrow-box box-bt-right" onClick={handleArrowNext}>
 
         <div className={`menu-trigger`}>
             <IconContext.Provider value={{ color: "white", size: "4em", height: "100" }}>
@@ -90,10 +83,68 @@ class ProjectPage extends Component {
             </IconContext.Provider>
         </div>
 
+        </div>
+
+        <div className="fullscreen-project-image" ref={this.topRef}>
+                {/* <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} /> */}
+                <LazyLoadImage
+                  // alt={image.alt}
+                  // height={image.height}
+                  effect="blur"
+                  src={myProjectData.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
+                  // width={image.width}
+                  />
+        </div>
+
+
+      <div className="project-content-middle" ref={this.nextSectionRef}>
+        <div className="content section-left">
+            <div className="content-wrapper">
+              
+              {/* <div className="scroll-marker">
+
+              </div> */}
+
+              <div className="text-container">
+                  <h2>{myProjectData.titlePart1}</h2>
+                  <h2>{myProjectData.titlePart2}</h2>
+                  <div className="project-description">
+                    <p>{myProjectData.projectDescription}</p>
+                    <p>{myProjectData.areaText}: <strong>{myProjectData.areaValue}</strong></p>
+                  </div>
+              </div>
+
+            </div>
+        </div>
+
+        <div className="content section-right">
+      
+            <div className="secondary-project-image">
+                  {/* <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} /> */}
+                  <LazyLoadImage
+                    // alt={image.alt}
+                    // height={image.height}
+                    effect="blur"
+                    src={myProjectData.secondaryPhoto.fluid.src} // use normal <img> attributes as props
+                    // width={image.width}
+                    />
+            </div>
+        </div>
       </div>
 
-      <div className="project-content" ref={this.nextSectionRef}>
-        content
+      <div className="project-page-content-bottom">
+
+        <div className="fullscreen-project-image" ref={this.topRef}>
+                  {/* <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} /> */}
+                  <LazyLoadImage
+                    // alt={image.alt}
+                    // height={image.height}
+                    effect="blur"
+                    src={myProjectData.fullScreenPhotoTwo.fluid.src} // use normal <img> attributes as props
+                    // width={image.width}
+                    />
+          </div>
+
       </div>
     
 
@@ -148,11 +199,43 @@ query myProjectData($locale: String!) {
       }
     }
   }
-  menuRight: datoCmsMenuRight(locale: {eq: $locale}) {
+
+  menuRightProject: datoCmsMenuRight(locale: {eq: $locale}) {
     adressData1
     adressData2
     phoneNumber
     emailAdress
+    instagramicon {
+      fixed(height: 35) {
+        src
+        tracedSVG
+        base64
+      }
+    }
+    facebookicon {
+      fixed(height: 35) {
+        src
+        tracedSVG
+        base64
+      }
+    }
+  }
+  menuLeftProject: datoCmsMenuLeft(locale: {eq: $locale}) {
+    projectsHeader
+    projectsSubfield1
+    projectsSubfield2
+    offerHeader
+    aboutHeader
+    individualCustomer
+    individualSubfield1
+    individualSubfield2
+    contactHeader
+  }
+
+  about: datoCmsAbout(locale: {eq: $locale}) {
+    aboutTitle
+    aboutContent
+    slug
     locale
   }
 }

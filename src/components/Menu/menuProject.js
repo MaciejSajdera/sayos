@@ -9,11 +9,11 @@ const MenuProject = ({ data }) => {
         {({navToggled, menuData}) => (
         <div className={`menu ${navToggled ? `active` : ""}`}>
             <div className="menu-left">
-                {menuData.adressData1}
+                
             </div>
 
             <div className="menu-right">
-                
+                {menuData.adressData1}
             </div>
         </div>
         )}

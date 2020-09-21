@@ -1,0 +1,18 @@
+.contact-form-container {
+    position: absolute;
+    border: 1px solid purple;
+    height: 100%;
+    top: 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    background: #0c0c0c;
+
+    .close-contact-form {
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        font-size: 3rem;
+    }
+}

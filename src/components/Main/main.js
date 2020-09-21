@@ -21,7 +21,7 @@ const Main = ({ data }) => {
                       )
                       .map((element, index) => (
                           
-                        <Link to={ element.locale === "pl" ? `/${element.slug}` : `/${element.locale}/${element.slug}`}>
+                        <Link to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}>
                           <div className={`single-project-container`} key={index}>
                               <Img fluid={element.thumbnail.fluid} />
                               <div className={`title-container`}>

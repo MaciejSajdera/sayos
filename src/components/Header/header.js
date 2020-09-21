@@ -1,92 +1,93 @@
-import React, { useState}  from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import React, { useEffect, useState}  from "react"
+import { Link, useStaticQuery, graphql, Img } from "gatsby"
 import PropTypes from "prop-types"
+import { Location } from '@reach/router'
 
 import Consumer from "../../../context"
 
-const Header = () => {
+const Header = ({ location }) => {
 
-  // const [navActive, setNavState] = useState(false)
+  const [offset, setOffset] = useState(0);
 
-  // const navProps = {
-  //   navActive: navActive,
-  //   setNavState: setNavState,
-  // }
+  useEffect(() => {
+    window.onscroll = () => {
+      setOffset(window.pageYOffset)
+    }
+  }, []);
+
+  console.log(offset);
+
+  // let myLocation = location.pathname
+
 
   const data = useStaticQuery(graphql`
-  query MyHeaderQuery {
-    allDatoCmsHeaderLogo(filter: {locale: {eq: "pl" }}) {
-      edges {
-        node {
-          logoImage {
-            url
-            title
-          }
+  query MyLogoQuery {
+    dark: datoCmsHeaderLogo {
+      logoImage {
+        fixed {
+          src
+          base64
+          tracedSVG
+        }
+      }
+    }
+
+    light: datoCmsHeaderLogoLight {
+      logoImage {
+        fixed {
+          base64
+          src
+          tracedSVG
         }
       }
     }
   }
   `)
 
+  let darkLogo = data.dark.logoImage.fixed.src;
+  let lightLogo = data.light.logoImage.fixed.src;
+
   return (
 
         <Consumer>
-
-        {({handleNavToggle, navToggled }) => (
-
-
+        {({navToggled }) => (
+        
         <>
 
-        <header className={`${navToggled ? "active" : ""}`}>
+        <header>
 
-        {/* <div className="menu-wrapper"> */}
-        <a href={`/`}>
-        <div className={`logo-container`}>
-            {data.allDatoCmsHeaderLogo.edges.map((file, index) => (
+        <div className="menu-wrapper">
+            <a href={`/`}>
 
-            <div className={`logo-top`} id={file.node.logoImage.title} key={index}>
-             <img src={file.node.logoImage.url}></img>
+            <div className={`logo-container`}>
+
+                <Location>
+                   {({ location }) => {
+                      if ( location.pathname === "/o-nas" || location.pathname === "/about-us") {
+                        return (
+                        <div className={`logo-top`}>
+                        <img src={lightLogo} alt="test-light-only"/>
+                        </div>
+                        )
+                      } else {
+                        return (
+                          <div className={`logo-top`}>
+                          <img src={offset < 900 || offset > 1774 ? darkLogo : lightLogo} alt="test"/>
+                          </div>
+                        )
+                      } 
+                    }}
+                </Location>
+
             </div>
 
-              ))}
+            </a>
         </div>
-        </a>
-
-        {/* <div className={`lang-switch`}>
-          <Link to="/" onClick={() => {
-            // set(data.menuRightPL)
-            // langSwitch(false)
-          } }>PL</Link>
-         <Link to="/en" onClick={() => {
-            // set(data.menuRightEN)
-            // langToggle()
-            // langSwitch(true)
-          } }>EN</Link>
-        </div> */}
-
-        {/* <div className={`menu-container`}> */}
-
-           {/* <div className="menu-box" onClick={() => handleNavToggle() }>
-
-              <div className={`menu-trigger ${navToggled ? "active" : ""}`} id={`menu10`} >
-                <span></span>
-                <span></span>
-                <span></span>
-             </div>
-
-            </div> */}
-
-        {/* </div> */}
-
-        {/* </div> */}
 
         </header>
         </>
-
-        
-
         )}
-        </Consumer>
+      </Consumer>
         
 
   )

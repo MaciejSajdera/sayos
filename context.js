@@ -41,7 +41,6 @@ class ContextProviderComponent extends React.Component {
     }))
   }
 
-
   handleNavToggle = () => {
     this.setState(prevState => ({navToggled: !prevState.navToggled}));
   }
@@ -52,7 +51,7 @@ class ContextProviderComponent extends React.Component {
 
   render() {
 
-    return <Provider value={this.state}>{this.props.children} {console.log(this.state)}</Provider>
+    return <Provider value={this.state}> {this.props.children} {console.log(this.state)}</Provider>
   }
 }
 

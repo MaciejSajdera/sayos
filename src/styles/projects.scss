@@ -1,11 +1,10 @@
-.fullscreen-project-image img {
+.fullscreen-project-image {
     height: 100vh;
-    width: 100%;
-    object-fit: cover;
-}
-
-.project-content {
-    height: 100vh;
+    img {
+        height: 100vh;
+        width: 100vw;
+        object-fit: cover;
+    }
 }
 
 .arrow-box {
@@ -25,4 +24,129 @@
 
 .box-bt-right {
     right: 4%;
+}
+
+.project-content-middle {
+
+    display: flex;
+    flex-flow: column;
+
+    @media screen and (min-width: 992px) {
+        flex-flow: row;
+        height: 100vh;
+    }
+
+    .content {
+
+        @media screen and (min-width: 992px) {
+            width: 50%;
+        }
+    }
+
+        .section-left {
+            background-color: rgb(26, 26, 26);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @media screen and (max-width: 992px) {
+                order: 2;
+               }
+
+            h2, p, span {
+                color: #fff;
+            }
+
+            .content-wrapper {
+
+                @media screen and (min-width: 992px) {
+                    height: 60%;
+                    // border: 1px solid purple;
+                    width: 60%;
+                    display: flex;
+                    flex-flow: row;
+                }
+
+            }
+    
+        }
+        
+        .section-right {
+
+            @media screen and (max-width: 992px) {
+             order: 1
+            }
+        
+            .secondary-project-image {
+                height: 100vh;
+
+                img {
+                    height: 100vh;
+                    width: 100%;
+                }
+            }
+
+        }
+
+}
+
+
+
+// .scroll-marker {
+//     width: 100%;
+//     height: 100%;
+//     border: 1px solid green;
+
+//     direction:ltr;
+// }
+
+.text-container {
+    padding: 2.5em;
+
+    overflow-y: scroll;
+    direction:rtl;
+    text-align: left;
+
+    @media screen and (max-width: 992px) {
+        padding-top: 4em;
+        height: 100vh;
+       }
+
+    h2 {
+        font-size: 3rem;
+        line-height: 1.4;
+        margin-bottom: 0;
+
+        &:nth-child(2){
+            margin-bottom: 0.5em;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+     
+    /* Track */
+    &::-webkit-scrollbar-track {
+        // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+        // -webkit-border-radius: 10px;
+        // border-radius: 10px;
+        background: rgb(41, 41, 41); 
+    }
+     
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: white;
+    }
+}
+
+.project-page-content-bottom {
+    span {
+        height: 100vh;
+    }
+
+    img {
+        height: 100vh;
+        width: 100%;
+    }
 }
