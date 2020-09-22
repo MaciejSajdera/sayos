@@ -23,6 +23,7 @@
 
 .menu-box, .arrow-box {
     position: absolute;
+    cursor: pointer;
     top: 2em;
     right: 2em;
     z-index:1000;
@@ -102,15 +103,15 @@ div.menu-trigger {
     // border: 1px solid purple;
 
     .menu-inner {
+
         z-index: -1;
         background: #0c0c0c;
-        display: flex;
         justify-content: center;
         align-items: center;
         opacity: 0;
         // transition: all 0.1s ease-in-out;
         color: white;
-
+        display: none;
 
             h3 {
                 font-weight: 400;
@@ -188,6 +189,7 @@ div.menu-trigger {
         opacity: 1;
         height: 100vh;
         width: 100vw;
+        display: flex;
 
     }
 }

@@ -1,7 +1,11 @@
 main {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1;
+    grid-template-columns: 1fr;
+
+    @media screen and (min-width: 992px) {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1;
+    }
 }
 
 .single-project-container {
@@ -10,10 +14,16 @@ main {
 
     .gatsby-image-wrapper {
         height: 100%;
+        transition: all 0.3s ease-in-out;
 
         img {
             object-position: top!important;
         }
+
+        &:hover {
+            height: 105%;
+        }
+
     }
 
     .title-container {
@@ -35,4 +45,19 @@ main {
     h2.project-title-2 {
 
     }
+
+    picture {
+        img {
+            transition: all 0.3s ease-in-out;
+            height: 120%;
+        }
+    }
+
+    // &:hover {
+    //     picture {
+    //         img {
+    //             height: 120%!important;
+    //         }
+    //     }
+    // }
 }
