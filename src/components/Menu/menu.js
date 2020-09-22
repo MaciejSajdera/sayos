@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useStaticQuery } from 'gatsby'
+import { navigate } from 'gatsby-link'
 import Consumer from "../../../context"
 import ContactForm from "../ContactForm/ContactForm"
 import { VscClose } from 'react-icons/vsc';
 
+function encode(data) {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&')
+}
 
 const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location }) => {
-
-  //test for form branch
 
     const data = useStaticQuery(graphql`
     query MyMenuLogoQuery {
@@ -26,8 +30,29 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
     let lightLogo = data.light.logoImage.fixed.src;
 
     const [isOpen, setIsOpen] = useState(false);
+
+    const [state, setState] = React.useState({})
+
+    const handleChange = (e) => {
+      setState({ ...state, [e.target.name]: e.target.value })
+    }
     
     const handleContactFormToggle = () => setIsOpen(!isOpen);
+
+    const handleSubmit = (e) => {
+      e.preventDefault()
+      const form = e.target
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': form.getAttribute('name'),
+          ...state,
+        }),
+      })
+        .then(() => navigate(form.getAttribute('action')))
+        .catch((error) => alert(error))
+    }
 
     return (
 
@@ -98,7 +123,49 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
                             </span>
                           <div className="contact-form-wrapper">
                             <h3>Napisz do nas</h3>
-                            <div className="contact-form"></div>
+                            <div className="contact-form">
+
+                                      <form
+                                            name="contact"
+                                            method="post"
+                                            action="/thanks/"
+                                            data-netlify="true"
+                                            data-netlify-honeypot="bot-field"
+                                            onSubmit={handleSubmit}
+                                          >
+                                            {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+                                            <input type="hidden" name="form-name" value="contact" />
+                                            <p hidden>
+                                              <label>
+                                                Don’t fill this out: <input name="bot-field" onChange={handleChange} />
+                                              </label>
+                                            </p>
+                                            <p>
+                                              <label>
+                                                Your name:
+                                                <br />
+                                                <input type="text" name="name" onChange={handleChange} />
+                                              </label>
+                                            </p>
+                                            <p>
+                                              <label>
+                                                Your email:
+                                                <br />
+                                                <input type="email" name="email" onChange={handleChange} />
+                                              </label>
+                                            </p>
+                                            <p>
+                                              <label>
+                                                Message:
+                                                <br />
+                                                <textarea name="message" onChange={handleChange} />
+                                              </label>
+                                            </p>
+                                            <p>
+                                              <button type="submit">Send</button>
+                                            </p>
+                                      </form>
+                            </div>
                           </div>
                         </div>
 
@@ -107,7 +174,6 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
                         </h3>
             
                     </div>
-
 
                     <div className="menu-right">
 

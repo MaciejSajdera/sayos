@@ -13,7 +13,7 @@ class ProjectPage extends Component {
 
   render() {
 
-    let { projects, menuRightProject, menuLeftProject, about } = this.props.data;
+    let { projects, menuRightProject, menuLeftProject, about, logoData } = this.props.data;
 
     const { myProjectData } = this.props.pageContext;
 
@@ -56,7 +56,7 @@ class ProjectPage extends Component {
       console.log(`this props data: ${this.props.data}`)
       }
 
-      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } dataProjects={projects} menuStyle={menuStyle} about={about}/>
+      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } dataProjects={projects} menuStyle={menuStyle} about={about} logoData={logoData}/>
 
       {/* {this.props.data.menuRight.phoneNumber} */}
       {/* <div> */}
@@ -237,6 +237,16 @@ query myProjectData($locale: String!) {
     aboutContent
     slug
     locale
+  }
+
+  logoData: datoCmsHeaderLogoLight {
+    logoImage {
+      fixed {
+        base64
+        src
+        tracedSVG
+      }
+    }
   }
 }
 `;
