@@ -17,7 +17,6 @@ class Home extends React.Component  {
     }
   }
 
-
   render() {
 
     let { projects, menuRightIndex, menuLeftIndex, about } = this.props.data;
