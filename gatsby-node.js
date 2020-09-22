@@ -64,7 +64,52 @@ menuPagesQuery.data.en.nodes.forEach(item => {
   });
 });
 
+  const thankYouPageQuery = await graphql(`
+  query thankYouPageQuery {
+    pl: allDatoCmsThankYou(filter: {locale: {eq: "pl"}}) {
+      nodes {
+        thankYouTitle
+        thankYouContent
+        slug
+        locale
+      }
+    }
+    en: allDatoCmsThankYou(filter: {locale: {eq: "en"}}) {
+      nodes {
+        thankYouTitle
+        thankYouContent
+        slug
+        locale
+      }
+    }
+  }
+  `)
 
+  thankYouPageQuery.data.pl.nodes.forEach(item => {
+    let url = `/${item.slug}`;
+    createPage({
+      path: url,
+      component: path.resolve(`src/templates/thanks.js`),
+      context: {
+        thankYouData: item.thankYouTitle,
+        locale: item.locale,
+      }
+    });
+  });
+
+
+  thankYouPageQuery.data.en.nodes.forEach(item => {
+  let url = `/${item.slug}`;
+  createPage({
+    path: url,
+    component: path.resolve(`src/templates/thanks.js`),
+    context: {
+      thankYouData: item,
+      thankYouTitle: item.thankYouTitle,
+      locale: item.locale,
+    }
+  });
+  });
 
 
   const projectsQuery = await graphql(`

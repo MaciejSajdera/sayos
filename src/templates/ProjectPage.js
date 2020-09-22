@@ -208,14 +208,12 @@ query myProjectData($locale: String!) {
     instagramicon {
       fixed(height: 35) {
         src
-        tracedSVG
         base64
       }
     }
     facebookicon {
       fixed(height: 35) {
         src
-        tracedSVG
         base64
       }
     }
@@ -244,7 +242,6 @@ query myProjectData($locale: String!) {
       fixed {
         base64
         src
-        tracedSVG
       }
     }
   }

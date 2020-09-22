@@ -1,10 +1,13 @@
 .contact-form-container {
     position: absolute;
-    border: 1px solid purple;
     height: 100%;
     top: 0;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-in-out;
+    transform: translateY(-200%);
+    // border: 1px solid red;
+    // transition: transform 0.3s ease-out;
+    transition: opacity 0.3s ease-out;
+
+    opacity: 0;
     width: 100%;
     background: #0c0c0c;
 
@@ -13,6 +16,33 @@
         right: 0;
         top: 0;
         cursor: pointer;
-        font-size: 3rem;
+        font-size: 2rem;
+        transition: opacity 0.3s ease-out;
     }
+
+    .contact-form {
+        form {
+            button {
+                margin-top: 2em;
+                width: 100%;
+                color: white;
+                background: transparent;
+                border: 1px solid white;
+            }
+
+            textarea, input {
+                background: #0c0c0c;
+                border-image: none;
+                color: white;
+                border: 1px solid #7c7c7c;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.form-active {
+    transform: translateY(0%);
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
 }

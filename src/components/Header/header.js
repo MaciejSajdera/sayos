@@ -19,6 +19,7 @@ const Header = ({ location }) => {
 
   // let myLocation = location.pathname
 
+  // console.log(location.pathname)
 
   const data = useStaticQuery(graphql`
   query MyLogoQuery {
@@ -48,9 +49,6 @@ const Header = ({ location }) => {
   let lightLogo = data.light.logoImage.fixed.src;
 
   return (
-
-        <Consumer>
-        {({navToggled }) => (
         
         <>
 
@@ -63,7 +61,9 @@ const Header = ({ location }) => {
 
                 <Location>
                    {({ location }) => {
-                      if ( location.pathname === "/o-nas" || location.pathname === "/about-us") {
+                     console.log(location.pathname.toString())
+
+                      if ( location.pathname === "/o-nas" || location.pathname === "/about-us" || location.pathname === "/thank-you" || location.pathname === "/dziekujemy") {
                         return (
                         <div className={`logo-top`}>
                         <img src={lightLogo} alt="test-light-only"/>
@@ -86,9 +86,6 @@ const Header = ({ location }) => {
 
         </header>
         </>
-        )}
-      </Consumer>
-        
 
   )
 }
