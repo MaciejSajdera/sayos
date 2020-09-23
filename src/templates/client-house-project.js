@@ -2,14 +2,8 @@ import React from "react"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, EffectFade } from 'swiper';
 
-
 import Menu from "../components/Menu/menu"
-import '../../node_modules/swiper/swiper.scss';
 
-import '../../node_modules/swiper/components/navigation/navigation.scss';
-import '../../node_modules/swiper/components/pagination/pagination.scss';
-// import '../../node_modules/swiper/components/scrollbar/scrollbar.scss';
-import '../../node_modules/swiper/components/effect-fade/effect-fade.scss';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 
