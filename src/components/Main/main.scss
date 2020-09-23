@@ -1,12 +1,55 @@
 main {
-    display: grid;
-    grid-template-columns: 1fr;
-    overflow: hidden;
 
-    @media screen and (min-width: 992px) {
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1;
+
+    .swiper-wrapper {
+    
+        @media screen and (min-width: 992px) {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1;
+        }
     }
+
+    .swiper-slide {
+        width: 100%;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        position: absolute;
+        top: 90%!important;
+        width: calc(var(--swiper-navigation-size) / 44 * 27);
+        height: var(--swiper-navigation-size);
+        margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
+        z-index: 10;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white!important;
+        // background-image: url(../images/arrowdown.svg);
+        width: 5%;
+
+        width: 4.5em;
+        height: 4.5em;
+
+        background: rgba(54, 52, 52, 0.4);
+    }
+
+    .swiper-button-next {
+        right: 2.5em;
+        &:after {
+            content: url(../images/arrowright.svg);
+            height: 1.5em;
+        }
+    }
+
+    .swiper-button-prev {
+        left: 2.5em;
+        &:after {
+            content: url(../images/arrowleft.svg);
+            height: 1.5em;
+        }
+    }
+
 }
 
 .single-project-container {
@@ -69,7 +112,7 @@ main {
 
     &:hover {
         .title-container {
-            transform: translateY(-80%)
+            transform: translateY(-90%)
         }
 
         .gatsby-image-wrapper {
@@ -77,7 +120,7 @@ main {
         }
 
         .text-on-hover {
-            transform: translateY(-200%);
+            transform: translateY(-275%);
 
             .read-more {
 
@@ -88,4 +131,8 @@ main {
             }
         }
     }
+}
+
+.project-slogan {
+    margin-bottom: 0.75em;
 }

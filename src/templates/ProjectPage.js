@@ -3,7 +3,7 @@ import { Link, graphql, navigate, Img } from "gatsby"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Consumer from "../../context";
-import { HiArrowNarrowUp, HiArrowNarrowDown } from 'react-icons/hi';
+import { HiArrowNarrowUp, HiArrowNarrowDown, HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi';
 import { IconContext } from "react-icons";
 
 import Menu from "../components/Menu/menu"

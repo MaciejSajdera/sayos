@@ -1,48 +1,69 @@
-.swiper-button-next, .swiper-button-prev {
-    position: absolute;
-    top: 80%!important;
-    width: calc(var(--swiper-navigation-size) / 44 * 27);
-    height: var(--swiper-navigation-size);
-    margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
-    z-index: 10;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white!important;
+.subpage {
 
+    .swiper-button-next, .swiper-button-prev {
+        position: absolute;
+        top: 80%!important;
+        width: calc(var(--swiper-navigation-size) / 44 * 27);
+        height: var(--swiper-navigation-size);
+        margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
+        z-index: 10;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white!important;
+        // background-image: url(../images/arrowdown.svg);
+        width: 5%;
 
-    // &:after {
-    //     content: '->'!important;
-    // }
-}
+        width: 4.5em;
+        height: 4.5em;
 
-.swiper-container {
-    height: 100vh;
+        background: rgba(54, 52, 52, 0.4);
+    }
 
-}
+    .swiper-button-next {
+        &:after {
+            content: url(../images/arrowright.svg);
+            height: 1.5em;
+        }
+    }
 
-.swiper-slide {
-    display: flex!important;
-    align-items: center!important;
-}
+    .swiper-button-prev {
+        &:after {
+            content: url(../images/arrowleft.svg);
+            height: 1.5em;
+        }
+    }
 
-.swiper-scrollbar {
-    bottom: 10%!important;
-}
+    .swiper-container {
+        height: 100vh;
 
-.swiper-scrollbar-drag {
-    background: white!important;
-}
+    }
 
-.swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom: 5%!important;
-}
+    .swiper-slide {
+        display: flex!important;
+        align-items: center!important;
+    }
 
-.swiper-pagination-bullet {
-    background: grey!important;
-}
+    .swiper-scrollbar {
+        bottom: 10%!important;
+    }
 
-.swiper-pagination-bullet-active {
-    background: white!important;
+    .swiper-scrollbar-drag {
+        background: white!important;
+    }
+
+    .swiper-container-horizontal > .swiper-pagination-bullets {
+        bottom: 5%!important;
+    }
+
+    .swiper-pagination-bullet {
+        background: grey!important;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: white!important;
+    }
+
+    
 }
