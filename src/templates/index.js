@@ -19,13 +19,13 @@ class Home extends React.Component  {
 
   render() {
 
-    let { projects, menuRightIndex, menuLeftIndex, about, logoData } = this.props.data;
+    let { projects, menuRightIndex, menuLeftIndex, about, logoData, houseProject } = this.props.data;
 
     const menuStyle = `menuStyleAbsolute`;
 
   return (
     <>  {console.log(`index.js state locale: ${this.state.locale}`), console.log(`this props data: ${this.props.data}`)}
-        <Menu dataMenu={ menuRightIndex} dataMenuLeft={ menuLeftIndex} dataProjects={projects} menuStyle={menuStyle} about={about} logoData={logoData} />
+        <Menu dataMenu={ menuRightIndex} dataMenuLeft={ menuLeftIndex} dataProjects={projects} menuStyle={menuStyle} about={about} logoData={logoData} houseProject={ houseProject }/>
 
          <Main data={projects}/>
     </>
@@ -54,6 +54,7 @@ query myData($locale: String!) {
       titlePart1
       titlePart2
       readMore
+      projectSlogan
       fullScreenPhoto {
         fluid {
           src
@@ -129,6 +130,17 @@ query myData($locale: String!) {
         src
         tracedSVG
       }
+    }
+  }
+
+  houseProject: datoCmsHouseProjectForClient(locale: {eq: $locale}) {
+    pageName
+    slug
+    locale
+    modularContent {
+      slideNumber
+      slideHeader
+      slideMainText
     }
   }
 }

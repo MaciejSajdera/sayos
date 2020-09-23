@@ -39,9 +39,9 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   `)
 
   menuPagesQuery.data.pl.nodes.forEach(item => {
-    let url = `/${item.slug}`;
+    const prefix = item.locale === 'pl' ? `${item.slug}` : `${item.locale}/${item.slug}`;
     createPage({
-      path: url,
+      path: `/${prefix}`,
       component: path.resolve(`src/templates/about.js`),
       context: {
         aboutData: item.aboutTitle,
@@ -52,9 +52,9 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
 
 menuPagesQuery.data.en.nodes.forEach(item => {
-  let url = `/${item.slug}`;
+  const prefix = `${item.locale}/${item.slug}`;
   createPage({
-    path: url,
+    path: `/${prefix}`,
     component: path.resolve(`src/templates/about.js`),
     context: {
       aboutData: item,
@@ -110,6 +110,53 @@ menuPagesQuery.data.en.nodes.forEach(item => {
     }
   });
   });
+
+
+  const houseProjectQuery = await graphql(`
+  query HouseProject {
+    pl: allDatoCmsHouseProjectForClient(filter: {locale: {eq: "pl"}}) {
+      nodes {
+        pageName
+        slug
+        locale
+      }
+    }
+    en: allDatoCmsHouseProjectForClient(filter: {locale: {eq: "en"}}) {
+      nodes {
+        pageName
+        slug
+        locale
+      }
+    }
+  }
+  `)
+
+  houseProjectQuery.data.pl.nodes.forEach(item => {
+    let url = `/${item.slug}`;
+    createPage({
+      path: url,
+      component: path.resolve(`src/templates/client-house-project.js`),
+      context: {
+        houseProjectData: item.pageName,
+        locale: item.locale,
+      }
+    });
+  });
+
+
+  houseProjectQuery.data.en.nodes.forEach(item => {
+  let url = `${item.locale}/${item.slug}`;
+  createPage({
+    path: url,
+    component: path.resolve(`src/templates/client-house-project.js`),
+    context: {
+      // thankYouData: item,
+      // thankYouTitle: item.thankYouTitle,
+      locale: item.locale,
+    }
+  });
+  });
+
 
 
   const projectsQuery = await graphql(`

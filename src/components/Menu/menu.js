@@ -6,7 +6,7 @@ import ContactForm from "../ContactForm/ContactForm"
 import { VscClose } from 'react-icons/vsc';
 
 
-const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location }) => {
+const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location, houseProject }) => {
 
     const data = useStaticQuery(graphql`
     query MyMenuLogoQuery {
@@ -82,15 +82,22 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
 
                         <h3>{dataMenuLeft.offerHeader}</h3>
 
-                        <Link to={`/${about.slug}`} onClick={() => {handleNavToggle()}}>
+                        <Link to={ about.locale === "pl" ? `/${about.slug}` : `/${about.locale}/${about.slug}`} onClick={() => {handleNavToggle()}}>
                         <h3>{dataMenuLeft.aboutHeader}</h3>
                         </Link>
 
-
                         <div className="menu-grouped-items">
                           <h3>{dataMenuLeft.individualCustomer}</h3>
+
+
+                          {/* <Link to={`/${houseProject.slug}`} onClick={() => {handleNavToggle()}}> */}
+                          <Link to={ about.locale === "pl" ? `/${houseProject.slug}` : `/${houseProject.locale}/${houseProject.slug}`} onClick={() => {handleNavToggle()}}>
                           <p>{dataMenuLeft.individualSubfield1}</p>
+                          </Link>
+
+
                           <p>{dataMenuLeft.individualSubfield2}</p>
+
                         </div>
 
                         <div className={`contact-form-container ${isOpen ? "form-active" : ""}`}>
@@ -106,7 +113,7 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
 
                         </div>
 
-                        <h3 class="contact-form-title" onClick={() => {handleContactFormToggle()}}>
+                        <h3 className="contact-form-title" onClick={() => {handleContactFormToggle()}}>
                           {dataMenuLeft.contactHeader}
                         </h3>
 

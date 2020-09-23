@@ -5,11 +5,11 @@ import Menu from "../components/Menu/menu"
 
 const About = (props) => {
 
-    let { about, menuRightProject, menuLeftProject } = props.data;
+    let { about, menuRightProject, menuLeftProject, houseProject } = props.data;
 
     return (
       <>
-      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={about}/>
+      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={about} houseProject={houseProject}/>
 
         <div className={`subpage about`}>
 
@@ -63,6 +63,16 @@ query aboutData($locale: String!) {
     individualSubfield1
     individualSubfield2
     contactHeader
+  }
+
+  houseProject: datoCmsHouseProjectForClient(locale: {eq: $locale}) {
+    pageName
+    slug
+    modularContent {
+      slideNumber
+      slideHeader
+      slideMainText
+    }
   }
 }
 `;

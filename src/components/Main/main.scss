@@ -21,9 +21,9 @@ main {
             object-position: top!important;
         }
 
-        &:hover {
-            transform: scale(1.05);
-        }
+        // &:hover {
+        //     transform: scale(1.05);
+        // }
 
     }
 
@@ -31,20 +31,33 @@ main {
         bottom: 14%;
         position: absolute;
         left: 2.5em;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .text-on-hover {
+        transition: all 0.3s ease-in-out;
+        padding: 0 2.5em;
+
+        .read-more {
+            position: relative;
+            text-transform: uppercase;
+            &:after {
+                content: '';
+                background: #fff;
+                height: 2px;
+                width: 0em;
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                transition: 0.7s cubic-bezier(0.57, 0.21, 0.53, 0.82);
+            }
+        }
     }
 
     h2 {
         color: #fff;
         font-size: 2.5rem;
         letter-spacing: 1px;
-    }
-
-    h2.project-title-1 {
-
-    }
-
-    h2.project-title-2 {
-
     }
 
     picture {
@@ -54,11 +67,25 @@ main {
         }
     }
 
-    // &:hover {
-    //     picture {
-    //         img {
-    //             height: 120%!important;
-    //         }
-    //     }
-    // }
+    &:hover {
+        .title-container {
+            transform: translateY(-80%)
+        }
+
+        .gatsby-image-wrapper {
+            transform: scale(1.05);
+        }
+
+        .text-on-hover {
+            transform: translateY(-200%);
+
+            .read-more {
+
+                &:after {
+                    width: 7.5em;
+                }
+
+            }
+        }
+    }
 }

@@ -1,0 +1,48 @@
+.swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    top: 80%!important;
+    width: calc(var(--swiper-navigation-size) / 44 * 27);
+    height: var(--swiper-navigation-size);
+    margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white!important;
+
+
+    // &:after {
+    //     content: '->'!important;
+    // }
+}
+
+.swiper-container {
+    height: 100vh;
+
+}
+
+.swiper-slide {
+    display: flex!important;
+    align-items: center!important;
+}
+
+.swiper-scrollbar {
+    bottom: 10%!important;
+}
+
+.swiper-scrollbar-drag {
+    background: white!important;
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: 5%!important;
+}
+
+.swiper-pagination-bullet {
+    background: grey!important;
+}
+
+.swiper-pagination-bullet-active {
+    background: white!important;
+}
