@@ -11,6 +11,28 @@ main {
 
     .swiper-slide {
         width: 100%;
+
+        &:hover {
+            .title-container {
+                transform: translateY(-90%)
+            }
+    
+            .gatsby-image-wrapper {
+                transform: scale(1.05);
+            }
+    
+            .text-on-hover {
+                transform: translateY(-275%);
+    
+                .read-more {
+    
+                    &:after {
+                        width: 7.5em;
+                    }
+    
+                }
+            }
+        }
     }
 
     .swiper-button-next, .swiper-button-prev {
@@ -110,27 +132,7 @@ main {
         }
     }
 
-    &:hover {
-        .title-container {
-            transform: translateY(-90%)
-        }
 
-        .gatsby-image-wrapper {
-            transform: scale(1.05);
-        }
-
-        .text-on-hover {
-            transform: translateY(-275%);
-
-            .read-more {
-
-                &:after {
-                    width: 7.5em;
-                }
-
-            }
-        }
-    }
 }
 
 .project-slogan {
