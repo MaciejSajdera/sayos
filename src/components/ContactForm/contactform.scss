@@ -14,20 +14,42 @@
     .close-contact-form {
         position: absolute;
         right: 0;
-        top: 0;
+        top: 0.25em;
         cursor: pointer;
-        font-size: 2rem;
-        transition: opacity 0.3s ease-out;
+        font-size: 1.25rem;
+        transition: transform 0.3s ease-out;
+
+        &:hover {
+            transform: scale(1.15)
+        }
     }
 
     .contact-form {
+        
+        h3 {
+            margin-bottom: 0.5em;
+            text-align: left;
+        }
         form {
+
+            p {
+                @media screen and (min-height: 640px) {
+                    padding: .7em 0;
+                }
+
+            }
+
             button {
-                margin-top: 2em;
+                margin-top: 0.5em;
                 width: 100%;
                 color: white;
                 background: transparent;
                 border: 1px solid white;
+
+                @media screen and (min-width: 992px) {
+                    margin-top: 2em;
+
+                }
             }
 
             textarea, input {
@@ -36,13 +58,30 @@
                 color: white;
                 border: 1px solid #7c7c7c;
                 width: 100%;
+                resize: none;
             }
+
+            textarea {
+
+                @media screen and (min-width: 992px) {
+                    height: 6rem;
+                }
+            }
+
+            // .text-area-paragraph {
+            //     margin-bottom: 0;
+            // }
         }
     }
 }
 
 .form-active {
+
     transform: translateY(0%);
     opacity: 1;
     transition: opacity 0.3s ease-out;
+
+    @media screen and (min-width: 992px) {
+        transform: translateY(0%);
+    }
 }

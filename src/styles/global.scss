@@ -34,3 +34,7 @@ img {
 .subpage-content-wrapper {
     max-width: 1100px;
 }
+
+.swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
+    pointer-events: auto!important;
+}

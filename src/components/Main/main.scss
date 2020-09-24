@@ -1,6 +1,5 @@
 main {
 
-
     .swiper-wrapper {
     
         @media screen and (min-width: 992px) {
@@ -22,7 +21,8 @@ main {
             }
     
             .text-on-hover {
-                transform: translateY(-275%);
+                transform: translateY(-270%);
+
     
                 .read-more {
     
@@ -102,6 +102,11 @@ main {
     .text-on-hover {
         transition: all 0.3s ease-in-out;
         padding: 0 2.5em;
+        
+        .project-slogan {
+            width: 90%;
+            margin-bottom: 0.75em;
+        }
 
         .read-more {
             position: relative;
@@ -133,8 +138,4 @@ main {
     }
 
 
-}
-
-.project-slogan {
-    margin-bottom: 0.75em;
 }

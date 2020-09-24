@@ -108,8 +108,10 @@
     text-align: left;
 
     @media screen and (max-width: 992px) {
+        padding: 1.5em;
         padding-top: 4em;
         height: 100vh;
+        width: 100vw;
        }
 
     h2 {

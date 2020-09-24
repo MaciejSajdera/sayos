@@ -42,10 +42,10 @@ const Main = ({ data }) => {
                         <SwiperSlide key={index}>
                           
                           <div className={`single-project-container`} key={index}>
+                          <Link to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`} key={index}>
                               <Img fluid={element.thumbnail.fluid} />
 
-                              <Link to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`} key={index}>
-
+                            
                               <div className={`title-container`}>
                                 <h2 className={`project-title-1`}>{element.titlePart1}</h2>
                                 <h2 className={`project-title-2`}>{element.titlePart2}</h2>

@@ -36,6 +36,7 @@ export default function ContactForm() {
 
     return (
           <div className="contact-form">
+                <h3>Napisz do nas</h3>
             
                 <Location>
                    {({ location }) => {
@@ -50,6 +51,7 @@ export default function ContactForm() {
                         let actionPath = "/thank-you";
 
                         return (
+
                                 <form
                                     name="contact"
                                     method="post"
@@ -114,37 +116,33 @@ export default function ContactForm() {
                                     {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
                                     <input type="hidden" name="form-name" value="contact" />
                                     <p hidden>
-                                      <label>
+                                    
                                         Don’t fill this out: <input name="bot-field" onChange={handleChange} />
-                                      </label>
+                                      
                                     </p>
                                     <p>
-                                      <label>
-                                        Your name:
-                                        <br />
-                                        <input type="text" name="name" onChange={handleChange} />
-                                      </label>
+                                    
+                                        
+                                        <input type="text" name="name" placeholder="Your name:" onChange={handleChange} />
+                                      
                                     </p>
                                     <p>
-                                      <label>
-                                        Your surname:
-                                        <br />
-                                        <input type="text" name="surname" onChange={handleChange} />
-                                      </label>
+                                    
+                                        
+                                        <input type="text" name="surname" placeholder="Your surname:" onChange={handleChange} />
+                                      
                                     </p>
                                     <p>
-                                      <label>
-                                        Your email:
-                                        <br />
-                                        <input type="email" name="email" onChange={handleChange} />
-                                      </label>
+                                    
+                                        
+                                        <input type="email" name="email" placeholder="E-mail:" onChange={handleChange} />
+                                      
                                     </p>
-                                    <p>
-                                      <label>
-                                        Message:
-                                        <br />
-                                        <textarea name="message" onChange={handleChange} />
-                                      </label>
+                                    <p className={`text-area-paragraph`}>
+                                    
+                                        
+                                        <textarea name="message" placeholder="Message:" onChange={handleChange} />
+                                      
                                     </p>
                                     <p>
                                       <button type="submit">Send</button>

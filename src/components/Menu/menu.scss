@@ -26,7 +26,7 @@
     cursor: pointer;
     top: 2em;
     right: 2em;
-    z-index:1000;
+    z-index:2;
     width: 4em;
     height: 4em;
     display: flex;
@@ -116,7 +116,28 @@ div.menu-trigger {
             h3 {
                 font-weight: 400;
                 letter-spacing: 1px;
-                margin-bottom: 2em;
+                margin-bottom: 1em;
+
+                @media screen and (min-height: 640px) {
+                    margin-bottom: 2em;
+                }
+
+                @media screen and (min-width: 992px) {
+                    margin-bottom: 2em;
+                }
+            }
+
+            .menu-grouped-items {
+                margin-bottom: 1em;
+
+                @media screen and (min-height: 640px) {
+                    margin-bottom: 2em;
+                }
+                
+                h3 {
+                    margin-bottom: 0.45em;
+                }
+
             }
 
             p {
@@ -125,52 +146,122 @@ div.menu-trigger {
             }
 
         .menu-wrapper {
-            height: 70%;
-            width: 50%;
-            text-align: left;
 
-            .menu-grouped-items {
-                padding-bottom: 2rem;
+                background: transparent;
+                position: fixed;
+                display: flex;
+                flex-flow: column;
+                justify-content: space-between;
+                align-items: center;
+                height: 60%;
 
-                h3 { 
-                    margin-bottom: 0.5em;
+            @media screen and (min-width: 992px) {
+                flex-flow: row;
+                height: 70%;
+                width: 50%;
+                text-align: left;
+    
+                .menu-grouped-items {
+                    // padding-bottom: 2rem;
+    
+                    h3 { 
+                        margin-bottom: 0.5em;
+                    }
                 }
             }
-        }
 
-        .menu-left {
-            width: 50%;
-            position: relative;
+            .menu-left {
 
-            .contact-form-title {
-                cursor: pointer;
-            }
+                position: relative;
 
+                @media screen and (min-width: 992px) {
+                    width: 50%;
+                }
+    
+                .contact-form-title {
+                    cursor: pointer;
+                }
 
-        }
-
-        .menu-right {
-
-            .menu-grouped-items {
-                padding-bottom: 1rem;
-            }
-
-            img.menu-logo {
-                width: 12rem;
-            }
-
-            .icons {
-                img {
-                    padding: 0 1em;
-
-                    &:nth-of-type(1) {
-                        padding-left: 0;
+                .title-hidden {
+                    display: none;
+                    @media screen and (min-width: 992px) {
+                        display: block;
                     }
+
+                }
+    
+            }
+    
+            .menu-right {
+
+                opacity: 0;
+                transform: translateY(150%);
+                transition: opacity 0.3s ease-out;
+
+                @media screen and (min-width: 992px) {
+                    display: block;
+                    opacity: 1;
+                    transform: translateY(0%);
+                }
+    
+                .menu-grouped-items {
+                    margin-bottom: 0.25em;
+
+                    p {
+                        font-size: 70%;
+                        line-height: 1.2;
+                    }
+
+                    @media screen and (min-width: 992px) {
+                        padding-bottom: 1rem;
+
+                        p {
+                            font-size: 100%;
+                            line-height: 1.2;
+                        }
+                    }
+                    
+                }
+    
+                img.menu-logo {
+                    width: 8em;
+                    
+                    @media screen and (min-width: 992px) {
+                        width: 12rem;
+                    }
+
+                }
+    
+                .icons {
+                    img {
+
+                        height: 25px;
+
+                        @media screen and (min-width: 992px) {
+                            height: 100%;
+                        }
+
+                        padding: 0 1em;
+    
+                        &:nth-of-type(1) {
+                            @media screen and (min-width: 992px) {
+                                padding-left: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .menu-right-active {
+                opacity: 1;
+                transform: translateY(20%);
+
+                @media screen and (min-width: 992px) {
+                    transform: translateY(0%);
                 }
             }
         }
     }
-
 }
 
 .menuStyleAbsolute {

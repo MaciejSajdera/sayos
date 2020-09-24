@@ -3,7 +3,7 @@ import { Link, useStaticQuery } from 'gatsby'
 
 import Consumer from "../../../context"
 import ContactForm from "../ContactForm/ContactForm"
-import { VscClose } from 'react-icons/vsc';
+import { RiArrowGoBackFill } from 'react-icons/ri';
 
 
 const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location, houseProject }) => {
@@ -96,30 +96,30 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
                           </Link>
 
 
-                          <p>{dataMenuLeft.individualSubfield2}</p>
+                          <p className={`${isOpen ? "title-hidden" : ""}`}>{dataMenuLeft.individualSubfield2}</p>
 
                         </div>
 
                         <div className={`contact-form-container ${isOpen ? "form-active" : ""}`}>
                             <span className="close-contact-form" onClick={() => {handleContactFormToggle()}}>
-                              <VscClose />
+                              <RiArrowGoBackFill />
                             </span>
 
-                            <div className="contact-form-wrapper">
-                              <h3>Napisz do nas</h3>
-                            </div>
+                            {/* <div className="contact-form-wrapper"> */}
+                              {/* <h3>Napisz do nas</h3> */}
+                            {/* </div> */}
 
                             <ContactForm />
 
                         </div>
 
-                        <h3 className="contact-form-title" onClick={() => {handleContactFormToggle()}}>
+                        <h3 className={`contact-form-title ${isOpen ? "title-hidden" : ""}`} onClick={() => {handleContactFormToggle()}}>
                           {dataMenuLeft.contactHeader}
                         </h3>
 
                     </div>
 
-                    <div className="menu-right">
+                    <div className={`menu-right ${isOpen ? "menu-right-active" : ""}`}>
 
                             <img className={`menu-logo`} src={lightLogo} alt=""></img>
 

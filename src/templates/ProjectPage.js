@@ -249,6 +249,7 @@ query myProjectData($locale: String!) {
   houseProject: datoCmsHouseProjectForClient(locale: {eq: $locale}) {
     pageName
     slug
+    locale
     modularContent {
       slideNumber
       slideHeader
