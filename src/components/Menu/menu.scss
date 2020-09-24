@@ -27,12 +27,17 @@
     top: 2em;
     right: 2em;
     z-index:2;
-    width: 4em;
-    height: 4em;
+    width: 3em;
+    height: 3em;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(54, 52, 52, 0.4)
+    background: rgba(54, 52, 52, 0.4);
+
+    @media screen and (min-width: 992px) {
+        width: 4em;
+        height: 4em;
+    }
 }
 
 .menu-trigger,
@@ -43,10 +48,15 @@
 }
 div.menu-trigger {
     position: relative;
-    width: 40px;
-    height: 36px;
+    width: 30px;
+    height: 32px;
     display: flex;
     justify-content: center;
+
+    @media screen and (min-width: 992px) {
+        width: 40px;
+        height: 36px;
+    }
 }
 .menu-trigger span {
     position: absolute;
@@ -57,13 +67,22 @@ div.menu-trigger {
     border-radius: 1px;
 }
 .menu-trigger span:nth-of-type(1) {
-    top: 0px;
+    top: 2px;
+    @media screen and (min-width: 992px) {
+        top: 0px;
+    }
 }
 .menu-trigger span:nth-of-type(2) {
-    top: 16px;
+    top: 14px;
+    @media screen and (min-width: 992px) {
+        top: 16px;
+    }
 }
 .menu-trigger span:nth-of-type(3) {
-    bottom: 0px;
+    bottom: 2px;
+    @media screen and (min-width: 992px) {
+        bottom: 0px;
+    }
 }
 
 #menu10:not(.active):hover span:nth-of-type(2) {
@@ -74,15 +93,23 @@ div.menu-trigger {
   }
 
   #menu10.active span:nth-of-type(1) {
-    -webkit-transform: translateY(16px) rotate(-45deg);
-    transform: translateY(16px) rotate(-45deg);
+    -webkit-transform: translateY(12px) rotate(-45deg);
+    transform: translateY(12px) rotate(-45deg);
+    @media screen and (min-width: 992px) {
+        -webkit-transform: translateY(16px) rotate(-45deg);
+        transform: translateY(16px) rotate(-45deg);
+    }
   }
   #menu10.active span:nth-of-type(2) {
     opacity: 0;
   }
   #menu10.active span:nth-of-type(3) {
-    -webkit-transform: translateY(-16px) rotate(45deg);
-    transform: translateY(-16px) rotate(45deg);
+    -webkit-transform: translateY(-12px) rotate(45deg);
+    transform: translateY(-12px) rotate(45deg);
+    @media screen and (min-width: 992px) {
+        -webkit-transform: translateY(-16px) rotate(45deg);
+        transform: translateY(-16px) rotate(45deg);
+    }
   }
 
 
@@ -233,6 +260,7 @@ div.menu-trigger {
                 }
     
                 .icons {
+                    padding-top: 0.5em;
                     img {
 
                         height: 25px;
@@ -287,18 +315,22 @@ div.menu-trigger {
 
 .lang-switch {
     position: absolute;
-    z-index:9999;
+    // z-index:9999;
     width: 150px;
-    height: 50px;
+    height: 35px;
     background: rgba(54, 52, 52, 0.4);
     color: white;
     text-align: center; 
     text-transform: uppercase;
-    top: 2em;
+    top: 0;
     left: calc(50% - 75px);
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media screen and (min-width: 992px) {
+        top: 2em;
+    }
 
     a {
         text-decoration: none;

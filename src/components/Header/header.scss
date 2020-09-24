@@ -13,7 +13,7 @@
 
 header {
     position: fixed;
-    z-index: 2;
+    z-index: 9999;
     top: 3em;
 
     .logo-container {
@@ -21,8 +21,13 @@ header {
         .logo-top {
             height: 100%;
             img {
-                padding-left: 3em;
-                width: 15rem;
+                padding-left: 2em;
+                width: 12rem;
+
+                @media screen and (min-width: 992px) {
+                    padding-left: 3em;
+                    width: 15rem;
+                }
             }
         }
     

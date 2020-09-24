@@ -34,7 +34,7 @@
 
             p {
                 @media screen and (min-height: 640px) {
-                    padding: .7em 0;
+                    padding: .2em 0;
                 }
 
             }
@@ -62,10 +62,17 @@
             }
 
             textarea {
-
+                height: 5em;
+                padding: 0.25em 0.5em;
                 @media screen and (min-width: 992px) {
                     height: 6rem;
+                    padding: 0.25em 0.5em;
                 }
+            }
+
+            input {
+                height: 2em;
+                padding-left: 0.5em;
             }
 
             // .text-area-paragraph {

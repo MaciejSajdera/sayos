@@ -40,9 +40,9 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
         
     <div className={`menu ${menuStyle} ${navToggled ? `active` : ""}`}>
 
-        <div className={`menu-container`}>
+        <div className={`menu-container`}>    
 
-            <div className="menu-box" onClick={() => handleNavToggle() }>
+            <div className="menu-box" onClick={() => handleNavToggle() } tabindex="0" role="button" aria-label="Open Menu">
 
                     <div className={`menu-trigger ${navToggled ? "active" : ""}`} id={`menu10`} >
                         <span></span>

@@ -63,7 +63,12 @@ const Header = ({ location }) => {
                    {({ location }) => {
                      console.log(location.pathname.toString())
 
-                      if ( location.pathname === "/o-nas" || location.pathname === "/en/about-us" || location.pathname === "/thank-you" || location.pathname === "/dziekujemy" ||  location.pathname === "/en/house-project" ||  location.pathname === "/projekt-domu") {
+                      if ( location.pathname === "/o-nas" || location.pathname === "/o-nas/" || location.pathname === "/en/about-us"
+                      || location.pathname === "/en/about-us/"
+                       || location.pathname === "/thank-you" || location.pathname === "/dziekujemy"
+                       || location.pathname === "/thank-you/" || location.pathname === "/dziekujemy/"
+                        ||  location.pathname === "/en/house-project/" ||  location.pathname === "/en/house-project" ||  location.pathname === "/projekt-domu"
+                        ||  location.pathname === "/projekt-domu/") {
                         return (
                         <div className={`logo-top`}>
                         <img src={lightLogo} alt="test-light-only"/>
