@@ -94,7 +94,7 @@ const ContactForm = ({ handleContactFormToggle }) => {
                                     </p>
                                     <p>
                                     
-                                        <input type="email" name="email" placeholder="E-mail:" onChange={handleChange} />
+                                        <input type="email" name="email" placeholder="E-mail:" required onChange={handleChange} />
                                     </p>
                                     <p className={`text-area-paragraph`}>
                                     
