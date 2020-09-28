@@ -2,7 +2,7 @@ import React from 'react';
 import { navigate } from 'gatsby-link'
 import { Location } from '@reach/router'
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 function encode(data) {
   return Object.keys(data)
@@ -21,6 +21,7 @@ const ContactForm = ({ handleContactFormToggle }) => {
     const handleSubmit = (e) => {
       e.preventDefault()
       const form = e.target
+      console.log(form);
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -33,6 +34,7 @@ const ContactForm = ({ handleContactFormToggle }) => {
         .catch((error) => alert(error))
     }
 
+    // const { register, handleSubmit, watch, errors } = useForm();
 
     return (
           <div className="contact-form">
@@ -62,7 +64,7 @@ const ContactForm = ({ handleContactFormToggle }) => {
                                 <form
                                     name="contact"
                                     method="post"
-                                    action={actionPath}
+                                    // action={actionPath}
                                     data-netlify="true"
                                     data-netlify-honeypot="bot-field"
                                     onSubmit={handleSubmit}
@@ -99,7 +101,7 @@ const ContactForm = ({ handleContactFormToggle }) => {
                                     <p className={`text-area-paragraph`}>
                                     
                                         
-                                        <textarea name="message" placeholder="Message:" onChange={handleChange} />
+                                        <textarea name="message" placeholder="Message:" required onChange={handleChange} />
                                       
                                     </p>
                                     <p>
@@ -152,13 +154,13 @@ const ContactForm = ({ handleContactFormToggle }) => {
                                     <p>
                                     
                                         
-                                        <input type="email" name="email" placeholder="E-mail:" onChange={handleChange} />
+                                        <input type="email" name="email" placeholder="E-mail:" required onChange={handleChange} />
                                       
                                     </p>
                                     <p className={`text-area-paragraph`}>
                                     
                                         
-                                        <textarea name="message" placeholder="Message:" onChange={handleChange} />
+                                        <textarea name="message" placeholder="Message:" required onChange={handleChange} />
                                       
                                     </p>
                                     <p>
