@@ -4,7 +4,6 @@ import { Link, graphql, navigate } from "gatsby"
 import Main from "../components/Main/main"
 import Menu from "../components/Menu/menu"
 
-
 import Consumer from "../../context"
 
 class Home extends React.Component  {

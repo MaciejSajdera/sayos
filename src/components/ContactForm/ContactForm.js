@@ -2,6 +2,7 @@ import React from 'react';
 import { navigate } from 'gatsby-link'
 import { Location } from '@reach/router'
 import { RiArrowGoBackFill } from 'react-icons/ri';
+import { graphql, useStaticQuery } from "gatsby"
 // import { useForm } from "react-hook-form";
 
 function encode(data) {
@@ -10,8 +11,8 @@ function encode(data) {
     .join('&')
 }
 
-const ContactForm = ({ handleContactFormToggle }) => {
-
+const ContactForm = ({ handleContactFormToggle, props }) => {
+  
   const [state, setState] = React.useState({})
 
   const handleChange = (e) => {
@@ -36,15 +37,40 @@ const ContactForm = ({ handleContactFormToggle }) => {
 
     // const { register, handleSubmit, watch, errors } = useForm();
 
+    const data = useStaticQuery(graphql`
+    query MyContactFormQuery {
+      pl: datoCmsContactForm(locale: {eq: "pl"}) {
+        formHeader
+        topic
+        topicOptions {
+          topicOptionField
+        }
+        firstName
+        surname
+        emailAddress
+        messageContent
+        submitText
+      }
+  
+      en: datoCmsContactForm(locale: {eq: "en"}) {
+        formHeader
+        topic
+        topicOptions {
+          topicOptionField
+        }
+        firstName
+        surname
+        emailAddress
+        messageContent
+        submitText
+        }
+    }
+    `)
+
     return (
           <div className="contact-form">
                 
-                <div className="form-title-wrapper">
-                  <h3>Napisz do nas! </h3>
-                  <span className="close-contact-form" onClick={() => {handleContactFormToggle()}}>
-                      <RiArrowGoBackFill />
-                  </span>
-                 </div>
+
                   
             
                 <Location>
@@ -60,11 +86,19 @@ const ContactForm = ({ handleContactFormToggle }) => {
                         let actionPath = "/thank-you";
 
                         return (
+                          <>
+
+                          <div className="form-title-wrapper">
+                          <h3>{data.en.formHeader} </h3>
+                          <span className="close-contact-form" onClick={() => {handleContactFormToggle()}}>
+                              <RiArrowGoBackFill />
+                          </span>
+                         </div>
 
                                 <form
                                     name="contact"
                                     method="post"
-                                    // action={actionPath}
+                                    action={actionPath}
                                     data-netlify="true"
                                     data-netlify-honeypot="bot-field"
                                     onSubmit={handleSubmit}
@@ -77,43 +111,52 @@ const ContactForm = ({ handleContactFormToggle }) => {
                                       
                                     </p>
 
-                                    <select name="cars" id="cars">
-                                      <option value="volvo">Volvo</option>
-                                      <option value="saab">Saab</option>
-                                      <option value="mercedes">Mercedes</option>
-                                      <option value="audi">Audi</option>
+                                    <select name="topic" onChange={handleChange}>
+                                    <option value={`${data.en.topic}`} disabled selected>{`${data.en.topic}`}</option>
+                                      {data.en.topicOptions.map((item, index) => (
+                                        <option value={`${item.topicOptionField}`} key={index}>{item.topicOptionField}</option>
+                                      ))}
                                     </select>
 
                                     <p>
                                   
-                                        <input type="text" name="name" placeholder="Your name:" onChange={handleChange} />
+                                        <input type="text" name="name" placeholder={data.en.firstName} onChange={handleChange} />
                                       
                                     </p>
                                     <p>
                                     
-                                        <input type="text" name="surname" placeholder="Your surname:" onChange={handleChange} />
+                                        <input type="text" name="surname" placeholder={data.en.surname} onChange={handleChange} />
                                       
                                     </p>
                                     <p>
                                     
-                                        <input type="email" name="email" placeholder="E-mail:" required onChange={handleChange} />
+                                        <input type="email" name="email" placeholder={data.en.emailAddress} required onChange={handleChange} />
                                     </p>
                                     <p className={`text-area-paragraph`}>
                                     
                                         
-                                        <textarea name="message" placeholder="Message:" required onChange={handleChange} />
+                                        <textarea name="message" placeholder={data.en.messageContent} required onChange={handleChange} />
                                       
                                     </p>
                                     <p>
-                                      <button type="submit">WYŚLIJ WIADOMOŚĆ</button>
+                                      <button type="submit">{data.en.submitText}</button>
                                     </p>
                                 </form>
+                              </>
                         )
                       } else {
 
                         let actionPath = "/dziekujemy";
 
                         return (
+                        <>
+                          <div className="form-title-wrapper">
+                          <h3>{data.pl.formHeader} </h3>
+                          <span className="close-contact-form" onClick={() => {handleContactFormToggle()}}>
+                              <RiArrowGoBackFill />
+                          </span>
+                         </div>
+
                                 <form
                                     name="contact"
                                     method="post"
@@ -131,48 +174,46 @@ const ContactForm = ({ handleContactFormToggle }) => {
                                     </p>
 
 
-                                    <select name="cars" id="cars" onChange={handleChange}>
-                                      <option value="volvo">Volvo</option>
-                                      <option value="saab">Saab</option>
-                                      <option value="mercedes">Mercedes</option>
-                                      <option value="audi">Audi</option>
+                                    <select name="Temat" onChange={handleChange}>
+                                    <option value={`${data.pl.topic}`} disabled selected>{`${data.pl.topic}`}</option>
+                                      {data.pl.topicOptions.map((item, index) => (
+                                        <option value={`${item.topicOptionField}`} key={index}>{item.topicOptionField}</option>
+                                      ))}
                                     </select>
 
-
                                     <p>
                                     
                                         
-                                        <input type="text" name="name" placeholder="Your name:" onChange={handleChange} />
+                                        <input type="text" name="name" placeholder={data.pl.firstName} onChange={handleChange} />
                                       
                                     </p>
                                     <p>
                                     
                                         
-                                        <input type="text" name="surname" placeholder="Your surname:" onChange={handleChange} />
+                                        <input type="text" name="surname" placeholder={data.pl.surname} onChange={handleChange} />
                                       
                                     </p>
                                     <p>
                                     
                                         
-                                        <input type="email" name="email" placeholder="E-mail:" required onChange={handleChange} />
+                                        <input type="email" name="email" placeholder={data.pl.emailAddress} required onChange={handleChange} />
                                       
                                     </p>
                                     <p className={`text-area-paragraph`}>
                                     
                                         
-                                        <textarea name="message" placeholder="Message:" required onChange={handleChange} />
+                                        <textarea name="message" placeholder={data.pl.messageContent} required onChange={handleChange} />
                                       
                                     </p>
                                     <p>
-                                    <button type="submit">WYŚLIJ WIADOMOŚĆ</button>
+                                    <button type="submit">{data.pl.submitText}</button>
                                     </p>
                                 </form>
+                            </>
                         )
                       } 
                     }}
                 </Location>
-
-            
           </div>
     )
 }
