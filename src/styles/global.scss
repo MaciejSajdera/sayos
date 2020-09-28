@@ -9,6 +9,10 @@ p {
     font-family: 'Mulish', sans-serif;
 }
 
+select {
+    font-family: 'Mulish', sans-serif;
+}
+
 a, a:visited {
     text-decoration: none;
     color: #fff;
@@ -23,6 +27,8 @@ h2 {
 
     @media screen and (max-height: 612px) {
         font-size: 1rem;
+
+        
 
     }
 }
@@ -54,12 +60,15 @@ p {
 
 .subpage-content-wrapper {
     max-width: 1100px;
-    padding: 2em;
 
     // @media screen and (min-width: 992px) {
     //     width: 4.5em;
     //     height: 4.5em;
     // }
+}
+
+.thank-you-title {
+    color: rgb(150, 230, 150);
 }
 
 .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
@@ -71,7 +80,8 @@ main, .subpage {
 
     .swiper-button-next, .swiper-button-prev {
         position: absolute;
-        top: 90%!important;
+        top: unset!important;
+        bottom: 8%;
         width: calc(var(--swiper-navigation-size) / 44 * 27);
         height: var(--swiper-navigation-size);
         margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
@@ -134,5 +144,11 @@ main {
     @media screen and (min-width: 992px) {
         top: 80%!important;
         }
+    }
+}
+
+* {
+    &:focus {
+        outline: none;
     }
 }

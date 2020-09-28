@@ -75,7 +75,10 @@ main {
 }
 
 .single-project-container {
-    height: 100vh;
+    height: 100vh
+}
+
+.single-project-container, .single-project-tile {
     position: relative;
 
     .gatsby-image-wrapper {
@@ -93,10 +96,13 @@ main {
     }
 
     .title-container {
-        bottom: 14%;
+        bottom: 20%;
         position: absolute;
         left: 2.5em;
         transition: all 0.3s ease-in-out;
+        @media screen and (min-width: 992px) {
+            bottom: 14%;
+        }
     }
 
     .text-on-hover {
@@ -126,8 +132,12 @@ main {
 
     h2 {
         color: #fff;
-        font-size: 2.5rem;
+        font-size: 2rem;
         letter-spacing: 1px;
+
+        @media screen and (min-height: 648px) {
+            font-size: 2.5rem;
+        }
     }
 
     picture {

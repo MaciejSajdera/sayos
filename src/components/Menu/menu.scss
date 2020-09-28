@@ -114,7 +114,7 @@ div.menu-trigger {
 
 
 .menu {
-
+    position: fixed;
     right: 0em;
     top: 0em;
     z-index: 999;
@@ -180,7 +180,8 @@ div.menu-trigger {
                 flex-flow: column;
                 justify-content: space-between;
                 align-items: center;
-                height: 60%;
+                height: 65%;
+                width: 90%;
 
             @media screen and (min-width: 992px) {
                 flex-flow: row;
@@ -200,6 +201,7 @@ div.menu-trigger {
             .menu-left {
 
                 position: relative;
+                width: 75%;
 
                 @media screen and (min-width: 992px) {
                     width: 50%;
@@ -207,6 +209,10 @@ div.menu-trigger {
     
                 .contact-form-title {
                     cursor: pointer;
+                }
+
+                p:hover {
+                    color: white;
                 }
 
                 .title-hidden {
@@ -292,14 +298,14 @@ div.menu-trigger {
     }
 }
 
-.menuStyleAbsolute {
-    position: absolute;
+// .menuStyleAbsolute {
+//     position: absolute;
     
-}
+// }
 
-.menuStyleFixed {
-    position: fixed;
-}
+// .menuStyleFixed {
+//     position: fixed;
+// }
 
 .menu.active {
     

@@ -3,10 +3,10 @@ import { Link, useStaticQuery } from 'gatsby'
 
 import Consumer from "../../../context"
 import ContactForm from "../ContactForm/ContactForm"
-import { RiArrowGoBackFill } from 'react-icons/ri';
 
 
-const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location, houseProject }) => {
+
+const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location, houseProject, interiorProject, category }) => {
 
     const data = useStaticQuery(graphql`
     query MyMenuLogoQuery {
@@ -15,7 +15,6 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
           fixed {
             base64
             src
-            tracedSVG
           }
         }
       }
@@ -38,7 +37,7 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
         {({handleNavToggle, navToggled, set}) => (
 
         
-    <div className={`menu ${menuStyle} ${navToggled ? `active` : ""}`}>
+    <div className={`menu ${navToggled ? `active` : ""}`}>
 
         <div className={`menu-container`}>    
 
@@ -75,9 +74,19 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
                     <div className="menu-left">
                         
                         <div className="menu-grouped-items">
-                          <h3>{dataMenuLeft.projectsHeader}</h3>
-                          <p>{dataMenuLeft.projectsSubfield1}</p>
-                          <p>{dataMenuLeft.projectsSubfield2}</p>
+
+                          <Link to={ about.locale === "pl" ? `/all` : `/${about.locale}/all`} onClick={() => {handleNavToggle()}}>
+                            <h3>{dataMenuLeft.projectsHeader}</h3>
+                          </Link>
+
+                          <Link to={ category.locale === "pl" ? `/${category.categoryFirst}` : `/${about.locale}/${category.categoryFirst}`} onClick={() => {handleNavToggle()}}>
+                            <p>{dataMenuLeft.projectsSubfield1}</p>
+                          </Link>
+
+                          <Link to={ category.locale === "pl" ? `/${category.categorySecond}` : `/${about.locale}/${category.categorySecond}`} onClick={() => {handleNavToggle()}}>
+                            <p>{dataMenuLeft.projectsSubfield2}</p>
+                          </Link>
+
                         </div>
 
                         <h3>{dataMenuLeft.offerHeader}</h3>
@@ -95,27 +104,27 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
                           <p>{dataMenuLeft.individualSubfield1}</p>
                           </Link>
 
-
+                          <Link to={ about.locale === "pl" ? `/${interiorProject.slug}` : `/${interiorProject.locale}/${interiorProject.slug}`} onClick={() => {handleNavToggle()}}>
                           <p className={`${isOpen ? "title-hidden" : ""}`}>{dataMenuLeft.individualSubfield2}</p>
+                          </Link>
 
                         </div>
 
                         <div className={`contact-form-container ${isOpen ? "form-active" : ""}`}>
-                            <span className="close-contact-form" onClick={() => {handleContactFormToggle()}}>
-                              <RiArrowGoBackFill />
-                            </span>
+
 
                             {/* <div className="contact-form-wrapper"> */}
                               {/* <h3>Napisz do nas</h3> */}
                             {/* </div> */}
 
-                            <ContactForm />
+                  <ContactForm handleContactFormToggle={handleContactFormToggle}/>
 
                         </div>
 
                         <h3 className={`contact-form-title ${isOpen ? "title-hidden" : ""}`} onClick={() => {handleContactFormToggle()}}>
                           {dataMenuLeft.contactHeader}
                         </h3>
+
 
                     </div>
 

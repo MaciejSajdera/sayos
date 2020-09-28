@@ -5,17 +5,17 @@ import Menu from "../components/Menu/menu"
 
 const About = (props) => {
 
-    let { about, menuRightProject, menuLeftProject, houseProject } = props.data;
+    let { about, menuRightProject, menuLeftProject, houseProject, interiorProject, category } = props.data;
 
     return (
       <>
-      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={about} houseProject={houseProject}/>
+      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={about} houseProject={houseProject} interiorProject={interiorProject} category={category}/>
 
         <div className={`subpage about`}>
 
           <div className="subpage-content-wrapper">
             <h1>{about.aboutTitle}</h1>
-            <p className={`text-content`}>{about.aboutContent}</p>
+            <p className={`about-content`}>{about.aboutContent}</p>
           </div>
 
         </div>
@@ -41,14 +41,12 @@ query aboutData($locale: String!) {
     instagramicon {
       fixed(height: 35) {
         src
-        tracedSVG
         base64
       }
     }
     facebookicon {
       fixed(height: 35) {
         src
-        tracedSVG
         base64
       }
     }
@@ -74,6 +72,21 @@ query aboutData($locale: String!) {
       slideHeader
       slideMainText
     }
+  }
+  interiorProject: datoCmsInteriorProjectForClient(locale: {eq: $locale}) {
+    pageName
+    slug
+    locale
+    modularContent {
+      slideNumber
+      slideHeader
+      slideMainText
+    }
+  }
+  category: datoCmsCategory(locale: {eq: $locale}) {
+    categoryFirst
+    categorySecond
+    locale
   }
 }
 `;

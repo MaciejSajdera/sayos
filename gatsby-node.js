@@ -3,10 +3,9 @@ const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
-
   const locales = ["pl", "en"];
 
-  const componentTemplate = path.resolve(`src/templates/index.js`);
+  const componentTemplate = path.resolve(`src/templates/home.js`);
 
   locales.forEach(locale => {
     const prefix = locale === 'pl' ? "" : `${locale}`;
@@ -17,8 +16,17 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     });
   });
 
-  const menuPagesQuery = await graphql(`
-  query MyMenuPagesQuery {
+  locales.forEach(locale => {
+    const prefix = locale === 'pl' ? `all` : `${locale}/all`;
+    createPage({
+      path: `/${prefix}`,
+      component: path.resolve(`src/templates/allProjects.js`),
+      context: { locale }
+    });
+  });
+
+  const aboutPageQuery = await graphql(`
+  query aboutPageQuery {
     pl: allDatoCmsAbout(filter: {locale: {eq: "pl"}}) {
       nodes {
         aboutTitle
@@ -38,7 +46,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   }
   `)
 
-  menuPagesQuery.data.pl.nodes.forEach(item => {
+  aboutPageQuery.data.pl.nodes.forEach(item => {
     const prefix = item.locale === 'pl' ? `${item.slug}` : `${item.locale}/${item.slug}`;
     createPage({
       path: `/${prefix}`,
@@ -51,7 +59,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 });
 
 
-menuPagesQuery.data.en.nodes.forEach(item => {
+aboutPageQuery.data.en.nodes.forEach(item => {
   const prefix = `${item.locale}/${item.slug}`;
   createPage({
     path: `/${prefix}`,
@@ -135,7 +143,7 @@ menuPagesQuery.data.en.nodes.forEach(item => {
     let url = `/${item.slug}`;
     createPage({
       path: url,
-      component: path.resolve(`src/templates/client-house-project.js`),
+      component: path.resolve(`src/templates/clientHouseProject.js`),
       context: {
         houseProjectData: item.pageName,
         locale: item.locale,
@@ -148,7 +156,7 @@ menuPagesQuery.data.en.nodes.forEach(item => {
   let url = `${item.locale}/${item.slug}`;
   createPage({
     path: url,
-    component: path.resolve(`src/templates/client-house-project.js`),
+    component: path.resolve(`src/templates/clientHouseProject.js`),
     context: {
       // thankYouData: item,
       // thankYouTitle: item.thankYouTitle,
@@ -158,6 +166,50 @@ menuPagesQuery.data.en.nodes.forEach(item => {
   });
 
 
+  const interiorProjectQuery = await graphql(`
+  query interiorProject {
+    pl: allDatoCmsInteriorProjectForClient(filter: {locale: {eq: "pl"}}) {
+      nodes {
+        pageName
+        slug
+        locale
+      }
+    }
+    en: allDatoCmsInteriorProjectForClient(filter: {locale: {eq: "en"}}) {
+      nodes {
+        pageName
+        slug
+        locale
+      }
+    }
+  }
+  `)
+
+  interiorProjectQuery.data.pl.nodes.forEach(item => {
+    let url = `/${item.slug}`;
+    createPage({
+      path: url,
+      component: path.resolve(`src/templates/clientInteriorProject.js`),
+      context: {
+        interiorProjectData: item.pageName,
+        locale: item.locale,
+      }
+    });
+  });
+
+
+  interiorProjectQuery.data.en.nodes.forEach(item => {
+  let url = `${item.locale}/${item.slug}`;
+  createPage({
+    path: url,
+    component: path.resolve(`src/templates/clientInteriorProject.js`),
+    context: {
+      // thankYouData: item,
+      // thankYouTitle: item.thankYouTitle,
+      locale: item.locale,
+    }
+  });
+  });
 
   const projectsQuery = await graphql(`
     query myData{
@@ -253,7 +305,7 @@ menuPagesQuery.data.en.nodes.forEach(item => {
   `)
 
   projectsQuery.data.pl.nodes.forEach(item => {
-
+    
           let url = `${item.projectCategory}/${item.slug}`;
           createPage({
             path: url,
@@ -279,6 +331,103 @@ menuPagesQuery.data.en.nodes.forEach(item => {
             }
           });
   });
+
+
+    //category pages
+
+  const categoriesFirstQuery = await graphql(`
+  query interiorProject {
+    pl: allDatoCmsCategory(filter: {locale: {eq: "pl" }}) { 
+      nodes {
+        categoryFirst
+        locale
+      }
+    }
+    en: allDatoCmsCategory(filter: {locale: {eq: "en" }}) { 
+      nodes {
+        categoryFirst
+        locale
+      }
+    }
+  }
+  `)
+
+  const categoriesSecondQuery = await graphql(`
+  query interiorProject {
+    pl: allDatoCmsCategory(filter: {locale: {eq: "pl" }}) { 
+      nodes {
+        categorySecond
+        locale
+      }
+    }
+    en: allDatoCmsCategory(filter: {locale: {eq: "en" }}) { 
+      nodes {
+        categorySecond
+        locale
+      }
+    }
+  }
+  `)
+
+      categoriesFirstQuery.data.pl.nodes.forEach(item => {
+
+        let url = `/${item.categoryFirst}`;
+
+        createPage({
+          path: url,
+          component: path.resolve(`src/templates/allProjectsHouse.js`),
+          context: {
+            // myProjectData: item,
+            locale: item.locale,
+            // fullScreenPhoto: item.fullScreenPhoto
+          }
+        });
+    });
+
+    categoriesFirstQuery.data.en.nodes.forEach(item => {
+
+      let url = `/${item.locale}/${item.categoryFirst}`;
+
+      createPage({
+        path: url,
+        component: path.resolve(`src/templates/allProjectsHouse.js`),
+        context: {
+          // myProjectData: item,
+          locale: item.locale,
+          // fullScreenPhoto: item.fullScreenPhoto
+        }
+      });
+    });
+
+    categoriesSecondQuery.data.pl.nodes.forEach(item => {
+
+      let url = `/${item.categorySecond}`;
+
+      createPage({
+        path: url,
+        component: path.resolve(`src/templates/allProjectsInterior.js`),
+        context: {
+          // myProjectData: item,
+          locale: item.locale,
+          // fullScreenPhoto: item.fullScreenPhoto
+        }
+      });
+  });
+
+    categoriesSecondQuery.data.en.nodes.forEach(item => {
+
+      let url = `/${item.locale}/${item.categorySecond}`;
+
+      createPage({
+        path: url,
+        component: path.resolve(`src/templates/allProjectsInterior.js`),
+        context: {
+          // myProjectData: item,
+          locale: item.locale,
+          // fullScreenPhoto: item.fullScreenPhoto
+        }
+      });
+    });
 
 
 };

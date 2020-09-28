@@ -9,11 +9,11 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 
 const ClientHouseProject = (props) => {
 
-  let { houseProject, menuRightProject, menuLeftProject, about } = props.data;
+  let { houseProject, interiorProject, menuRightProject, menuLeftProject, about, category } = props.data;
 
   return (
     <>
-        <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={ about } houseProject = {houseProject}/>
+        <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={ about } houseProject = {houseProject} interiorProject={interiorProject} category={category}/>
 
       <div className={`subpage`}>
       <div className="subpage-content-wrapper">
@@ -61,6 +61,16 @@ query HouseProjectData($locale: String!) {
       slideMainText
     }
   }
+  interiorProject: datoCmsInteriorProjectForClient(locale: {eq: $locale}) {
+    pageName
+    slug
+    locale
+    modularContent {
+      slideNumber
+      slideHeader
+      slideMainText
+    }
+  }
   menuRightProject: datoCmsMenuRight(locale: {eq: $locale}) {
     adressData1
     adressData2
@@ -69,14 +79,12 @@ query HouseProjectData($locale: String!) {
     instagramicon {
       fixed(height: 35) {
         src
-        tracedSVG
         base64
       }
     }
     facebookicon {
       fixed(height: 35) {
         src
-        tracedSVG
         base64
       }
     }
@@ -107,6 +115,11 @@ query HouseProjectData($locale: String!) {
         src
       }
     }
+  }
+  category: datoCmsCategory(locale: {eq: $locale}) {
+    categoryFirst
+    categorySecond
+    locale
   }
 }
 `;

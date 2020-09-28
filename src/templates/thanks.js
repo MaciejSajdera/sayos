@@ -12,8 +12,8 @@ const Thanks = (props) => {
 
       <div className={`subpage`}>
       <div className="subpage-content-wrapper">
-        <h1>{thanks.thankYouTitle}</h1>
-        <p className={`text-content`}>{thanks.thankYouContent}</p>
+        <h1 className={`thank-you-title`}>{thanks.thankYouTitle}</h1>
+        <p className={`text-content thank-you-title`}>{thanks.thankYouContent}</p>
       </div>
 
       </div>
@@ -38,14 +38,12 @@ query thanksData($locale: String!) {
     instagramicon {
       fixed(height: 35) {
         src
-        tracedSVG
         base64
       }
     }
     facebookicon {
       fixed(height: 35) {
         src
-        tracedSVG
         base64
       }
     }

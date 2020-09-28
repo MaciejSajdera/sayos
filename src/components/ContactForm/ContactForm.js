@@ -1,6 +1,8 @@
 import React from 'react';
 import { navigate } from 'gatsby-link'
 import { Location } from '@reach/router'
+import { RiArrowGoBackFill } from 'react-icons/ri';
+import { useForm } from "react-hook-form";
 
 function encode(data) {
   return Object.keys(data)
@@ -8,7 +10,7 @@ function encode(data) {
     .join('&')
 }
 
-export default function ContactForm() {
+const ContactForm = ({ handleContactFormToggle }) => {
 
   const [state, setState] = React.useState({})
 
@@ -34,7 +36,14 @@ export default function ContactForm() {
 
     return (
           <div className="contact-form">
-                <h3>Napisz do nas</h3>
+                
+                <div className="form-title-wrapper">
+                  <h3>Napisz do nas! </h3>
+                  <span className="close-contact-form" onClick={() => {handleContactFormToggle()}}>
+                      <RiArrowGoBackFill />
+                  </span>
+                 </div>
+                  
             
                 <Location>
                    {({ location }) => {
@@ -65,23 +74,27 @@ export default function ContactForm() {
                                         Don’t fill this out: <input name="bot-field" onChange={handleChange} />
                                       
                                     </p>
+
+                                    <select name="cars" id="cars">
+                                      <option value="volvo">Volvo</option>
+                                      <option value="saab">Saab</option>
+                                      <option value="mercedes">Mercedes</option>
+                                      <option value="audi">Audi</option>
+                                    </select>
+
                                     <p>
-                                    
-                                        
+                                  
                                         <input type="text" name="name" placeholder="Your name:" onChange={handleChange} />
                                       
                                     </p>
                                     <p>
                                     
-                                        
                                         <input type="text" name="surname" placeholder="Your surname:" onChange={handleChange} />
                                       
                                     </p>
                                     <p>
                                     
-                                        
                                         <input type="email" name="email" placeholder="E-mail:" onChange={handleChange} />
-                                      
                                     </p>
                                     <p className={`text-area-paragraph`}>
                                     
@@ -90,7 +103,7 @@ export default function ContactForm() {
                                       
                                     </p>
                                     <p>
-                                      <button type="submit">Send</button>
+                                      <button type="submit">WYŚLIJ WIADOMOŚĆ</button>
                                     </p>
                                 </form>
                         )
@@ -114,6 +127,16 @@ export default function ContactForm() {
                                         Don’t fill this out: <input name="bot-field" onChange={handleChange} />
                                       
                                     </p>
+
+
+                                    <select name="cars" id="cars" onChange={handleChange}>
+                                      <option value="volvo">Volvo</option>
+                                      <option value="saab">Saab</option>
+                                      <option value="mercedes">Mercedes</option>
+                                      <option value="audi">Audi</option>
+                                    </select>
+
+
                                     <p>
                                     
                                         
@@ -139,7 +162,7 @@ export default function ContactForm() {
                                       
                                     </p>
                                     <p>
-                                      <button type="submit">Send</button>
+                                    <button type="submit">WYŚLIJ WIADOMOŚĆ</button>
                                     </p>
                                 </form>
                         )
@@ -151,3 +174,5 @@ export default function ContactForm() {
           </div>
     )
 }
+
+export default ContactForm

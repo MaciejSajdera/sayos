@@ -28,7 +28,6 @@ const Header = ({ location }) => {
         fixed {
           src
           base64
-          tracedSVG
         }
       }
     }
@@ -38,7 +37,6 @@ const Header = ({ location }) => {
         fixed {
           base64
           src
-          tracedSVG
         }
       }
     }
@@ -68,7 +66,7 @@ const Header = ({ location }) => {
                        || location.pathname === "/thank-you" || location.pathname === "/dziekujemy"
                        || location.pathname === "/thank-you/" || location.pathname === "/dziekujemy/"
                         ||  location.pathname === "/en/house-project/" ||  location.pathname === "/en/house-project" ||  location.pathname === "/projekt-domu"
-                        ||  location.pathname === "/projekt-domu/") {
+                        ||  location.pathname === "/projekt-domu/" || location.pathname === "/projekt-wnetrza/" || location.pathname === "/projekt-wnetrza" || location.pathname === "/en/interior-project/" || location.pathname === "/en/interior-project") {
                         return (
                         <div className={`logo-top`}>
                         <img src={lightLogo} alt="test-light-only"/>

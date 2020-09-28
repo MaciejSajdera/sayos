@@ -13,7 +13,7 @@ class ProjectPage extends Component {
 
   render() {
 
-    let { projects, menuRightProject, menuLeftProject, about, logoData, houseProject } = this.props.data;
+    let { projects, menuRightProject, menuLeftProject, about, logoData, houseProject, interiorProject, category } = this.props.data;
 
     const { myProjectData } = this.props.pageContext;
 
@@ -56,7 +56,7 @@ class ProjectPage extends Component {
       console.log(`this props data: ${this.props.data}`)
       }
 
-      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } dataProjects={projects} menuStyle={menuStyle} about={about} logoData={logoData} houseProject={houseProject}/>
+      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } dataProjects={projects} menuStyle={menuStyle} about={about} logoData={logoData} houseProject={houseProject} interiorProject={interiorProject} category={category}/>
 
       {/* {this.props.data.menuRight.phoneNumber} */}
       {/* <div> */}
@@ -255,6 +255,21 @@ query myProjectData($locale: String!) {
       slideHeader
       slideMainText
     }
+  }
+  interiorProject: datoCmsInteriorProjectForClient(locale: {eq: $locale}) {
+    pageName
+    slug
+    locale
+    modularContent {
+      slideNumber
+      slideHeader
+      slideMainText
+    }
+  }
+  category: datoCmsCategory(locale: {eq: $locale}) {
+    categoryFirst
+    categorySecond
+    locale
   }
 }
 `;
