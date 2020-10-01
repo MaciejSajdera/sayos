@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useEffect, useContext } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, EffectFade } from 'swiper';
 
 import Menu from "../components/Menu/menu"
+
+import myContext from "../../context"
 
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
@@ -10,6 +12,12 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 const ClientHouseProject = (props) => {
 
   let { houseProject, interiorProject, menuRightProject, menuLeftProject, about, category } = props.data;
+
+  const context = useContext(myContext)
+
+  useEffect(() => {
+    context.navToggled ? context.handleNavToggle() : console.log('nav open');
+  }, [])
 
   return (
     <>
@@ -32,10 +40,10 @@ const ClientHouseProject = (props) => {
 
             <SwiperSlide>
             <div className="slide-container" id={`slide-${index}`} key={index}>
-              <div className="slide-container-upper-wrapper">
+
                 <p>{node.slideNumber}</p>
                 <h2>{node.slideHeader}</h2>
-              </div>
+
               <p className={`text-content`}>{node.slideMainText}</p>
             </div>
             </SwiperSlide>

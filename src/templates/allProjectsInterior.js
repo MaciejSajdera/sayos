@@ -2,11 +2,12 @@ import React from "react"
 import { Link, graphql, Img } from "gatsby"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import myContext from "../../context"
+
 import Menu from "../components/Menu/menu"
 
-import Consumer from "../../context"
 
-class allProjectsHouse extends React.Component  {
+class allProjectsInterior extends React.Component  {
 
   constructor(props) {
     super(props);
@@ -15,6 +16,11 @@ class allProjectsHouse extends React.Component  {
       locale: this.props.data.menuRightIndex.locale
     }
   }
+
+  componentDidMount() {
+    this.context.navToggled ? this.context.handleNavToggle() : console.log('nav open');
+  }
+
 
   render() {
 
@@ -83,7 +89,9 @@ class allProjectsHouse extends React.Component  {
   }
 }
 
-export default allProjectsHouse
+allProjectsInterior.contextType = myContext;
+
+export default allProjectsInterior
 
 export const query = graphql`
 query allProjectsInteriorData($locale: String!) {

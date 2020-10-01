@@ -9,7 +9,9 @@ import React from "react"
 //   set: () => {},
 // }
 
-const { Provider, Consumer } = React.createContext()
+const myContext = React.createContext({
+  navToggled: false,
+})
 
 class ContextProviderComponent extends React.Component {
   constructor(props) {
@@ -22,6 +24,7 @@ class ContextProviderComponent extends React.Component {
       langChosen: '',
       langToggle: this.langToggle,
       handleNavToggle: this.handleNavToggle,
+      navToggled: false
     }
   }
 
@@ -51,8 +54,8 @@ class ContextProviderComponent extends React.Component {
 
   render() {
 
-    return <Provider value={this.state}> {this.props.children} {console.log(this.state)}</Provider>
+    return <myContext.Provider value={this.state}> {this.props.children} {console.log(`context state: ${this.state}`)}</myContext.Provider>
   }
 }
 
-export { Consumer as default, ContextProviderComponent }
+export { myContext as default, ContextProviderComponent }

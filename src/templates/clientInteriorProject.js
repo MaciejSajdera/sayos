@@ -1,15 +1,22 @@
-import React from "react"
+import React, { useEffect, useContext } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, EffectFade } from 'swiper';
 
 import Menu from "../components/Menu/menu"
 
+import myContext from "../../context"
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 
 const ClientInteriorProject = (props) => {
 
   let { interiorProject, houseProject, menuRightProject, menuLeftProject, about, category } = props.data;
+
+  const context = useContext(myContext)
+
+  useEffect(() => {
+    context.navToggled ? context.handleNavToggle() : console.log('nav open');
+  }, [])
 
   return (
     <>

@@ -4,7 +4,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import Menu from "../components/Menu/menu"
 
-import Consumer from "../../context"
+import myContext from "../../context"
 
 class allProjectsHouse extends React.Component  {
 
@@ -14,6 +14,10 @@ class allProjectsHouse extends React.Component  {
     this.state = {
       locale: this.props.data.menuRightIndex.locale
     }
+  }
+
+  componentDidMount() {
+    this.context.navToggled ? this.context.handleNavToggle() : console.log('nav open');
   }
 
   render() {
@@ -82,6 +86,8 @@ class allProjectsHouse extends React.Component  {
   )
   }
 }
+
+allProjectsHouse.contextType = myContext;
 
 export default allProjectsHouse
 

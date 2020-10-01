@@ -16,6 +16,18 @@ header {
     z-index: 9999;
     top: 3em;
 
+    @media screen and (max-height: 420px) and (orientation: landscape) {
+        top: 1em;
+    }
+
+    @media screen and (max-height: 650px) {
+        top: 2em;
+
+        img {
+            padding-left: 1em;
+        }
+    }
+
     .logo-container {
     
         .logo-top {
@@ -23,6 +35,14 @@ header {
             img {
                 padding-left: 2em;
                 width: 12rem;
+
+                @media screen and (max-height: 420px) and (orientation: landscape) {
+                    width: 10em;
+                }
+
+                @media screen and (max-height: 650px) {
+                    padding-left: 1em;
+                }
 
                 @media screen and (min-width: 992px) {
                     padding-left: 3em;

@@ -42,7 +42,7 @@
     .swiper-container {
         width: 100vw;
         height: 100vh;
-        @media screen and (min-width: 992px) {
+        @media screen and (min-width: 1200px) {
             width: 100%;
         }
     }
@@ -54,22 +54,59 @@
 
     .slide-container {
         padding: 1em;
-        display: flex;
-        flex-flow: column;
-        justify-content: space-between;
-        height: 40%;
+
+        @media screen and (min-width: 992px) {
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            height: 60%;
+        }
+
+        @media screen and (min-width: 1200px) {
+            height: 45%;
+        }
+
 
         @media screen and (min-height: 612px) {
             padding: 2em;
+        }
+
+        p {
+            @media screen and (max-height: 650px) {
+                margin-bottom: 0.25em;
+            }
+        }
+
+        h2 {
+            @media screen and (max-height: 650px) {
+                font-size: 1.1rem;
+            }
+
+            @media screen and (min-width: 992px) {
+                font-size: 2.5rem;
+            }
+
+            @media screen and (min-width: 1200px) {
+                font-size: 1.9rem;
+            }
 
         }
 
-        // .slide-container-upper-wrapper {
-        //     height: 100%;
-        // }
 
         .text-content {
             height: 100%;
+            line-height: 1.7;
+            @media screen and (max-height: 650px) {
+                font-size: 0.8rem;
+            }
+
+            @media screen and (min-width: 992px) and (max-width: 1024px) {
+                font-size: 1.5rem;
+            }
+
+            @media screen and (min-width: 1200px) {
+                font-size: 1.2rem;
+            }
         }
     }
 

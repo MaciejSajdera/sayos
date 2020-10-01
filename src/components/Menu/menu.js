@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useStaticQuery } from 'gatsby'
 
-import Consumer from "../../../context"
+import myContext from "../../../context"
 import ContactForm from "../ContactForm/ContactForm"
 
 
@@ -33,7 +33,7 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
 
       <>
 
-        <Consumer>
+        <myContext.Consumer>
         {({handleNavToggle, navToggled, set}) => (
 
         
@@ -41,7 +41,7 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
 
         <div className={`menu-container`}>    
 
-            <div className="menu-box" onClick={() => handleNavToggle() } tabindex="0" role="button" aria-label="Open Menu">
+            <div className="menu-box" onClick={() => handleNavToggle() } tabIndex="0" role="button" aria-label="Open Menu">
 
                     <div className={`menu-trigger ${navToggled ? "active" : ""}`} id={`menu10`} >
                         <span></span>
@@ -75,15 +75,15 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
                         
                         <div className="menu-grouped-items">
 
-                          <Link to={ about.locale === "pl" ? `/all` : `/${about.locale}/all`} onClick={() => {handleNavToggle()}}>
+                          <Link to={ about.locale === "pl" ? `/all` : `/${about.locale}/all`}>
                             <h3>{dataMenuLeft.projectsHeader}</h3>
                           </Link>
 
-                          <Link to={ category.locale === "pl" ? `/${category.categoryFirst}` : `/${about.locale}/${category.categoryFirst}`} onClick={() => {handleNavToggle()}}>
+                          <Link to={ category.locale === "pl" ? `/${category.categoryFirst}` : `/${about.locale}/${category.categoryFirst}`}>
                             <p>{dataMenuLeft.projectsSubfield1}</p>
                           </Link>
 
-                          <Link to={ category.locale === "pl" ? `/${category.categorySecond}` : `/${about.locale}/${category.categorySecond}`} onClick={() => {handleNavToggle()}}>
+                          <Link to={ category.locale === "pl" ? `/${category.categorySecond}` : `/${about.locale}/${category.categorySecond}`}>
                             <p>{dataMenuLeft.projectsSubfield2}</p>
                           </Link>
 
@@ -91,7 +91,7 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
 
                         <h3>{dataMenuLeft.offerHeader}</h3>
 
-                        <Link to={ about.locale === "pl" ? `/${about.slug}` : `/${about.locale}/${about.slug}`} onClick={() => {handleNavToggle()}}>
+                        <Link to={ about.locale === "pl" ? `/${about.slug}` : `/${about.locale}/${about.slug}`}>
                         <h3>{dataMenuLeft.aboutHeader}</h3>
                         </Link>
 
@@ -100,11 +100,11 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
 
 
                           {/* <Link to={`/${houseProject.slug}`} onClick={() => {handleNavToggle()}}> */}
-                          <Link to={ about.locale === "pl" ? `/${houseProject.slug}` : `/${houseProject.locale}/${houseProject.slug}`} onClick={() => {handleNavToggle()}}>
+                          <Link to={ about.locale === "pl" ? `/${houseProject.slug}` : `/${houseProject.locale}/${houseProject.slug}`}>
                           <p>{dataMenuLeft.individualSubfield1}</p>
                           </Link>
 
-                          <Link to={ about.locale === "pl" ? `/${interiorProject.slug}` : `/${interiorProject.locale}/${interiorProject.slug}`} onClick={() => {handleNavToggle()}}>
+                          <Link to={ about.locale === "pl" ? `/${interiorProject.slug}` : `/${interiorProject.locale}/${interiorProject.slug}`}>
                           <p className={`${isOpen ? "title-hidden" : ""}`}>{dataMenuLeft.individualSubfield2}</p>
                           </Link>
 
@@ -158,7 +158,7 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
 
 
         )}
-        </Consumer>
+        </myContext.Consumer>
     </>
     )
 }

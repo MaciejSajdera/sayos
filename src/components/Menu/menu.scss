@@ -34,6 +34,11 @@
     justify-content: center;
     background: rgba(54, 52, 52, 0.4);
 
+    @media screen and (max-height: 420px) and (orientation: landscape) {
+        top: 1em;
+        right: 1em;
+    }
+
     @media screen and (min-width: 992px) {
         width: 4em;
         height: 4em;
@@ -170,6 +175,10 @@ div.menu-trigger {
             p {
                 color: #7c7c7c;
                 margin-bottom: 0.5em;
+
+                @media screen and (max-height: 420px) and (orientation: landscape) {
+                    line-height: 1.1;
+                }
             }
 
         .menu-wrapper {
@@ -182,6 +191,18 @@ div.menu-trigger {
                 align-items: center;
                 height: 65%;
                 width: 90%;
+
+            @media screen and (max-height: 420px) and (orientation: landscape) {
+                flex-flow: row;
+                
+                h3 {
+                    font-size: 0.9rem;
+
+                    @media screen and (max-height: 420px) and (orientation: landscape) {
+                        margin-bottom: 0.65em;
+                    }
+                }
+            }
 
             @media screen and (min-width: 992px) {
                 flex-flow: row;
@@ -202,6 +223,10 @@ div.menu-trigger {
 
                 position: relative;
                 width: 75%;
+
+                @media screen and (max-height: 420px) and (orientation: landscape) {
+                    width: 50%;
+                }
 
                 @media screen and (min-width: 992px) {
                     width: 50%;
@@ -230,6 +255,13 @@ div.menu-trigger {
                 opacity: 0;
                 transform: translateY(150%);
                 transition: opacity 0.3s ease-out;
+
+                @media screen and (max-height: 420px) and (orientation: landscape) {
+                    display: block;
+                    opacity: 1;
+                    transform: translateY(0%);
+                    width: 70%;
+                }
 
                 @media screen and (min-width: 992px) {
                     display: block;

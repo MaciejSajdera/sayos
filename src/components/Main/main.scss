@@ -84,10 +84,11 @@ main {
     .gatsby-image-wrapper {
         height: 100%;
         transition: all 0.3s ease-in-out;
-
         img {
-            object-position: top!important;
+            object-position: bottom!important;
         }
+
+
 
         // &:hover {
         //     transform: scale(1.05);

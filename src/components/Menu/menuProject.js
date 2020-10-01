@@ -1,11 +1,11 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
-import Consumer from "../../../context"
+import myContext from "../../../context"
 
 const MenuProject = ({ data }) => {
     return (
 
-        <Consumer>
+        <myContext.Consumer>
         {({navToggled, menuData}) => (
         <div className={`menu ${navToggled ? `active` : ""}`}>
             <div className="menu-left">
@@ -17,7 +17,7 @@ const MenuProject = ({ data }) => {
             </div>
         </div>
         )}
-        </Consumer>
+        </myContext.Consumer>
     )
 }
 

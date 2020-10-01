@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Link, graphql } from "gatsby"
 import Menu from "../components/Menu/menu"
 
+import myContext from "../../context"
 
 const About = (props) => {
 
     let { about, menuRightProject, menuLeftProject, houseProject, interiorProject, category } = props.data;
+    
+    const context = useContext(myContext)
+
+    useEffect(() => {
+      context.navToggled ? context.handleNavToggle() : console.log('nav open');
+    }, [])
+
 
     return (
       <>
+
+
+
       <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={about} houseProject={houseProject} interiorProject={interiorProject} category={category}/>
 
         <div className={`subpage about`}>

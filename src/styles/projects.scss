@@ -33,7 +33,7 @@
 
     @media screen and (min-width: 992px) {
         flex-flow: row;
-        height: 100vh;
+        height: 100%;
     }
 
     .content {
@@ -51,7 +51,15 @@
 
             @media screen and (max-width: 992px) {
                 order: 2;
-               }
+            }
+
+            @media screen and (max-width: 1640px) {
+                h2 {
+                    font-size: 1.6rem;
+                }
+    
+            }
+
 
             h2, p, span {
                 color: #fff;
@@ -62,10 +70,16 @@
                 @media screen and (min-width: 992px) {
                     height: 60%;
                     // border: 1px solid purple;
-                    width: 60%;
+                    width: 70%;
                     display: flex;
                     flex-flow: row;
+
+                    .text-container {
+                        padding-top: 0;
+                    }
                 }
+
+
 
             }
     
@@ -110,7 +124,7 @@
     @media screen and (max-width: 992px) {
         padding: 1.5em;
         padding-top: 4em;
-        height: 100vh;
+        height: 100%;
         width: 100vw;
        }
 
