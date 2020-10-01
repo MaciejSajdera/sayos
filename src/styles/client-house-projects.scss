@@ -54,9 +54,22 @@
 
     .slide-container {
         padding: 1em;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        height: 40%;
+
         @media screen and (min-height: 612px) {
             padding: 2em;
 
+        }
+
+        // .slide-container-upper-wrapper {
+        //     height: 100%;
+        // }
+
+        .text-content {
+            height: 100%;
         }
     }
 

@@ -32,9 +32,11 @@ const ClientHouseProject = (props) => {
 
             <SwiperSlide>
             <div className="slide-container" id={`slide-${index}`} key={index}>
-            <p>{node.slideNumber}</p>
-            <h2>{node.slideHeader}</h2>
-            <p className={`text-content`}>{node.slideMainText}</p>
+              <div className="slide-container-upper-wrapper">
+                <p>{node.slideNumber}</p>
+                <h2>{node.slideHeader}</h2>
+              </div>
+              <p className={`text-content`}>{node.slideMainText}</p>
             </div>
             </SwiperSlide>
 
