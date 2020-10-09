@@ -6,12 +6,11 @@ import Menu from "../components/Menu/menu"
 
 import myContext from "../../context"
 
-
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 
-const ClientHouseProject = (props) => {
+const ClientDesignProject = (props) => {
 
-  let { houseProject, interiorProject, menuRightProject, menuLeftProject, about, category, offer } = props.data;
+  let { interiorProject, houseProject, designProject, menuRightProject, menuLeftProject, about, category, offer } = props.data;
 
   const context = useContext(myContext)
 
@@ -25,7 +24,7 @@ const ClientHouseProject = (props) => {
 
       <div className={`subpage`}>
       <div className="subpage-content-wrapper">
-      <h1 className="subpage-title">{houseProject.pageName}</h1>
+      <h1 className="subpage-title">{designProject.pageName}</h1>
       <Swiper
           spaceBetween={50}
           slidesPerView={1}
@@ -37,22 +36,15 @@ const ClientHouseProject = (props) => {
           onSwiper={(swiper) => console.log(swiper)}
         >
 
-        {houseProject.modularContent.map((node, index) => (
-
-            <>
-
+        {designProject.modularContent.map((node, index) => (
 
             <SwiperSlide>
             <div className="slide-container" id={`slide-${index}`} key={index}>
-
-                <p>{node.slideNumber}</p>
-                <h2>{node.slideHeader}</h2>
-
-              <p className={`text-content`}>{node.slideMainText}</p>
+            <p>{node.slideNumber}</p>
+            <h2>{node.slideHeader}</h2>
+            <p className={`text-content`}>{node.slideMainText}</p>
             </div>
             </SwiperSlide>
-
-            </>
 
         ))}
 
@@ -63,10 +55,20 @@ const ClientHouseProject = (props) => {
     </>
   )}
   
-export default ClientHouseProject
+export default ClientDesignProject
 
 export const query = graphql`
-query HouseProjectData($locale: String!) {
+query DesignProjectData($locale: String!) {
+  interiorProject: datoCmsInteriorProjectForClient(locale: {eq: $locale}) {
+    pageName
+    slug
+    locale
+    modularContent {
+      slideNumber
+      slideHeader
+      slideMainText
+    }
+  }
   houseProject: datoCmsHouseProjectForClient(locale: {eq: $locale}) {
     pageName
     slug
@@ -77,7 +79,7 @@ query HouseProjectData($locale: String!) {
       slideMainText
     }
   }
-  interiorProject: datoCmsInteriorProjectForClient(locale: {eq: $locale}) {
+  designProject: datoCmsDesignProjectForClient(locale: {eq: $locale}) {
     pageName
     slug
     locale

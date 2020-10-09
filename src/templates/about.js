@@ -6,7 +6,7 @@ import myContext from "../../context"
 
 const About = (props) => {
 
-    let { about, menuRightProject, menuLeftProject, houseProject, interiorProject, category } = props.data;
+    let { about, menuRightProject, menuLeftProject, houseProject, interiorProject, category, offer } = props.data;
     
     const context = useContext(myContext)
 
@@ -20,7 +20,7 @@ const About = (props) => {
 
 
 
-      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={about} houseProject={houseProject} interiorProject={interiorProject} category={category}/>
+      <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={about} houseProject={houseProject} interiorProject={interiorProject} category={category} offer={offer}/>
 
         <div className={`subpage about`}>
 
@@ -98,6 +98,30 @@ query aboutData($locale: String!) {
     categoryFirst
     categorySecond
     locale
+  }
+
+  
+  offer: datoCmsOffer(locale: {eq: $locale}) {
+    offerArchitectsLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    offerDesignLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    offerInteriorsLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    locale
+    slug
   }
 }
 `;

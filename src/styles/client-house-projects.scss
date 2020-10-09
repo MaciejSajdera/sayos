@@ -1,5 +1,12 @@
 .subpage {
 
+    .subpage-title {
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
     // .swiper-button-next, .swiper-button-prev {
     //     position: absolute;
     //     top: 90%!important;

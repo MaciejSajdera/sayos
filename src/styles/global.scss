@@ -1,6 +1,10 @@
 //Variables
 $white: #fff;
 
+// body {
+//     background-color: #0c0c0c;
+// }
+
 h2 {
     font-family: 'Mulish', sans-serif;
 }
@@ -150,4 +154,25 @@ main {
     &:focus {
         outline: none;
     }
+}
+
+// .lazy-load-image-background.blur > img {
+//     opacity: 0.2!important;
+// }
+
+.lazy-load-image-background {
+    width: 100%;
+}
+
+// .lazy-load-image-background.blur.lazy-load-image-loaded {
+//     transition: filter .1s, -webkit-filter 0.1s!important;
+// }
+
+// .lazy-load-image-background.blur.lazy-load-image-loaded > img {
+//     transition: opacity 0.1s!important;
+// }
+
+.lazy-load-image-background.blur {
+    -webkit-filter: blur(45px);
+    filter: blur(45px);
 }

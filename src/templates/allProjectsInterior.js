@@ -24,16 +24,17 @@ class allProjectsInterior extends React.Component  {
 
   render() {
 
-    let { projects, menuRightIndex, menuLeftIndex, about, logoData, houseProject, interiorProject, category } = this.props.data;
+    let { projects, menuRightIndex, menuLeftIndex, about, logoData, houseProject, interiorProject, category, offer } = this.props.data;
 
     const menuStyle = `menuStyleAbsolute`;
 
   return (
     <>  
-        <Menu dataMenu={ menuRightIndex} dataMenuLeft={ menuLeftIndex} dataProjects={projects} menuStyle={menuStyle} about={about} logoData={logoData} houseProject={ houseProject } interiorProject={interiorProject} category={category}/>
+        <Menu dataMenu={ menuRightIndex} dataMenuLeft={ menuLeftIndex} dataProjects={projects} menuStyle={menuStyle} about={about} logoData={logoData} houseProject={ houseProject } interiorProject={interiorProject} category={category} offer={offer}/>
 
         
         <main className={`all-grid`}>
+          <div className="all-grid-bg">
             {projects.nodes
                         .filter((node) => {
                         return node.projectCategory === category.categorySecond;})
@@ -61,7 +62,7 @@ class allProjectsInterior extends React.Component  {
                               // alt={image.alt}
                               // height={image.height}
                               effect="blur"
-                              src={element.thumbnail.fluid.src} // use normal <img> attributes as props
+                              src={element.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
                               // width={image.width}
                               />
 
@@ -83,6 +84,7 @@ class allProjectsInterior extends React.Component  {
                           </div>
 
                       ))}
+          </div>
       </main>
     </>
   )
@@ -164,6 +166,7 @@ query allProjectsInteriorData($locale: String!) {
     projectsSubfield1
     projectsSubfield2
     offerHeader
+    offerSubfield
     aboutHeader
     individualCustomer
     individualSubfield1
@@ -212,6 +215,30 @@ query allProjectsInteriorData($locale: String!) {
     categoryFirst
     categorySecond
     locale
+  }
+
+  
+  offer: datoCmsOffer(locale: {eq: $locale}) {
+    offerArchitectsLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    offerDesignLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    offerInteriorsLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    locale
+    slug
   }
 }
 `;

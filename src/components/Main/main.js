@@ -6,8 +6,8 @@ import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi';
 
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, EffectFade, Lazy } from 'swiper';
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade, Lazy]);
+import SwiperCore, { Navigation, A11y, Lazy, Keyboard, Mousewheel } from 'swiper';
+SwiperCore.use([Navigation, Mousewheel, Keyboard, A11y, Lazy]);
 
 const Main = ({ data }) => {
 
@@ -15,9 +15,16 @@ const Main = ({ data }) => {
       <main>
           <Swiper
           spaceBetween={0}
-          slidesPerView={1}
+          slidesPerView={3}
+          mousewheel={{
+            thresholdTime: 1,
+            sensitivity: 500,
+            releaseOnEdges: true,
+          }}
           navigation
-          lazy={{loadPrevNext: true, loadPrevNextAmount: 3}}
+          keyboard
+          a11y
+          lazy={{loadPrevNext: true, loadPrevNextAmount: 1}}
           breakpoints={{
             // when window width is >= 640px
             992: {

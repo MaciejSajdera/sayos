@@ -1,0 +1,93 @@
+.offer-logos-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+        width: 50%;
+
+
+    }
+
+    a {
+
+        &:nth-of-type(1) {
+
+            span {
+                transition: -webkit-filter .3s!important;
+                transition: filter .3s!important;
+                transition: filter .3s, -webkit-filter .3s!important;
+            }
+            
+        }   
+
+        &:nth-of-type(2) {
+
+            span {
+                transition: -webkit-filter .9s!important;
+                transition: filter .9s!important;
+                transition: filter .9s, -webkit-filter .9s!important;
+            }
+            
+        }   
+
+        &:nth-of-type(3) {
+
+            span {
+                transition: -webkit-filter 1.2s!important;
+                transition: filter 1.2s!important;
+                transition: filter 1.2s, -webkit-filter 1.2s!important;
+            }
+            
+        }   
+        
+
+        .text-on-hover {
+            transition: all 0.75s cubic-bezier(0.2, 0.44, 0.54, 0.87);
+            margin-top: 2.5em;
+            transform: translateY(100%);
+            opacity: 0;
+            
+            .project-slogan {
+                width: 90%;
+                margin-bottom: 2.5em;
+            }
+        
+            .read-more {
+                position: relative;
+                text-transform: uppercase;
+
+                &:after {
+                    content: '';
+                    background: #fff;
+                    height: 2px;
+                    width: 0em;
+                    position: absolute;
+                    bottom: -4px;
+                    left: 0;
+                    transition: 0.7s cubic-bezier(0.57, 0.21, 0.53, 0.82);
+                }
+            }
+        }
+
+
+        &:hover {
+    
+            .text-on-hover {
+                transform: translateY(0%);
+                opacity: 1;
+    
+                .read-more {
+    
+                    &:after {
+                        width: 8em;
+                    }
+    
+                }
+            }
+        }
+
+    }
+}
+
+
+

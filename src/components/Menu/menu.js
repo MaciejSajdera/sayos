@@ -6,7 +6,7 @@ import ContactForm from "../ContactForm/ContactForm"
 
 
 
-const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location, houseProject, interiorProject, category }) => {
+const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location, houseProject, interiorProject, category, offer }) => {
 
     const data = useStaticQuery(graphql`
     query MyMenuLogoQuery {
@@ -89,17 +89,20 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
 
                         </div>
 
-                        <h3>{dataMenuLeft.offerHeader}</h3>
+                        <Link to={ `/${offer.slug}`}>
+                        <h3>{dataMenuLeft.offerHeader}
+                        <p className="offer-subfield">{dataMenuLeft.offerSubfield}</p>
+                        </h3>
+                        </Link>
+
 
                         <Link to={ about.locale === "pl" ? `/${about.slug}` : `/${about.locale}/${about.slug}`}>
                         <h3>{dataMenuLeft.aboutHeader}</h3>
                         </Link>
 
-                        <div className="menu-grouped-items">
+                        {/* <div className="menu-grouped-items">
                           <h3>{dataMenuLeft.individualCustomer}</h3>
 
-
-                          {/* <Link to={`/${houseProject.slug}`} onClick={() => {handleNavToggle()}}> */}
                           <Link to={ about.locale === "pl" ? `/${houseProject.slug}` : `/${houseProject.locale}/${houseProject.slug}`}>
                           <p>{dataMenuLeft.individualSubfield1}</p>
                           </Link>
@@ -108,7 +111,7 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
                           <p className={`${isOpen ? "title-hidden" : ""}`}>{dataMenuLeft.individualSubfield2}</p>
                           </Link>
 
-                        </div>
+                        </div> */}
 
                         <div className={`contact-form-container ${isOpen ? "form-active" : ""}`}>
 

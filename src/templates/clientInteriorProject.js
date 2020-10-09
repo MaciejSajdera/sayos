@@ -10,7 +10,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 
 const ClientInteriorProject = (props) => {
 
-  let { interiorProject, houseProject, menuRightProject, menuLeftProject, about, category } = props.data;
+  let { interiorProject, houseProject, menuRightProject, menuLeftProject, about, category, offer } = props.data;
 
   const context = useContext(myContext)
 
@@ -20,10 +20,11 @@ const ClientInteriorProject = (props) => {
 
   return (
     <>
-        <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={ about } houseProject = {houseProject} interiorProject={interiorProject} category={category}/>
+        <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={ about } houseProject = {houseProject} interiorProject={interiorProject} category={category} offer={offer}/>
 
       <div className={`subpage`}>
       <div className="subpage-content-wrapper">
+      <h1 className="subpage-title">{interiorProject.pageName}</h1>
       <Swiper
           spaceBetween={50}
           slidesPerView={1}
@@ -101,6 +102,7 @@ query InteriorProjectData($locale: String!) {
     projectsSubfield1
     projectsSubfield2
     offerHeader
+    offerSubfield
     aboutHeader
     individualCustomer
     individualSubfield1
@@ -127,6 +129,30 @@ query InteriorProjectData($locale: String!) {
     categoryFirst
     categorySecond
     locale
+  }
+
+  
+  offer: datoCmsOffer(locale: {eq: $locale}) {
+    offerArchitectsLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    offerDesignLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    offerInteriorsLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    locale
+    slug
   }
 }
 `;

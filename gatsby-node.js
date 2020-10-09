@@ -120,6 +120,85 @@ aboutPageQuery.data.en.nodes.forEach(item => {
   });
 
 
+
+  const offerPageQuery = await graphql(`
+  query thankYouPageQuery {
+    pl: allDatoCmsOffer(filter: {locale: {eq: "pl"}}) {
+      nodes {
+        slug
+        locale
+        offerArchitectsLogo {
+          fixed {
+            src
+            base64
+          }
+        }
+        offerInteriorsLogo {
+          fixed {
+            src
+            base64
+          }
+        }
+        offerDesignLogo {
+          fixed {
+            src
+            base64
+          }
+        }
+      }
+    }
+    en: allDatoCmsOffer(filter: {locale: {eq: "en"}}) {
+      nodes {
+        slug
+        locale
+        offerArchitectsLogo {
+          fixed {
+            src
+            base64
+          }
+        }
+        offerInteriorsLogo {
+          fixed {
+            src
+            base64
+          }
+        }
+        offerDesignLogo {
+          fixed {
+            src
+            base64
+          }
+        }
+      }
+    }
+  }
+  `)
+
+  offerPageQuery.data.pl.nodes.forEach(item => {
+    let url = `/${item.slug}`;
+    createPage({
+      path: url,
+      component: path.resolve(`src/templates/offer.js`),
+      context: {
+        locale: item.locale,
+      }
+    });
+  });
+
+
+  offerPageQuery.data.en.nodes.forEach(item => {
+  let url = `/${item.slug}`;
+  createPage({
+    path: url,
+    component: path.resolve(`src/templates/offer.js`),
+    context: {
+      locale: item.locale,
+    }
+  });
+  });
+
+
+
   const houseProjectQuery = await graphql(`
   query HouseProject {
     pl: allDatoCmsHouseProjectForClient(filter: {locale: {eq: "pl"}}) {
@@ -210,6 +289,52 @@ aboutPageQuery.data.en.nodes.forEach(item => {
     }
   });
   });
+
+  const designProjectQuery = await graphql(`
+  query designProject {
+    pl: allDatoCmsDesignProjectForClient(filter: {locale: {eq: "pl"}}) {
+      nodes {
+        pageName
+        slug
+        locale
+      }
+    }
+    en: allDatoCmsDesignProjectForClient(filter: {locale: {eq: "en"}}) {
+      nodes {
+        pageName
+        slug
+        locale
+      }
+    }
+  }
+  `)
+
+  designProjectQuery.data.pl.nodes.forEach(item => {
+    let url = `/${item.slug}`;
+    createPage({
+      path: url,
+      component: path.resolve(`src/templates/clientDesignProject.js`),
+      context: {
+        designProjectData: item.pageName,
+        locale: item.locale,
+      }
+    });
+  });
+
+
+  designProjectQuery.data.en.nodes.forEach(item => {
+    let url = `${item.locale}/${item.slug}`;
+    createPage({
+      path: url,
+      component: path.resolve(`src/templates/clientDesignProject.js`),
+      context: {
+        designProjectData: item.pageName,
+        locale: item.locale,
+      }
+    });
+  });
+
+
 
   const projectsQuery = await graphql(`
     query myData{

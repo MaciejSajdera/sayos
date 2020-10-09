@@ -19,13 +19,13 @@ class Home extends React.Component  {
 
   render() {
 
-    let { projects, menuRightIndex, menuLeftIndex, about, logoData, houseProject, interiorProject, category } = this.props.data;
+    let { projects, menuRightIndex, menuLeftIndex, about, logoData, houseProject, interiorProject, category, offer } = this.props.data;
 
     const menuStyle = `menuStyleAbsolute`;
 
   return (
     <>  {console.log(`index.js state locale: ${this.state.locale}`), console.log(`this props data: ${this.props.data}`)}
-        <Menu dataMenu={ menuRightIndex} dataMenuLeft={ menuLeftIndex} dataProjects={projects} menuStyle={menuStyle} about={about} logoData={logoData} houseProject={ houseProject } interiorProject={interiorProject} category={category}/>
+        <Menu dataMenu={ menuRightIndex} dataMenuLeft={ menuLeftIndex} dataProjects={projects} menuStyle={menuStyle} about={about} logoData={logoData} houseProject={ houseProject } interiorProject={interiorProject} category={category} offer={offer}/>
 
          <Main data={projects}/>
     </>
@@ -106,6 +106,7 @@ query allProjectsDataHome($locale: String!) {
     projectsSubfield1
     projectsSubfield2
     offerHeader
+    offerSubfield
     aboutHeader
     individualCustomer
     individualSubfield1
@@ -154,6 +155,29 @@ query allProjectsDataHome($locale: String!) {
     categoryFirst
     categorySecond
     locale
+  }
+  
+  offer: datoCmsOffer(locale: {eq: $locale}) {
+    offerArchitectsLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    offerDesignLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    offerInteriorsLogo {
+      fixed {
+        base64
+        src
+      }
+    }
+    locale
+    slug
   }
 }
 `;

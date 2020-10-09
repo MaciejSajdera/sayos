@@ -92,10 +92,14 @@
             }
         
             .secondary-project-image {
-                height: 100vh;
+                height: 100%;
+
+                span {
+                    height: 100%;
+                }
 
                 img {
-                    height: 100vh;
+                    height: 100%;
                     width: 100%;
                 }
             }
