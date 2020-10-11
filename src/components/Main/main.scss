@@ -9,7 +9,6 @@ main {
     }
 
     .swiper-slide {
-        width: 100%;
 
         &:hover {
             .title-container {
@@ -32,6 +31,10 @@ main {
     
                 }
             }
+        }
+
+        @media screen and (max-width: 992px) {
+            width: 100%;
         }
     }
 
@@ -75,7 +78,8 @@ main {
 }
 
 .single-project-container {
-    height: 100vh
+    height: 100vh;
+    overflow: hidden;
 }
 
 .single-project-container, .single-project-tile {
@@ -100,14 +104,14 @@ main {
         bottom: 20%;
         position: absolute;
         left: 2.5em;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         @media screen and (min-width: 992px) {
             bottom: 14%;
         }
     }
 
     .text-on-hover {
-        transition: all 0.3s ease-in-out;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         padding: 0 2.5em;
         
         .project-slogan {

@@ -15,7 +15,7 @@ const Main = ({ data }) => {
       <main>
           <Swiper
           spaceBetween={0}
-          slidesPerView={3}
+          slidesPerView={1}
           mousewheel={{
             thresholdTime: 1,
             sensitivity: 500,

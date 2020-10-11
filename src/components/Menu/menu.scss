@@ -24,8 +24,8 @@
 .menu-box, .arrow-box {
     position: absolute;
     cursor: pointer;
-    top: 2em;
-    right: 2em;
+    top: 1em;
+    right: 1em;
     z-index:2;
     width: 3em;
     height: 3em;
@@ -42,6 +42,8 @@
     @media screen and (min-width: 992px) {
         width: 4em;
         height: 4em;
+        top: 2em;
+        right: 2em;
     }
 }
 
@@ -149,6 +151,7 @@ div.menu-trigger {
                 font-weight: 400;
                 letter-spacing: 1px;
                 margin-bottom: 1em;
+                margin-top: 1em;
 
                 @media screen and (min-height: 640px) {
                     margin-bottom: 2em;
@@ -189,26 +192,28 @@ div.menu-trigger {
                 flex-flow: column;
                 justify-content: space-between;
                 align-items: center;
-                height: 65%;
+                height: 55%;
                 width: 90%;
 
-            @media screen and (max-height: 420px) and (orientation: landscape) {
-                flex-flow: row;
+            // @media screen and (max-height: 420px) and (orientation: landscape) {
+            //     flex-flow: row;
                 
-                h3 {
-                    font-size: 0.9rem;
+            //     h3 {
+            //         font-size: 0.9rem;
 
-                    @media screen and (max-height: 420px) and (orientation: landscape) {
-                        margin-bottom: 0.65em;
-                    }
-                }
-            }
+            //         @media screen and (max-height: 420px) and (orientation: landscape) {
+            //             margin-bottom: 0.65em;
+            //         }
+            //     }
+            // }
 
             @media screen and (min-width: 992px) {
                 flex-flow: row;
-                height: 70%;
-                width: 50%;
+                // height: 70%;
+                width: 60%;
                 text-align: left;
+
+
     
                 .menu-grouped-items {
                     // padding-bottom: 2rem;
@@ -217,6 +222,10 @@ div.menu-trigger {
                         margin-bottom: 0.5em;
                     }
                 }
+            }
+
+            @media screen and (min-width: 1200px) {
+                width: 50%;
             }
 
             .menu-left {
@@ -253,7 +262,7 @@ div.menu-trigger {
                     padding-top: 0.5em;
 
                     &:hover {
-                        color: auto;
+                        color: #7c7c7c;
                     }
                 }
     
@@ -329,7 +338,7 @@ div.menu-trigger {
 
             .menu-right-active {
                 opacity: 1;
-                transform: translateY(20%);
+                transform: translateY(35%);
 
                 @media screen and (min-width: 992px) {
                     transform: translateY(0%);

@@ -20,7 +20,6 @@ const Offer = (props) => {
       <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={about} houseProject={houseProject} interiorProject={interiorProject} category={category} offer={offer}/>
 
       <div className={`subpage`}>
-        <div className="subpage-content-wrapper">
           <div className="offer-logos-wrapper">
 
           <Link to={ about.locale === "pl" ? `/${houseProject.slug}` : `/${houseProject.locale}/${houseProject.slug}`}>
@@ -81,7 +80,6 @@ const Offer = (props) => {
           </Link>
                     
           </div>
-        </div>
       </div>
         
   </>

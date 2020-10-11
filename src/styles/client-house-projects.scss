@@ -5,6 +5,14 @@
         top: 15%;
         left: 50%;
         transform: translate(-50%, 0);
+
+        @media screen and (max-width: 992px) {
+            display: none;
+            font-size: 1.25rem;
+            width: 100%;
+            text-align: center;
+        
+        }
     }
 
     // .swiper-button-next, .swiper-button-prev {

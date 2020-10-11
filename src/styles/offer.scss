@@ -1,14 +1,37 @@
 .offer-logos-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    width: 90%;
+    margin: auto;
 
-    span {
-        width: 50%;
-
-
+    @media screen and (max-width: 992px) {
+        position: fixed;
+        flex-flow: column;
+        justify-content: space-between;
+        height: 70%;
     }
 
     a {
+
+        display: flex;
+        flex-flow: column;
+        height: 300px;
+        width: 100%;
+        padding: 1em;
+        align-self: center;
+
+        @media screen and (max-height: 750px) {
+            height: 150px;
+        }
+
+        span {
+            width: 100%;
+            text-align: center;
+
+            img {
+                width: 200px;
+            }
+        }
 
         &:nth-of-type(1) {
 
@@ -46,10 +69,19 @@
             margin-top: 2.5em;
             transform: translateY(100%);
             opacity: 0;
+            text-align: center;
+
+            @media screen and (max-height: 750px) {
+                margin-top: 0.5em;
+            }
             
             .project-slogan {
-                width: 90%;
+                // width: 90%;
                 margin-bottom: 2.5em;
+
+                @media screen and (max-height: 750px) {
+                    margin-bottom: 0.5em;
+                }
             }
         
             .read-more {
@@ -63,8 +95,9 @@
                     width: 0em;
                     position: absolute;
                     bottom: -4px;
-                    left: 0;
                     transition: 0.7s cubic-bezier(0.57, 0.21, 0.53, 0.82);
+                    left: 50%;
+                    transform: translate(-50%, 0);
                 }
             }
         }

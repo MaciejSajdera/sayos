@@ -7,6 +7,10 @@
     // transition: transform 0.3s ease-out;
     transition: opacity 0.3s ease-out;
 
+    @media screen and (max-width: 992px) {
+        top: -18%;
+    }
+
     opacity: 0;
     width: 100%;
     background: #0c0c0c;
@@ -44,6 +48,7 @@
 
             &:nth-of-type(1) {
                 margin-bottom: 1em;
+                margin-top: 0em;
 
                 @media screen and (min-width: 992px) {
                     font-size: 2.2rem;
@@ -125,10 +130,10 @@
             }
 
             textarea {
-                height: 5em;
+                height: 7em;
                 padding: 0.25em 0.5em;
                 @media screen and (min-width: 992px) {
-                    height: 6rem;
+                    // height: 6rem;
                     padding: 0.25em 0.5em;
                 }
             }
