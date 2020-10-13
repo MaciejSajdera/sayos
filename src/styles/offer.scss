@@ -33,35 +33,35 @@
             }
         }
 
-        &:nth-of-type(1) {
+        // &:nth-of-type(1) {
 
-            span {
-                transition: -webkit-filter .3s!important;
-                transition: filter .3s!important;
-                transition: filter .3s, -webkit-filter .3s!important;
-            }
+        //     span {
+        //         transition: -webkit-filter .3s!important;
+        //         transition: filter .3s!important;
+        //         transition: filter .3s, -webkit-filter .3s!important;
+        //     }
             
-        }   
+        // }   
 
-        &:nth-of-type(2) {
+        // &:nth-of-type(2) {
 
-            span {
-                transition: -webkit-filter .9s!important;
-                transition: filter .9s!important;
-                transition: filter .9s, -webkit-filter .9s!important;
-            }
+        //     span {
+        //         transition: -webkit-filter .9s!important;
+        //         transition: filter .9s!important;
+        //         transition: filter .9s, -webkit-filter .9s!important;
+        //     }
             
-        }   
+        // }   
 
-        &:nth-of-type(3) {
+        // &:nth-of-type(3) {
 
-            span {
-                transition: -webkit-filter 1.2s!important;
-                transition: filter 1.2s!important;
-                transition: filter 1.2s, -webkit-filter 1.2s!important;
-            }
+        //     span {
+        //         transition: -webkit-filter 1.2s!important;
+        //         transition: filter 1.2s!important;
+        //         transition: filter 1.2s, -webkit-filter 1.2s!important;
+        //     }
             
-        }   
+        // }   
         
 
         .text-on-hover {
