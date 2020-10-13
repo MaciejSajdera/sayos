@@ -141,7 +141,7 @@ const Menu = ({ dataMenu, dataMenuLeft, dataProjects, menuStyle, about, location
                             </div>
 
                             <div className="menu-grouped-items">
-                                <p>{dataMenu.phoneNumber}</p>
+                                <a href={`tel:${dataMenu.phoneNumber}`}>{dataMenu.phoneNumber}</a>
                                 <p>{dataMenu.emailAdress}</p>
                             </div>
 

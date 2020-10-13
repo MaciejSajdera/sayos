@@ -6,6 +6,7 @@ module.exports = {
     siteURL: 'https://sayos.pl',
   },
   plugins: [
+    `gatsby-plugin-glamor`,
     `gatsby-plugin-root-import`,
     `gatsby-plugin-sass`,
     {

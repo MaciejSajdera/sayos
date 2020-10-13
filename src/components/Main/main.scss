@@ -23,6 +23,10 @@ main {
             .text-on-hover {
                 transform: translateY(-270%);
 
+                @media screen and (max-width: 1450px) {
+                    transform: translateY(-200%);
+                }
+
                 .read-more {
     
                     &:after {
@@ -122,21 +126,6 @@ main {
 
 .single-project-container, .single-project-tile {
     position: relative;
-
-    .gatsby-image-wrapper {
-        height: 100%;
-        transition: all 0.3s ease-in-out;
-        img {
-            object-position: bottom!important;
-        }
-
-
-
-        // &:hover {
-        //     transform: scale(1.05);
-        // }
-
-    }
 
     .title-container {
         bottom: 20%;

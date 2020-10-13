@@ -32,7 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(54, 52, 52, 0.4);
+    background: rgba(0, 0, 0, 0.4);
 
     @media screen and (max-height: 420px) and (orientation: landscape) {
         top: 1em;
@@ -45,6 +45,18 @@
         top: 2em;
         right: 2em;
     }
+}
+
+.menu-box {
+    background: rgba(54, 52, 52, 0.4);
+}
+
+
+@media screen and (min-width: 992px) {
+.arrow-box {
+    width: 3em;
+    height: 3em;
+}
 }
 
 .menu-trigger,
@@ -213,8 +225,6 @@ div.menu-trigger {
                 width: 60%;
                 text-align: left;
 
-
-    
                 .menu-grouped-items {
                     // padding-bottom: 2rem;
     
@@ -295,6 +305,10 @@ div.menu-trigger {
                         line-height: 1.2;
                     }
 
+                    a, a:visited {
+                        color: #7c7c7c;
+                    }
+
                     @media screen and (min-width: 992px) {
                         padding-bottom: 1rem;
 
@@ -347,15 +361,6 @@ div.menu-trigger {
         }
     }
 }
-
-// .menuStyleAbsolute {
-//     position: absolute;
-    
-// }
-
-// .menuStyleFixed {
-//     position: fixed;
-// }
 
 .menu.active {
     

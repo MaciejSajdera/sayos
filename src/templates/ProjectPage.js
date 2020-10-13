@@ -48,6 +48,14 @@ class ProjectPage extends Component {
       });
     }
 
+
+    // handleScroll = (e) => {
+    //   const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    //   if (bottom) {
+        
+    //    }
+    // }
+
     return (
       <>
 
@@ -65,7 +73,7 @@ class ProjectPage extends Component {
       {/* testmenudata: {menuRight.phoneNumber} */}
       {/* </div> */}
 
-      <div className="arrow-box box-bt-left" onClick={handleArrowPrev}>
+      <div className="arrow-box test box-bt-left" onClick={handleArrowPrev}>
 
         <div className={`menu-trigger`}>
             <IconContext.Provider value={{ color: "white", size: "4em", height: "100" }}>

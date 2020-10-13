@@ -4,6 +4,7 @@ import Img from "gatsby-image";
 import { IconContext } from "react-icons";
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Helmet } from "react-helmet";
 
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -99,15 +100,21 @@ const Main = ({ data }) => {
                               src={element.thumbnailBw.fluid.src} // use normal <img> attributes as props
                               // width={image.width}
                               /> */}
-                              <div className="text-holder" style={{backgroundImage: `url(${element.thumbnailBw.fluid.src})`, transition: `all 0.5s ease-in`}}
-
+                              <div className="text-holder"  css={{
+                                                                  backgroundImage: `url(${element.thumbnailBw.fluid.src})`,
+                                                                  transition: `all 0.3s ease-in`,
+                                                                  '@media (max-width: 992px)': {
+                                                                    backgroundImage: `url(${element.thumbnail.fluid.src})`
+                                                                  },
+                                                                }}
+                                                            
                                                         onMouseEnter={(e) => {
                                                           e.currentTarget.style.backgroundImage = `url(${element.thumbnail.fluid.src})`
                                                         }}
                                                         onMouseLeave={(e) => {
                                                           e.currentTarget.style.backgroundImage = `url(${element.thumbnailBw.fluid.src})`
                                                         }}>
-
+                                                          
 
                                                         </div>
 {/* 

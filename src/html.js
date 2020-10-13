@@ -1,6 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
-import LoaderSVG from './images/ballLoader.svg'
+import LoaderSVG from './images/rolling.svg'
+
+import LoaderLogo from './images/sayos-logo-light-cropped_100.png'
 
 export default function HTML(props) {
   return (
@@ -35,8 +37,14 @@ export default function HTML(props) {
            <img 
               src={LoaderSVG} 
               alt="loading spinner" 
-              width="100" 
-              height="100"
+           />
+            <img 
+              src={LoaderLogo} 
+              alt="loading logo" 
+              style={{
+                position: "absolute",
+                zIndex: 999,
+              }}
            />
         </div>
         <div
