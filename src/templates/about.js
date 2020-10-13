@@ -67,6 +67,7 @@ query aboutData($locale: String!) {
     projectsSubfield1
     projectsSubfield2
     offerHeader
+    offerSubfield
     aboutHeader
     individualCustomer
     individualSubfield1

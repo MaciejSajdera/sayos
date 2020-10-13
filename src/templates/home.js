@@ -50,6 +50,13 @@ query allProjectsDataHome($locale: String!) {
           srcSet
         }
       }
+      thumbnailBw {
+        fluid {
+          src
+          srcSet
+          base64
+        }
+      }
       projectCategory
       titlePart1
       titlePart2

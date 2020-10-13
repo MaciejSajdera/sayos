@@ -87,6 +87,7 @@ class allProjects extends React.Component  {
                               // alt={image.alt}
                               // height={image.height}
                               effect="blur"
+
                               src={element.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
                               // width={image.width}
                               />
