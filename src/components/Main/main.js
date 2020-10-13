@@ -39,10 +39,7 @@ const Main = ({ data }) => {
     // }
 
     return (
-
       
-
-
       <main>
           <Swiper 
           spaceBetween={0}
@@ -109,9 +106,13 @@ const Main = ({ data }) => {
                                                                 }}
                                                             
                                                         onMouseEnter={(e) => {
+                                                          e.persist();
                                                           e.currentTarget.style.backgroundImage = `url(${element.thumbnail.fluid.src})`
+
+
                                                         }}
                                                         onMouseLeave={(e) => {
+                                                          e.persist();
                                                           e.currentTarget.style.backgroundImage = `url(${element.thumbnailBw.fluid.src})`
                                                         }}>
                                                           
