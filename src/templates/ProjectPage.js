@@ -28,8 +28,8 @@ class ProjectPage extends Component {
 
     const handleArrowPrev = (e) => {
       let pageHeight = window.innerHeight;
-      window.scrollBy({
-        top: -pageHeight,
+      window.scrollTo({
+        top: 0,
         behavior: 'smooth'
       });
     }

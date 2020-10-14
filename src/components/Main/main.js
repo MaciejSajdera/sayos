@@ -97,7 +97,8 @@ const Main = ({ data }) => {
                               src={element.thumbnailBw.fluid.src} // use normal <img> attributes as props
                               // width={image.width}
                               /> */}
-                              <div className="text-holder"  css={{
+                              <div className="text-holder"
+                                                        css={{
                                                                   backgroundImage: `url(${element.thumbnailBw.fluid.src})`,
                                                                   transition: `all 0.3s ease-in`,
                                                                   '@media (max-width: 992px)': {
@@ -114,7 +115,9 @@ const Main = ({ data }) => {
                                                         onMouseLeave={(e) => {
                                                           e.persist();
                                                           e.currentTarget.style.backgroundImage = `url(${element.thumbnailBw.fluid.src})`
-                                                        }}>
+                                                        }}
+                                                        
+                                                        >
                                                           
 
                                                         </div>
