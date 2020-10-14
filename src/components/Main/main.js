@@ -83,7 +83,7 @@ const Main = ({ data }) => {
 
                           <Link to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}>
 
-                              {/* <LazyLoadImage
+                              <LazyLoadImage
                               onMouseEnter={(e) => {
                                 (e.currentTarget.src = element.thumbnail.fluid.src)
                               }}
@@ -96,26 +96,28 @@ const Main = ({ data }) => {
                               effect="blur"
                               src={element.thumbnailBw.fluid.src} // use normal <img> attributes as props
                               // width={image.width}
-                              /> */}
+                              />
+
+                              
                               <div className="text-holder"
-                                                        css={{
-                                                                  backgroundImage: `url(${element.thumbnailBw.fluid.src})`,
-                                                                  transition: `all 0.3s ease-in`,
-                                                                  '@media (max-width: 992px)': {
-                                                                    backgroundImage: `url(${element.thumbnail.fluid.src})`
-                                                                  },
-                                                                }}
+                                                        // css={{
+                                                        //           backgroundImage: `url(${element.thumbnailBw.fluid.src})`,
+                                                        //           transition: `all 0.3s ease-in`,
+                                                        //           '@media (max-width: 992px)': {
+                                                        //             backgroundImage: `url(${element.thumbnail.fluid.src})`
+                                                        //           },
+                                                        //         }}
                                                             
-                                                        onMouseEnter={(e) => {
-                                                          e.persist();
-                                                          e.currentTarget.style.backgroundImage = `url(${element.thumbnail.fluid.src})`
+                                                        // onMouseEnter={(e) => {
+                                                        //   e.persist();
+                                                        //   e.currentTarget.style.backgroundImage = `url(${element.thumbnail.fluid.src})`
 
 
-                                                        }}
-                                                        onMouseLeave={(e) => {
-                                                          e.persist();
-                                                          e.currentTarget.style.backgroundImage = `url(${element.thumbnailBw.fluid.src})`
-                                                        }}
+                                                        // }}
+                                                        // onMouseLeave={(e) => {
+                                                        //   e.persist();
+                                                        //   e.currentTarget.style.backgroundImage = `url(${element.thumbnailBw.fluid.src})`
+                                                        // }}
                                                         
                                                         >
                                                           
