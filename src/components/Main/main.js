@@ -84,17 +84,17 @@ const Main = ({ data }) => {
                           <Link to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}>
 
                               <LazyLoadImage
-                              onMouseEnter={(e) => {
-                                (e.currentTarget.src = element.thumbnail.fluid.src)
-                              }}
-                              onMouseLeave={(e) => {
-                                (e.currentTarget.src = element.thumbnailBw.fluid.src)
-                              }}
+                              // onMouseEnter={(e) => {
+                              //   (e.currentTarget.src = element.thumbnail.fluid.src)
+                              // }}
+                              // onMouseLeave={(e) => {
+                              //   (e.currentTarget.src = element.thumbnailBw.fluid.src)
+                              // }}
 
                               // alt={image.alt}
                               // height={image.height}
                               effect="blur"
-                              src={element.thumbnailBw.fluid.src} // use normal <img> attributes as props
+                              src={element.thumbnail.fluid.src} // use normal <img> attributes as props
                               // width={image.width}
                               />
 

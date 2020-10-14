@@ -11,6 +11,15 @@ main {
     .swiper-slide {
 
         &:hover {
+
+            span {
+                
+                img {
+                    filter: grayscale(0%);
+                    transform: scale(1.05);
+                    transition: all 0.5s ease-in-out!important;
+                }
+            }
             
             .title-container {
                 transform: translateY(-90%)
@@ -90,8 +99,6 @@ main {
 .single-project-container {
     height: 100vh;
     overflow: hidden;
-    
-
 
     span {
         height: 100%;
@@ -99,6 +106,12 @@ main {
         img {
             width: 100%;
             height: 100%;
+
+            transition: all 0.5s ease-in!important;
+
+            @media screen and (min-width: 992px) {
+                filter: grayscale(100%) contrast(105%);
+            }
         }
     }
 
