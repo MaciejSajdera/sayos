@@ -96,16 +96,18 @@ class allProjects extends React.Component  {
                               <div className={`title-container`}>
                                 <h2 className={`project-title-1`}>{element.titlePart1}</h2>
                                 <h2 className={`project-title-2`}>{element.titlePart2}</h2>
+
+                                  <div className="text-on-hover">
+                                  <p className="project-slogan">
+                                  {element.projectSlogan}
+                                  </p>
+                                  <p className="read-more">
+                                  {element.readMore}
+                                  </p>
+                                </div>
                               </div>
 
-                              <div className="text-on-hover">
-                                <p className="project-slogan">
-                                {element.projectSlogan}
-                                </p>
-                                <p className="read-more">
-                                {element.readMore}
-                                </p>
-                              </div>
+
                              </Link>
                           </div>
 

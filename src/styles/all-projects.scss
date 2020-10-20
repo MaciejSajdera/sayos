@@ -31,8 +31,12 @@
 
         .title-container {
 
+            h2 {
+                color: #fff;
+            }
+
             @media screen and (max-width: 992px) {
-                transform: translateY(-60%);
+                transform: translateY(-80%);
             }
 
             h2 {
@@ -66,7 +70,8 @@
 
             &:hover {
                 .title-container {
-                    transform: translateY(-60%)
+                    transform: translateY(-80%);
+
                 }
         
                 .gatsby-image-wrapper {
@@ -74,7 +79,7 @@
                 }
         
                 .text-on-hover {
-                    transform: translateY(-150%);
+                    opacity: 1;
     
         
                     .read-more {
@@ -95,7 +100,7 @@
 
         &:hover {
             .title-container {
-                transform: translateY(-60%)
+                transform: translateY(-80%)
             }
     
             .gatsby-image-wrapper {
@@ -103,8 +108,7 @@
             }
     
             .text-on-hover {
-                transform: translateY(-190%);
-
+                opacity: 1;
     
                 .read-more {
     

@@ -7,6 +7,9 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-glamor`,
+    {
+      resolve: `gatsby-plugin-transition-link`,
+      },
     `gatsby-plugin-root-import`,
     `gatsby-plugin-sass`,
     {

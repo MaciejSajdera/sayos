@@ -6,60 +6,105 @@ import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Helmet } from "react-helmet";
 
+import TransitionLink from "gatsby-plugin-transition-link"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, A11y, Lazy, Keyboard, Mousewheel } from 'swiper';
-SwiperCore.use([Navigation, Mousewheel, Keyboard, A11y, Lazy]);
+import SwiperCore, { Navigation, A11y, Lazy, Keyboard, Mousewheel, Autoplay } from 'swiper';
+SwiperCore.use([Navigation, Mousewheel, Keyboard, A11y, Lazy, Autoplay]);
 
-const Main = ({ data }) => {
+class Main extends React.Component {
 
-    // const [isMouseOver, setMousePosition] = useState(false);
+  constructor(props) {
+    super(props);
 
-    // const mouseEnterHandler = (e) => {
+    this.state = {
+      mouseWheelActive: false,
+      aniLinkTarget: 1
+    }
 
-    //   console.log(e.target.closest('SPAN'));
+    // this.handleAniLink = this.handleAniLink.bind(this);
+  }
 
-    //   e.target.closest('SPAN').classList.remove('hideColor')
-    //   e.target.closest('SPAN').classList.add('showColor')
 
-    //   let flag = false;
-    //   return flag;
+    handleAniLink = (e) => {
+      // const parentSlide = this.
+      console.log(e.currentTarget)
+      // e.currentTarget.classList.contains('swiper-slide-active') ? console.log('mamy active') : '';
+      // e.currentTarget.classList.contains('swiper-slide-next') ? console.log('mamy active')
+  
+      if ( e.currentTarget.classList.contains('swiper-slide-active') ) {
+          this.setState({aniLinkTarget: 1})
+          console.log('1szy od lewej')
+      }
+  
+      if ( e.currentTarget.classList.contains('swiper-slide-next') ) {
+          this.setState({aniLinkTarget: 2})
+          console.log('srodkowy')
+      } 
+  
+      if ( !e.currentTarget.classList.contains('swiper-slide-active') && !e.currentTarget.classList.contains('swiper-slide-next')) {
+        this.setState({aniLinkTarget: 3})
+        console.log('ostatni')
+      } 
+    }
 
-    // }
+    handleWheel = (e) => {
+      const delta = Math.sign(e.deltaY);
+      delta < 0 ? this.setState({ mouseWheelActive: false }) : this.setState({ mouseWheelActive: true });
+    }
 
-    // const mouseLeaveHandler = (e) => {
 
-    //   console.log(e.target.closest('SPAN'));
 
-    //   e.target.closest('SPAN').classList.remove('showColor');
-    //   e.target.closest('SPAN').classList.add('hideColor');
+//https://dev.to/mattrothenberg/recreating-pentagram-com-a-deep-dive-with-gatsby-js-h75
 
-    //   let flag = true;
-    //   return flag;
-    // }
+//https://www.gatsbyjs.com/blog/2018-12-04-per-link-gatsby-page-transitions-with-transitionlink/
+
+  render() {
+
+    let data = this.props.data
+
+
+
+    const aniLinkTarget = this.state.aniLinkTarget;
+
+    let direction;
+
+      if ( aniLinkTarget === 1 ) {
+        direction="right"
+      }
+
+      if ( aniLinkTarget === 2 ) {
+          direction="top"
+      }
+
+      if ( aniLinkTarget === 3 ) {
+        direction="left"
+      }
+
 
     return (
       
       <main>
-          <Swiper 
+          <Swiper
           spaceBetween={0}
           slidesPerView={1}
           mousewheel={{
-            thresholdTime: 1,
-            sensitivity: 500,
-            releaseOnEdges: true,
+            sensitivity: 3,
           }}
           navigation
           keyboard
           a11y
-          lazy={{loadPrevNext: true, loadPrevNextAmount: 1}}
+          lazy={{loadPrevNext: true, loadPrevNextAmount: 3}}
           breakpoints={{
             // when window width is >= 640px
             992: {
               slidesPerView: 3,
+              freeMode: true,
+              // speed: 700,
             },
           }}
-        >
+          >
             {data.nodes.sort(
                         (a, b) => {
                         const positionA = a.position;
@@ -77,69 +122,59 @@ const Main = ({ data }) => {
 
                         return (
                         <>
-                        <SwiperSlide key={index}>
+                        <SwiperSlide key={index}
+                                     onMouseOver={this.handleAniLink}
+                        >
 
                           <div className={`single-project-container`}>
 
-                          <Link to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}>
+                              <AniLink id={index} key={index} to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}
+                                
+                                cover
+                                bg={`url(${element.thumbnail.fluid.src})`}
+                                direction={direction}
+                                duration={3}
+                                
+                              > 
 
-                              <LazyLoadImage
-                              // onMouseEnter={(e) => {
-                              //   (e.currentTarget.src = element.thumbnail.fluid.src)
-                              // }}
-                              // onMouseLeave={(e) => {
-                              //   (e.currentTarget.src = element.thumbnailBw.fluid.src)
-                              // }}
+                              {/* <TransitionLink
+                                exit={{
+                                  length: length,
+                                  trigger: ({ exit, node }) =>
+                                    this.someCustomDefinedAnimation({ exit, node, direction: "out" }),
+                                }}
+                                entry={{
+                                  length: 0,
+                                  trigger: ({ exit, node }) =>
+                                    this.someCustomDefinedAnimation({ exit, node, direction: "in" }),
+                                }}
+                                // {...props}
+                              > */}
 
-                              // alt={image.alt}
-                              // height={image.height}
+                              <LazyLoadImage className={this.state.mouseWheelActive ? `move-right` : `move-left`} 
+                                onWheel = {this.handleWheel}
                               effect="blur"
-                              src={element.thumbnail.fluid.src} // use normal <img> attributes as props
-                              // width={image.width}
+                              src={element.thumbnail.fluid.src}
+
                               />
 
-                              
-                              <div className="text-holder"
-                                                        // css={{
-                                                        //           backgroundImage: `url(${element.thumbnailBw.fluid.src})`,
-                                                        //           transition: `all 0.3s ease-in`,
-                                                        //           '@media (max-width: 992px)': {
-                                                        //             backgroundImage: `url(${element.thumbnail.fluid.src})`
-                                                        //           },
-                                                        //         }}
-                                                            
-                                                        // onMouseEnter={(e) => {
-                                                        //   e.persist();
-                                                        //   e.currentTarget.style.backgroundImage = `url(${element.thumbnail.fluid.src})`
-
-
-                                                        // }}
-                                                        // onMouseLeave={(e) => {
-                                                        //   e.persist();
-                                                        //   e.currentTarget.style.backgroundImage = `url(${element.thumbnailBw.fluid.src})`
-                                                        // }}
-                                                        
-                                                        >
-                                                          
-
-                                                        </div>
-{/* 
-                              <Img fluid={ element.thumbnailBw.fluid } /> */}
 
                               <div className={`title-container`}>
                                 <h2 className={`project-title-1`}>{element.titlePart1}</h2>
                                 <h2 className={`project-title-2`}>{element.titlePart2}</h2>
+
+                                  <div className="text-on-hover">
+                                  <p className="project-slogan">
+                                  {element.projectSlogan}
+                                  </p>
+                                  <p className="read-more">
+                                  {element.readMore}
+                                  </p>
+                                </div>
                               </div>
 
-                              <div className="text-on-hover">
-                                <p className="project-slogan">
-                                {element.projectSlogan}
-                                </p>
-                                <p className="read-more">
-                                {element.readMore}
-                                </p>
-                              </div>
-                             </Link>
+
+                              </AniLink>
                           </div>
                         </SwiperSlide>
                         </>
@@ -148,8 +183,8 @@ const Main = ({ data }) => {
           </Swiper>
 
       </main>
-
     )
+  }
 }
 
 export default Main

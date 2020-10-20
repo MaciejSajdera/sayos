@@ -1,4 +1,14 @@
+* {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    
+    &:focus {
+        outline: none;
+    }
+}
+
 //Variables
+
 $white: #fff;
 
 // body {
@@ -96,8 +106,8 @@ main, .subpage {
         color: white!important;
         // background-image: url(../images/arrowdown.svg);
         width: 5%;
-        width: 3.5em;
-        height: 3.5em;
+        width: 2.75em;
+        height: 2.75em;
 
         // @media screen and (min-width: 992px) {
         //     width: 4.5em;
@@ -115,7 +125,7 @@ main, .subpage {
         &:after {
             content: url(../images/arrowright.svg);
             height: 1.5em;
-            transform: scale(0.7);
+            transform: scale(0.5);
         }
     }
     
@@ -127,7 +137,7 @@ main, .subpage {
         &:after {
             content: url(../images/arrowleft.svg);
             height: 1.5em;
-            transform: scale(0.7);
+            transform: scale(0.5);
         }
     }
 }
@@ -136,7 +146,7 @@ main {
     .swiper-button-next, .swiper-button-prev {
         background: rgba(0, 0, 0, 0.4);
     @media screen and (min-width: 992px) {
-        top: 90%!important;
+        top: 95%!important;
     }
   }
 }
@@ -149,11 +159,7 @@ main {
     }
 }
 
-* {
-    &:focus {
-        outline: none;
-    }
-}
+
 
 // .lazy-load-image-background.blur > img {
 //     opacity: 0.2!important;

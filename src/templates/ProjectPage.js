@@ -48,6 +48,7 @@ class ProjectPage extends Component {
       });
     }
 
+    console.log(this.props.transitionStatus)
 
     // handleScroll = (e) => {
     //   const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
@@ -57,7 +58,7 @@ class ProjectPage extends Component {
     // }
 
     return (
-      <>
+      <div>
 
       {console.log(`index.js state locale: ${myProjectData.locale}`),
       
@@ -156,7 +157,7 @@ class ProjectPage extends Component {
       </div>
     
 
-    </>
+    </div>
     )
   }
 }

@@ -6,6 +6,8 @@ import Menu from "../components/Menu/menu"
 
 import Consumer from "../../context"
 
+import TransitionLink from "gatsby-plugin-transition-link"
+
 class Home extends React.Component  {
 
   constructor(props) {
