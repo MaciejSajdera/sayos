@@ -131,7 +131,7 @@ class Main extends React.Component {
                               <AniLink id={index} key={index} to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}
                                 
                                 cover
-                                bg={`url(${element.thumbnail.fluid.src})`}
+                                bg={`url(${element.fullScreenPhoto.fluid.src}) center / cover`}
                                 direction={direction}
                                 duration={3}
                                 
