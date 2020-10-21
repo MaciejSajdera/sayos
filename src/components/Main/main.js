@@ -129,14 +129,16 @@ class Main extends React.Component {
 
                           <div className={`single-project-container`}>
 
-                              <AniLink id={index} key={index} to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}
+                          <Link to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}>
+
+                              {/* <AniLink id={index} key={index} to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}
                                 
                                 cover
                                 bg={`url(${element.fullScreenPhoto.fluid.src}) center / cover`}
                                 direction={direction}
                                 duration={3}
                                 
-                              > 
+                              >  */}
 
                               {/* <TransitionLink
                                 exit={{
@@ -174,7 +176,7 @@ class Main extends React.Component {
                               </div>
 
 
-                              </AniLink>
+                              </Link>
                           </div>
                         </SwiperSlide>
                         </>
