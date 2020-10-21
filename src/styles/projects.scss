@@ -8,8 +8,8 @@
 }
 
 .arrow-box {
-    top: 85%;
-    right: 2em;
+    top: inherit;
+    bottom: 5%;
     position: fixed;
 
     svg {
@@ -19,11 +19,11 @@
 
 .box-bt-left {
     right: auto;
-    left: 4%;
+    left: 2em;
 }
 
 .box-bt-right {
-    right: 4%;
+    right: 2em;
 }
 
 .project-content-middle {

@@ -19,8 +19,8 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      mouseWheelActive: '',
-      aniLinkTarget: ''
+      mouseWheelActive: false,
+      aniLinkTarget: 1
     }
 
     // this.handleAniLink = this.handleAniLink.bind(this);
@@ -54,6 +54,16 @@ class Main extends React.Component {
       delta < 0 ? this.setState({ mouseWheelActive: false }) : this.setState({ mouseWheelActive: true });
     }
 
+    
+    // handleWheel = (e) => {
+    //   const allElements = document.querySelectorAll(".thumbnail-image");
+    //   console.log(e.target.getBoundingClientRect())
+    //   allElements.forEach(element => {
+    //     // console.log(element.getBoundingClientRect())
+    //     let matrixValue = `${element.getBoundingClientRect().x / 120}`
+    //     element.style.transform = `matrix(1.05, 0, 0, 1.05, ${matrixValue}, 0)`
+    //   });
+    // }
 
 
 //https://dev.to/mattrothenberg/recreating-pentagram-com-a-deep-dive-with-gatsby-js-h75
@@ -91,7 +101,6 @@ class Main extends React.Component {
           slidesPerView={1}
           mousewheel={{
             sensitivity: 3,
-            releaseOnEdges: true,
           }}
           navigation
           keyboard
@@ -129,16 +138,14 @@ class Main extends React.Component {
 
                           <div className={`single-project-container`}>
 
-                          <Link to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}>
-
-                              {/* <AniLink id={index} key={index} to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}
+                              <Link id={index} key={index} to={ element.locale === "pl" ? `${element.projectCategory}/${element.slug}` : `/${element.locale}/${element.projectCategory}/${element.slug}`}
                                 
-                                cover
-                                bg={`url(${element.fullScreenPhoto.fluid.src}) center / cover`}
-                                direction={direction}
-                                duration={3}
+                                // cover
+                                // bg={`url(${element.fullScreenPhoto.fluid.src}) center / cover`}
+                                // direction={direction}
+                                // duration={3}
                                 
-                              >  */}
+                              > 
 
                               {/* <TransitionLink
                                 exit={{
@@ -154,10 +161,11 @@ class Main extends React.Component {
                                 // {...props}
                               > */}
 
-                              <LazyLoadImage className={this.state.mouseWheelActive ? `move-right` : null} 
+                              <LazyLoadImage className={this.state.mouseWheelActive ? `move-right` : `move-left`} 
                                 onWheel = {this.handleWheel}
                               effect="blur"
                               src={element.thumbnail.fluid.src}
+
                               />
 
 

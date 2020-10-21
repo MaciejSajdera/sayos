@@ -93,8 +93,8 @@ main, .subpage {
 
     .swiper-button-next, .swiper-button-prev {
         position: absolute;
-        top: unset!important;
-        bottom: 8%;
+        top: inherit;
+        bottom: 5%;
         width: calc(var(--swiper-navigation-size) / 44 * 27);
         height: var(--swiper-navigation-size);
         margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
@@ -120,7 +120,7 @@ main, .subpage {
     .swiper-button-next {
         right: 1.5em;
         @media screen and (min-width: 992px) {
-            right: 2.5em;
+            right: 2em;
         }
         &:after {
             content: url(../images/arrowright.svg);
@@ -132,7 +132,7 @@ main, .subpage {
     .swiper-button-prev {
         left: 1.5em;
         @media screen and (min-width: 992px) {
-            left: 2.5em;
+            left: 2em;
         }
         &:after {
             content: url(../images/arrowleft.svg);
@@ -145,9 +145,6 @@ main, .subpage {
 main {
     .swiper-button-next, .swiper-button-prev {
         background: rgba(0, 0, 0, 0.4);
-    @media screen and (min-width: 992px) {
-        top: 95%!important;
-    }
   }
 }
 
