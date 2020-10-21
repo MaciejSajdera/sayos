@@ -19,8 +19,8 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      mouseWheelActive: false,
-      aniLinkTarget: 1
+      mouseWheelActive: '',
+      aniLinkTarget: ''
     }
 
     // this.handleAniLink = this.handleAniLink.bind(this);
@@ -91,6 +91,7 @@ class Main extends React.Component {
           slidesPerView={1}
           mousewheel={{
             sensitivity: 3,
+            releaseOnEdges: true,
           }}
           navigation
           keyboard
@@ -151,11 +152,10 @@ class Main extends React.Component {
                                 // {...props}
                               > */}
 
-                              <LazyLoadImage className={this.state.mouseWheelActive ? `move-right` : `move-left`} 
+                              <LazyLoadImage className={this.state.mouseWheelActive ? `move-right` : null} 
                                 onWheel = {this.handleWheel}
                               effect="blur"
                               src={element.thumbnail.fluid.src}
-
                               />
 
 
