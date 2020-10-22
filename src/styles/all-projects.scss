@@ -31,12 +31,16 @@
 
         .title-container {
 
+            @media screen and (max-width: 992px) {
+                height: 20%;
+            }
+
             h2 {
                 color: #fff;
             }
 
             @media screen and (max-width: 992px) {
-                transform: translateY(-80%);
+                transform: translateY(0%);
             }
 
             h2 {
@@ -47,7 +51,7 @@
         .text-on-hover {
 
             @media screen and (max-width: 992px) {
-                transform: translateY(-150%);
+                // transform: translateY(-150%);
                 .read-more {
     
                     &:after {
@@ -100,7 +104,11 @@
 
         &:hover {
             .title-container {
-                transform: translateY(-80%)
+                transform: translateY(-40%);
+                @media screen and (min-width: 992px) {
+                    transform: translateY(-80%)
+                }
+
             }
     
             .gatsby-image-wrapper {

@@ -94,7 +94,7 @@ main, .subpage {
     .swiper-button-next, .swiper-button-prev {
         position: absolute;
         top: inherit;
-        bottom: 5%;
+        bottom: 7%;
         width: calc(var(--swiper-navigation-size) / 44 * 27);
         height: var(--swiper-navigation-size);
         margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
@@ -109,10 +109,9 @@ main, .subpage {
         width: 2.75em;
         height: 2.75em;
 
-        // @media screen and (min-width: 992px) {
-        //     width: 4.5em;
-        //     height: 4.5em;
-        // }
+        @media screen and (min-width: 992px) {
+            bottom: 5%;
+        }
     
         background: rgba(54, 52, 52, 0.3);
     }

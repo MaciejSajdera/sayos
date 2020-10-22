@@ -14,7 +14,7 @@
 header {
     position: fixed;
     z-index: 9999;
-    top: 3em;
+    top: 2em;
 
     @media screen and (max-height: 420px) and (orientation: landscape) {
         top: 1em;
