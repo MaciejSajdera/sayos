@@ -32,6 +32,8 @@ export default function HTML(props) {
                 right: 0,
                 bottom: 0,
                 zIndex: 999,
+                opacity: 1,
+                transition: "0.4s ease-in"
               }}
            >
            <img 

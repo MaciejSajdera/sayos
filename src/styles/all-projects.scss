@@ -26,6 +26,9 @@
                 width: 100%;
                 height: 100%;
                 object-position: bottom;
+                transition-timing-function: linear!important;
+                transition-property: opacity!important;
+                transition-duration: 0.3s;
             }
         }
 

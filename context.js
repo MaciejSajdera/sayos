@@ -1,6 +1,5 @@
 import React from "react"
 
-
 // const defaultContextValue = {
 //   data: {
 //     // set your initial data shape here
@@ -21,10 +20,10 @@ class ContextProviderComponent extends React.Component {
     this.state = {
       set: this.setData,
       setLocale: this.setLocale,
-      langChosen: '',
+      langChosen: "",
       langToggle: this.langToggle,
       handleNavToggle: this.handleNavToggle,
-      navToggled: false
+      navToggled: false,
     }
   }
 
@@ -45,16 +44,20 @@ class ContextProviderComponent extends React.Component {
   }
 
   handleNavToggle = () => {
-    this.setState(prevState => ({navToggled: !prevState.navToggled}));
+    this.setState(prevState => ({ navToggled: !prevState.navToggled }))
   }
 
   langToggle = () => {
-    this.setState(prevState => ({langChosen: !prevState.langChosen}));
+    this.setState(prevState => ({ langChosen: !prevState.langChosen }))
   }
 
   render() {
-
-    return <myContext.Provider value={this.state}> {this.props.children} {console.log(`context state: ${this.state}`)}</myContext.Provider>
+    return (
+      <myContext.Provider value={this.state}>
+        {" "}
+        {this.props.children} {console.log(`context state: ${this.state}`)}
+      </myContext.Provider>
+    )
   }
 }
 

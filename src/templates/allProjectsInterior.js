@@ -64,6 +64,9 @@ class allProjectsInterior extends React.Component  {
                               effect="blur"
                               src={element.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
                               // width={image.width}
+                              style={{
+                                transitionDelay: `${0 + index/10}s`
+                              }}
                               />
 
 

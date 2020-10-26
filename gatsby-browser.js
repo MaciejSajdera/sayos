@@ -9,6 +9,12 @@ import "./src/styles/styles.scss"
 
 export const onInitialClientRender = () => {
     setTimeout(function() {
-        document.getElementById("___loader").style.display = "none"
+
+        document.getElementById("___loader").style.opacity = 0
     }, 1000)
+
+    setTimeout(function() {
+        document.getElementById("___loader").style.display = "none"
+    }, 1400)
+
 }

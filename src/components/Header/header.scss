@@ -1,74 +1,64 @@
-
 .nav {
-    position: absolute;
-    border: 1px solid red;
-    height: 100%;
-    width: 100%;
-    z-index:-1;
-    background: #0c0c0c;
-    opacity: 0;
-    transition: transform 0s;
-    transition: opacity 0.3s ease-in-out;
+  position: absolute;
+  border: 1px solid red;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background: #0c0c0c;
+  opacity: 0;
+  transition: transform 0s;
+  transition: opacity 0.3s ease-in-out;
+}
+
+a.logo-link {
+  min-height: 75px;
+  min-width: 75px;
+
+  @media screen and (min-width: 992px) {
+    min-height: 100px;
+    min-width: 100px;
+  }
+
+  position: fixed;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-height: 420px) and (orientation: landscape) {
+  }
 }
 
 header {
-    position: fixed;
-    z-index: 9999;
-    top: 2em;
+  .logo-container {
+    .logo-top {
+      height: 100%;
+      img {
+        padding-left: 1em;
+        width: 10rem;
 
-    @media screen and (max-height: 420px) and (orientation: landscape) {
-        top: 1em;
+        @media screen and (min-width: 992px) {
+          padding-left: 3em;
+          width: 12rem;
+        }
+      }
     }
 
-    @media screen and (max-height: 650px) {
-        top: 2em;
-
-        img {
-            padding-left: 1em;
-        }
+    #logo-white {
+      display: none;
     }
-
-    .logo-container {
-    
-        .logo-top {
-            height: 100%;
-            img {
-                padding-left: 2em;
-                width: 12rem;
-
-                @media screen and (max-height: 420px) and (orientation: landscape) {
-                    width: 10em;
-                }
-
-                @media screen and (max-height: 650px) {
-                    padding-left: 1em;
-                }
-
-                @media screen and (min-width: 992px) {
-                    padding-left: 3em;
-                    width: 12rem;
-                }
-            }
-        }
-    
-        #logo-white {
-            display: none;
-        }
-
-    }
+  }
 }
 
 header.active {
-    // height: 100%;
+  // height: 100%;
 
-    .lang-switch {
-        display: block;
-    }
+  .lang-switch {
+    display: block;
+  }
 
-    .nav {
-        z-index: 1;
-        opacity: 1;
-    }
+  .nav {
+    z-index: 1;
+    opacity: 1;
+  }
 }
-  
-  

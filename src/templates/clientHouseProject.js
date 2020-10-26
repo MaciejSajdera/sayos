@@ -1,167 +1,184 @@
-import React, { useEffect, useContext } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, EffectFade } from 'swiper';
+import React, { useEffect, useContext } from "react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  EffectFade,
+  Mousewheel,
+} from "swiper"
 
 import Menu from "../components/Menu/menu"
 
 import myContext from "../../context"
 
+SwiperCore.use([
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Scrollbar,
+  A11y,
+  EffectFade,
+])
 
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
-
-const ClientHouseProject = (props) => {
-
-  let { houseProject, interiorProject, menuRightProject, menuLeftProject, about, category, offer } = props.data;
+const ClientHouseProject = props => {
+  let {
+    houseProject,
+    interiorProject,
+    menuRightProject,
+    menuLeftProject,
+    about,
+    category,
+    offer,
+  } = props.data
 
   const context = useContext(myContext)
 
   useEffect(() => {
-    context.navToggled ? context.handleNavToggle() : console.log('nav open');
+    context.navToggled ? context.handleNavToggle() : console.log("nav open")
   }, [])
 
   return (
     <>
-        <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={ about } houseProject = {houseProject} interiorProject={interiorProject} category={category} offer={offer}/>
+      <Menu
+        dataMenu={menuRightProject}
+        dataMenuLeft={menuLeftProject}
+        about={about}
+        houseProject={houseProject}
+        interiorProject={interiorProject}
+        category={category}
+        offer={offer}
+      />
 
       <div className={`subpage`}>
-      <div className="subpage-content-wrapper">
-      <h1 className="subpage-title">{houseProject.pageName}</h1>
-      <Swiper
-          spaceBetween={50}
-          slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
-          // effect="fade"
-          // scrollbar={{ draggable: true }}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
-        >
+        <div className="subpage-content-wrapper">
+          <h1 className="subpage-title">{houseProject.pageName}</h1>
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            mousewheel
+            navigation
+            pagination={{ clickable: true }}
+            // effect="fade"
+            // scrollbar={{ draggable: true }}
+            // onSlideChange={() => console.log("slide change")}
+            // onSwiper={swiper => console.log(swiper)}
+          >
+            {houseProject.modularContent.map((node, index) => (
+              <SwiperSlide key={index}>
+                <div className="slide-container" id={`slide-${index}`}>
+                  <p>{node.slideNumber}</p>
+                  <h2>{node.slideHeader}</h2>
 
-        {houseProject.modularContent.map((node, index) => (
-
-            <>
-
-
-            <SwiperSlide>
-            <div className="slide-container" id={`slide-${index}`} key={index}>
-
-                <p>{node.slideNumber}</p>
-                <h2>{node.slideHeader}</h2>
-
-              <p className={`text-content`}>{node.slideMainText}</p>
-            </div>
-            </SwiperSlide>
-
-            </>
-
-        ))}
-
-      </Swiper>
-      </div>
-
+                  <p className={`text-content`}>{node.slideMainText}</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </>
-  )}
-  
+  )
+}
+
 export default ClientHouseProject
 
 export const query = graphql`
-query HouseProjectData($locale: String!) {
-  houseProject: datoCmsHouseProjectForClient(locale: {eq: $locale}) {
-    pageName
-    slug
-    locale
-    modularContent {
-      slideNumber
-      slideHeader
-      slideMainText
-    }
-  }
-  interiorProject: datoCmsInteriorProjectForClient(locale: {eq: $locale}) {
-    pageName
-    slug
-    locale
-    modularContent {
-      slideNumber
-      slideHeader
-      slideMainText
-    }
-  }
-  menuRightProject: datoCmsMenuRight(locale: {eq: $locale}) {
-    adressData1
-    adressData2
-    phoneNumber
-    emailAdress
-    instagramicon {
-      fixed(height: 35) {
-        src
-        base64
+  query HouseProjectData($locale: String!) {
+    houseProject: datoCmsHouseProjectForClient(locale: { eq: $locale }) {
+      pageName
+      slug
+      locale
+      modularContent {
+        slideNumber
+        slideHeader
+        slideMainText
       }
     }
-    facebookicon {
-      fixed(height: 35) {
-        src
-        base64
+    interiorProject: datoCmsInteriorProjectForClient(locale: { eq: $locale }) {
+      pageName
+      slug
+      locale
+      modularContent {
+        slideNumber
+        slideHeader
+        slideMainText
       }
     }
-  }
-  menuLeftProject: datoCmsMenuLeft(locale: {eq: $locale}) {
-    projectsHeader
-    projectsSubfield1
-    projectsSubfield2
-    offerHeader
-    offerSubfield
-    aboutHeader
-    individualCustomer
-    individualSubfield1
-    individualSubfield2
-    contactHeader
-  }
+    menuRightProject: datoCmsMenuRight(locale: { eq: $locale }) {
+      adressData1
+      adressData2
+      phoneNumber
+      emailAdress
+      instagramicon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      facebookicon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+    }
+    menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
+      projectsHeader
+      projectsSubfield1
+      projectsSubfield2
+      offerHeader
+      offerSubfield
+      aboutHeader
+      individualCustomer
+      individualSubfield1
+      individualSubfield2
+      contactHeader
+    }
 
-  about: datoCmsAbout(locale: {eq: $locale}) {
-    aboutTitle
-    aboutContent
-    slug
-    locale
-  }
+    about: datoCmsAbout(locale: { eq: $locale }) {
+      aboutTitle
+      aboutContent
+      slug
+      locale
+    }
 
-  logoData: datoCmsHeaderLogoLight {
-    logoImage {
-      fixed {
-        base64
-        src
+    logoData: datoCmsHeaderLogoLight {
+      logoImage {
+        fixed {
+          base64
+          src
+        }
       }
     }
-  }
-  category: datoCmsCategory(locale: {eq: $locale}) {
-    categoryFirst
-    categorySecond
-    locale
-  }
+    category: datoCmsCategory(locale: { eq: $locale }) {
+      categoryFirst
+      categorySecond
+      locale
+    }
 
-  
-  offer: datoCmsOffer(locale: {eq: $locale}) {
-    offerArchitectsLogo {
-      fixed {
-        base64
-        src
+    offer: datoCmsOffer(locale: { eq: $locale }) {
+      offerArchitectsLogo {
+        fixed {
+          base64
+          src
+        }
       }
-    }
-    offerDesignLogo {
-      fixed {
-        base64
-        src
+      offerDesignLogo {
+        fixed {
+          base64
+          src
+        }
       }
-    }
-    offerInteriorsLogo {
-      fixed {
-        base64
-        src
+      offerInteriorsLogo {
+        fixed {
+          base64
+          src
+        }
       }
+      locale
+      slug
     }
-    locale
-    slug
   }
-}
-`;
-
+`
