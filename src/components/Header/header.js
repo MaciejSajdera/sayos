@@ -4,10 +4,8 @@ import { Location } from "@reach/router"
 
 import myContext from "../../../context"
 
-const Header = props => {
+const Header = ({ location }) => {
   const [offset, setOffset] = useState(0)
-
-  let { about, offer } = props.data
 
   useEffect(() => {
     window.onscroll = () => {
@@ -56,16 +54,30 @@ const Header = props => {
                 <div className={`logo-container`}>
                   <Location>
                     {({ location }) => {
-                      // console.log(location.pathname.toString())
+                      console.log(location.pathname.toString())
 
                       if (
                         navToggled ||
-                        location.pathname.includes(about.slug) ||
+                        location.pathname === "/o-nas" ||
+                        location.pathname === "/o-nas/" ||
+                        location.pathname === "/en/about-us" ||
+                        location.pathname === "/en/about-us/" ||
                         location.pathname === "/thank-you" ||
                         location.pathname === "/dziekujemy" ||
                         location.pathname === "/thank-you/" ||
                         location.pathname === "/dziekujemy/" ||
-                        location.pathname.includes(offer.slug)
+                        location.pathname === "/en/house-project/" ||
+                        location.pathname === "/en/house-project" ||
+                        location.pathname === "/projekt-domu" ||
+                        location.pathname === "/projekt-domu/" ||
+                        location.pathname === "/projekt-wnetrza/" ||
+                        location.pathname === "/projekt-wnetrza" ||
+                        location.pathname === "/en/interior-project/" ||
+                        location.pathname === "/en/interior-project" ||
+                        location.pathname === "/oferta/" ||
+                        location.pathname === "/offer/" ||
+                        location.pathname === "/oferta" ||
+                        location.pathname === "/offer"
                       ) {
                         return (
                           <div className={`logo-top`}>
@@ -91,5 +103,13 @@ const Header = props => {
     </>
   )
 }
+
+// Header.propTypes = {
+//   siteTitle: PropTypes.string,
+// }
+
+// Header.defaultProps = {
+//   siteTitle: ``,
+// }
 
 export default Header

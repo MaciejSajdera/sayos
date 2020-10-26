@@ -17,7 +17,7 @@ const Layout = props => {
   return (
     <>
       <ContextProviderComponent>
-        <Header {...props} />
+        <Header {...props.data} />
         {props.children}
       </ContextProviderComponent>
     </>
