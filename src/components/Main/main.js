@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 
+import LazyLoad from "react-lazyload"
+
 import { LazyLoadImage } from "react-lazy-load-image-component"
 
 import TransitionLink from "gatsby-plugin-transition-link"
@@ -159,7 +161,7 @@ class Main extends React.Component {
                                 // {...props}
                               > */}
 
-                      <LazyLoadImage
+                      {/* <LazyLoadImage
                         className={
                           this.state.mouseWheelActive
                             ? `move-right`
@@ -168,7 +170,19 @@ class Main extends React.Component {
                         onWheel={this.handleWheel}
                         effect="blur"
                         src={element.thumbnail.fluid.src}
-                      />
+                      /> */}
+
+                      <LazyLoad>
+                        <img
+                          src={`${element.thumbnail.fluid.src}`}
+                          className={
+                            this.state.mouseWheelActive
+                              ? `move-right`
+                              : `move-left`
+                          }
+                          onWheel={this.handleWheel}
+                        />
+                      </LazyLoad>
 
                       <div className={`title-container`}>
                         <h2 className={`project-title-1`}>
