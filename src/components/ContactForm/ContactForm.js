@@ -21,7 +21,7 @@ const ContactForm = ({ handleContactFormToggle, props }) => {
   const handleSubmit = e => {
     e.preventDefault()
     const form = e.target
-    console.log(form)
+    // console.log(form)
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },

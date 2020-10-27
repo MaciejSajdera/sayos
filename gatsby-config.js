@@ -3,22 +3,23 @@ module.exports = {
     title: `Gatsby Default Starter`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
-    siteURL: 'https://sayos.pl',
+    siteURL: "https://sayos.pl",
   },
   plugins: [
     `gatsby-plugin-glamor`,
+    `gatsby-plugin-smoothscroll`,
     {
       resolve: `gatsby-plugin-transition-link`,
-      },
+    },
     `gatsby-plugin-root-import`,
     `gatsby-plugin-sass`,
     {
-      resolve: 'gatsby-plugin-web-font-loader',
+      resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ['Mulish']
-        }
-      }
+          families: ["Mulish"],
+        },
+      },
     },
     `gatsby-plugin-react-helmet`,
     {
@@ -27,7 +28,6 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
-      
     },
     {
       resolve: `gatsby-plugin-layout`,
@@ -61,13 +61,13 @@ module.exports = {
         // If you are working on development/staging environment, you might want to
         // preview the latest version of records instead of the published one:
         previewMode: false,
-  
+
         // Disable automatic reloading of content when some change occurs on DatoCMS:
         disableLiveReload: false,
-  
+
         // Custom API base URL (most don't need this)
         // apiUrl: 'https://site-api.datocms.com',
-  
+
         // Setup locale fallbacks
         // In this example, if some field value is missing in Italian, fall back to English
         // localeFallbacks: {

@@ -43,7 +43,6 @@ const Offer = props => {
                 : `/${offer.slug}/${houseProject.locale}/${houseProject.slug}`
             }
           >
-            {console.log(offer.slug)}
             <LazyLoadImage
               // alt={image.alt}
               // height={image.height}

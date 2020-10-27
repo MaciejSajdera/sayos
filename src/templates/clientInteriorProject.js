@@ -62,8 +62,6 @@ const ClientInteriorProject = props => {
             pagination={{ clickable: true }}
             // effect="fade"
             // scrollbar={{ draggable: true }}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={swiper => console.log(swiper)}
           >
             {interiorProject.modularContent.map((node, index) => (
               <SwiperSlide key={index}>

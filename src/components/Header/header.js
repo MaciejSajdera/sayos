@@ -13,7 +13,7 @@ const Header = ({ location }) => {
     }
   }, [])
 
-  console.log(offset)
+  // console.log(offset)
 
   // let myLocation = location.pathname
 
@@ -54,7 +54,7 @@ const Header = ({ location }) => {
                 <div className={`logo-container`}>
                   <Location>
                     {({ location }) => {
-                      console.log(location.pathname.toString())
+                      // console.log(location.pathname.toString())
 
                       if (
                         navToggled ||

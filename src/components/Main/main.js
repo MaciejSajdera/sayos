@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import Img from "gatsby-image"
 
 import LazyLoad from "react-lazyload"
+import posed from "react-pose"
 
 import { LazyLoadImage } from "react-lazy-load-image-component"
 
@@ -26,7 +27,7 @@ class Main extends React.Component {
 
     this.state = {
       mouseWheelActive: false,
-      aniLinkTarget: 1,
+      transitionLinkTarget: 1,
     }
 
     // this.handleAniLink = this.handleAniLink.bind(this);
@@ -34,17 +35,17 @@ class Main extends React.Component {
 
   handleAniLink = e => {
     // const parentSlide = this.
-    console.log(e.currentTarget)
+    // console.log(e.currentTarget)
     // e.currentTarget.classList.contains('swiper-slide-active') ? console.log('mamy active') : '';
     // e.currentTarget.classList.contains('swiper-slide-next') ? console.log('mamy active')
 
     if (e.currentTarget.classList.contains("swiper-slide-active")) {
-      this.setState({ aniLinkTarget: 1 })
+      this.setState({ transitionLinkTarget: 1 })
       console.log("1szy od lewej")
     }
 
     if (e.currentTarget.classList.contains("swiper-slide-next")) {
-      this.setState({ aniLinkTarget: 2 })
+      this.setState({ transitionLinkTarget: 2 })
       console.log("srodkowy")
     }
 
@@ -52,8 +53,15 @@ class Main extends React.Component {
       !e.currentTarget.classList.contains("swiper-slide-active") &&
       !e.currentTarget.classList.contains("swiper-slide-next")
     ) {
-      this.setState({ aniLinkTarget: 3 })
+      e.currentTarget.classList.add("swiper-slide-last-in-viewport")
+      this.setState({ transitionLinkTarget: 3 })
       console.log("ostatni")
+    }
+  }
+
+  handleOnMouseLeave = e => {
+    if (e.currentTarget.classList.contains("swiper-slide-last-in-viewport")) {
+      e.currentTarget.classList.remove("swiper-slide-last-in-viewport")
     }
   }
 
@@ -81,20 +89,108 @@ class Main extends React.Component {
   render() {
     let data = this.props.data
 
-    const aniLinkTarget = this.state.aniLinkTarget
+    const transitionLinkTarget = this.state.transitionLinkTarget
 
     let direction
 
-    if (aniLinkTarget === 1) {
+    let exitTransition
+
+    const TRANSITION_LENGTH = 0.7
+
+    const allSlides = document.querySelectorAll(".swiper-slide")
+    const firstSlide = document.querySelector(".swiper-slide-active")
+    const middleSlide = document.querySelector(".swiper-slide-next")
+
+    if (transitionLinkTarget === 1) {
       direction = "right"
+      exitTransition = {
+        length: TRANSITION_LENGTH, // Take 1.5 seconds to leave
+        trigger: () => {
+          if (document) {
+            // Preventing overflow here make the animation smoother IMO
+            document.body.style.overflow = "hidden"
+          }
+
+          const firstSlideBgImage = firstSlide.querySelector(
+            ".slide-bg-fullscreen"
+          )
+
+          firstSlideBgImage.style.transform = `scale(1)`
+          firstSlide.style.width = `100vw`
+
+          console.log(
+            `We are exiting 1, target: ${firstSlideBgImage.classList}`
+          )
+        },
+      }
     }
 
-    if (aniLinkTarget === 2) {
+    if (transitionLinkTarget === 2) {
       direction = "top"
+      exitTransition = {
+        length: TRANSITION_LENGTH, // Take 1.5 seconds to leave
+        trigger: () => {
+          if (document) {
+            // Preventing overflow here make the animation smoother IMO
+            document.body.style.overflow = "hidden"
+          }
+
+          // firstSlide.style.width = `0%`
+
+          const middleSlideBgImage = middleSlide.querySelector(
+            ".slide-bg-fullscreen"
+          )
+          middleSlideBgImage.style.transform = `scale(1)`
+          // middleSlideBgImage.style.backgroundSize = `cover`
+          firstSlide.style.width = `0%`
+          middleSlide.style.width = `100vw`
+
+          console.log("We are exiting 2")
+        },
+      }
     }
 
-    if (aniLinkTarget === 3) {
+    if (transitionLinkTarget === 3) {
       direction = "left"
+
+      exitTransition = {
+        length: TRANSITION_LENGTH, // Take 1.5 seconds to leave
+        trigger: () => {
+          if (document) {
+            // Preventing overflow here make the animation smoother IMO
+            document.body.style.overflow = "hidden"
+          }
+
+          const lastSlide = document.querySelector(
+            ".swiper-slide-last-in-viewport"
+          )
+
+          const lastSlideBgImage = lastSlide.querySelector(
+            ".slide-bg-fullscreen"
+          )
+
+          lastSlideBgImage.style.transform = `scale(1)`
+
+          firstSlide.style.width = `0%`
+          middleSlide.style.width = `0%`
+          lastSlide.style.width = `100vw`
+
+          console.log("We are exiting 3")
+        },
+      }
+    }
+
+    const entryTransition = {
+      delay: TRANSITION_LENGTH, // Wait 1.5 seconds before entering
+      trigger: () => {
+        console.log("We are entering")
+        if (document && window) {
+          // Ensuring we're at the top of the page when the page loads
+          // prevents any additional JANK when the transition ends.
+          window.scrollTo(0, 0)
+          document.body.style.overflow = "visible"
+        }
+      },
     }
 
     return (
@@ -132,21 +228,33 @@ class Main extends React.Component {
             })
             .map((element, index) => {
               return (
-                <SwiperSlide key={index} onMouseOver={this.handleAniLink}>
+                <SwiperSlide
+                  key={index}
+                  onMouseOver={this.handleAniLink}
+                  onMouseLeave={this.handleOnMouseLeave}
+                >
                   <div className={`single-project-container`}>
-                    <Link
+                    <TransitionLink
+                      to={
+                        element.locale === "pl"
+                          ? `${element.projectCategory}/${element.slug}`
+                          : `/${element.locale}/${element.projectCategory}/${element.slug}`
+                      }
+                      exit={exitTransition}
+                      entry={entryTransition}
+                    >
+                      {/* <Link
                       id={index}
                       to={
                         element.locale === "pl"
                           ? `${element.projectCategory}/${element.slug}`
                           : `/${element.locale}/${element.projectCategory}/${element.slug}`
                       }
-
-                      // cover
-                      // bg={`url(${element.fullScreenPhoto.fluid.src}) center / cover`}
-                      // direction={direction}
-                      // duration={3}
-                    >
+                      cover
+                      bg={`url(${element.fullScreenPhoto.fluid.src}) center / cover`}
+                      direction={direction}
+                      duration={3}
+                    > */}
                       {/* <TransitionLink
                                 exit={{
                                   length: length,
@@ -173,15 +281,45 @@ class Main extends React.Component {
                       /> */}
 
                       <LazyLoad>
-                        <img
+                        {/* <img
                           src={`${element.thumbnail.fluid.src}`}
+                          srcF={`${element.fullScreenPhoto.fluid.src}`}
                           className={
                             this.state.mouseWheelActive
                               ? `move-right`
                               : `move-left`
                           }
                           onWheel={this.handleWheel}
-                        />
+                          onClick={e =>
+                            console.log(
+                              (e.target.src = element.fullScreenPhoto.fluid.src)
+                            )
+                          }
+                        /> */}
+                        <div
+                          onWheel={this.handleWheel}
+                          className={`slide-bg-fullscreen
+                          ${
+                            this.state.mouseWheelActive
+                              ? `move-right`
+                              : `move-left`
+                          }
+                          `}
+                          css={{
+                            backgroundImage: `url(
+                              ${element.fullScreenPhoto.fluid.src}
+                            )`,
+                          }}
+                        ></div>
+
+                        {/* <div
+                          className={"slide-bg-thumbnail"}
+                          css={{
+                            backgroundImage: `url(
+                              ${element.thumbnail.fluid.src}
+                            )`,
+                          }}
+                        ></div> */}
                       </LazyLoad>
 
                       <div className={`title-container`}>
@@ -199,7 +337,8 @@ class Main extends React.Component {
                           <p className="read-more">{element.readMore}</p>
                         </div>
                       </div>
-                    </Link>
+                    </TransitionLink>
+                    {/* </Link> */}
                   </div>
                 </SwiperSlide>
               )

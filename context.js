@@ -55,7 +55,7 @@ class ContextProviderComponent extends React.Component {
     return (
       <myContext.Provider value={this.state}>
         {" "}
-        {this.props.children} {console.log(`context state: ${this.state}`)}
+        {this.props.children}
       </myContext.Provider>
     )
   }
