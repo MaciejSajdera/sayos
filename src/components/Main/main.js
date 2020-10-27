@@ -97,10 +97,6 @@ class Main extends React.Component {
 
     const TRANSITION_LENGTH = 0.7
 
-    const allSlides = document.querySelectorAll(".swiper-slide")
-    const firstSlide = document.querySelector(".swiper-slide-active")
-    const middleSlide = document.querySelector(".swiper-slide-next")
-
     if (transitionLinkTarget === 1) {
       direction = "right"
       exitTransition = {
@@ -110,6 +106,10 @@ class Main extends React.Component {
             // Preventing overflow here make the animation smoother
             document.body.style.overflow = "hidden"
           }
+
+          const allSlides = document.querySelectorAll(".swiper-slide")
+          const firstSlide = document.querySelector(".swiper-slide-active")
+          const middleSlide = document.querySelector(".swiper-slide-next")
 
           const firstSlideBgImage = firstSlide.querySelector(
             ".slide-bg-fullscreen"
@@ -134,6 +134,10 @@ class Main extends React.Component {
             // Preventing overflow here make the animation smoother IMO
             document.body.style.overflow = "hidden"
           }
+
+          const allSlides = document.querySelectorAll(".swiper-slide")
+          const firstSlide = document.querySelector(".swiper-slide-active")
+          const middleSlide = document.querySelector(".swiper-slide-next")
 
           // firstSlide.style.width = `0%`
 
@@ -160,6 +164,10 @@ class Main extends React.Component {
             // Preventing overflow here make the animation smoother IMO
             document.body.style.overflow = "hidden"
           }
+
+          const allSlides = document.querySelectorAll(".swiper-slide")
+          const firstSlide = document.querySelector(".swiper-slide-active")
+          const middleSlide = document.querySelector(".swiper-slide-next")
 
           const lastSlide = document.querySelector(
             ".swiper-slide-last-in-viewport"
