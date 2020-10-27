@@ -107,7 +107,7 @@ class Main extends React.Component {
         length: TRANSITION_LENGTH, // Take 1.5 seconds to leave
         trigger: () => {
           if (document) {
-            // Preventing overflow here make the animation smoother IMO
+            // Preventing overflow here make the animation smoother
             document.body.style.overflow = "hidden"
           }
 
