@@ -71,7 +71,7 @@ main {
       // transform: matrix(1.05, 0, 0, 1.05, 0, 0);
 
       transition: transform 0.5s ease-in, filter 0.5s ease-in,
-        background-position 1.5s ease-in-out !important;
+        background-position 1.5s ease-in !important;
 
       @media screen and (min-width: 992px) {
         filter: grayscale(100%) contrast(105%);
