@@ -1,24 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { Location } from "@reach/router"
 
 import myContext from "../../../context"
 
-const Header = ({ location }) => {
-  const [offset, setOffset] = useState(0)
-
-  useEffect(() => {
-    window.onscroll = () => {
-      setOffset(window.pageYOffset)
-    }
-  }, [])
-
-  // console.log(offset)
-
-  // let myLocation = location.pathname
-
-  // console.log(location.pathname)
-
+const Header = ({ logoLight }) => {
   const data = useStaticQuery(graphql`
     query MyLogoQuery {
       dark: datoCmsHeaderLogo {
@@ -54,31 +40,7 @@ const Header = ({ location }) => {
                 <div className={`logo-container`}>
                   <Location>
                     {({ location }) => {
-                      // console.log(location.pathname.toString())
-
-                      if (
-                        navToggled ||
-                        location.pathname === "/o-nas" ||
-                        location.pathname === "/o-nas/" ||
-                        location.pathname === "/en/about-us" ||
-                        location.pathname === "/en/about-us/" ||
-                        location.pathname === "/thank-you" ||
-                        location.pathname === "/dziekujemy" ||
-                        location.pathname === "/thank-you/" ||
-                        location.pathname === "/dziekujemy/" ||
-                        location.pathname === "/en/house-project/" ||
-                        location.pathname === "/en/house-project" ||
-                        location.pathname === "/projekt-domu" ||
-                        location.pathname === "/projekt-domu/" ||
-                        location.pathname === "/projekt-wnetrza/" ||
-                        location.pathname === "/projekt-wnetrza" ||
-                        location.pathname === "/en/interior-project/" ||
-                        location.pathname === "/en/interior-project" ||
-                        location.pathname === "/oferta/" ||
-                        location.pathname === "/offer/" ||
-                        location.pathname === "/oferta" ||
-                        location.pathname === "/offer"
-                      ) {
+                      if (logoLight) {
                         return (
                           <div className={`logo-top`}>
                             <img src={lightLogo} alt="test-light-only" />
@@ -88,7 +50,6 @@ const Header = ({ location }) => {
                         return (
                           <div className={`logo-top`}>
                             <img src={darkLogo} alt="test" />
-                            {/* <img src={offset < 900 || offset > 1774 ? darkLogo : lightLogo} alt="test"/> */}
                           </div>
                         )
                       }
@@ -103,13 +64,5 @@ const Header = ({ location }) => {
     </>
   )
 }
-
-// Header.propTypes = {
-//   siteTitle: PropTypes.string,
-// }
-
-// Header.defaultProps = {
-//   siteTitle: ``,
-// }
 
 export default Header

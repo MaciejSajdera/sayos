@@ -11,9 +11,22 @@ import {
 } from "react-icons/hi"
 import { IconContext } from "react-icons"
 
+import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
 
 class ProjectPage extends Component {
+  componentDidMount() {
+    console.log()
+
+    const arrowButtonLeft = document.querySelector(".box-bt-left")
+    const arrowButtonRight = document.querySelector(".box-bt-right")
+
+    setTimeout(() => {
+      arrowButtonLeft.classList.add("arrow-entered")
+      arrowButtonRight.classList.add("arrow-entered")
+    }, 500)
+  }
+
   render() {
     let {
       projects,
@@ -39,7 +52,6 @@ class ProjectPage extends Component {
     // const { fullScreenPhoto } = this.props.pageContext.fullScreenPhoto;
 
     const handleArrowPrev = e => {
-      let pageHeight = window.innerHeight
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -71,6 +83,7 @@ class ProjectPage extends Component {
 
     return (
       <div>
+        <Header />
         <Menu
           dataMenu={menuRightProject}
           dataMenuLeft={menuLeftProject}
@@ -91,7 +104,7 @@ class ProjectPage extends Component {
         {/* testmenudata: {menuRight.phoneNumber} */}
         {/* </div> */}
 
-        <div className="arrow-box test box-bt-left" onClick={handleArrowPrev}>
+        <div className={`arrow-box box-bt-left`} onClick={handleArrowPrev}>
           <div className={`menu-trigger`}>
             <IconContext.Provider
               value={{ color: "white", size: "4em", height: "100" }}
@@ -101,7 +114,7 @@ class ProjectPage extends Component {
           </div>
         </div>
 
-        <div className="arrow-box box-bt-right" onClick={handleArrowNext}>
+        <div className={`arrow-box box-bt-right`} onClick={handleArrowNext}>
           <div className={`menu-trigger`}>
             <IconContext.Provider
               value={{ color: "white", size: "4em", height: "100" }}
@@ -235,12 +248,14 @@ export const query = graphql`
           base64
         }
       }
+      instagramLink
       facebookicon {
         fixed(height: 35) {
           src
           base64
         }
       }
+      facebookLink
     }
     menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
       projectsHeader

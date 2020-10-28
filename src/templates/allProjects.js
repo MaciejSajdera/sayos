@@ -3,6 +3,7 @@ import { Link, graphql, Img } from "gatsby"
 import { LazyLoadImage } from "react-lazy-load-image-component"
 
 import Menu from "../components/Menu/menu"
+import Header from "../components/Header/header"
 
 import myContext from "../../context"
 
@@ -39,6 +40,7 @@ class allProjects extends React.Component {
 
     return (
       <>
+        <Header />
         <Menu
           dataMenu={menuRightIndex}
           dataMenuLeft={menuLeftIndex}
@@ -174,19 +176,20 @@ export const query = graphql`
       adressData2
       phoneNumber
       emailAdress
-      locale
       instagramicon {
         fixed(height: 35) {
           src
           base64
         }
       }
+      instagramLink
       facebookicon {
         fixed(height: 35) {
           src
           base64
         }
       }
+      facebookLink
     }
 
     menuLeftIndex: datoCmsMenuLeft(locale: { eq: $locale }) {

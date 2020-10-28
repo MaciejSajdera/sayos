@@ -11,12 +11,16 @@ main {
   }
 
   .swiper-slide {
-    transition: width 0.7s linear;
+    transition: width 0.7s cubic-bezier(0.39, -0.45, 0.63, 0.62);
     &:hover {
       .lazyload-wrapper {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
         .slide-bg-fullscreen {
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
           filter: grayscale(0%);
-          transform: matrix(1.07, 0, 0, 1.07, 0, 0);
+          transform: scale(1.07);
         }
       }
 

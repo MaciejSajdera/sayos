@@ -9,6 +9,7 @@ import SwiperCore, {
   EffectFade,
 } from "swiper"
 
+import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
 
 import myContext from "../../context"
@@ -39,8 +40,11 @@ const ClientInteriorProject = props => {
     context.navToggled ? context.handleNavToggle() : console.log("nav open")
   }, [])
 
+  console.log(props.transitionStatus)
+
   return (
     <>
+      <Header logoLight />
       <Menu
         dataMenu={menuRightProject}
         dataMenuLeft={menuLeftProject}
@@ -51,9 +55,17 @@ const ClientInteriorProject = props => {
         offer={offer}
       />
 
-      <div className={`subpage`}>
-        <div className="subpage-content-wrapper">
-          <h1 className="subpage-title">{interiorProject.pageName}</h1>
+      <div className={`subpage subpage-offer`}>
+        <div className={`subpage-content-wrapper`}>
+          <h1
+            className={`subpage-title ${
+              props.transitionStatus === `entered`
+                ? `subpage-title-entered`
+                : ``
+            }`}
+          >
+            {interiorProject.pageName}
+          </h1>
           <Swiper
             spaceBetween={50}
             slidesPerView={1}
@@ -65,7 +77,14 @@ const ClientInteriorProject = props => {
           >
             {interiorProject.modularContent.map((node, index) => (
               <SwiperSlide key={index}>
-                <div className="slide-container" id={`slide-${index}`}>
+                <div
+                  className={`slide-container ${
+                    props.transitionStatus === `entered`
+                      ? `subpage-slide-container-entered`
+                      : ``
+                  }`}
+                  id={`slide-${index}`}
+                >
                   <p>{node.slideNumber}</p>
                   <h2>{node.slideHeader}</h2>
                   <p className={`text-content`}>{node.slideMainText}</p>
@@ -114,12 +133,14 @@ export const query = graphql`
           base64
         }
       }
+      instagramLink
       facebookicon {
         fixed(height: 35) {
           src
           base64
         }
       }
+      facebookLink
     }
     menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
       projectsHeader

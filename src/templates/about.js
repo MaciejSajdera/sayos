@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react"
 import { Link, graphql } from "gatsby"
 import Menu from "../components/Menu/menu"
+import Header from "../components/Header/header"
 
 import myContext from "../../context"
 
@@ -21,8 +22,11 @@ const About = props => {
     context.navToggled ? context.handleNavToggle() : console.log("nav open")
   }, [])
 
+  console.log(props.transitionStatus)
+
   return (
     <>
+      <Header logoLight />
       <Menu
         dataMenu={menuRightProject}
         dataMenuLeft={menuLeftProject}
@@ -34,9 +38,29 @@ const About = props => {
       />
 
       <div className={`subpage about`}>
-        <div className="subpage-content-wrapper">
-          <h1>{about.aboutTitle}</h1>
-          <p className={`about-content`}>{about.aboutContent}</p>
+        <div
+          className={`subpage-content-wrapper ${
+            props.transitionStatus === `entered`
+              ? `subpage-content-entered`
+              : ``
+          }`}
+        >
+          <h1
+            className={`about-header ${
+              props.transitionStatus === `entered` ? `about-header-entered` : ``
+            }`}
+          >
+            {about.aboutTitle}
+          </h1>
+          <p
+            className={`about-content ${
+              props.transitionStatus === `entered`
+                ? `about-content-entered`
+                : ``
+            }`}
+          >
+            {about.aboutContent}
+          </p>
         </div>
       </div>
     </>
@@ -64,12 +88,14 @@ export const query = graphql`
           base64
         }
       }
+      instagramLink
       facebookicon {
         fixed(height: 35) {
           src
           base64
         }
       }
+      facebookLink
     }
     menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
       projectsHeader

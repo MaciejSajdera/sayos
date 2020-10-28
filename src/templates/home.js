@@ -3,6 +3,7 @@ import { Link, graphql, navigate } from "gatsby"
 
 import Main from "../components/Main/main"
 import Menu from "../components/Menu/menu"
+import Header from "../components/Header/header"
 
 import Consumer from "../../context"
 
@@ -34,6 +35,7 @@ class Home extends React.Component {
 
     return (
       <>
+        <Header />
         <Menu
           dataMenu={menuRightIndex}
           dataMenuLeft={menuLeftIndex}
@@ -67,13 +69,6 @@ export const query = graphql`
             src
             base64
             srcSet
-          }
-        }
-        thumbnailBw {
-          fluid {
-            src
-            srcSet
-            base64
           }
         }
         projectCategory
@@ -112,19 +107,20 @@ export const query = graphql`
       adressData2
       phoneNumber
       emailAdress
-      locale
       instagramicon {
         fixed(height: 35) {
           src
           base64
         }
       }
+      instagramLink
       facebookicon {
         fixed(height: 35) {
           src
           base64
         }
       }
+      facebookLink
     }
 
     menuLeftIndex: datoCmsMenuLeft(locale: { eq: $locale }) {

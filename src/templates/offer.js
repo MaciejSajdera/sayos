@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react"
 import { Link, graphql } from "gatsby"
+import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
 import myContext from "../../context"
 import { LazyLoadImage } from "react-lazy-load-image-component"
@@ -24,6 +25,7 @@ const Offer = props => {
 
   return (
     <>
+      <Header />
       <Menu
         dataMenu={menuRightProject}
         dataMenuLeft={menuLeftProject}
@@ -124,12 +126,14 @@ export const query = graphql`
           base64
         }
       }
+      instagramLink
       facebookicon {
         fixed(height: 35) {
           src
           base64
         }
       }
+      facebookLink
     }
 
     menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {

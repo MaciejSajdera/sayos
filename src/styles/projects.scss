@@ -7,12 +7,22 @@
 
     transition: opacity 0.4s ease-in !important;
   }
+
+  .lazy-load-image-background {
+    width: 100%;
+    transition: filter 0.4s ease-in-out !important;
+
+    img {
+      opacity: 1 !important;
+    }
+  }
 }
 
 .arrow-box {
   top: inherit;
   bottom: 5%;
   position: fixed;
+  transition: all 0.3s ease-in;
 
   svg {
     height: 100%;
@@ -22,10 +32,16 @@
 .box-bt-left {
   right: auto;
   left: 2em;
+  transform: translateX(-200%);
 }
 
 .box-bt-right {
   right: 2em;
+  transform: translateX(200%);
+}
+
+.arrow-entered {
+  transform: translateX(0%) !important;
 }
 
 .project-content-middle {

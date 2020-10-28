@@ -1,10 +1,14 @@
 * {
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    
-    &:focus {
-        outline: none;
-    }
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 //Variables
@@ -16,154 +20,166 @@ $white: #fff;
 // }
 
 h2 {
-    font-family: 'Mulish', sans-serif;
+  font-family: "Mulish", sans-serif;
 }
 
 p {
-    font-family: 'Mulish', sans-serif;
+  font-family: "Mulish", sans-serif;
 }
 
 select {
-    font-family: 'Mulish', sans-serif;
+  font-family: "Mulish", sans-serif;
 }
 
-a, a:visited {
-    text-decoration: none;
-    color: #fff;
-    font-family: 'Mulish', sans-serif;
+a,
+a:visited {
+  text-decoration: none;
+  color: #fff;
+  font-family: "Mulish", sans-serif;
 }
 
 img {
-    object-fit: cover;
+  object-fit: cover;
 }
 
 h2 {
-
-    @media screen and (max-height: 612px) {
-        font-size: 1rem;
-
-        
-
-    }
+  @media screen and (max-height: 612px) {
+    font-size: 1rem;
+  }
 }
 
 p {
+  font-size: 80%;
 
-    font-size: 80%;
+  @media screen and (min-height: 640px) {
+    font-size: 90%;
+  }
 
-    @media screen and (min-height: 640px) {
-        font-size: 90%;
-    }
-
-    @media screen and (min-width: 992px) {
-        font-size: 100%;
-    }
-}
-
-.subpage {
-    z-index: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    opacity: 1;
-    color: white;
-    background: #0c0c0c;
-}
-
-.subpage-content-wrapper {
-
-
-    @media screen and (min-width: 1200px) {
-        max-width: 1100px;
-    }
-}
-
-.thank-you-title {
-    color: rgb(150, 230, 150);
-}
-
-.swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
-    pointer-events: auto!important;
-}
-
-
-main, .subpage {
-
-    .swiper-button-next, .swiper-button-prev {
-        position: absolute;
-        top: inherit;
-        bottom: 7%;
-        width: calc(var(--swiper-navigation-size) / 44 * 27);
-        height: var(--swiper-navigation-size);
-        margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
-        z-index: 10;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white!important;
-        // background-image: url(../images/arrowdown.svg);
-        width: 5%;
-        width: 2.75em;
-        height: 2.75em;
-
-        @media screen and (min-width: 992px) {
-            bottom: 5%;
-        }
-    
-        background: rgba(54, 52, 52, 0.3);
-    }
-    
-    .swiper-button-next {
-        right: 1.5em;
-        @media screen and (min-width: 992px) {
-            right: 2em;
-        }
-        &:after {
-            content: url(../images/arrowright.svg);
-            height: 1.5em;
-            transform: scale(0.5);
-        }
-    }
-    
-    .swiper-button-prev {
-        left: 1.5em;
-        @media screen and (min-width: 992px) {
-            left: 2em;
-        }
-        &:after {
-            content: url(../images/arrowleft.svg);
-            height: 1.5em;
-            transform: scale(0.5);
-        }
-    }
-}
-
-main {
-    .swiper-button-next, .swiper-button-prev {
-        background: rgba(0, 0, 0, 0.4);
+  @media screen and (min-width: 992px) {
+    font-size: 100%;
   }
 }
 
 .subpage {
-    .swiper-button-next, .swiper-button-prev {
-    @media screen and (min-width: 992px) {
-        top: 80%!important;
-        }
-    }
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  color: white;
+  background: #0c0c0c;
 }
 
+.subpage-content-wrapper {
+  overflow: hidden;
+  @media screen and (min-width: 1200px) {
+    max-width: 1100px;
+  }
+}
 
+.thank-you-title {
+  color: rgb(150, 230, 150);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.thank-you-title-entered {
+  opacity: 1;
+}
+
+.thank-you-content-entered {
+  transition: opacity 1s ease;
+  opacity: 1;
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  pointer-events: auto !important;
+}
+
+main,
+.subpage {
+  .swiper-button-next,
+  .swiper-button-prev {
+    position: absolute;
+    top: inherit;
+    bottom: 7%;
+    width: calc(var(--swiper-navigation-size) / 44 * 27);
+    height: var(--swiper-navigation-size);
+    margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white !important;
+    // background-image: url(../images/arrowdown.svg);
+    width: 5%;
+    width: 2.75em;
+    height: 2.75em;
+    transition: all 0.3s ease-in;
+
+    @media screen and (min-width: 992px) {
+      bottom: 5%;
+    }
+
+    background: rgba(54, 52, 52, 0.3);
+  }
+
+  .swiper-button-next {
+    right: 1.5em;
+    @media screen and (min-width: 992px) {
+      right: 2em;
+    }
+    &:after {
+      content: url(../images/arrowright.svg);
+      height: 1.5em;
+      transform: scale(0.5);
+    }
+  }
+
+  .swiper-button-prev {
+    left: 1.5em;
+    @media screen and (min-width: 992px) {
+      left: 2em;
+    }
+    &:after {
+      content: url(../images/arrowleft.svg);
+      height: 1.5em;
+      transform: scale(0.5);
+    }
+  }
+}
+
+main {
+  .swiper-button-next,
+  .swiper-button-prev {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .swiper-button-prev {
+    transform: translateX(-200%);
+  }
+
+  .swiper-button-next {
+    transform: translateX(200%);
+  }
+}
+
+.subpage {
+  .swiper-button-next,
+  .swiper-button-prev {
+    @media screen and (min-width: 992px) {
+      top: 80% !important;
+    }
+  }
+}
 
 // .lazy-load-image-background.blur > img {
 //     opacity: 0.2!important;
 // }
-
-.lazy-load-image-background {
-    width: 100%;
-}
 
 // .lazy-load-image-background.blur.lazy-load-image-loaded {
 //     transition: filter .1s, -webkit-filter 0.1s!important;
@@ -174,6 +190,6 @@ main {
 // }
 
 .lazy-load-image-background.blur {
-    -webkit-filter: blur(45px);
-    filter: blur(45px);
+  -webkit-filter: blur(45px);
+  filter: blur(45px);
 }
