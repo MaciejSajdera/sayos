@@ -10,7 +10,6 @@ const Thanks = props => {
 
   return (
     <>
-      {/* <Menu dataMenu={menuRightProject} dataMenuLeft={ menuLeftProject } about={about}/> */}
       <Header logoLight />
       <div className={`subpage`}>
         <div className="subpage-content-wrapper">
