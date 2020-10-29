@@ -4,6 +4,7 @@ import LazyLoad from "react-lazyload"
 import posed from "react-pose"
 
 import TransitionLink from "gatsby-plugin-transition-link"
+import scrollTo from "gatsby-plugin-smoothscroll"
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore, {
@@ -46,6 +47,11 @@ class Main extends React.Component {
       e.currentTarget.classList.add("swiper-slide-last-in-viewport")
       this.setState({ transitionLinkTarget: 3 })
       console.log("ostatni")
+    }
+
+    if (e.currentTarget.classList.contains("swiper-slide-prev")) {
+      this.setState({ transitionLinkTarget: 4 })
+      console.log("1szy od lewej")
     }
   }
 
@@ -95,7 +101,7 @@ class Main extends React.Component {
 
     let exitTransition
 
-    const TRANSITION_LENGTH = 0.7
+    const TRANSITION_LENGTH = 1.1
 
     if (transitionLinkTarget === 1) {
       exitTransition = {
@@ -106,16 +112,109 @@ class Main extends React.Component {
             document.body.style.overflow = "hidden"
           }
 
+          // const isElementXPercentInViewport = function (el, percentVisible) {
+          //   let rect = el.getBoundingClientRect(),
+          //     windowHeight =
+          //       window.innerHeight || document.documentElement.clientHeight
+
+          //   return !(
+          //     Math.floor(
+          //       100 -
+          //         ((rect.top >= 0 ? 0 : rect.top) / +-(rect.height / 1)) * 100
+          //     ) < percentVisible ||
+          //     Math.floor(
+          //       100 - ((rect.bottom - windowHeight) / rect.height) * 100
+          //     ) < percentVisible
+          //   )
+          // }
+
           const allSlides = document.querySelectorAll(".swiper-slide")
           const firstSlide = document.querySelector(".swiper-slide-active")
           const middleSlide = document.querySelector(".swiper-slide-next")
-
           const firstSlideBgImage = firstSlide.querySelector(
             ".slide-bg-fullscreen"
           )
+          const allSlideTitles = document.querySelectorAll(".title-container")
+          allSlideTitles.forEach(title => {
+            title.style.opacity = `0`
+          })
 
+          const arrowBoxes = document.querySelectorAll(
+            "div[class*='swiper-button']"
+          )
+          arrowBoxes.forEach(arrow => {
+            arrow.style.opacity = `0`
+          })
+
+          const currentViewPort = window.innerWidth
+          const firstSlideWidth = firstSlide.clientWidth
+          const firstSlideDistanceFromStart = firstSlide.getBoundingClientRect()
+            .x
+          // const firstSlideVisiblePxs =
+          //   firstSlideDistanceFromStart - currentViewPort
+          // const firstSlideHiddenPxs = firstSlideVisiblePxs + firstSlideWidth
+
+          const myMove = firstSlideDistanceFromStart
+
+          const swiperControl = document.querySelector(".swiper-wrapper")
+
+          // const currentSwiper3d = window.getComputedStyle(swiperControl)
+          //   .transform
+
+          const currentSwiperPosition = getStyle(swiperControl, "transform")
+
+          const swiperPositionValuesArray = currentSwiperPosition
+            .match(/\((.*)\)/)
+            .pop()
+            .split(",")
+
+          const currentSwiperPositionValue = swiperPositionValuesArray[4]
+
+          swiperControl.style.transform = `matrix(1, 0, 0, 1, ${
+            currentSwiperPositionValue - myMove
+          }, 0)`
+
+          // `matrix(${-myMove}px, 0px, 0px)`
+
+          function getStyle(el, styleProp) {
+            var value,
+              defaultView = (el.ownerDocument || document).defaultView
+            // W3C standard way:
+            if (defaultView && defaultView.getComputedStyle) {
+              // sanitize property name to css notation
+              // (hypen separated words eg. font-Size)
+              styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase()
+              return defaultView
+                .getComputedStyle(el, null)
+                .getPropertyValue(styleProp)
+            } else if (el.currentStyle) {
+              // IE
+              // sanitize property name to camelCase
+              styleProp = styleProp.replace(/\-(\w)/g, function (str, letter) {
+                return letter.toUpperCase()
+              })
+              value = el.currentStyle[styleProp]
+              // convert other units to pixels on IE
+              if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
+                return (function (value) {
+                  var oldLeft = el.style.left,
+                    oldRsLeft = el.runtimeStyle.left
+                  el.runtimeStyle.left = el.currentStyle.left
+                  el.style.left = value || 0
+                  value = el.style.pixelLeft + "px"
+                  el.style.left = oldLeft
+                  el.runtimeStyle.left = oldRsLeft
+                  return value
+                })(value)
+              }
+              return value
+            }
+          }
+
+          firstSlideBgImage.classList.remove("move-left")
+          firstSlideBgImage.classList.remove("move-right")
           firstSlideBgImage.style.transform = `scale(1)`
-          firstSlide.style.width = `100vw`
+          firstSlide.style.width = `100%`
 
           console.log(
             `We are exiting 1, target: ${firstSlideBgImage.classList}`
@@ -133,18 +232,96 @@ class Main extends React.Component {
             document.body.style.overflow = "hidden"
           }
           const allSlides = document.querySelectorAll(".swiper-slide")
+          // const beforeFirstSlide = document.querySelector(".swiper-slide-prev")
           const firstSlide = document.querySelector(".swiper-slide-active")
           const middleSlide = document.querySelector(".swiper-slide-next")
-
-          // firstSlide.style.width = `0%`
 
           const middleSlideBgImage = middleSlide.querySelector(
             ".slide-bg-fullscreen"
           )
+          const allSlideTitles = document.querySelectorAll(".title-container")
+          allSlideTitles.forEach(title => {
+            title.style.opacity = `0`
+          })
+
+          const arrowBoxes = document.querySelectorAll(
+            "div[class*='swiper-button']"
+          )
+          arrowBoxes.forEach(arrow => {
+            arrow.style.opacity = `0`
+          })
+
+          const currentViewPort = window.innerWidth
+          const middleSlideWidth = middleSlide.clientWidth
+          const middleSlideDistanceFromStart = middleSlide.getBoundingClientRect()
+            .x
+          const firstSlideDistanceFromStart = firstSlide.getBoundingClientRect()
+            .x
+          // const middleSlideVisiblePxs =
+          //   middleSlideDistanceFromStart - currentViewPort
+          // const middleSlideHiddenPxs = middleSlideVisiblePxs + middleSlideWidth
+
+          const myMove = firstSlideDistanceFromStart
+
+          const swiperControl = document.querySelector(".swiper-wrapper")
+
+          // const currentSwiper3d = window.getComputedStyle(swiperControl)
+          //   .transform
+
+          const currentSwiperPosition = getStyle(swiperControl, "transform")
+
+          const swiperPositionValuesArray = currentSwiperPosition
+            .match(/\((.*)\)/)
+            .pop()
+            .split(",")
+
+          const currentSwiperPositionValue = swiperPositionValuesArray[4]
+
+          swiperControl.style.transform = `matrix(1, 0, 0, 1, ${
+            currentSwiperPositionValue - myMove
+          }, 0)`
+
+          // `matrix(${-myMove}px, 0px, 0px)`
+
+          function getStyle(el, styleProp) {
+            var value,
+              defaultView = (el.ownerDocument || document).defaultView
+            // W3C standard way:
+            if (defaultView && defaultView.getComputedStyle) {
+              // sanitize property name to css notation
+              // (hypen separated words eg. font-Size)
+              styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase()
+              return defaultView
+                .getComputedStyle(el, null)
+                .getPropertyValue(styleProp)
+            } else if (el.currentStyle) {
+              // IE
+              // sanitize property name to camelCase
+              styleProp = styleProp.replace(/\-(\w)/g, function (str, letter) {
+                return letter.toUpperCase()
+              })
+              value = el.currentStyle[styleProp]
+              // convert other units to pixels on IE
+              if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
+                return (function (value) {
+                  var oldLeft = el.style.left,
+                    oldRsLeft = el.runtimeStyle.left
+                  el.runtimeStyle.left = el.currentStyle.left
+                  el.style.left = value || 0
+                  value = el.style.pixelLeft + "px"
+                  el.style.left = oldLeft
+                  el.runtimeStyle.left = oldRsLeft
+                  return value
+                })(value)
+              }
+              return value
+            }
+          }
 
           middleSlideBgImage.classList.remove("move-left")
+          middleSlideBgImage.classList.remove("move-right")
           middleSlideBgImage.style.transform = `scale(1)`
-          // middleSlideBgImage.style.backgroundPosition = `40% 100%!important`
+          // middleSlideBgImage.style.backgroundSize = `cover`
           firstSlide.style.width = `0%`
           middleSlide.style.width = `100%`
 
@@ -173,14 +350,214 @@ class Main extends React.Component {
           const lastSlideBgImage = lastSlide.querySelector(
             ".slide-bg-fullscreen"
           )
+          const allSlideTitles = document.querySelectorAll(".title-container")
+          allSlideTitles.forEach(title => {
+            title.style.opacity = `0`
+          })
 
+          const arrowBoxes = document.querySelectorAll(
+            "div[class*='swiper-button']"
+          )
+          arrowBoxes.forEach(arrow => {
+            arrow.style.opacity = `0`
+          })
+
+          // allSlides.forEach(slide => {
+          //   slide.width = `0%`
+          // })
+
+          const currentViewPort = window.innerWidth
+          const lastSlideWidth = lastSlide.clientWidth
+          const lastSlideDistanceFromStart = lastSlide.getBoundingClientRect().x
+          const lastSlideVisiblePxs =
+            lastSlideDistanceFromStart - currentViewPort
+          const lastSlideHiddenPxs = lastSlideVisiblePxs + lastSlideWidth
+
+          const myMove = lastSlideHiddenPxs
+
+          const swiperControl = document.querySelector(".swiper-wrapper")
+
+          // const currentSwiper3d = window.getComputedStyle(swiperControl)
+          //   .transform
+
+          const currentSwiperPosition = getStyle(swiperControl, "transform")
+
+          const swiperPositionValuesArray = currentSwiperPosition
+            .match(/\((.*)\)/)
+            .pop()
+            .split(",")
+
+          const currentSwiperPositionValue = swiperPositionValuesArray[4]
+
+          swiperControl.style.transform = `matrix(1, 0, 0, 1, ${
+            currentSwiperPositionValue - myMove
+          }, 0)`
+
+          // `matrix(${-myMove}px, 0px, 0px)`
+
+          function getStyle(el, styleProp) {
+            var value,
+              defaultView = (el.ownerDocument || document).defaultView
+            // W3C standard way:
+            if (defaultView && defaultView.getComputedStyle) {
+              // sanitize property name to css notation
+              // (hypen separated words eg. font-Size)
+              styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase()
+              return defaultView
+                .getComputedStyle(el, null)
+                .getPropertyValue(styleProp)
+            } else if (el.currentStyle) {
+              // IE
+              // sanitize property name to camelCase
+              styleProp = styleProp.replace(/\-(\w)/g, function (str, letter) {
+                return letter.toUpperCase()
+              })
+              value = el.currentStyle[styleProp]
+              // convert other units to pixels on IE
+              if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
+                return (function (value) {
+                  var oldLeft = el.style.left,
+                    oldRsLeft = el.runtimeStyle.left
+                  el.runtimeStyle.left = el.currentStyle.left
+                  el.style.left = value || 0
+                  value = el.style.pixelLeft + "px"
+                  el.style.left = oldLeft
+                  el.runtimeStyle.left = oldRsLeft
+                  return value
+                })(value)
+              }
+              return value
+            }
+          }
+
+          lastSlideBgImage.classList.remove("move-left")
+          lastSlideBgImage.classList.remove("move-right")
           lastSlideBgImage.style.transform = `scale(1)`
 
           firstSlide.style.width = `0%`
           middleSlide.style.width = `0%`
-          lastSlide.style.width = `100vw`
+          lastSlide.style.width = `100%`
 
           console.log("We are exiting 3")
+        },
+      }
+    }
+
+    if (transitionLinkTarget === 4) {
+      exitTransition = {
+        length: TRANSITION_LENGTH,
+        trigger: () => {
+          if (document) {
+            // Preventing overflow here make the animation smoother
+            document.body.style.overflow = "hidden"
+          }
+
+          // const isElementXPercentInViewport = function (el, percentVisible) {
+          //   let rect = el.getBoundingClientRect(),
+          //     windowHeight =
+          //       window.innerHeight || document.documentElement.clientHeight
+
+          //   return !(
+          //     Math.floor(
+          //       100 -
+          //         ((rect.top >= 0 ? 0 : rect.top) / +-(rect.height / 1)) * 100
+          //     ) < percentVisible ||
+          //     Math.floor(
+          //       100 - ((rect.bottom - windowHeight) / rect.height) * 100
+          //     ) < percentVisible
+          //   )
+          // }
+
+          const allSlides = document.querySelectorAll(".swiper-slide")
+          const firstSlide = document.querySelector(".swiper-slide-active")
+          const middleSlide = document.querySelector(".swiper-slide-next")
+          const prevSlide = document.querySelector(".swiper-slide-prev")
+
+          const prevSlideBgImage = prevSlide.querySelector(
+            ".slide-bg-fullscreen"
+          )
+          const allSlideTitles = document.querySelectorAll(".title-container")
+          allSlideTitles.forEach(title => {
+            title.style.opacity = `0`
+          })
+
+          const arrowBoxes = document.querySelectorAll(
+            "div[class*='swiper-button']"
+          )
+          arrowBoxes.forEach(arrow => {
+            arrow.style.opacity = `0`
+          })
+
+          const currentViewPort = window.innerWidth
+          const prevSlideWidth = prevSlide.clientWidth
+          const prevSlideDistanceFromStart = prevSlide.getBoundingClientRect().x
+          // const firstSlideVisiblePxs =
+          //   firstSlideDistanceFromStart - currentViewPort
+          // const firstSlideHiddenPxs = firstSlideVisiblePxs + firstSlideWidth
+
+          const myMove = prevSlideDistanceFromStart
+
+          const swiperControl = document.querySelector(".swiper-wrapper")
+
+          // const currentSwiper3d = window.getComputedStyle(swiperControl)
+          //   .transform
+
+          const currentSwiperPosition = getStyle(swiperControl, "transform")
+
+          const swiperPositionValuesArray = currentSwiperPosition
+            .match(/\((.*)\)/)
+            .pop()
+            .split(",")
+
+          const currentSwiperPositionValue = swiperPositionValuesArray[4]
+
+          swiperControl.style.transform = `matrix(1, 0, 0, 1, ${
+            currentSwiperPositionValue - myMove
+          }, 0)`
+
+          // `matrix(${-myMove}px, 0px, 0px)`
+
+          function getStyle(el, styleProp) {
+            var value,
+              defaultView = (el.ownerDocument || document).defaultView
+            // W3C standard way:
+            if (defaultView && defaultView.getComputedStyle) {
+              // sanitize property name to css notation
+              // (hypen separated words eg. font-Size)
+              styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase()
+              return defaultView
+                .getComputedStyle(el, null)
+                .getPropertyValue(styleProp)
+            } else if (el.currentStyle) {
+              // IE
+              // sanitize property name to camelCase
+              styleProp = styleProp.replace(/\-(\w)/g, function (str, letter) {
+                return letter.toUpperCase()
+              })
+              value = el.currentStyle[styleProp]
+              // convert other units to pixels on IE
+              if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
+                return (function (value) {
+                  var oldLeft = el.style.left,
+                    oldRsLeft = el.runtimeStyle.left
+                  el.runtimeStyle.left = el.currentStyle.left
+                  el.style.left = value || 0
+                  value = el.style.pixelLeft + "px"
+                  el.style.left = oldLeft
+                  el.runtimeStyle.left = oldRsLeft
+                  return value
+                })(value)
+              }
+              return value
+            }
+          }
+
+          prevSlideBgImage.classList.remove("move-left")
+          prevSlideBgImage.classList.remove("move-right")
+          prevSlideBgImage.style.transform = `scale(1)`
+          prevSlide.style.width = `100%`
+
+          console.log(`We are exiting 4, target: ${prevSlideBgImage.classList}`)
         },
       }
     }
@@ -196,7 +573,7 @@ class Main extends React.Component {
           document.body.style.overflow = "visible"
         }
 
-        console.log("juz")
+        console.log("ENTRY ENTRY ENTRY")
       },
     }
 
@@ -237,8 +614,10 @@ class Main extends React.Component {
               return (
                 <SwiperSlide
                   key={index}
+                  id={`slide-id-${index}`}
                   onMouseOver={this.handleTransitionLinkType}
                   onMouseLeave={this.handleOnMouseLeave}
+                  // onClick={e => scrollTo(`#slide-id-${index}`)}
                 >
                   <div className={`single-project-container`}>
                     <TransitionLink

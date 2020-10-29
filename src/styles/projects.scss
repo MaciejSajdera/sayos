@@ -23,6 +23,7 @@
   bottom: 5%;
   position: fixed;
   transition: all 0.3s ease-in;
+  opacity: 0;
 
   svg {
     height: 100%;
@@ -42,6 +43,7 @@
 
 .arrow-entered {
   transform: translateX(0%) !important;
+  opacity: 1;
 }
 
 .project-content-middle {
@@ -176,5 +178,26 @@
   img {
     height: 100vh;
     width: 100%;
+  }
+}
+
+.lazyload-wrapper {
+  height: 100vh;
+  z-index: -1;
+
+  .slide-bg-fullscreen {
+    width: 100%;
+    height: 100vh;
+    background-position: 50% 100%;
+    background-size: cover;
+
+    // transform: matrix(1.05, 0, 0, 1.05, 0, 0);
+
+    // transition: transform 0.5s ease-in, filter 0.5s ease-in,
+    //   background-position 1.5s ease-in !important;
+
+    // @media screen and (min-width: 992px) {
+    //   filter: grayscale(100%) contrast(105%);
+    // }
   }
 }

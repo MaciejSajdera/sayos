@@ -1,6 +1,7 @@
 import React, { Component, createRef } from "react"
 import { Link, graphql, navigate, Img } from "gatsby"
 import { LazyLoadImage } from "react-lazy-load-image-component"
+import LazyLoad from "react-lazyload"
 import "react-lazy-load-image-component/src/effects/blur.css"
 import Consumer from "../../context"
 import {
@@ -21,10 +22,10 @@ class ProjectPage extends Component {
     const arrowButtonLeft = document.querySelector(".box-bt-left")
     const arrowButtonRight = document.querySelector(".box-bt-right")
 
-    setTimeout(() => {
-      arrowButtonLeft.classList.add("arrow-entered")
-      arrowButtonRight.classList.add("arrow-entered")
-    }, 500)
+    // setTimeout(() => {
+    arrowButtonLeft.classList.add("arrow-entered")
+    arrowButtonRight.classList.add("arrow-entered")
+    // }, 250)
   }
 
   render() {
@@ -124,9 +125,9 @@ class ProjectPage extends Component {
           </div>
         </div>
 
-        <div className="fullscreen-project-image" ref={this.topRef}>
-          {/* <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} /> */}
-          <LazyLoadImage
+        {/* <div className="fullscreen-project-image" ref={this.topRef}> */}
+        {/* <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} /> */}
+        {/* <LazyLoadImage
             // alt={image.alt}
             // height={image.height}
             effect="blur"
@@ -134,8 +135,18 @@ class ProjectPage extends Component {
             // visibleByDefault
             src={myProjectData.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
             // width={image.width}
-          />
-        </div>
+          /> */}
+        <LazyLoad ref={this.topRef}>
+          <div
+            className={`slide-bg-fullscreen`}
+            css={{
+              backgroundImage: `url(
+                              ${myProjectData.fullScreenPhoto.fluid.src}
+                            )`,
+            }}
+          ></div>
+        </LazyLoad>
+        {/* </div> */}
 
         <div className="project-content-middle" ref={this.nextSectionRef}>
           <div className="content section-left">
