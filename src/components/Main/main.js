@@ -66,12 +66,6 @@ class Main extends React.Component {
     delta < 0
       ? this.setState({ mouseWheelActive: false })
       : this.setState({ mouseWheelActive: true })
-
-    const allSlides = document.querySelectorAll(".swiper-slide")
-
-    allSlides.forEach(slide => {
-      slide.classList.remove("swiper-slide-last-in-viewport")
-    })
   }
 
   componentDidMount() {
