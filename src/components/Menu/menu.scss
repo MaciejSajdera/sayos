@@ -350,8 +350,19 @@ div.menu-trigger {
         .icons {
           padding-top: 0.5em;
 
+          @media screen and (max-width: 992px) {
+            display: flex;
+            justify-content: center;
+          }
+
           a {
-            padding: 0 2em 0 0;
+            @media screen and (max-width: 992px) {
+              margin: auto;
+            }
+
+            @media screen and (min-width: 992px) {
+              padding: 0 2em 0 0;
+            }
           }
 
           img {
