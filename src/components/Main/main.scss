@@ -14,41 +14,43 @@ main {
     transition: width 0.7s cubic-bezier(0.39, -0.45, 0.63, 0.62),
       transform 0.7s linear;
 
-    &:hover {
-      .lazyload-wrapper {
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        .slide-bg-fullscreen {
+    @media screen and (min-width: 992px) {
+      &:hover {
+        .lazyload-wrapper {
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
-          filter: grayscale(0%);
-          transform: scale(1.07);
-        }
-      }
-
-      .title-container {
-        transform: translateY(-30%);
-
-        h2 {
-          font-size: 2.55rem;
-          color: #fff;
-        }
-      }
-      .text-on-hover {
-        // transform: translateY(-250%);
-        opacity: 1;
-
-        // p {
-        //     transform: scale(0.97);
-        // }
-
-        @media screen and (max-width: 1450px) {
-          // transform: translateY(-200%);
+          .slide-bg-fullscreen {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            filter: grayscale(0%);
+            transform: scale(1.07);
+          }
         }
 
-        .read-more {
-          &:after {
-            width: 7.5em;
+        .title-container {
+          transform: translateY(-30%);
+
+          h2 {
+            font-size: 2.55rem;
+            color: #fff;
+          }
+        }
+        .text-on-hover {
+          // transform: translateY(-250%);
+          opacity: 1;
+
+          // p {
+          //     transform: scale(0.97);
+          // }
+
+          @media screen and (max-width: 1450px) {
+            // transform: translateY(-200%);
+          }
+
+          .read-more {
+            &:after {
+              width: 7.5em;
+            }
           }
         }
       }
@@ -98,11 +100,12 @@ main {
 
   .title-container {
     z-index: 1;
-    bottom: 4%;
+    bottom: 16%;
     position: absolute;
     height: 28%;
     padding-left: 1.5em;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
     @media screen and (min-width: 992px) {
       height: 25%;
       bottom: 2%;
@@ -122,8 +125,12 @@ main {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     // padding: 0 2.5em;
     // padding-left: 3.5em;
-    opacity: 0;
+
     color: #fff;
+
+    @media screen and (min-width: 992px) {
+      opacity: 0;
+    }
 
     .project-slogan {
       width: 90%;
@@ -147,7 +154,7 @@ main {
   }
 
   h2 {
-    color: #d8d8d8;
+    color: #fff;
     font-size: 2rem;
     width: 100%;
     // letter-spacing: 1px;
@@ -157,6 +164,7 @@ main {
 
     @media screen and (min-width: 992px) {
       font-size: 2.75rem;
+      color: #d8d8d8;
     }
   }
 
