@@ -444,7 +444,7 @@ div.menu-trigger {
   position: absolute;
   // z-index:9999;
   width: 150px;
-  height: 35px;
+  height: 25px;
   background: rgba(54, 52, 52, 0.4);
   color: white;
   text-align: center;
@@ -454,9 +454,12 @@ div.menu-trigger {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.75rem;
 
   @media screen and (min-width: 992px) {
     top: 2em;
+    height: 35px;
+    font-size: 1rem;
   }
 
   a {
