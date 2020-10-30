@@ -20,10 +20,14 @@
 
 .arrow-box {
   top: inherit;
-  bottom: 5%;
+  bottom: 7%;
   position: fixed;
   transition: all 0.3s ease-in;
   opacity: 0;
+
+  @media screen and (min-width: 992px) {
+    bottom: 5%;
+  }
 
   svg {
     height: 100%;
@@ -32,13 +36,20 @@
 
 .box-bt-left {
   right: auto;
-  left: 2em;
+  left: 1.5em;
   transform: translateX(-200%);
+  @media screen and (min-width: 992px) {
+    left: 2em;
+  }
 }
 
 .box-bt-right {
-  right: 2em;
+  right: 1.5em;
   transform: translateX(200%);
+  @media screen and (min-width: 992px) {
+    right: 1.5em;
+    right: 2em;
+  }
 }
 
 .arrow-entered {
