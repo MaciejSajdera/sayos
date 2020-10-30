@@ -256,6 +256,8 @@ div.menu-trigger {
       .menu-left {
         position: relative;
         width: 75%;
+        transform: translateX(-200%);
+        transition: transform 2s ease;
 
         @media screen and (max-height: 420px) and (orientation: landscape) {
           width: 50%;
@@ -297,7 +299,8 @@ div.menu-trigger {
       .menu-right {
         opacity: 0;
         transform: translateY(150%);
-        transition: opacity 0.3s ease-out;
+        // transform: translateX(200%);
+        transition: opacity 0.3s ease-out, transform 0.4s ease;
 
         @media screen and (max-height: 420px) and (orientation: landscape) {
           display: block;
@@ -309,7 +312,7 @@ div.menu-trigger {
         @media screen and (min-width: 992px) {
           display: block;
           opacity: 1;
-          transform: translateY(0%);
+          transform: translate(0%, 0%);
         }
 
         .menu-grouped-items {
@@ -345,6 +348,7 @@ div.menu-trigger {
 
         .icons {
           padding-top: 0.5em;
+
           img {
             height: 25px;
 
@@ -363,9 +367,9 @@ div.menu-trigger {
         }
       }
 
-      .menu-right-active {
+      .menu-right-contact-active {
         opacity: 1;
-        transform: translateY(35%);
+        transform: translateY(30%);
 
         @media screen and (min-width: 992px) {
           transform: translateY(0%);
@@ -383,6 +387,42 @@ div.menu-trigger {
     width: 100vw;
     display: flex;
     transition: opacity 2s ease;
+  }
+}
+
+.menu-left-part-active {
+  @media screen and (min-width: 992px) {
+    animation: MenuPartMoveLeft 0.5s ease forwards;
+  }
+}
+
+@keyframes MenuPartMoveLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.menu-right-part-active {
+  @media screen and (min-width: 992px) {
+    animation: MenuPartMoveRight 0.5s normal forwards;
+  }
+}
+
+@keyframes MenuPartMoveRight {
+  from {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0%, 0%);
+    opacity: 1;
   }
 }
 

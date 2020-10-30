@@ -33,37 +33,41 @@ const Header = ({ logoLight }) => {
   return (
     <>
       <myContext.Consumer>
-        {({ handleNavToggle, navToggled, set }) =>
-          navToggled ? (
-            ``
-          ) : (
-            <a className={`logo-link`} href={`/`}>
-              <header>
-                <div className="menu-wrapper">
-                  <div className={`logo-container`}>
-                    <Location>
-                      {({ location }) => {
-                        if (logoLight) {
-                          return (
-                            <div className={`logo-top`}>
-                              <img src={lightLogo} alt="test-light-only" />
-                            </div>
-                          )
-                        } else {
-                          return (
-                            <div className={`logo-top`}>
-                              <img src={darkLogo} alt="test" />
-                            </div>
-                          )
-                        }
-                      }}
-                    </Location>
-                  </div>
+        {({ handleNavToggle, navToggled, set }) => (
+          <a className={`logo-link`} href={`/`}>
+            <header>
+              <div className="menu-wrapper">
+                <div className={`logo-container`}>
+                  <Location>
+                    {({ location }) => {
+                      if (navToggled) {
+                        return (
+                          <div className={`logo-top logo-menu-open`}>
+                            <img src={lightLogo} alt="test-light-only" />
+                          </div>
+                        )
+                      }
+
+                      if (logoLight) {
+                        return (
+                          <div className={`logo-top`}>
+                            <img src={lightLogo} alt="test-light-only" />
+                          </div>
+                        )
+                      } else {
+                        return (
+                          <div className={`logo-top`}>
+                            <img src={darkLogo} alt="test" />
+                          </div>
+                        )
+                      }
+                    }}
+                  </Location>
                 </div>
-              </header>
-            </a>
-          )
-        }
+              </div>
+            </header>
+          </a>
+        )}
       </myContext.Consumer>
     </>
   )

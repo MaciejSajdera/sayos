@@ -85,7 +85,11 @@ const Menu = ({
                 </div>
 
                 <div className="menu-wrapper">
-                  <div className="menu-left">
+                  <div
+                    className={`menu-left ${
+                      navToggled ? "menu-left-part-active" : ""
+                    }`}
+                  >
                     <div className="menu-grouped-items">
                       <Link
                         to={
@@ -182,8 +186,8 @@ const Menu = ({
 
                   <div
                     className={`menu-right ${
-                      isOpen ? "menu-right-active" : ""
-                    }`}
+                      isOpen ? "menu-right-contact-active" : ""
+                    } ${navToggled ? "menu-right-part-active" : ""}`}
                   >
                     <img className={`menu-logo`} src={lightLogo} alt=""></img>
 
