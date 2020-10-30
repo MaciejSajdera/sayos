@@ -189,7 +189,9 @@ const Menu = ({
                       isOpen ? "menu-right-contact-active" : ""
                     } ${navToggled ? "menu-right-part-active" : ""}`}
                   >
-                    <img className={`menu-logo`} src={lightLogo} alt=""></img>
+                    <Link to={`/`}>
+                      <img className={`menu-logo`} src={lightLogo} alt=""></img>
+                    </Link>
 
                     <div className="menu-grouped-items">
                       <p>{dataMenu.adressData1}</p>
@@ -204,8 +206,13 @@ const Menu = ({
                     </div>
 
                     <div className="icons">
-                      <img src={dataMenu.instagramicon.fixed.src} alt="" />
-                      <img src={dataMenu.facebookicon.fixed.src} alt="" />
+                      <a href={`${dataMenu.instagramLink}`} target="_blank">
+                        <img src={dataMenu.instagramicon.fixed.src} alt="" />
+                      </a>
+
+                      <a href={`${dataMenu.instagramLink}`} target="_blank">
+                        <img src={dataMenu.facebookicon.fixed.src} alt="" />
+                      </a>
                     </div>
                   </div>
                 </div>

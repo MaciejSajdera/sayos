@@ -256,7 +256,7 @@ div.menu-trigger {
       .menu-left {
         position: relative;
         width: 75%;
-        transform: translateX(-200%);
+
         transition: transform 2s ease;
 
         @media screen and (max-height: 420px) and (orientation: landscape) {
@@ -265,6 +265,7 @@ div.menu-trigger {
 
         @media screen and (min-width: 992px) {
           width: 50%;
+          transform: translateX(-200%);
         }
 
         .contact-form-title {
@@ -349,14 +350,16 @@ div.menu-trigger {
         .icons {
           padding-top: 0.5em;
 
+          a {
+            padding: 0 1em;
+          }
+
           img {
             height: 25px;
 
             @media screen and (min-width: 992px) {
               height: 100%;
             }
-
-            padding: 0 1em;
 
             &:nth-of-type(1) {
               @media screen and (min-width: 992px) {
