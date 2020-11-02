@@ -24,6 +24,7 @@ class Main extends React.Component {
     this.state = {
       mouseWheelActive: false,
       transitionLinkTarget: 0,
+      swiperPosition: 0,
     }
 
     // this.handleTransitionLinkType = this.handleTransitionLinkType.bind(this);
@@ -71,6 +72,18 @@ class Main extends React.Component {
   componentDidMount() {
     const swiperButtonLeft = document.querySelector(".swiper-button-prev")
     const swiperButtonRight = document.querySelector(".swiper-button-next")
+    const swiperControl = document.querySelector(".swiper-wrapper")
+
+    if (typeof Storage !== "undefined") {
+      if (window.localStorage.swiperPosition) {
+        const goToPreviousPosition = () => {
+          console.log(localStorage.getItem("swiperPosition"))
+          const swiperExitPosition = localStorage.getItem("swiperPosition")
+          swiperControl.style.transform = `translate3d(${swiperExitPosition}px, 0px, 0px)`
+        }
+        goToPreviousPosition()
+      }
+    }
 
     setTimeout(() => {
       swiperButtonLeft.classList.add("arrow-entered")
@@ -175,6 +188,14 @@ class Main extends React.Component {
               currentSwiperPositionValue - myMove
             }, 0)`
 
+            const handleExitedSwiperPosition = e => {
+              localStorage.setItem(
+                "swiperPosition",
+                currentSwiperPositionValue - myMove
+              )
+            }
+            handleExitedSwiperPosition()
+
             firstSlideBgImage.classList.remove("move-left")
             firstSlideBgImage.classList.remove("move-right")
             firstSlideBgImage.style.transform = `scale(1)`
@@ -198,6 +219,14 @@ class Main extends React.Component {
             swiperControl.style.transform = `matrix(1, 0, 0, 1, ${
               currentSwiperPositionValue - myMove
             }, 0)`
+
+            const handleExitedSwiperPosition = e => {
+              localStorage.setItem(
+                "swiperPosition",
+                currentSwiperPositionValue - myMove
+              )
+            }
+            handleExitedSwiperPosition()
 
             middleSlideBgImage.classList.remove("move-left")
             middleSlideBgImage.classList.remove("move-right")
@@ -229,6 +258,14 @@ class Main extends React.Component {
             swiperControl.style.transform = `matrix(1, 0, 0, 1, ${
               currentSwiperPositionValue - myMove
             }, 0)`
+
+            const handleExitedSwiperPosition = e => {
+              localStorage.setItem(
+                "swiperPosition",
+                currentSwiperPositionValue - myMove
+              )
+            }
+            handleExitedSwiperPosition()
 
             lastSlideBgImage.classList.remove("move-left")
             lastSlideBgImage.classList.remove("move-right")
@@ -300,7 +337,7 @@ class Main extends React.Component {
             1100: {
               slidesPerView: 3,
               freeMode: true,
-              // speed: 700,
+              speed: 100,
             },
           }}
         >
