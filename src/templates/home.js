@@ -64,13 +64,6 @@ export const query = graphql`
         locale
         id
         position
-        thumbnail {
-          fluid {
-            src
-            base64
-            srcSet
-          }
-        }
         projectCategory
         titlePart1
         titlePart2

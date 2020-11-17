@@ -348,13 +348,6 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           locale
           id
           position
-          thumbnail {
-            fluid {
-              src
-              base64
-              srcSet
-            }
-          }
           projectCategory
           titlePart1
           titlePart2
@@ -392,13 +385,6 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           locale
           id
           position
-          thumbnail {
-            fluid {
-              src
-              base64
-              srcSet
-            }
-          }
           projectCategory
           titlePart1
           titlePart2
