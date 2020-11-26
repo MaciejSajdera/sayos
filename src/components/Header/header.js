@@ -30,6 +30,8 @@ const Header = ({ logoLight }) => {
   let darkLogo = data.dark.logoImage.fixed.src
   let lightLogo = data.light.logoImage.fixed.src
 
+  console.log("test")
+
   return (
     <>
       <myContext.Consumer>
