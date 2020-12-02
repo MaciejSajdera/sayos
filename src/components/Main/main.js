@@ -75,10 +75,10 @@ class Main extends React.Component {
     const swiperControl = document.querySelector(".swiper-wrapper")
 
     if (typeof Storage !== "undefined") {
-      if (window.localStorage.swiperPosition) {
+      if (window.sessionStorage.swiperPosition) {
         const goToPreviousPosition = () => {
-          console.log(localStorage.getItem("swiperPosition"))
-          const swiperExitPosition = localStorage.getItem("swiperPosition")
+          console.log(sessionStorage.getItem("swiperPosition"))
+          const swiperExitPosition = sessionStorage.getItem("swiperPosition")
           swiperControl.style.transform = `translate3d(${swiperExitPosition}px, 0px, 0px)`
         }
         goToPreviousPosition()
@@ -189,7 +189,7 @@ class Main extends React.Component {
             }, 0)`
 
             const handleExitedSwiperPosition = e => {
-              localStorage.setItem(
+              sessionStorage.setItem(
                 "swiperPosition",
                 currentSwiperPositionValue - myMove
               )
@@ -221,7 +221,7 @@ class Main extends React.Component {
             }, 0)`
 
             const handleExitedSwiperPosition = e => {
-              localStorage.setItem(
+              sessionStorage.setItem(
                 "swiperPosition",
                 currentSwiperPositionValue - myMove
               )
@@ -260,7 +260,7 @@ class Main extends React.Component {
             }, 0)`
 
             const handleExitedSwiperPosition = e => {
-              localStorage.setItem(
+              sessionStorage.setItem(
                 "swiperPosition",
                 currentSwiperPositionValue - myMove
               )
