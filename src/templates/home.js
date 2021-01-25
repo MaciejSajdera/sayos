@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql, navigate } from "gatsby"
 
 import Main from "../components/Main/main"
+import Filler from "../components/Filler/filler"
 import Menu from "../components/Menu/menu"
 import Header from "../components/Header/header"
 
@@ -35,8 +36,8 @@ class Home extends React.Component {
 
     return (
       <>
-        <Header />
-        <Menu
+        {/* <Header /> */}
+        {/* <Menu
           dataMenu={menuRightIndex}
           dataMenuLeft={menuLeftIndex}
           dataProjects={projects}
@@ -47,8 +48,9 @@ class Home extends React.Component {
           interiorProject={interiorProject}
           category={category}
           offer={offer}
-        />
-        <Main data={projects} />
+        /> */}
+        <Filler dataMenu={menuRightIndex} />
+        {/* <Main data={projects} /> */}
       </>
     )
   }
