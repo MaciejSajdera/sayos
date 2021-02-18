@@ -83,12 +83,10 @@ class allProjects extends React.Component {
                     }
                     key={index}
                   >
-                    {/* <Img fluid={element.thumbnail.fluid} /> */}
-
                     <LazyLoadImage
                       // alt={image.alt}
                       // height={image.height}
-                      effect="blur"
+                      // effect="blur"
                       src={element.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
                       // width={image.width}
                       style={{

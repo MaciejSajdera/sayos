@@ -30,7 +30,25 @@ const Header = ({ logoLight }) => {
   let darkLogo = data.dark.logoImage.fixed.src
   let lightLogo = data.light.logoImage.fixed.src
 
-  console.log("test")
+  // const darkBackgroundElement = document.querySelector(
+  //   ".project-content-middle"
+  // )
+
+  // function callback(entries, observer) {
+  //   entries.forEach(entry => {
+  //     if (entry.isIntersecting) {
+  //       document.querySelector(".logo-top").classList.add("test")
+  //     } else {
+  //       document.querySelector(".logo-top").classList.remove("test")
+  //     }
+  //   })
+  // }
+
+  // let observer = new IntersectionObserver(callback)
+
+  // if (darkBackgroundElement) {
+  //   observer.observe(darkBackgroundElement)
+  // }
 
   return (
     <>
@@ -45,7 +63,7 @@ const Header = ({ logoLight }) => {
                       if (navToggled) {
                         return (
                           <div className={`logo-top logo-menu-open`}>
-                            <img src={lightLogo} alt="test-light-only" />
+                            <img src={lightLogo} alt="Sayos Architects Logo" />
                           </div>
                         )
                       }
@@ -53,13 +71,13 @@ const Header = ({ logoLight }) => {
                       if (logoLight) {
                         return (
                           <div className={`logo-top`}>
-                            <img src={lightLogo} alt="test-light-only" />
+                            <img src={lightLogo} alt="Sayos Architects Logo" />
                           </div>
                         )
                       } else {
                         return (
                           <div className={`logo-top`}>
-                            <img src={darkLogo} alt="test" />
+                            <img src={darkLogo} alt="Sayos Architects Logo" />
                           </div>
                         )
                       }

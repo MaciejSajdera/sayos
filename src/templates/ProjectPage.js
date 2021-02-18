@@ -23,9 +23,35 @@ class ProjectPage extends Component {
     const arrowButtonRight = document.querySelector(".box-bt-right")
 
     // setTimeout(() => {
-    arrowButtonLeft.classList.add("arrow-entered")
+    // arrowButtonLeft.classList.add("arrow-entered")
     arrowButtonRight.classList.add("arrow-entered")
     // }, 250)
+
+    //Scroll Up Arrow
+    const target = document.querySelector(".lazyload-wrapper") //top section
+    const scrollToTopBtn = document.querySelector(".box-bt-left")
+
+    function callback(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          scrollToTopBtn.classList.remove("arrow-entered")
+        } else {
+          scrollToTopBtn.classList.add("arrow-entered")
+        }
+      })
+    }
+
+    let options = {
+      root: document.querySelector("#scrollArea"),
+      rootMargin: "0px",
+      threshold: 0.7,
+    }
+
+    let observer = new IntersectionObserver(callback, options)
+
+    if (target) {
+      observer.observe(target)
+    }
   }
 
   render() {
@@ -136,7 +162,7 @@ class ProjectPage extends Component {
             src={myProjectData.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
             // width={image.width}
           /> */}
-        <LazyLoad ref={this.topRef}>
+        <LazyLoad ref={this.topRef} className={`project-content-top`}>
           <div
             className={`slide-bg-fullscreen`}
             css={{
@@ -149,6 +175,7 @@ class ProjectPage extends Component {
         {/* </div> */}
 
         <div className="project-content-middle" ref={this.nextSectionRef}>
+          <span id={"sentinel-1"}></span>
           <div className="content section-left">
             <div className="content-wrapper">
               {/* <div className="scroll-marker">
@@ -175,12 +202,13 @@ class ProjectPage extends Component {
               <LazyLoadImage
                 // alt={image.alt}
                 // height={image.height}
-                effect="blur"
+                // effect="blur"
                 src={myProjectData.secondaryPhoto.fluid.src} // use normal <img> attributes as props
                 // width={image.width}
               />
             </div>
           </div>
+          <span id={"sentinel-2"}></span>
         </div>
 
         <div className="project-page-content-bottom">
@@ -189,7 +217,7 @@ class ProjectPage extends Component {
             <LazyLoadImage
               // alt={image.alt}
               // height={image.height}
-              effect="blur"
+              // effect="blur"
               placeholderSrc={myProjectData.fullScreenPhotoTwo.fluid.src}
               src={myProjectData.fullScreenPhotoTwo.fluid.src} // use normal <img> attributes as props
               // width={image.width}

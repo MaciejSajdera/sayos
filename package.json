@@ -40,7 +40,7 @@
     "react-lazy-load-image-component": "^1.5.0",
     "react-lazyload": "^3.1.0",
     "react-pose": "^4.0.10",
-    "swiper": "^6.3.3"
+    "swiper": "^6.4.15"
   },
   "devDependencies": {
     "gatsby-plugin-root-import": "^2.0.5",

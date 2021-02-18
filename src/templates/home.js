@@ -7,8 +7,6 @@ import Header from "../components/Header/header"
 
 import Consumer from "../../context"
 
-import TransitionLink from "gatsby-plugin-transition-link"
-
 class Home extends React.Component {
   constructor(props) {
     super(props)

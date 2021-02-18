@@ -11,11 +11,20 @@ import SwiperCore, {
   Navigation,
   A11y,
   Lazy,
+  Parallax,
   Keyboard,
   Mousewheel,
   Autoplay,
 } from "swiper"
-SwiperCore.use([Navigation, Mousewheel, Keyboard, A11y, Lazy, Autoplay])
+SwiperCore.use([
+  Navigation,
+  Mousewheel,
+  Keyboard,
+  A11y,
+  Lazy,
+  Autoplay,
+  Parallax,
+])
 
 class Main extends React.Component {
   constructor(props) {
@@ -317,29 +326,56 @@ class Main extends React.Component {
       },
     }
 
+    const SwiperConfigs = {
+      spaceBetween: 0,
+      slidesPerView: 1,
+      mousewheel: {
+        sensitivity: 6,
+      },
+      watchSlidesProgress: true,
+      parallax: true,
+      navigation: true,
+      // keyboard: true,
+      // a11y: true,
+      lazy: false,
+      breakpoints: {
+        // when window width is >= 640px
+        992: {
+          slidesPerView: 2,
+        },
+
+        1100: {
+          slidesPerView: 3,
+          freeMode: true,
+          speed: 100,
+        },
+      },
+    }
+
     return (
       <main>
         <Swiper
-          spaceBetween={0}
-          slidesPerView={1}
-          mousewheel={{
-            sensitivity: 6,
-          }}
-          navigation
-          keyboard
-          a11y
-          lazy={{ loadPrevNext: true, loadPrevNextAmount: 3 }}
-          breakpoints={{
-            // when window width is >= 640px
-            992: {
-              slidesPerView: 2,
-            },
-            1100: {
-              slidesPerView: 3,
-              freeMode: true,
-              speed: 100,
-            },
-          }}
+          {...SwiperConfigs}
+          // spaceBetween={0}
+          // slidesPerView={1}
+          // mousewheel={{
+          //   sensitivity: 6,
+          // }}
+          // navigation
+          // keyboard
+          // a11y
+          // lazy={{ loadPrevNext: true, loadPrevNextAmount: 3 }}
+          // breakpoints={{
+          //   // when window width is >= 640px
+          //   992: {
+          //     slidesPerView: 2,
+          //   },
+          //   1100: {
+          //     slidesPerView: 3,
+          //     freeMode: true,
+          //     speed: 100,
+          //   },
+          // }}
         >
           {data.nodes
             .sort((a, b) => {
@@ -360,54 +396,66 @@ class Main extends React.Component {
                   id={`slide-id-${index}`}
                   onClick={this.handleTransitionLinkType}
                   onMouseLeave={this.handleOnMouseLeave}
-                  // onClick={e => scrollTo(`#slide-id-${index}`)}
                 >
-                  <div className={`single-project-container`}>
-                    <TransitionLink
-                      to={
-                        element.locale === "pl"
-                          ? `${element.projectCategory}/${element.slug}`
-                          : `/${element.locale}/${element.projectCategory}/${element.slug}`
-                      }
-                      exit={myExitTransition()}
-                      entry={entryTransition}
-                    >
-                      <LazyLoad>
-                        <div
-                          onWheel={this.handleWheel}
-                          className={`slide-bg-fullscreen
-                          ${
-                            this.state.mouseWheelActive
-                              ? `move-right`
-                              : `move-left`
-                          }
-                          `}
-                          css={{
-                            backgroundImage: `url(
-                              ${element.fullScreenPhoto.fluid.src}
-                            )`,
-                          }}
-                        ></div>
-                      </LazyLoad>
+                  {/* <div className={`single-project-container`}> */}
+                  <TransitionLink
+                    to={
+                      element.locale === "pl"
+                        ? `${element.projectCategory}/${element.slug}`
+                        : `/${element.locale}/${element.projectCategory}/${element.slug}`
+                    }
+                    exit={myExitTransition()}
+                    entry={entryTransition}
+                    // onWheel={this.handleWheel}
+                    className={`slide-bg-fullscreen 
+                        ${
+                          this.state.mouseWheelActive
+                            ? `move-right`
+                            : `move-left`
+                        }
+                        `}
+                    css={{
+                      backgroundImage: `url(
+                            ${element.fullScreenPhoto.fluid.src}
+                          )`,
+                    }}
+                  >
+                    {/* <LazyLoad> */}
+                    <div
+                    // onWheel={this.handleWheel}
+                    // className={`slide-bg-fullscreen
+                    //   ${
+                    //     this.state.mouseWheelActive
+                    //       ? `move-right`
+                    //       : `move-left`
+                    //   }
+                    //   `}
+                    // css={{
+                    //   backgroundImage: `url(
+                    //       ${element.fullScreenPhoto.fluid.src}
+                    //     )`,
+                    // }}
+                    ></div>
+                    {/* </LazyLoad> */}
 
-                      <div className={`title-container`}>
-                        <h2 className={`project-title-1`}>
-                          {element.titlePart1}
-                        </h2>
-                        <h2 className={`project-title-2`}>
-                          {element.titlePart2}
-                        </h2>
+                    <div className={`title-container`}>
+                      <h2 className={`project-title-1`}>
+                        {element.titlePart1}
+                      </h2>
+                      <h2 className={`project-title-2`}>
+                        {element.titlePart2}
+                      </h2>
 
-                        <div className="text-on-hover">
-                          <p className="project-slogan">
-                            {element.projectSlogan}
-                          </p>
-                          <p className="read-more">{element.readMore}</p>
-                        </div>
+                      <div className="text-on-hover">
+                        <p className="project-slogan">
+                          {element.projectSlogan}
+                        </p>
+                        <p className="read-more">{element.readMore}</p>
                       </div>
-                    </TransitionLink>
-                    {/* </Link> */}
-                  </div>
+                    </div>
+                  </TransitionLink>
+                  {/* </Link> */}
+                  {/* </div> */}
                 </SwiperSlide>
               )
             })}

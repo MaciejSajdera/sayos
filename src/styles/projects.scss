@@ -94,6 +94,14 @@
       color: #fff;
     }
 
+    .project-description {
+      direction: ltr;
+
+      p {
+        text-align: justify;
+      }
+    }
+
     .content-wrapper {
       @media screen and (min-width: 992px) {
         height: 60%;
