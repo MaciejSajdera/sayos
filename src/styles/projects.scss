@@ -1,5 +1,6 @@
 .fullscreen-project-image {
   height: 100vh;
+
   img {
     height: 100vh;
     width: 100vw;
@@ -10,6 +11,8 @@
 
   .lazy-load-image-background {
     width: 100%;
+    height: 100%;
+
     transition: filter 0.4s ease-in-out !important;
 
     img {
@@ -39,7 +42,7 @@
   left: 1.5em;
   transform: translateX(-200%);
   @media screen and (min-width: 992px) {
-    left: 2em;
+    left: 3em;
   }
 }
 
@@ -48,13 +51,19 @@
   transform: translateX(200%);
   @media screen and (min-width: 992px) {
     right: 1.5em;
-    right: 2em;
+    right: 3em;
   }
 }
 
 .arrow-entered {
   transform: translateX(0%) !important;
   opacity: 1;
+}
+
+.arrow-disabled {
+  opacity: 0.35;
+  cursor: auto;
+  pointer-events: none;
 }
 
 .project-content-middle {
@@ -106,7 +115,7 @@
       @media screen and (min-width: 992px) {
         height: 60%;
         // border: 1px solid purple;
-        width: 70%;
+        padding: 0 5em;
         display: flex;
         flex-flow: row;
 
@@ -120,8 +129,8 @@
   .section-right {
     @media screen and (max-width: 992px) {
       order: 1;
+      height: 25em;
     }
-
     .secondary-project-image {
       height: 100%;
 
@@ -172,7 +181,7 @@
   }
 
   &::-webkit-scrollbar {
-    width: 12px;
+    width: 0.5em;
   }
 
   /* Track */
@@ -190,14 +199,17 @@
 }
 
 .project-page-content-bottom {
-  span {
+  .visualization-tile {
     height: 100vh;
-  }
+    p {
+      background: rgba(54, 52, 52, 0.4);
+      color: #fff;
+      margin: 2em;
+    }
 
-  img {
-    height: 100vh;
-    width: 100%;
-    object-position: bottom;
+    @media screen and (max-width: 992px) {
+      width: 100%;
+    }
   }
 }
 

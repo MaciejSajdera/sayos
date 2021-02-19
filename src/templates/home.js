@@ -84,12 +84,14 @@ export const query = graphql`
         projectDescription
         areaText
         areaValue
-        fullScreenPhotoTwo {
-          fluid {
-            src
-            base64
-            srcSet
+        gallery {
+          visualizationImage {
+            fluid {
+              src
+            }
           }
+          visualizationImageText
+          width
         }
       }
     }
@@ -171,6 +173,12 @@ export const query = graphql`
     }
 
     offer: datoCmsOffer(locale: { eq: $locale }) {
+      offerBackgroundImage {
+        fluid {
+          src
+          base64
+        }
+      }
       offerArchitectsLogo {
         fixed {
           base64

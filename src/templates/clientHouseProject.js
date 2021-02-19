@@ -55,7 +55,7 @@ const ClientHouseProject = props => {
 
       <div className={`subpage subpage-offer`}>
         <div className="subpage-content-wrapper">
-          <h1
+          {/* <h1
             className={`subpage-title ${
               props.transitionStatus === `entered`
                 ? `subpage-title-entered`
@@ -63,13 +63,17 @@ const ClientHouseProject = props => {
             }`}
           >
             {houseProject.pageName}
-          </h1>
+          </h1> */}
           <Swiper
             spaceBetween={50}
             slidesPerView={1}
-            mousewheel
+            // mousewheel
             navigation
-            pagination={{ clickable: true }}
+            // pagination={{ clickable: true }}
+            mousewheel={{
+              sensitivity: 3,
+            }}
+            speed={600}
             // effect="fade"
             // scrollbar={{ draggable: true }}
             // onSlideChange={() => console.log("slide change")}
@@ -85,7 +89,7 @@ const ClientHouseProject = props => {
                   }`}
                   id={`slide-${index}`}
                 >
-                  <p>{node.slideNumber}</p>
+                  {/* <p>{node.slideNumber}</p> */}
                   <h2>{node.slideHeader}</h2>
 
                   <p className={`text-content`}>{node.slideMainText}</p>
@@ -178,6 +182,12 @@ export const query = graphql`
     }
 
     offer: datoCmsOffer(locale: { eq: $locale }) {
+      offerBackgroundImage {
+        fluid {
+          src
+          base64
+        }
+      }
       offerArchitectsLogo {
         fixed {
           base64

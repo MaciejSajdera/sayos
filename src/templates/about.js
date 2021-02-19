@@ -137,6 +137,12 @@ export const query = graphql`
     }
 
     offer: datoCmsOffer(locale: { eq: $locale }) {
+      offerBackgroundImage {
+        fluid {
+          src
+          base64
+        }
+      }
       offerArchitectsLogo {
         fixed {
           base64

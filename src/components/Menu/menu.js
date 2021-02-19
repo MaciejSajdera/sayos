@@ -71,7 +71,7 @@ const Menu = ({
                   >
                     PL
                   </Link>
-
+                  |
                   <Link
                     to="/en"
                     onClick={() => {
@@ -126,14 +126,14 @@ const Menu = ({
                       </Link>
                     </div>
 
-                    <Link to={`/${offer.slug}`}>
-                      <h3>
-                        {dataMenuLeft.offerHeader}
-                        <p className="offer-subfield">
+                    <div className="menu-grouped-items with-subtitle">
+                      <Link to={`/${offer.slug}`}>
+                        <h3>{dataMenuLeft.offerHeader}</h3>
+                        <p className="project-subfield">
                           {dataMenuLeft.offerSubfield}
                         </p>
-                      </h3>
-                    </Link>
+                      </Link>
+                    </div>
 
                     <Link
                       to={
@@ -184,7 +184,7 @@ const Menu = ({
                     </h3>
                   </div>
 
-                  <div
+                  {/* <div
                     className={`menu-right ${
                       isOpen ? "menu-right-contact-active" : ""
                     } ${navToggled ? "menu-right-part-active" : ""}`}
@@ -198,11 +198,13 @@ const Menu = ({
                       <p>{dataMenu.adressData2}</p>
                     </div>
 
-                    <div className="menu-grouped-items">
+                    <div className="menu-grouped-items contact-info">
                       <a href={`tel:${dataMenu.phoneNumber}`}>
                         {dataMenu.phoneNumber}
                       </a>
-                      <p>{dataMenu.emailAdress}</p>
+                      <a href={`mailto:${dataMenu.emailAdress}`}>
+                        {dataMenu.emailAdress}
+                      </a>
                     </div>
 
                     <div className="icons">
@@ -214,7 +216,7 @@ const Menu = ({
                         <img src={dataMenu.facebookicon.fixed.src} alt="" />
                       </a>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

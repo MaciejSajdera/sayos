@@ -123,6 +123,12 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         nodes {
           slug
           locale
+          offerBackgroundImage {
+            fluid {
+              src
+              base64
+            }
+          }
           offerArchitectsLogo {
             fixed {
               src
@@ -147,6 +153,12 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         nodes {
           slug
           locale
+          offerBackgroundImage {
+            fluid {
+              src
+              base64
+            }
+          }
           offerArchitectsLogo {
             fixed {
               src
@@ -369,12 +381,14 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           projectDescription
           areaText
           areaValue
-          fullScreenPhotoTwo {
-            fluid {
-              src
-              base64
-              srcSet
+          gallery {
+            visualizationImage {
+              fluid {
+                src
+              }
             }
+            visualizationImageText
+            width
           }
         }
       }
@@ -406,12 +420,15 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           projectDescription
           areaText
           areaValue
-          fullScreenPhotoTwo {
-            fluid {
-              src
-              base64
-              srcSet
+
+          gallery {
+            visualizationImage {
+              fluid {
+                src
+              }
             }
+            visualizationImageText
+            width
           }
         }
       }

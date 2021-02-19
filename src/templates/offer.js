@@ -36,7 +36,15 @@ const Offer = props => {
         offer={offer}
       />
 
-      <div className={`subpage`}>
+      <div
+        className={`subpage subpage-offer`}
+        css={{
+          backgroundImage: `url(
+                                      ${offer.offerBackgroundImage.fluid.src}
+                                    )`,
+          backgroundSize: `cover`,
+        }}
+      >
         <div className="offer-logos-wrapper">
           <Link
             to={
@@ -189,6 +197,12 @@ export const query = graphql`
     }
 
     offer: datoCmsOffer(locale: { eq: $locale }) {
+      offerBackgroundImage {
+        fluid {
+          src
+          base64
+        }
+      }
       offerArchitectsLogo {
         fixed {
           base64

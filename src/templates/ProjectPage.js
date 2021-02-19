@@ -5,11 +5,11 @@ import LazyLoad from "react-lazyload"
 import "react-lazy-load-image-component/src/effects/blur.css"
 import Consumer from "../../context"
 import {
-  HiArrowNarrowUp,
-  HiArrowNarrowDown,
+  CgArrowUp,
+  CgArrowDown,
   HiArrowNarrowLeft,
   HiArrowNarrowRight,
-} from "react-icons/hi"
+} from "react-icons/cg"
 import { IconContext } from "react-icons"
 
 import Header from "../components/Header/header"
@@ -22,35 +22,64 @@ class ProjectPage extends Component {
     const arrowButtonLeft = document.querySelector(".box-bt-left")
     const arrowButtonRight = document.querySelector(".box-bt-right")
 
-    // setTimeout(() => {
-    // arrowButtonLeft.classList.add("arrow-entered")
     arrowButtonRight.classList.add("arrow-entered")
-    // }, 250)
 
     //Scroll Up Arrow
-    const target = document.querySelector(".lazyload-wrapper") //top section
-    const scrollToTopBtn = document.querySelector(".box-bt-left")
+    const targetScrollUpArrow = document.querySelector(".lazyload-wrapper") //top section
+    const scrollUpArrow = document.querySelector(".box-bt-left")
 
-    function callback(entries, observer) {
+    function callbackScrollUpArrow(entries, observer) {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          scrollToTopBtn.classList.remove("arrow-entered")
+          scrollUpArrow.classList.remove("arrow-entered")
         } else {
-          scrollToTopBtn.classList.add("arrow-entered")
+          scrollUpArrow.classList.add("arrow-entered")
         }
       })
     }
 
-    let options = {
+    let optionsScrollUpArrow = {
       root: document.querySelector("#scrollArea"),
       rootMargin: "0px",
       threshold: 0.7,
     }
 
-    let observer = new IntersectionObserver(callback, options)
+    let observerScrollUpArrow = new IntersectionObserver(
+      callbackScrollUpArrow,
+      optionsScrollUpArrow
+    )
 
-    if (target) {
-      observer.observe(target)
+    if (targetScrollUpArrow) {
+      observerScrollUpArrow.observe(targetScrollUpArrow)
+    }
+
+    //Scroll Down Arrow
+    const targetScrollDownArrow = document.querySelector("#project-page-end") //top section
+    const scrollDownArrow = document.querySelector(".box-bt-right")
+
+    function callbackScrollDownArrow(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          scrollDownArrow.classList.remove("arrow-entered")
+        } else {
+          scrollDownArrow.classList.add("arrow-entered")
+        }
+      })
+    }
+
+    let optionsScrollDownArrow = {
+      root: document.querySelector("#scrollArea"),
+      rootMargin: "0px",
+      threshold: 0.7,
+    }
+
+    let observerScrollDownArrow = new IntersectionObserver(
+      callbackScrollDownArrow,
+      optionsScrollDownArrow
+    )
+
+    if (targetScrollDownArrow) {
+      observerScrollDownArrow.observe(targetScrollDownArrow)
     }
   }
 
@@ -136,7 +165,7 @@ class ProjectPage extends Component {
             <IconContext.Provider
               value={{ color: "white", size: "4em", height: "100" }}
             >
-              <HiArrowNarrowUp />
+              <CgArrowUp />
             </IconContext.Provider>
           </div>
         </div>
@@ -146,7 +175,7 @@ class ProjectPage extends Component {
             <IconContext.Provider
               value={{ color: "white", size: "4em", height: "100" }}
             >
-              <HiArrowNarrowDown />
+              <CgArrowDown />
             </IconContext.Provider>
           </div>
         </div>
@@ -175,7 +204,6 @@ class ProjectPage extends Component {
         {/* </div> */}
 
         <div className="project-content-middle" ref={this.nextSectionRef}>
-          <span id={"sentinel-1"}></span>
           <div className="content section-left">
             <div className="content-wrapper">
               {/* <div className="scroll-marker">
@@ -196,24 +224,29 @@ class ProjectPage extends Component {
             </div>
           </div>
 
-          <div className="content section-right">
-            <div className="secondary-project-image">
-              {/* <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} /> */}
-              <LazyLoadImage
-                // alt={image.alt}
-                // height={image.height}
-                // effect="blur"
-                src={myProjectData.secondaryPhoto.fluid.src} // use normal <img> attributes as props
-                // width={image.width}
-              />
-            </div>
-          </div>
-          <span id={"sentinel-2"}></span>
+          <div
+            className="content section-right"
+            css={{
+              backgroundImage: `url(
+                                      ${myProjectData.secondaryPhoto.fluid.src}
+                                    )`,
+              backgroundSize: `cover`,
+            }}
+          ></div>
         </div>
 
-        <div className="project-page-content-bottom">
-          <div className="fullscreen-project-image" ref={this.topRef}>
-            {/* <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} /> */}
+        {/* <div
+          className={`fullscreen-project-image`}
+          css={{
+            backgroundImage: `url(
+                                          ${myProjectData.fullScreenPhotoTwo.fluid.src}
+                                        )`,
+            backgroundSize: `cover`,
+            width: `100%`,
+          }}
+        ></div> */}
+
+        {/* <div className="fullscreen-project-image" ref={this.topRef}>
             <LazyLoadImage
               // alt={image.alt}
               // height={image.height}
@@ -222,8 +255,66 @@ class ProjectPage extends Component {
               src={myProjectData.fullScreenPhotoTwo.fluid.src} // use normal <img> attributes as props
               // width={image.width}
             />
-          </div>
+          </div> */}
+
+        <div
+          className="project-page-content-bottom"
+          css={{
+            display: `flex`,
+            flexWrap: `wrap`,
+          }}
+        >
+          {myProjectData.gallery.map((element, index) => {
+            return (
+              <div
+                className={`visualization-tile visualization-tile__width-${element.width}`}
+                css={{
+                  backgroundImage: `url(
+                                        ${element.visualizationImage.fluid.src}
+                                      )`,
+                  backgroundSize: `cover`,
+                  backgroundPosition: `bottom`,
+                  width: `${element.width === 1 ? `100%` : ""} ${
+                    element.width === 2 ? `50%` : ""
+                  } ${element.width === 3 ? `33.33%` : ""}`,
+                  height: `50em`,
+                  display: `flex`,
+                  flexFlow: `column`,
+                  justifyContent: `flex-end`,
+                }}
+              >
+                {element.visualizationImageText ? (
+                  <p
+                    css={{
+                      minHeight: `4em`,
+                      padding: `1em`,
+                      display: `flex`,
+                      alignSelf: `flex-end`,
+                      alignItems: `center`,
+                    }}
+                  >
+                    {element.visualizationImageText}
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+            )
+          })}
+
+          {/* <div className="fullscreen-project-image" ref={this.topRef}>
+            <LazyLoadImage
+              // alt={image.alt}
+              // height={image.height}
+              // effect="blur"
+              placeholderSrc={myProjectData.fullScreenPhotoTwo.fluid.src}
+              src={myProjectData.fullScreenPhotoTwo.fluid.src} // use normal <img> attributes as props
+              // width={image.width}
+            />
+          </div> */}
         </div>
+
+        <span id="project-page-end"></span>
       </div>
     )
   }
@@ -259,12 +350,14 @@ export const query = graphql`
         projectDescription
         areaText
         areaValue
-        fullScreenPhotoTwo {
-          fluid {
-            src
-            base64
-            srcSet
+        gallery {
+          visualizationImage {
+            fluid {
+              src
+            }
           }
+          visualizationImageText
+          width
         }
       }
     }
@@ -345,6 +438,12 @@ export const query = graphql`
     }
 
     offer: datoCmsOffer(locale: { eq: $locale }) {
+      offerBackgroundImage {
+        fluid {
+          src
+          base64
+        }
+      }
       offerArchitectsLogo {
         fixed {
           base64

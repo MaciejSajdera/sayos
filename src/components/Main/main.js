@@ -40,34 +40,58 @@ class Main extends React.Component {
   }
 
   handleTransitionLinkType = e => {
-    if (e.currentTarget.classList.contains("swiper-slide-active")) {
+    if (
+      e.currentTarget
+        .closest(".swiper-slide")
+        .classList.contains("swiper-slide-active")
+    ) {
       this.setState({ transitionLinkTarget: 1 })
       console.log("1szy od lewej")
     }
 
-    if (e.currentTarget.classList.contains("swiper-slide-next")) {
+    if (
+      e.currentTarget
+        .closest(".swiper-slide")
+        .classList.contains("swiper-slide-next")
+    ) {
       this.setState({ transitionLinkTarget: 2 })
       console.log("srodkowy")
     }
 
     if (
-      !e.currentTarget.classList.contains("swiper-slide-active") &&
-      !e.currentTarget.classList.contains("swiper-slide-next")
+      !e.currentTarget
+        .closest(".swiper-slide")
+        .classList.contains("swiper-slide-active") &&
+      !e.currentTarget
+        .closest(".swiper-slide")
+        .classList.contains("swiper-slide-next")
     ) {
-      e.currentTarget.classList.add("swiper-slide-last-in-viewport")
+      e.currentTarget
+        .closest(".swiper-slide")
+        .classList.add("swiper-slide-last-in-viewport")
       this.setState({ transitionLinkTarget: 3 })
       console.log("ostatni")
     }
 
-    if (e.currentTarget.classList.contains("swiper-slide-prev")) {
+    if (
+      e.currentTarget
+        .closest(".swiper-slide")
+        .classList.contains("swiper-slide-prev")
+    ) {
       this.setState({ transitionLinkTarget: 4 })
       console.log("1szy od lewej")
     }
   }
 
   handleOnMouseLeave = e => {
-    if (e.currentTarget.classList.contains("swiper-slide-last-in-viewport")) {
-      e.currentTarget.classList.remove("swiper-slide-last-in-viewport")
+    if (
+      e.currentTarget
+        .closest(".swiper-slide")
+        .classList.contains("swiper-slide-last-in-viewport")
+    ) {
+      e.currentTarget
+        .closest(".swiper-slide")
+        .classList.remove("swiper-slide-last-in-viewport")
     }
   }
 
@@ -207,7 +231,9 @@ class Main extends React.Component {
 
             firstSlideBgImage.classList.remove("move-left")
             firstSlideBgImage.classList.remove("move-right")
+            firstSlideBgImage.classList.add("slide-clicked")
             firstSlideBgImage.style.transform = `scale(1)`
+
             firstSlide.style.width = `100%`
 
             console.log(
@@ -239,6 +265,7 @@ class Main extends React.Component {
 
             middleSlideBgImage.classList.remove("move-left")
             middleSlideBgImage.classList.remove("move-right")
+            middleSlideBgImage.classList.add("slide-clicked")
             middleSlideBgImage.style.transform = `scale(1)`
             firstSlide.style.width = `0%`
             middleSlide.style.width = `100%`
@@ -278,6 +305,7 @@ class Main extends React.Component {
 
             lastSlideBgImage.classList.remove("move-left")
             lastSlideBgImage.classList.remove("move-right")
+            lastSlideBgImage.classList.add("slide-clicked")
             lastSlideBgImage.style.transform = `scale(1)`
 
             firstSlide.style.width = `0%`
@@ -302,6 +330,7 @@ class Main extends React.Component {
 
             prevSlideBgImage.classList.remove("move-left")
             prevSlideBgImage.classList.remove("move-right")
+            prevSlideBgImage.classList.add("slide-clicked")
             prevSlideBgImage.style.transform = `scale(1)`
             prevSlide.style.width = `100%`
 
@@ -330,8 +359,9 @@ class Main extends React.Component {
       spaceBetween: 0,
       slidesPerView: 1,
       mousewheel: {
-        sensitivity: 6,
+        sensitivity: 5,
       },
+
       watchSlidesProgress: true,
       parallax: true,
       navigation: true,
@@ -347,36 +377,14 @@ class Main extends React.Component {
         1100: {
           slidesPerView: 3,
           freeMode: true,
-          speed: 100,
+          speed: 70,
         },
       },
     }
 
     return (
       <main>
-        <Swiper
-          {...SwiperConfigs}
-          // spaceBetween={0}
-          // slidesPerView={1}
-          // mousewheel={{
-          //   sensitivity: 6,
-          // }}
-          // navigation
-          // keyboard
-          // a11y
-          // lazy={{ loadPrevNext: true, loadPrevNextAmount: 3 }}
-          // breakpoints={{
-          //   // when window width is >= 640px
-          //   992: {
-          //     slidesPerView: 2,
-          //   },
-          //   1100: {
-          //     slidesPerView: 3,
-          //     freeMode: true,
-          //     speed: 100,
-          //   },
-          // }}
-        >
+        <Swiper {...SwiperConfigs}>
           {data.nodes
             .sort((a, b) => {
               const positionA = a.position
@@ -394,10 +402,8 @@ class Main extends React.Component {
                 <SwiperSlide
                   key={index}
                   id={`slide-id-${index}`}
-                  onClick={this.handleTransitionLinkType}
-                  onMouseLeave={this.handleOnMouseLeave}
+                  // onMouseLeave={this.handleOnMouseLeave}
                 >
-                  {/* <div className={`single-project-container`}> */}
                   <TransitionLink
                     to={
                       element.locale === "pl"
@@ -406,8 +412,9 @@ class Main extends React.Component {
                     }
                     exit={myExitTransition()}
                     entry={entryTransition}
-                    // onWheel={this.handleWheel}
-                    className={`slide-bg-fullscreen 
+                    onClick={this.handleTransitionLinkType}
+                    onWheel={this.handleWheel}
+                    className={`slide-bg-fullscreen slide-home-page
                         ${
                           this.state.mouseWheelActive
                             ? `move-right`
@@ -420,42 +427,24 @@ class Main extends React.Component {
                           )`,
                     }}
                   >
-                    {/* <LazyLoad> */}
-                    <div
-                    // onWheel={this.handleWheel}
-                    // className={`slide-bg-fullscreen
-                    //   ${
-                    //     this.state.mouseWheelActive
-                    //       ? `move-right`
-                    //       : `move-left`
-                    //   }
-                    //   `}
-                    // css={{
-                    //   backgroundImage: `url(
-                    //       ${element.fullScreenPhoto.fluid.src}
-                    //     )`,
-                    // }}
-                    ></div>
-                    {/* </LazyLoad> */}
+                    <div className={`title-wrapper`}>
+                      <div className={`title-container`}>
+                        <h2 className={`project-title-1`}>
+                          {element.titlePart1}
+                        </h2>
+                        <h2 className={`project-title-2`}>
+                          {element.titlePart2}
+                        </h2>
 
-                    <div className={`title-container`}>
-                      <h2 className={`project-title-1`}>
-                        {element.titlePart1}
-                      </h2>
-                      <h2 className={`project-title-2`}>
-                        {element.titlePart2}
-                      </h2>
-
-                      <div className="text-on-hover">
-                        <p className="project-slogan">
-                          {element.projectSlogan}
-                        </p>
-                        <p className="read-more">{element.readMore}</p>
+                        <div className="text-on-hover">
+                          <p className="project-slogan">
+                            {element.projectSlogan}
+                          </p>
+                          <p className="read-more">{element.readMore}</p>
+                        </div>
                       </div>
                     </div>
                   </TransitionLink>
-                  {/* </Link> */}
-                  {/* </div> */}
                 </SwiperSlide>
               )
             })}

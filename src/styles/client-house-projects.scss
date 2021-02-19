@@ -78,12 +78,13 @@
       height: 60%;
     }
 
-    @media screen and (min-width: 1200px) {
-      height: 45%;
-    }
-
     @media screen and (min-height: 612px) {
       padding: 2em;
+    }
+
+    @media screen and (min-width: 1200px) {
+      height: 25%;
+      padding: 2em 20%;
     }
 
     p {
@@ -93,6 +94,8 @@
     }
 
     h2 {
+      margin-bottom: 2em;
+
       @media screen and (max-height: 650px) {
         font-size: 1.1rem;
       }
@@ -102,23 +105,25 @@
       }
 
       @media screen and (min-width: 1200px) {
-        font-size: 1.9rem;
+        font-size: 1.2rem;
+        text-transform: lowercase;
       }
     }
 
     .text-content {
       height: 100%;
       line-height: 1.7;
+      text-align: justify;
       @media screen and (max-height: 650px) {
-        font-size: 0.8rem;
+        font-size: 1rem;
       }
 
       @media screen and (min-width: 992px) and (max-width: 1024px) {
-        font-size: 1.5rem;
+        font-size: 1rem;
       }
 
       @media screen and (min-width: 1200px) {
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
     }
   }
