@@ -235,28 +235,6 @@ class ProjectPage extends Component {
           ></div>
         </div>
 
-        {/* <div
-          className={`fullscreen-project-image`}
-          css={{
-            backgroundImage: `url(
-                                          ${myProjectData.fullScreenPhotoTwo.fluid.src}
-                                        )`,
-            backgroundSize: `cover`,
-            width: `100%`,
-          }}
-        ></div> */}
-
-        {/* <div className="fullscreen-project-image" ref={this.topRef}>
-            <LazyLoadImage
-              // alt={image.alt}
-              // height={image.height}
-              // effect="blur"
-              placeholderSrc={myProjectData.fullScreenPhotoTwo.fluid.src}
-              src={myProjectData.fullScreenPhotoTwo.fluid.src} // use normal <img> attributes as props
-              // width={image.width}
-            />
-          </div> */}
-
         <div
           className="project-page-content-bottom"
           css={{
@@ -302,17 +280,6 @@ class ProjectPage extends Component {
               </div>
             )
           })}
-
-          {/* <div className="fullscreen-project-image" ref={this.topRef}>
-            <LazyLoadImage
-              // alt={image.alt}
-              // height={image.height}
-              // effect="blur"
-              placeholderSrc={myProjectData.fullScreenPhotoTwo.fluid.src}
-              src={myProjectData.fullScreenPhotoTwo.fluid.src} // use normal <img> attributes as props
-              // width={image.width}
-            />
-          </div> */}
         </div>
         <span
           id="project-page-end"
