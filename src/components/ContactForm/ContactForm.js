@@ -147,7 +147,6 @@ const ContactForm = ({ handleContactFormToggle, props }) => {
                     <input
                       type="tel"
                       name="phone"
-                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       placeholder={data.en.phoneNumber}
                       required
                       onChange={handleChange}
@@ -247,7 +246,6 @@ const ContactForm = ({ handleContactFormToggle, props }) => {
                     <input
                       type="tel"
                       name="phone"
-                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       placeholder={data.pl.phoneNumber}
                       required
                       onChange={handleChange}
