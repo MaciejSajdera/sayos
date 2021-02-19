@@ -46,6 +46,7 @@ const ContactForm = ({ handleContactFormToggle, props }) => {
         }
         firstName
         surname
+        phoneNumber
         emailAddress
         messageContent
         submitText
@@ -59,6 +60,7 @@ const ContactForm = ({ handleContactFormToggle, props }) => {
         }
         firstName
         surname
+        phoneNumber
         emailAddress
         messageContent
         submitText
@@ -138,6 +140,16 @@ const ContactForm = ({ handleContactFormToggle, props }) => {
                       type="text"
                       name="surname"
                       placeholder={data.en.surname}
+                      onChange={handleChange}
+                    />
+                  </p>
+                  <p>
+                    <input
+                      type="tel"
+                      name="phone"
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                      placeholder={data.en.phoneNumber}
+                      required
                       onChange={handleChange}
                     />
                   </p>
@@ -228,6 +240,16 @@ const ContactForm = ({ handleContactFormToggle, props }) => {
                       type="text"
                       name="surname"
                       placeholder={data.pl.surname}
+                      onChange={handleChange}
+                    />
+                  </p>
+                  <p>
+                    <input
+                      type="tel"
+                      name="phone"
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                      placeholder={data.pl.phoneNumber}
+                      required
                       onChange={handleChange}
                     />
                   </p>
