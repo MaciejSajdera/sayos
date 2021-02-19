@@ -75,6 +75,7 @@ const ClientDesignProject = props => {
               sensitivity: 4,
             }}
             speed={10}
+            roundLengths={true}
             // effect="fade"
             // scrollbar={{ draggable: true }}
           >

@@ -74,6 +74,7 @@ const ClientHouseProject = props => {
               sensitivity: 3,
             }}
             speed={600}
+            roundLengths={true}
             // effect="fade"
             // scrollbar={{ draggable: true }}
             // onSlideChange={() => console.log("slide change")}

@@ -27,6 +27,8 @@
   position: fixed;
   transition: all 0.3s ease-in;
   opacity: 0;
+  width: 2.25em;
+  height: 2.25em;
 
   @media screen and (min-width: 992px) {
     bottom: 5%;

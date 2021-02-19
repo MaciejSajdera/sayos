@@ -74,6 +74,7 @@ const ClientInteriorProject = props => {
               sensitivity: 4,
             }}
             speed={10}
+            roundLengths={true}
             // pagination={{ clickable: true }}
             // effect="fade"
             // scrollbar={{ draggable: true }}

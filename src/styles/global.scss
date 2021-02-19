@@ -213,3 +213,12 @@ main {
   -webkit-filter: blur(45px);
   filter: blur(45px);
 }
+
+.swiper-container {
+  display: flex;
+}
+
+.swiper-wrapper {
+  align-self: center;
+  height: auto !important;
+}

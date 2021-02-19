@@ -13,7 +13,7 @@ main {
   .swiper-slide {
     transition: width 0.7s cubic-bezier(0.39, -0.45, 0.63, 0.62),
       transform 0.7s linear;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
 
     @media screen and (min-width: 992px) {
@@ -186,7 +186,7 @@ main {
     right: 0;
     top: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.15);
     transition: 0.3s ease-in-out;
   }
 

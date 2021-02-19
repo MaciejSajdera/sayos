@@ -57,6 +57,7 @@
   .swiper-container {
     width: 100vw;
     height: 100vh;
+    -webkit-transform: translate3d(0, 0, 0);
     @media screen and (min-width: 1200px) {
       width: 100%;
     }

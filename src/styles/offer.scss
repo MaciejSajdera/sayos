@@ -50,7 +50,10 @@
     }
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.6);
+      @media screen and (min-width: 992px) {
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
       .text-on-hover {
         transform: translateY(0%);
         opacity: 1;

@@ -413,7 +413,7 @@ class Main extends React.Component {
                     exit={myExitTransition()}
                     entry={entryTransition}
                     onClick={this.handleTransitionLinkType}
-                    onWheel={this.handleWheel}
+                    // onWheel={this.handleWheel}
                     className={`slide-bg-fullscreen slide-home-page
                         ${
                           this.state.mouseWheelActive

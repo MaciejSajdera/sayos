@@ -40,7 +40,7 @@ class ProjectPage extends Component {
 
     let optionsScrollUpArrow = {
       root: document.querySelector("#scrollArea"),
-      rootMargin: "0px",
+      rootMargin: "100px",
       threshold: 0.7,
     }
 
@@ -54,7 +54,7 @@ class ProjectPage extends Component {
     }
 
     //Scroll Down Arrow
-    const targetScrollDownArrow = document.querySelector("#project-page-end") //top section
+    const targetScrollDownArrow = document.querySelector("#project-page-end")
     const scrollDownArrow = document.querySelector(".box-bt-right")
 
     function callbackScrollDownArrow(entries, observer) {
@@ -69,7 +69,7 @@ class ProjectPage extends Component {
 
     let optionsScrollDownArrow = {
       root: document.querySelector("#scrollArea"),
-      rootMargin: "0px",
+      rootMargin: "100px",
       threshold: 0.7,
     }
 
@@ -267,6 +267,7 @@ class ProjectPage extends Component {
           {myProjectData.gallery.map((element, index) => {
             return (
               <div
+                key={index}
                 className={`visualization-tile visualization-tile__width-${element.width}`}
                 css={{
                   backgroundImage: `url(
@@ -313,8 +314,15 @@ class ProjectPage extends Component {
             />
           </div> */}
         </div>
-
-        <span id="project-page-end"></span>
+        <span
+          id="project-page-end"
+          css={{
+            height: `1em`,
+            display: `block`,
+            position: `absolute`,
+            bottom: `0`,
+          }}
+        ></span>
       </div>
     )
   }
