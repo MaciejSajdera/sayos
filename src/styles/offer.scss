@@ -10,6 +10,17 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.8);
   }
+
+  @media screen and (max-width: 992px) {
+    .slide-container {
+      height: 55vh;
+      overflow: scroll;
+
+      h2 {
+        line-height: 1.5;
+      }
+    }
+  }
 }
 
 .offer-logos-wrapper {
@@ -52,17 +63,6 @@
     &:hover {
       @media screen and (min-width: 992px) {
         background-color: rgba(0, 0, 0, 0.6);
-      }
-
-      .text-on-hover {
-        transform: translateY(0%);
-        opacity: 1;
-
-        .read-more {
-          &:after {
-            width: 8em;
-          }
-        }
       }
     }
 

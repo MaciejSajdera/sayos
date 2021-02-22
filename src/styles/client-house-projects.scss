@@ -95,20 +95,20 @@
     }
 
     h2 {
-      margin-bottom: 2em;
+      margin-bottom: 1em;
 
-      @media screen and (max-height: 650px) {
-        font-size: 1.1rem;
-      }
+      // @media screen and (max-height: 650px) {
+      //   font-size: 1.1rem;
+      // }
 
-      @media screen and (min-width: 992px) {
-        font-size: 2.5rem;
-      }
+      // @media screen and (min-width: 992px) {
+      //   font-size: 2.5rem;
+      // }
 
-      @media screen and (min-width: 1200px) {
-        font-size: 1.2rem;
-        text-transform: lowercase;
-      }
+      // @media screen and (min-width: 1200px) {
+      font-size: 1.2rem;
+      text-transform: lowercase;
+      // }
     }
 
     .text-content {
