@@ -63,6 +63,11 @@
     &:hover {
       @media screen and (min-width: 992px) {
         background-color: rgba(0, 0, 0, 0.6);
+
+        .text-on-hover {
+          opacity: 1;
+          transform: translateY(0%);
+        }
       }
     }
 
