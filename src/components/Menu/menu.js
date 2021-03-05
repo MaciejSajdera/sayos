@@ -3,6 +3,7 @@ import { Link, useStaticQuery } from "gatsby"
 
 import myContext from "../../../context"
 import ContactForm from "../ContactForm/ContactForm"
+import { element } from "prop-types"
 
 const Menu = ({
   dataMenu,
@@ -33,8 +34,13 @@ const Menu = ({
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleContactFormToggle = () => setIsOpen(!isOpen)
-
+  const handleContactFormToggle = () => {
+    setIsOpen(!isOpen)
+    const elementsToHide = document.querySelectorAll(".will-be-hidden")
+    elementsToHide.forEach(element => {
+      element.classList.toggle("hidden")
+    })
+  }
   return (
     <>
       <myContext.Consumer>
@@ -84,13 +90,23 @@ const Menu = ({
                   </Link>
                 </div>
 
+                <div className="icons icons__mobile">
+                  <a href={`${dataMenu.instagramLink}`} target="_blank">
+                    <img src={dataMenu.instagramicon.fixed.src} alt="" />
+                  </a>
+
+                  <a href={`${dataMenu.instagramLink}`} target="_blank">
+                    <img src={dataMenu.facebookicon.fixed.src} alt="" />
+                  </a>
+                </div>
+
                 <div className="menu-wrapper">
                   <div
                     className={`menu-left ${
                       navToggled ? "menu-left-part-active" : ""
                     }`}
                   >
-                    <div className="menu-grouped-items">
+                    <div className="menu-grouped-items will-be-hidden">
                       <Link
                         to={
                           about.locale === "pl"
@@ -126,7 +142,7 @@ const Menu = ({
                       </Link>
                     </div>
 
-                    <div className="menu-grouped-items with-subtitle">
+                    <div className="menu-grouped-items with-subtitle will-be-hidden">
                       <Link to={`/${offer.slug}`}>
                         <h3>{dataMenuLeft.offerHeader}</h3>
                         <p className="project-subfield">
@@ -136,6 +152,7 @@ const Menu = ({
                     </div>
 
                     <Link
+                      className={`will-be-hidden`}
                       to={
                         about.locale === "pl"
                           ? `/${about.slug}`
@@ -173,7 +190,7 @@ const Menu = ({
                     </div>
 
                     <h3
-                      className={`contact-form-title ${
+                      className={`contact-form-title will-be-hidden ${
                         isOpen ? "title-hidden" : ""
                       }`}
                       onClick={() => {
@@ -184,10 +201,12 @@ const Menu = ({
                     </h3>
                   </div>
 
-                  {/* <div
+                  <div
                     className={`menu-right ${
-                      isOpen ? "menu-right-contact-active" : ""
-                    } ${navToggled ? "menu-right-part-active" : ""}`}
+                      isOpen
+                        ? "menu-right-contact-active menu-right-part-active"
+                        : ""
+                    }`}
                   >
                     <Link to={`/`}>
                       <img className={`menu-logo`} src={lightLogo} alt=""></img>
@@ -207,7 +226,7 @@ const Menu = ({
                       </a>
                     </div>
 
-                    <div className="icons">
+                    <div className="icons icons__desktop">
                       <a href={`${dataMenu.instagramLink}`} target="_blank">
                         <img src={dataMenu.instagramicon.fixed.src} alt="" />
                       </a>
@@ -216,7 +235,7 @@ const Menu = ({
                         <img src={dataMenu.facebookicon.fixed.src} alt="" />
                       </a>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>

@@ -6,6 +6,7 @@ import myContext from "../../context"
 
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
+import HeroCarousel from "../components/HeroCarousel/HeroCarousel"
 
 class allProjectsInterior extends React.Component {
   constructor(props) {
@@ -37,6 +38,17 @@ class allProjectsInterior extends React.Component {
 
     const menuStyle = `menuStyleAbsolute`
 
+    let interiorsCollection = []
+
+    projects.nodes.map(project => {
+      if (project.projectCategory === category.categorySecond) {
+        interiorsCollection.push(project)
+      }
+      return interiorsCollection
+    })
+
+    console.log(interiorsCollection)
+
     return (
       <>
         <Header />
@@ -53,7 +65,12 @@ class allProjectsInterior extends React.Component {
           offer={offer}
         />
 
-        <main className={`all-grid`}>
+        <HeroCarousel
+          projects={interiorsCollection}
+          pageLocation={"allProjectsInterior"}
+        />
+
+        {/* <main className={`all-grid`}>
           <div className="all-grid-bg">
             {projects.nodes
               .filter(node => {
@@ -115,7 +132,7 @@ class allProjectsInterior extends React.Component {
                 </div>
               ))}
           </div>
-        </main>
+        </main> */}
       </>
     )
   }

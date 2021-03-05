@@ -1,8 +1,12 @@
 main {
   .swiper-wrapper {
+    transition: transform 0.5s ease-out !important;
+
     @media screen and (min-width: 992px) {
       // transition: all 0.7s cubic-bezier(0.2, 0.44, 0.21, 0.43) !important;
-      transition: all 1.2s cubic-bezier(0, 0, 0.2, 1) !important;
+      // transition: all 1.2s cubic-bezier(0, 0, 0.2, 1) !important;
+      // transition: all 1s linear !important;
+      transition: transform 0.9s ease-out !important;
       // @media screen and (min-width: 992px) {
       //     grid-template-columns: 1fr 1fr 1fr;
       //     grid-template-rows: 1;

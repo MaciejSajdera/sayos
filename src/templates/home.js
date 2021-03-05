@@ -1,11 +1,9 @@
 import React from "react"
-import { Link, graphql, navigate } from "gatsby"
+import { graphql } from "gatsby"
 
-import Main from "../components/Main/main"
 import Menu from "../components/Menu/menu"
 import Header from "../components/Header/header"
-
-import Consumer from "../../context"
+import HeroCarousel from "../components/HeroCarousel/HeroCarousel"
 
 class Home extends React.Component {
   constructor(props) {
@@ -31,6 +29,15 @@ class Home extends React.Component {
 
     const menuStyle = `menuStyleAbsolute`
 
+    let allCollection = []
+
+    projects.nodes.map(project => {
+      if (project) {
+        allCollection.push(project)
+      }
+      return allCollection
+    })
+
     return (
       <>
         <Header />
@@ -46,7 +53,7 @@ class Home extends React.Component {
           category={category}
           offer={offer}
         />
-        <Main data={projects} />
+        <HeroCarousel projects={allCollection} pageLocation={"homePage"} />
       </>
     )
   }

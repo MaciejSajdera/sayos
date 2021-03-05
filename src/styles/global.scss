@@ -19,6 +19,7 @@ body {
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  transition: all 0.4s ease-in;
 }
 
 .tl-wrapper {
@@ -29,9 +30,9 @@ body {
 
 $white: #fff;
 
-// body {
-//     background-color: #0c0c0c;
-// }
+body {
+  background-color: #0c0c0c;
+}
 
 h2 {
   font-family: "Mulish", sans-serif;
@@ -216,9 +217,11 @@ main {
 
 .swiper-container {
   display: flex;
+  background-color: #0c0c0c;
 }
 
 .swiper-wrapper {
   align-self: center;
+  background-color: #0c0c0c;
   // height: auto !important;
 }

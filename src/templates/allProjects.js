@@ -4,6 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component"
 
 import Menu from "../components/Menu/menu"
 import Header from "../components/Header/header"
+import HeroCarousel from "../components/HeroCarousel/HeroCarousel"
 
 import myContext from "../../context"
 
@@ -38,6 +39,15 @@ class allProjects extends React.Component {
 
     const menuStyle = `menuStyleAbsolute`
 
+    let allCollection = []
+
+    projects.nodes.map(project => {
+      if (project) {
+        allCollection.push(project)
+      }
+      return allCollection
+    })
+
     return (
       <>
         <Header />
@@ -54,7 +64,9 @@ class allProjects extends React.Component {
           offer={offer}
         />
 
-        <main className={`all-grid`}>
+        <HeroCarousel projects={allCollection} pageLocation={"allProjects"} />
+
+        {/* <main className={`all-grid`}>
           <div className="all-grid-bg">
             {projects.nodes
               .sort((a, b) => {
@@ -69,6 +81,11 @@ class allProjects extends React.Component {
                 return comparision
               })
               .map((element, index) => (
+
+
+
+
+
                 <div
                   className={`single-project-tile ${
                     index % 5 && index > 0 ? `` : `big-project-tile`
@@ -111,9 +128,14 @@ class allProjects extends React.Component {
                     </div>
                   </Link>
                 </div>
+
+
+
+
+
               ))}
           </div>
-        </main>
+        </main> */}
       </>
     )
   }

@@ -4,6 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component"
 
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
+import HeroCarousel from "../components/HeroCarousel/HeroCarousel"
 
 import myContext from "../../context"
 
@@ -37,6 +38,15 @@ class allProjectsHouse extends React.Component {
 
     const menuStyle = `menuStyleAbsolute`
 
+    let housesCollection = []
+
+    projects.nodes.map(project => {
+      if (project.projectCategory === category.categoryFirst) {
+        housesCollection.push(project)
+      }
+      return housesCollection
+    })
+
     return (
       <>
         <Header />
@@ -53,7 +63,12 @@ class allProjectsHouse extends React.Component {
           offer={offer}
         />
 
-        <main className={`all-grid`}>
+        <HeroCarousel
+          projects={housesCollection}
+          pageLocation={"allProjectsHouse"}
+        />
+
+        {/* <main className={`all-grid`}>
           <div className="all-grid-bg">
             {projects.nodes
               .filter(node => {
@@ -115,7 +130,7 @@ class allProjectsHouse extends React.Component {
                 </div>
               ))}
           </div>
-        </main>
+        </main> */}
       </>
     )
   }
