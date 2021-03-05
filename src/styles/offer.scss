@@ -67,6 +67,13 @@
         .text-on-hover {
           opacity: 1;
           transform: translateY(0%);
+
+          .read-more {
+            &:after {
+              width: 35%;
+              bottom: -10px;
+            }
+          }
         }
       }
     }
@@ -112,7 +119,7 @@
           width: 0em;
           position: absolute;
           bottom: -4px;
-          transition: 0.7s cubic-bezier(0.57, 0.21, 0.53, 0.82);
+          transition: all 0.375s linear;
           left: 50%;
           transform: translate(-50%, 0);
         }
