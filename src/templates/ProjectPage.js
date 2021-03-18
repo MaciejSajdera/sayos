@@ -33,8 +33,8 @@ class ProjectPage extends Component {
     let enteredFrom
 
     if (typeof Storage !== "undefined") {
-      if (sessionStorage.getItem(`navigationAtProjectPageStartedAt`)) {
-        enteredFrom = sessionStorage.getItem(`navigationAtProjectPageStartedAt`)
+      if (sessionStorage.getItem(`projectPageNavigationStartedAt`)) {
+        enteredFrom = sessionStorage.getItem(`projectPageNavigationStartedAt`)
       }
     }
 

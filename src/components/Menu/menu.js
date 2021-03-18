@@ -44,7 +44,7 @@ const Menu = ({
 
   const rememberWhereEnteredFrom = nameOfTheEntryPoint => {
     sessionStorage.setItem(
-      `navigationAtProjectPageStartedAt`,
+      `projectPageNavigationStartedAt`,
       nameOfTheEntryPoint
     )
   }
