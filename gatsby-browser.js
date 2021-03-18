@@ -6,15 +6,21 @@
 
 // You can delete this file if you're not using it
 import "./src/styles/styles.scss"
+import smoothscroll from "smoothscroll-polyfill"
 
-export const onInitialClientRender = () => {
-    setTimeout(function() {
+export const onClientEntry = () => {
+  setTimeout(function () {
+    document.getElementById("___loader").style.opacity = 0
+  }, 1000)
 
-        document.getElementById("___loader").style.opacity = 0
-    }, 1000)
+  smoothscroll.polyfill()
 
-    setTimeout(function() {
-        document.getElementById("___loader").style.display = "none"
-    }, 1400)
+  setTimeout(function () {
+    document.getElementById("___loader").style.display = "none"
+  }, 1400)
 
+  // IntersectionObserver polyfill for gatsby-background-image (Safari, IE)
+  if (!(`IntersectionObserver` in window)) {
+    return import(`intersection-observer`)
+  }
 }

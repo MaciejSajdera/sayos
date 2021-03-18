@@ -1,24 +1,29 @@
 import React, { Component, createRef } from "react"
-import { Link, graphql, navigate, Img } from "gatsby"
-import { LazyLoadImage } from "react-lazy-load-image-component"
+import { StaticQuery, graphql } from "gatsby"
 import LazyLoad from "react-lazyload"
+import TransitionLink from "gatsby-plugin-transition-link"
 import "react-lazy-load-image-component/src/effects/blur.css"
 import Consumer from "../../context"
-import {
-  CgArrowUp,
-  CgArrowDown,
-  HiArrowNarrowLeft,
-  HiArrowNarrowRight,
-} from "react-icons/cg"
+import { CgArrowUp, CgArrowDown } from "react-icons/cg"
 import { IconContext } from "react-icons"
-
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
 
-class ProjectPage extends Component {
-  componentDidMount() {
-    console.log()
+import BackgroundImage from "gatsby-background-image"
 
+class ProjectPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLogoBackgroundDark: false,
+      arrowRightLinksToNextProject: false,
+      otherProjectInThisCategory: [],
+      indexOfCurrentProject: null,
+    }
+  }
+
+  componentDidMount() {
+    /***ARROWS */
     const arrowButtonLeft = document.querySelector(".box-bt-left")
     const arrowButtonRight = document.querySelector(".box-bt-right")
 
@@ -55,14 +60,21 @@ class ProjectPage extends Component {
 
     //Scroll Down Arrow
     const targetScrollDownArrow = document.querySelector("#project-page-end")
+
     const scrollDownArrow = document.querySelector(".box-bt-right")
 
     function callbackScrollDownArrow(entries, observer) {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          scrollDownArrow.classList.remove("arrow-entered")
-        } else {
-          scrollDownArrow.classList.add("arrow-entered")
+        if (entry.intersectionRatio > 0.5) {
+          scrollDownArrow.classList.remove("arrow-unrotated-right")
+          scrollDownArrow.classList.add("arrow-rotated-right")
+          // this.setState({ arrowRightLinksToNextProject: true })
+        }
+
+        if (entry.intersectionRatio < 0.5) {
+          scrollDownArrow.classList.remove("arrow-rotated-right")
+          scrollDownArrow.classList.add("arrow-unrotated-right")
+          // this.setState({ arrowRightLinksToNextProject: false })
         }
       })
     }
@@ -81,6 +93,91 @@ class ProjectPage extends Component {
     if (targetScrollDownArrow) {
       observerScrollDownArrow.observe(targetScrollDownArrow)
     }
+
+    /***LOGO COLOR CHANGE */
+    const targetLogoChange = document.querySelector(
+      "#project-content-middle-end"
+    )
+
+    const callbackLogoChange = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.intersectionRatio > 0) {
+          this.setState({ isLogoBackgroundDark: true })
+        } else {
+          this.setState({ isLogoBackgroundDark: false })
+        }
+      })
+    }
+
+    //only for desktop
+    const mediaQueryDesktop = window.matchMedia("(min-width: 992px)")
+    function handleDesktopChange(e) {
+      if (e.matches) {
+        console.log("Media Query Desktop Matched!")
+
+        let optionsLogoChange = {
+          root: document.querySelector("#scrollArea"),
+          rootMargin: "0px",
+        }
+
+        let observerLogoChange = new IntersectionObserver(
+          callbackLogoChange,
+          optionsLogoChange
+        )
+
+        if (targetLogoChange) {
+          observerLogoChange.observe(targetLogoChange)
+        }
+      }
+    }
+
+    mediaQueryDesktop.addListener(handleDesktopChange)
+    handleDesktopChange(mediaQueryDesktop)
+
+    let { projects } = this.props.data
+    const { thisProjectData } = this.props.pageContext
+
+    /***NAVIGATION BETWEEN PROJECTS IN THE SAME CATEGORY***/
+    let projectsInThisCategory = []
+    let indexOfThisPoject
+
+    projects.nodes
+      .sort((a, b) => {
+        const positionA = a.position
+        const positionB = b.position
+        let comparision = 0
+        if (positionA > positionB) {
+          comparision = 1
+        } else if (positionA < positionB) {
+          comparision = -1
+        }
+        return comparision
+      })
+      .map(project => {
+        if (project.projectCategory === thisProjectData.projectCategory) {
+          projectsInThisCategory.push(project)
+        }
+        return projectsInThisCategory
+      })
+
+    projectsInThisCategory.map((project, i) => {
+      if (project.id === thisProjectData.id) {
+        indexOfThisPoject = i
+      }
+      return
+    })
+
+    this.setState(prevState => ({
+      otherProjectInThisCategory: [...projectsInThisCategory],
+    }))
+
+    this.setState(prevState => ({
+      indexOfCurrentProject: indexOfThisPoject,
+    }))
+
+    setTimeout(() => {
+      console.log(this.state)
+    }, 3000)
   }
 
   render() {
@@ -96,12 +193,49 @@ class ProjectPage extends Component {
       offer,
     } = this.props.data
 
-    const { myProjectData } = this.props.pageContext
+    const { thisProjectData } = this.props.pageContext
 
     const menuStyle = `menuStyleFixed`
 
     this.topRef = createRef()
     this.nextSectionRef = createRef()
+
+    // const myBgImage = props => (
+    //   <StaticQuery
+    //     query={graphql`
+    //       query {
+    //         images: allFile {
+    //           edges {
+    //             node {
+    //               relativePath
+    //               name
+    //               childImageSharp {
+    //                 fluid(maxWidth: 600) {
+    //                   ...GatsbyImageSharpFluid
+    //                 }
+    //               }
+    //             }
+    //           }
+    //         }
+    //       }
+    //     `}
+    //     render={data => {
+    //       const image = data.images.edges.find(n => {
+    //         return n.node.relativePath.includes(props.filename);
+    //       });
+    //       if (!image) {
+    //         return null;
+    //       }
+
+    //       //const imageSizes = image.node.childImageSharp.sizes; sizes={imageSizes}
+    //       return <Img alt={props.alt} fluid={image.node.childImageSharp.fluid} />;
+    //     }}
+    //   />
+    // );
+
+    // console.log(projectsInThisCategory)
+
+    // console.log(`thisProjectData: ${thisProjectData.projectCategory}`)
 
     // const { locale } = this.props.pageContext.locale;
 
@@ -128,7 +262,7 @@ class ProjectPage extends Component {
       })
     }
 
-    console.log(this.props.transitionStatus)
+    // console.log(this.props.transitionStatus)
 
     // handleScroll = (e) => {
     //   const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
@@ -139,7 +273,7 @@ class ProjectPage extends Component {
 
     return (
       <div>
-        <Header />
+        <Header isLogoBackgroundDark={this.state.isLogoBackgroundDark} />
         <Menu
           dataMenu={menuRightProject}
           dataMenuLeft={menuLeftProject}
@@ -152,13 +286,6 @@ class ProjectPage extends Component {
           category={category}
           offer={offer}
         />
-
-        {/* {this.props.data.menuRight.phoneNumber} */}
-        {/* <div> */}
-
-        {/* strona projektu: {myProjectData.slug} */}
-        {/* testmenudata: {menuRight.phoneNumber} */}
-        {/* </div> */}
 
         <div className={`arrow-box box-bt-left`} onClick={handleArrowPrev}>
           <div className={`menu-trigger`}>
@@ -180,44 +307,28 @@ class ProjectPage extends Component {
           </div>
         </div>
 
-        {/* <div className="fullscreen-project-image" ref={this.topRef}> */}
-        {/* <img src={`${myProjectData.fullScreenPhoto.fluid.src}`} /> */}
-        {/* <LazyLoadImage
-            // alt={image.alt}
-            // height={image.height}
-            effect="blur"
-            placeholderSrc={myProjectData.fullScreenPhoto.fluid.src}
-            // visibleByDefault
-            src={myProjectData.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
-            // width={image.width}
-          /> */}
         <LazyLoad ref={this.topRef} className={`project-content-top`}>
           <div
             className={`slide-bg-fullscreen`}
             css={{
               backgroundImage: `url(
-                              ${myProjectData.fullScreenPhoto.fluid.src}
+                              ${thisProjectData.fullScreenPhoto.fluid.src}
                             )`,
             }}
           ></div>
         </LazyLoad>
-        {/* </div> */}
 
         <div className="project-content-middle" ref={this.nextSectionRef}>
           <div className="content section-left">
             <div className="content-wrapper">
-              {/* <div className="scroll-marker">
-
-              </div> */}
-
               <div className="text-container">
-                <h2>{myProjectData.titlePart1}</h2>
-                <h2>{myProjectData.titlePart2}</h2>
+                <h2>{thisProjectData.titlePart1}</h2>
+                <h2>{thisProjectData.titlePart2}</h2>
                 <div className="project-description">
-                  <p>{myProjectData.projectDescription}</p>
+                  <p>{thisProjectData.projectDescription}</p>
                   <p>
-                    {myProjectData.areaText}:{" "}
-                    <strong>{myProjectData.areaValue}</strong>
+                    {thisProjectData.areaText}:{" "}
+                    <strong>{thisProjectData.areaValue}</strong>
                   </p>
                 </div>
               </div>
@@ -228,11 +339,23 @@ class ProjectPage extends Component {
             className="content section-right"
             css={{
               backgroundImage: `url(
-                                      ${myProjectData.secondaryPhoto.fluid.src}
+                                      ${thisProjectData.secondaryPhoto.fluid.src}
                                     )`,
               backgroundSize: `cover`,
+              backgroundPosition: `center`,
             }}
           ></div>
+
+          <span
+            id="project-content-middle-end"
+            css={{
+              height: `1em`,
+              width: `100%`,
+              display: `block`,
+              position: `absolute`,
+              bottom: `1em`,
+            }}
+          ></span>
         </div>
 
         <div
@@ -242,7 +365,7 @@ class ProjectPage extends Component {
             flexWrap: `wrap`,
           }}
         >
-          {myProjectData.gallery.map((element, index) => {
+          {thisProjectData.gallery.map((element, index) => {
             return (
               <div
                 key={index}
@@ -298,7 +421,7 @@ class ProjectPage extends Component {
 export default ProjectPage
 
 export const query = graphql`
-  query myProjectData($locale: String!) {
+  query thisProjectData($locale: String!) {
     projects: allDatoCmsProject(filter: { locale: { eq: $locale } }) {
       nodes {
         slug
@@ -322,6 +445,7 @@ export const query = graphql`
             srcSet
           }
         }
+        projectCategory
         projectDescription
         areaText
         areaValue

@@ -1,6 +1,5 @@
 .nav {
   position: absolute;
-  border: 1px solid red;
   height: 100%;
   width: 100%;
   z-index: -1;
@@ -38,8 +37,38 @@ header {
         width: 7rem;
 
         @media screen and (min-width: 992px) {
-          padding-left: 3em;
-          width: 10rem;
+          padding-left: 1em;
+          width: 8rem;
+        }
+      }
+
+      &--on-dark-background {
+        img {
+          animation: showTransition 0.3s forwards;
+        }
+
+        @keyframes showTransition {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+      }
+
+      &--on-light-background {
+        img {
+          animation: showTransition 0.3s forwards;
+        }
+
+        @keyframes showTransition {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
         }
       }
     }

@@ -95,7 +95,7 @@
     }
 
     h2 {
-      margin-bottom: 1em;
+      margin-bottom: 2em;
 
       // @media screen and (max-height: 650px) {
       //   font-size: 1.1rem;
@@ -114,18 +114,10 @@
     .text-content {
       height: 100%;
       line-height: 1.7;
+      font-weight: 200;
       text-align: justify;
-      @media screen and (max-height: 650px) {
-        font-size: 1rem;
-      }
 
-      @media screen and (min-width: 992px) and (max-width: 1024px) {
-        font-size: 1rem;
-      }
-
-      @media screen and (min-width: 1200px) {
-        font-size: 1rem;
-      }
+      font-size: 1rem;
     }
   }
 

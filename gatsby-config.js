@@ -9,21 +9,41 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-glamor`,
-    `gatsby-plugin-smoothscroll`,
-    {
-      resolve: `gatsby-plugin-transition-link`,
-    },
     `gatsby-plugin-root-import`,
-    `gatsby-plugin-sass`,
+    `gatsby-plugin-transition-link`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
-      resolve: "gatsby-plugin-web-font-loader",
+      resolve: "gatsby-plugin-sass",
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
-        google: {
-          families: ["Mulish"],
-        },
+        fonts: [
+          `Mulish\:200,300,400,700`, // you can also specify font weights and styles
+        ],
+        display: "swap",
       },
     },
-    `gatsby-plugin-react-helmet`,
+    // {
+    //   resolve: "gatsby-plugin-web-font-loader",
+    //   options: {
+    //     fonts: {
+    //       google: [
+    //         {
+    //           family: "Mulish",
+    //           variants: [
+    //             "300",
+    //             "600",
+    //             "700",
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //   },
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -37,8 +57,6 @@ module.exports = {
         component: require.resolve(`./src/components/layout.js`),
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

@@ -4,7 +4,7 @@ import { Location } from "@reach/router"
 
 import myContext from "../../../context"
 
-const Header = ({ logoLight }) => {
+const Header = ({ logoLight, isLogoBackgroundDark }) => {
   const data = useStaticQuery(graphql`
     query MyLogoQuery {
       dark: datoCmsHeaderLogo {
@@ -71,6 +71,15 @@ const Header = ({ logoLight }) => {
                       if (logoLight) {
                         return (
                           <div className={`logo-top`}>
+                            <img src={lightLogo} alt="Sayos Architects Logo" />
+                          </div>
+                        )
+                      }
+                      if (isLogoBackgroundDark) {
+                        return (
+                          <div
+                            className={`logo-top logo-top--on-dark-background`}
+                          >
                             <img src={lightLogo} alt="Sayos Architects Logo" />
                           </div>
                         )

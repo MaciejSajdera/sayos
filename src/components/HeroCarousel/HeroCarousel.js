@@ -4,7 +4,8 @@ import LazyLoad from "react-lazyload"
 import posed from "react-pose"
 
 import TransitionLink from "gatsby-plugin-transition-link"
-import scrollTo from "gatsby-plugin-smoothscroll"
+
+import { getStyle } from "../../helperFunctions/helperFunctions"
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore, {
@@ -120,7 +121,6 @@ class HeroCarousel extends React.Component {
           )
 
           swiperControl.style.transform = `translate3d(${swiperExitPosition}px, 0px, 0px)`
-          console.log(swiperControl)
         }
         goToPreviousPosition()
       }
@@ -129,7 +129,7 @@ class HeroCarousel extends React.Component {
     setTimeout(() => {
       swiperButtonLeft.classList.add("arrow-entered")
       swiperButtonRight.classList.add("arrow-entered")
-    }, 1500)
+    }, 500)
   }
 
   //https://dev.to/mattrothenberg/recreating-pentagram-com-a-deep-dive-with-gatsby-js-h75
@@ -181,40 +181,6 @@ class HeroCarousel extends React.Component {
           const currentSwiperPositionValue = swiperPositionValuesArray[4]
 
           //helper function for sliding slide into viewport
-          function getStyle(el, styleProp) {
-            var value,
-              defaultView = (el.ownerDocument || document).defaultView
-            // W3C standard way:
-            if (defaultView && defaultView.getComputedStyle) {
-              // sanitize property name to css notation
-              // (hypen separated words eg. font-Size)
-              styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase()
-              return defaultView
-                .getComputedStyle(el, null)
-                .getPropertyValue(styleProp)
-            } else if (el.currentStyle) {
-              // IE
-              // sanitize property name to camelCase
-              styleProp = styleProp.replace(/\-(\w)/g, function (str, letter) {
-                return letter.toUpperCase()
-              })
-              value = el.currentStyle[styleProp]
-              // convert other units to pixels on IE
-              if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
-                return (function (value) {
-                  var oldLeft = el.style.left,
-                    oldRsLeft = el.runtimeStyle.left
-                  el.runtimeStyle.left = el.currentStyle.left
-                  el.style.left = value || 0
-                  value = el.style.pixelLeft + "px"
-                  el.style.left = oldLeft
-                  el.runtimeStyle.left = oldRsLeft
-                  return value
-                })(value)
-              }
-              return value
-            }
-          }
 
           if (this.state.transitionLinkTarget === 1) {
             const firstSlideBgImage = firstSlide.querySelector(
@@ -362,9 +328,9 @@ class HeroCarousel extends React.Component {
       },
     }
 
-    const setZIndexForBgInTopSlider = () => {
-      console.log("test")
-    }
+    // const setZIndexForBgInTopSlider = () => {
+    //   console.log("test")
+    // }
 
     const SwiperConfigs = {
       spaceBetween: 0,
@@ -379,8 +345,8 @@ class HeroCarousel extends React.Component {
         sensitivity: 5,
       },
 
-      onInit: setZIndexForBgInTopSlider,
-      onSlideChangeStart: setZIndexForBgInTopSlider,
+      // onInit: setZIndexForBgInTopSlider,
+      // onSlideChangeStart: setZIndexForBgInTopSlider,
 
       breakpoints: {
         // when window width is >= 640px

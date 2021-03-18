@@ -1,3 +1,5 @@
+@import "../styles/variables.scss";
+
 .fullscreen-project-image {
   height: 100vh;
 
@@ -29,6 +31,7 @@
   opacity: 0;
   width: 2.25em;
   height: 2.25em;
+  overflow: hidden;
 
   @media screen and (min-width: 992px) {
     bottom: 5%;
@@ -36,6 +39,7 @@
 
   svg {
     height: 100%;
+    transition: all 0.2s ease-in;
   }
 }
 
@@ -62,6 +66,55 @@
   opacity: 1;
 }
 
+.arrow-rotated-right {
+  svg {
+    animation: arrowRotateRight 0.75s forwards;
+  }
+
+  @keyframes arrowRotateRight {
+    0% {
+      transform: translate(0%, 0%);
+    }
+
+    50% {
+      transform: translate(0%, 150%);
+    }
+
+    55% {
+      transform: translate(-150%, 0%) rotate(-90deg);
+    }
+
+    100% {
+      transform: translate(0%, 0%) rotate(-90deg);
+    }
+  }
+}
+
+.arrow-unrotated-right {
+  svg {
+    // transform: rotate(90deg);
+    animation: arrowUnRotateRight 0.75s forwards;
+  }
+
+  @keyframes arrowUnRotateRight {
+    0% {
+      transform: translate(0%, 0%) rotate(-90deg);
+    }
+
+    50% {
+      transform: translate(150%, 0%) rotate(-90deg);
+    }
+
+    55% {
+      transform: translate(0%, -150%) rotate(0deg);
+    }
+
+    100% {
+      transform: translate(0%, 0%) rotate(0deg);
+    }
+  }
+}
+
 .arrow-disabled {
   opacity: 0.35;
   cursor: auto;
@@ -71,6 +124,7 @@
 .project-content-middle {
   display: flex;
   flex-flow: column;
+  position: relative;
 
   @media screen and (min-width: 992px) {
     flex-flow: row;
@@ -78,7 +132,7 @@
   }
 
   .content {
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1200px) {
       width: 50%;
     }
   }
@@ -93,12 +147,6 @@
       order: 2;
     }
 
-    @media screen and (max-width: 1640px) {
-      h2 {
-        font-size: 1.6rem;
-      }
-    }
-
     h2,
     p,
     span {
@@ -110,6 +158,9 @@
 
       p {
         text-align: justify;
+        font-weight: 300;
+        line-height: 1.4;
+        @include fluid-type($min_width, $max_width, 17px, 19px);
       }
     }
 
@@ -117,13 +168,17 @@
       @media screen and (min-width: 992px) {
         height: 60%;
         // border: 1px solid purple;
-        padding: 0 5em;
+        padding: 0 3em;
         display: flex;
         flex-flow: row;
 
         .text-container {
           padding-top: 0;
         }
+      }
+
+      @media screen and (min-width: 1200px) {
+        padding: 0 4.5em;
       }
     }
   }
@@ -159,7 +214,11 @@
 // }
 
 .text-container {
-  padding: 2.5em;
+  padding: 2em 2em 2em 4em;
+
+  @media screen and (min-width: 1400px) {
+    padding: 3em 3em 3em 5em;
+  }
 
   overflow-y: scroll;
   direction: rtl;
@@ -173,9 +232,12 @@
   }
 
   h2 {
-    font-size: 3rem;
+    font-weight: 700;
+    // font-size: 2.75rem;
     line-height: 1.4;
     margin-bottom: 0;
+
+    @include fluid-type($min_width, $max_width, 24px, 46px);
 
     &:nth-child(2) {
       margin-bottom: 0.5em;
@@ -183,7 +245,7 @@
   }
 
   &::-webkit-scrollbar {
-    width: 0.5em;
+    width: 0.8em;
   }
 
   /* Track */

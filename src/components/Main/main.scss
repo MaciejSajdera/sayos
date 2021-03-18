@@ -1,3 +1,5 @@
+@import "../styles/variables.scss";
+
 main {
   .swiper-wrapper {
     transition: transform 0.5s ease-out !important;
@@ -33,7 +35,8 @@ main {
           transform: translateY(-30%);
 
           h2 {
-            font-size: 2.55rem;
+            // font-size: 2.55rem;
+            font-weight: 700;
             color: #fff;
           }
         }
@@ -76,7 +79,7 @@ main {
     transition: transform 0.5s ease-in, filter 0.5s ease-in,
       background-position 1.5s ease-in !important;
 
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 1200px) {
       filter: grayscale(100%) contrast(105%);
     }
   }
@@ -98,12 +101,20 @@ main {
     width: 100%;
     height: 100%;
     position: relative;
-    padding: 0 2em;
+    padding: 0 1em;
+
+    @media screen and (min-height: 600px) {
+      padding: 0 2em;
+    }
+
+    @media screen and (max-height: 450px) and (orientation: landscape) {
+      padding: 0 5em;
+    }
   }
 
   .title-container {
     z-index: 1;
-    bottom: 8%;
+    bottom: 4em;
     position: absolute;
     height: 28%;
     padding-left: 1.5em;
@@ -112,6 +123,14 @@ main {
     @media screen and (min-width: 992px) {
       height: 25%;
       bottom: 2%;
+    }
+
+    @media screen and (max-height: 768px) and (orientation: landscape) {
+      bottom: 5em;
+    }
+
+    @media screen and (max-height: 450px) and (orientation: landscape) {
+      bottom: 8em;
     }
 
     @media screen and (min-width: 1100) {
@@ -161,25 +180,20 @@ main {
 
   h2 {
     color: #fff;
-    font-size: 2rem;
+    // font-size: 2rem;
+    @include fluid-type($min_width, $max_width, 28px, 48px);
     width: 100%;
     // letter-spacing: 1px;
     // transition: all 0.5s ease-in-out;
     // -webkit-backface-visibility: hidden;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 700;
 
-    @media screen and (min-width: 992px) {
-      font-size: 2.75rem;
+    @media screen and (min-width: 1200px) {
+      // font-size: 2.55rem;
       color: #9b9b9b;
     }
   }
-
-  // picture {
-  //     img {
-  //         transition: all 0.3s ease-in-out;
-  //         height: 120%;
-  //     }
-  // }
 }
 
 .slide-home-page {
@@ -213,8 +227,10 @@ main {
 
 .subpage-offer {
   h2 {
+    font-weight: 400;
     @media screen and (min-width: 992px) {
       color: #fff;
+      margin-bottom: 2em;
     }
   }
 }

@@ -2,8 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
-  const { site } = useStaticQuery(
+function SEO({ lang, meta, image: metaImage, pathname }) {
+  const { site, datoCmsSite } = useStaticQuery(
     graphql`
       query {
         site {
@@ -15,10 +15,23 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
             siteURL
           }
         }
+        datoCmsSite {
+          globalSeo {
+            siteName
+            fallbackSeo {
+              description
+              title
+              image {
+                url
+              }
+            }
+          }
+        }
       }
     `
   )
-  const metaDescription = description || site.siteMetadata.description
+  const title = datoCmsSite.globalSeo.siteName
+  const metaDescription = datoCmsSite.globalSeo.fallbackSeo.description
   const image =
     metaImage && metaImage.src
       ? `${site.siteMetadata.siteURL}${metaImage.src}`
@@ -107,9 +120,8 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
   )
 }
 SEO.defaultProps = {
-  lang: `en`,
+  lang: `pl`,
   meta: [],
-  description: ``,
 }
 SEO.propTypes = {
   description: PropTypes.string,

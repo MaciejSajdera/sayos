@@ -441,7 +441,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: url,
       component: path.resolve(`src/templates/ProjectPage.js`),
       context: {
-        myProjectData: item,
+        thisProjectData: item,
         locale: item.locale,
         fullScreenPhoto: item.fullScreenPhoto,
       },
@@ -454,7 +454,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: url,
       component: path.resolve(`src/templates/ProjectPage.js`),
       context: {
-        myProjectData: item,
+        thisProjectData: item,
         locale: item.locale,
         fullScreenPhoto: item.fullScreenPhoto,
       },
@@ -504,7 +504,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: url,
       component: path.resolve(`src/templates/allProjectsHouse.js`),
       context: {
-        // myProjectData: item,
+        // thisProjectData: item,
         locale: item.locale,
         // fullScreenPhoto: item.fullScreenPhoto
       },
@@ -518,7 +518,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: url,
       component: path.resolve(`src/templates/allProjectsHouse.js`),
       context: {
-        // myProjectData: item,
+        // thisProjectData: item,
         locale: item.locale,
         // fullScreenPhoto: item.fullScreenPhoto
       },
@@ -532,7 +532,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: url,
       component: path.resolve(`src/templates/allProjectsInterior.js`),
       context: {
-        // myProjectData: item,
+        // thisProjectData: item,
         locale: item.locale,
         // fullScreenPhoto: item.fullScreenPhoto
       },
@@ -546,7 +546,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: url,
       component: path.resolve(`src/templates/allProjectsInterior.js`),
       context: {
-        // myProjectData: item,
+        // thisProjectData: item,
         locale: item.locale,
         // fullScreenPhoto: item.fullScreenPhoto
       },
