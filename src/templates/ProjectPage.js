@@ -200,60 +200,12 @@ class ProjectPage extends Component {
     this.topRef = createRef()
     this.nextSectionRef = createRef()
 
-    // const myBgImage = props => (
-    //   <StaticQuery
-    //     query={graphql`
-    //       query {
-    //         images: allFile {
-    //           edges {
-    //             node {
-    //               relativePath
-    //               name
-    //               childImageSharp {
-    //                 fluid(maxWidth: 600) {
-    //                   ...GatsbyImageSharpFluid
-    //                 }
-    //               }
-    //             }
-    //           }
-    //         }
-    //       }
-    //     `}
-    //     render={data => {
-    //       const image = data.images.edges.find(n => {
-    //         return n.node.relativePath.includes(props.filename);
-    //       });
-    //       if (!image) {
-    //         return null;
-    //       }
-
-    //       //const imageSizes = image.node.childImageSharp.sizes; sizes={imageSizes}
-    //       return <Img alt={props.alt} fluid={image.node.childImageSharp.fluid} />;
-    //     }}
-    //   />
-    // );
-
-    // console.log(projectsInThisCategory)
-
-    // console.log(`thisProjectData: ${thisProjectData.projectCategory}`)
-
-    // const { locale } = this.props.pageContext.locale;
-
-    // const { fullScreenPhoto } = this.props.pageContext.fullScreenPhoto;
-
     const handleArrowPrev = e => {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
       })
     }
-
-    // const handleArrowNext = () =>
-    // this.nextSectionRef.current.scrollIntoView({
-    //   behavior: 'smooth',
-    //   block: 'start',
-    // });
-
     const handleArrowNext = e => {
       let pageHeight = window.innerHeight
       window.scrollBy({
@@ -261,15 +213,6 @@ class ProjectPage extends Component {
         behavior: "smooth",
       })
     }
-
-    // console.log(this.props.transitionStatus)
-
-    // handleScroll = (e) => {
-    //   const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    //   if (bottom) {
-
-    //    }
-    // }
 
     return (
       <div>
