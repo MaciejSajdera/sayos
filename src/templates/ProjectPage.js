@@ -1,5 +1,5 @@
 import React, { Component, createRef } from "react"
-import { StaticQuery, graphql } from "gatsby"
+import { StaticQuery, graphql, Link } from "gatsby"
 import LazyLoad from "react-lazyload"
 import TransitionLink from "gatsby-plugin-transition-link"
 import "react-lazy-load-image-component/src/effects/blur.css"
@@ -8,6 +8,8 @@ import { CgArrowUp, CgArrowDown } from "react-icons/cg"
 import { IconContext } from "react-icons"
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
+
+import { Location } from "@reach/router"
 
 import BackgroundImage from "gatsby-background-image"
 
@@ -18,11 +20,69 @@ class ProjectPage extends Component {
       isLogoBackgroundDark: false,
       arrowRightLinksToNextProject: false,
       otherProjectInThisCategory: [],
-      indexOfCurrentProject: null,
+      indexOfCurrentProject: 0,
+      arrowRightLinkDestinationState: ``,
     }
   }
 
   componentDidMount() {
+    /***NAVIGATION BETWEEN PROJECTS IN THE SAME CATEGORY***/
+
+    let { projects } = this.props.data
+    const { thisProjectData } = this.props.pageContext
+    let enteredFrom
+
+    if (typeof Storage !== "undefined") {
+      if (sessionStorage.getItem(`navigationAtProjectPageStartedAt`)) {
+        enteredFrom = sessionStorage.getItem(`navigationAtProjectPageStartedAt`)
+      }
+    }
+
+    let projectsInThisCategory = []
+    let indexOfThisPoject
+
+    projects.nodes
+      .sort((a, b) => {
+        const positionA = a.position
+        const positionB = b.position
+        let comparision = 0
+        if (positionA > positionB) {
+          comparision = 1
+        } else if (positionA < positionB) {
+          comparision = -1
+        }
+        return comparision
+      })
+      .map(project => {
+        if (
+          enteredFrom === `/all` ||
+          enteredFrom === `/` ||
+          enteredFrom === undefined
+        ) {
+          projectsInThisCategory.push(project)
+          return
+        } else {
+          if (project.projectCategory === thisProjectData.projectCategory) {
+            projectsInThisCategory.push(project)
+          }
+        }
+      })
+
+    projectsInThisCategory.map((project, i) => {
+      if (project.id === thisProjectData.id) {
+        indexOfThisPoject = i
+      }
+      return
+    })
+
+    this.setState(prevState => ({
+      otherProjectInThisCategory: [...projectsInThisCategory],
+    }))
+
+    this.setState(prevState => ({
+      indexOfCurrentProject: indexOfThisPoject,
+    }))
+
     /***ARROWS */
     const arrowButtonLeft = document.querySelector(".box-bt-left")
     const arrowButtonRight = document.querySelector(".box-bt-right")
@@ -63,18 +123,73 @@ class ProjectPage extends Component {
 
     const scrollDownArrow = document.querySelector(".box-bt-right")
 
-    function callbackScrollDownArrow(entries, observer) {
+    const callbackScrollDownArrow = (entries, observer) => {
       entries.forEach(entry => {
+        let arrowRightLinkDestination
+
+        if (
+          this.state.indexOfCurrentProject >=
+          this.state.otherProjectInThisCategory.length - 1
+        ) {
+          let firstProject
+
+          thisProjectData.locale === "pl"
+            ? (firstProject = `/${this.state.otherProjectInThisCategory[0].projectCategory}/${this.state.otherProjectInThisCategory[0].slug}`)
+            : (firstProject = `/${thisProjectData.locale}/${this.state.otherProjectInThisCategory[0].projectCategory}/${this.state.otherProjectInThisCategory[0].slug}`)
+
+          arrowRightLinkDestination = firstProject
+        } else {
+          let nextProject
+
+          thisProjectData.locale === "pl"
+            ? (nextProject = `/${
+                this.state.otherProjectInThisCategory[
+                  this.state.indexOfCurrentProject + 1
+                ].projectCategory
+              }/${
+                this.state.otherProjectInThisCategory[
+                  this.state.indexOfCurrentProject + 1
+                ].slug
+              }`)
+            : (nextProject = `/${thisProjectData.locale}/${
+                this.state.otherProjectInThisCategory[
+                  this.state.indexOfCurrentProject + 1
+                ].projectCategory
+              }/${
+                this.state.otherProjectInThisCategory[
+                  this.state.indexOfCurrentProject + 1
+                ].slug
+              }`)
+
+          arrowRightLinkDestination = nextProject
+        }
+
         if (entry.intersectionRatio > 0.5) {
           scrollDownArrow.classList.remove("arrow-unrotated-right")
           scrollDownArrow.classList.add("arrow-rotated-right")
           // this.setState({ arrowRightLinksToNextProject: true })
+
+          scrollDownArrow.querySelector(
+            "#linkToTheNextProject"
+          ).style.pointerEvents = `initial`
+
+          // scrollDownArrow.querySelector(
+          //   "#linkToTheNextProject"
+          // ).href = arrowRightLinkDestination
+
+          this.setState(prevState => ({
+            arrowRightLinkDestinationState: arrowRightLinkDestination,
+          }))
         }
 
         if (entry.intersectionRatio < 0.5) {
           scrollDownArrow.classList.remove("arrow-rotated-right")
           scrollDownArrow.classList.add("arrow-unrotated-right")
           // this.setState({ arrowRightLinksToNextProject: false })
+
+          scrollDownArrow.querySelector(
+            "#linkToTheNextProject"
+          ).style.pointerEvents = `none`
         }
       })
     }
@@ -133,51 +248,6 @@ class ProjectPage extends Component {
 
     mediaQueryDesktop.addListener(handleDesktopChange)
     handleDesktopChange(mediaQueryDesktop)
-
-    let { projects } = this.props.data
-    const { thisProjectData } = this.props.pageContext
-
-    /***NAVIGATION BETWEEN PROJECTS IN THE SAME CATEGORY***/
-    let projectsInThisCategory = []
-    let indexOfThisPoject
-
-    projects.nodes
-      .sort((a, b) => {
-        const positionA = a.position
-        const positionB = b.position
-        let comparision = 0
-        if (positionA > positionB) {
-          comparision = 1
-        } else if (positionA < positionB) {
-          comparision = -1
-        }
-        return comparision
-      })
-      .map(project => {
-        if (project.projectCategory === thisProjectData.projectCategory) {
-          projectsInThisCategory.push(project)
-        }
-        return projectsInThisCategory
-      })
-
-    projectsInThisCategory.map((project, i) => {
-      if (project.id === thisProjectData.id) {
-        indexOfThisPoject = i
-      }
-      return
-    })
-
-    this.setState(prevState => ({
-      otherProjectInThisCategory: [...projectsInThisCategory],
-    }))
-
-    this.setState(prevState => ({
-      indexOfCurrentProject: indexOfThisPoject,
-    }))
-
-    setTimeout(() => {
-      console.log(this.state)
-    }, 3000)
   }
 
   render() {
@@ -241,13 +311,19 @@ class ProjectPage extends Component {
         </div>
 
         <div className={`arrow-box box-bt-right`} onClick={handleArrowNext}>
-          <div className={`menu-trigger`}>
-            <IconContext.Provider
-              value={{ color: "white", size: "4em", height: "100" }}
-            >
-              <CgArrowDown />
-            </IconContext.Provider>
-          </div>
+          <TransitionLink
+            id={`linkToTheNextProject`}
+            to={this.state.arrowRightLinkDestinationState}
+            state={{ prevPath: `previousProject` }}
+          >
+            <div className={`menu-trigger`}>
+              <IconContext.Provider
+                value={{ color: "white", size: "4em", height: "100" }}
+              >
+                <CgArrowDown />
+              </IconContext.Provider>
+            </div>
+          </TransitionLink>
         </div>
 
         <LazyLoad ref={this.topRef} className={`project-content-top`}>

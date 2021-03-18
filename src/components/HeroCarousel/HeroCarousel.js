@@ -137,9 +137,11 @@ class HeroCarousel extends React.Component {
   //https://www.gatsbyjs.com/blog/2018-12-04-per-link-gatsby-page-transitions-with-transitionlink/
 
   render() {
-    let { projects } = this.props
+    let { projects, templateLocation } = this.props
 
     let exitTransition
+
+    console.log(`my templateLocation: ${templateLocation.pathname}`)
 
     const TRANSITION_LENGTH = 1.1
 
@@ -392,6 +394,7 @@ class HeroCarousel extends React.Component {
                     exit={myExitTransition()}
                     entry={entryTransition}
                     onClick={this.handleTransitionLinkType}
+                    state={{ prevPath: templateLocation.pathname }}
                     // onWheel={this.handleWheel}
                     className={`slide-bg-fullscreen slide-home-page
                         ${

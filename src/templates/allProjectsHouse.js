@@ -66,6 +66,7 @@ class allProjectsHouse extends React.Component {
         <HeroCarousel
           projects={housesCollection}
           pageLocation={"allProjectsHouse"}
+          templateLocation={this.props.location}
         />
 
         {/* <main className={`all-grid`}>

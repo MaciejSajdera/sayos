@@ -43,7 +43,7 @@ function SEO({ lang, meta, image: metaImage, pathname }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`${datoCmsSite.globalSeo.siteName}`}
       link={
         canonical
           ? [

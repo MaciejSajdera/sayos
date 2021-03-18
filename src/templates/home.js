@@ -53,7 +53,11 @@ class Home extends React.Component {
           category={category}
           offer={offer}
         />
-        <HeroCarousel projects={allCollection} pageLocation={"homePage"} />
+        <HeroCarousel
+          projects={allCollection}
+          pageLocation={"homePage"}
+          templateLocation={this.props.location}
+        />
       </>
     )
   }

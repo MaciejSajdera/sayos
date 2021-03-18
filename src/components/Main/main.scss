@@ -265,6 +265,10 @@ main {
   }
 }
 
+.hide {
+  visibility: hidden;
+}
+
 .move-left {
   // transform: matrix(1.05, 0, 0, 1.05, -3.5, 0) !important;
   background-position: 48.5% 100% !important;

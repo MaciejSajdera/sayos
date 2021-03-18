@@ -64,24 +64,31 @@
 .arrow-entered {
   transform: translateX(0%) !important;
   opacity: 1;
+
+  svg {
+    animation: arrowEntered 0.5s forwards;
+  }
+
+  @keyframes arrowEntered {
+    0% {
+      transform: translate(0%, -150%);
+    }
+
+    100% {
+      transform: translate(0%, 0%);
+    }
+  }
 }
 
 .arrow-rotated-right {
   svg {
-    animation: arrowRotateRight 0.75s forwards;
+    // transform: rotate(-90deg);
+    animation: arrowRotateRight 0.5s forwards;
   }
 
   @keyframes arrowRotateRight {
     0% {
       transform: translate(0%, 0%);
-    }
-
-    50% {
-      transform: translate(0%, 150%);
-    }
-
-    55% {
-      transform: translate(-150%, 0%) rotate(-90deg);
     }
 
     100% {
@@ -93,20 +100,12 @@
 .arrow-unrotated-right {
   svg {
     // transform: rotate(90deg);
-    animation: arrowUnRotateRight 0.75s forwards;
+    animation: arrowUnRotateRight 0.5s forwards;
   }
 
   @keyframes arrowUnRotateRight {
     0% {
       transform: translate(0%, 0%) rotate(-90deg);
-    }
-
-    50% {
-      transform: translate(150%, 0%) rotate(-90deg);
-    }
-
-    55% {
-      transform: translate(0%, -150%) rotate(0deg);
     }
 
     100% {

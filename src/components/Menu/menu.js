@@ -41,6 +41,14 @@ const Menu = ({
       element.classList.toggle("hidden")
     })
   }
+
+  const rememberWhereEnteredFrom = nameOfTheEntryPoint => {
+    sessionStorage.setItem(
+      `navigationAtProjectPageStartedAt`,
+      nameOfTheEntryPoint
+    )
+  }
+
   return (
     <>
       <myContext.Consumer>
@@ -113,6 +121,9 @@ const Menu = ({
                             ? `/all`
                             : `/${about.locale}/all`
                         }
+                        onClick={() => {
+                          rememberWhereEnteredFrom(`/all`)
+                        }}
                       >
                         <h3>{dataMenuLeft.projectsHeader}</h3>
                       </Link>
@@ -123,6 +134,15 @@ const Menu = ({
                             ? `/${category.categoryFirst}`
                             : `/${about.locale}/${category.categoryFirst}`
                         }
+                        onClick={() => {
+                          category.locale === "pl"
+                            ? rememberWhereEnteredFrom(
+                                `/${category.categoryFirst}`
+                              )
+                            : rememberWhereEnteredFrom(
+                                `/${about.locale}/${category.categoryFirst}`
+                              )
+                        }}
                       >
                         <p className={`project-subfield`}>
                           {dataMenuLeft.projectsSubfield1}
@@ -135,6 +155,15 @@ const Menu = ({
                             ? `/${category.categorySecond}`
                             : `/${about.locale}/${category.categorySecond}`
                         }
+                        onClick={() => {
+                          category.locale === "pl"
+                            ? rememberWhereEnteredFrom(
+                                `/${category.categorySecond}`
+                              )
+                            : rememberWhereEnteredFrom(
+                                `/${about.locale}/${category.categorySecond}`
+                              )
+                        }}
                       >
                         <p className={`project-subfield`}>
                           {dataMenuLeft.projectsSubfield2}
@@ -208,7 +237,12 @@ const Menu = ({
                         : ""
                     }`}
                   >
-                    <Link to={`/`}>
+                    <Link
+                      to={`/`}
+                      onClick={() => {
+                        rememberWhereEnteredFrom(`/all`)
+                      }}
+                    >
                       <img className={`menu-logo`} src={lightLogo} alt=""></img>
                     </Link>
 
