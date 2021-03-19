@@ -377,21 +377,13 @@ class ProjectPage extends Component {
       }
     }
 
-    const arrowBoxes = document.querySelectorAll(".arrow-box")
-
     const hideArrowBoxes = () => {
+      const arrowBoxes = document.querySelectorAll(".arrow-box")
+
       arrowBoxes.forEach(box => {
         box.classList.remove("arrow-entered")
       })
     }
-
-    const prevPagePlaceholder = document.querySelector(
-      "#prev-project-page__placeholder"
-    )
-
-    const nextPagePlaceholder = document.querySelector(
-      "#next-project-page__placeholder"
-    )
 
     const exitToNextProject = () => {
       if (document) {
@@ -403,6 +395,10 @@ class ProjectPage extends Component {
       currentPage.style.transform = `translateX(-100%)`
 
       hideArrowBoxes()
+
+      const nextPagePlaceholder = document.querySelector(
+        "#next-project-page__placeholder"
+      )
 
       nextPagePlaceholder.style.transform = `translateX(0%)`
     }
@@ -417,6 +413,10 @@ class ProjectPage extends Component {
       currentPage.style.transform = `translateX(100%)`
 
       hideArrowBoxes()
+
+      const prevPagePlaceholder = document.querySelector(
+        "#prev-project-page__placeholder"
+      )
 
       prevPagePlaceholder.style.transform = `translateX(0%)`
     }
