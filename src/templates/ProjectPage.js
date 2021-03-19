@@ -543,7 +543,7 @@ class ProjectPage extends Component {
                 width: `100%`,
                 display: `block`,
                 position: `absolute`,
-                bottom: `1em`,
+                bottom: `2em`,
               }}
             ></span>
           </div>
