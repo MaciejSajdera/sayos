@@ -299,9 +299,13 @@ class ProjectPage extends Component {
     const callbackLogoChange = (entries, observer) => {
       entries.forEach(entry => {
         if (entry.intersectionRatio > 0) {
-          this.setState({ isLogoBackgroundDark: true })
+          this.setState(prevState => ({
+            isLogoBackgroundDark: true,
+          }))
         } else {
-          this.setState({ isLogoBackgroundDark: false })
+          this.setState(prevState => ({
+            isLogoBackgroundDark: false,
+          }))
         }
       })
     }
