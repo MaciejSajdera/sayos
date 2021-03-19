@@ -32,6 +32,7 @@ class ProjectPage extends Component {
 
   componentDidMount() {
     /***NAVIGATION BETWEEN PROJECTS IN THE SAME CATEGORY***/
+    window.scrollTop = 0
     let { projects } = this.props.data
     const { thisProjectData } = this.props.pageContext
     let enteredFrom
@@ -332,8 +333,6 @@ class ProjectPage extends Component {
   }
 
   render() {
-    window.scrollTop = 0
-
     let {
       projects,
       menuRightProject,
