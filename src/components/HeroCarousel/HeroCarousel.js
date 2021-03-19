@@ -357,6 +357,7 @@ class HeroCarousel extends React.Component {
         1100: {
           slidesPerView: 3,
           freeMode: true,
+          touchRatio: 0,
         },
       },
     }
