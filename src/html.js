@@ -1,8 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
-import LoaderSVG from './images/rolling.svg'
+import LoaderSVG from "./images/rolling.svg"
 
-import LoaderLogo from './images/sayos-logo-light-cropped_100.png'
+import LoaderLogo from "./images/sayos-logo-light-cropped_100.png"
 
 export default function HTML(props) {
   return (
@@ -19,35 +19,32 @@ export default function HTML(props) {
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
         <div
-              key={`loader`}
-              id="___loader"
-              style={{
-                alignItems: "center",
-                backgroundColor: "#0c0c0c",
-                display: "flex",
-                justifyContent: "center",
-                position: "absolute",
-                left: 0,
-                top: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: 999,
-                opacity: 1,
-                transition: "0.4s ease-in"
-              }}
-           >
-           <img 
-              src={LoaderSVG} 
-              alt="loading spinner" 
-           />
-            <img 
-              src={LoaderLogo} 
-              alt="loading logo" 
-              style={{
-                position: "absolute",
-                zIndex: 999,
-              }}
-           />
+          key={`loader`}
+          id="___loader"
+          style={{
+            alignItems: "center",
+            backgroundColor: "#0c0c0c",
+            display: "flex",
+            justifyContent: "center",
+            position: "fixed",
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 999,
+            opacity: 1,
+            transition: "0.4s ease-in",
+          }}
+        >
+          <img src={LoaderSVG} alt="loading spinner" />
+          <img
+            src={LoaderLogo}
+            alt="loading logo"
+            style={{
+              position: "absolute",
+              zIndex: 999,
+            }}
+          />
         </div>
         <div
           key={`body`}
