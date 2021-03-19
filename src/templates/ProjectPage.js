@@ -19,8 +19,8 @@ class ProjectPage extends Component {
       isLogoBackgroundDark: false,
       otherProjectsInThisCategory: [],
       indexOfCurrentProject: 0,
-      arrowRightLinkDestinationState: null,
-      arrowLeftLinkDestinationState: null,
+      arrowRightLinkDestinationState: ``,
+      arrowLeftLinkDestinationState: ``,
       nextProjectObjectState: {},
       prevProjectObjectState: {},
     }

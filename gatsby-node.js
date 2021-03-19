@@ -462,33 +462,6 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     })
   })
 
-  //withoutcategoryprefix
-  // projectsQuery.data.pl.nodes.forEach(item => {
-  //   let url = `/${item.slug}`
-  //   createPage({
-  //     path: url,
-  //     component: path.resolve(`src/templates/ProjectPage.js`),
-  //     context: {
-  //       thisProjectData: item,
-  //       locale: item.locale,
-  //       fullScreenPhoto: item.fullScreenPhoto,
-  //     },
-  //   })
-  // })
-
-  // projectsQuery.data.en.nodes.forEach(item => {
-  //   let url = `/${item.locale}/${item.slug}`
-  //   createPage({
-  //     path: url,
-  //     component: path.resolve(`src/templates/ProjectPage.js`),
-  //     context: {
-  //       thisProjectData: item,
-  //       locale: item.locale,
-  //       fullScreenPhoto: item.fullScreenPhoto,
-  //     },
-  //   })
-  // })
-
   //category pages
 
   const categoriesFirstQuery = await graphql(`
