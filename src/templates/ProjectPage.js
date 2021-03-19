@@ -1,6 +1,5 @@
 import React, { Component, createRef } from "react"
 import { StaticQuery, graphql, Link } from "gatsby"
-import LazyLoad from "react-lazyload"
 import TransitionLink from "gatsby-plugin-transition-link"
 import "react-lazy-load-image-component/src/effects/blur.css"
 import Consumer from "../../context"
@@ -8,7 +7,6 @@ import { CgArrowUp, CgArrowDown } from "react-icons/cg"
 import { IconContext } from "react-icons"
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
-import gsap from "gsap"
 
 import BackgroundImage from "gatsby-background-image"
 
@@ -26,69 +24,7 @@ class ProjectPage extends Component {
     }
   }
 
-  // componentWillUnmount() {
-  //   alert("The component is going to be unmounted")
-  // }
-
   componentDidMount() {
-    /***NAVIGATION BETWEEN PROJECTS IN THE SAME CATEGORY***/
-    window.scrollTop = 0
-    let { projects } = this.props.data
-    const { thisProjectData } = this.props.pageContext
-    let enteredFrom
-
-    if (typeof Storage !== "undefined") {
-      if (sessionStorage.getItem(`projectPageNavigationStartedAt`)) {
-        enteredFrom = sessionStorage.getItem(`projectPageNavigationStartedAt`)
-      }
-    }
-
-    let projectsInThisCategory = []
-    let indexOfThisPoject
-
-    projects.nodes
-      .sort((a, b) => {
-        const positionA = a.position
-        const positionB = b.position
-        let comparision = 0
-        if (positionA > positionB) {
-          comparision = 1
-        } else if (positionA < positionB) {
-          comparision = -1
-        }
-        return comparision
-      })
-      .map(project => {
-        if (
-          enteredFrom === `/all` ||
-          enteredFrom === `/` ||
-          enteredFrom === undefined ||
-          enteredFrom === false
-        ) {
-          projectsInThisCategory.push(project)
-          return
-        } else {
-          if (project.projectCategory === thisProjectData.projectCategory) {
-            projectsInThisCategory.push(project)
-          }
-        }
-      })
-
-    projectsInThisCategory.map((project, i) => {
-      if (project.id === thisProjectData.id) {
-        indexOfThisPoject = i
-      }
-      return
-    })
-
-    this.setState(prevState => ({
-      otherProjectsInThisCategory: [...projectsInThisCategory],
-    }))
-
-    this.setState(prevState => ({
-      indexOfCurrentProject: indexOfThisPoject,
-    }))
-
     /***ARROWS */
     const arrowButtonLeft = document.querySelector(".box-bt-left")
     const arrowButtonRight = document.querySelector(".box-bt-right")
@@ -125,6 +61,65 @@ class ProjectPage extends Component {
     if (targetScrollUpArrow) {
       observerScrollUpArrow.observe(targetScrollUpArrow)
     }
+
+    /***NAVIGATION BETWEEN PROJECTS IN THE SAME CATEGORY***/
+    window.scrollTop = 0
+    let { projects } = this.props.data
+    const { thisProjectData } = this.props.pageContext
+    let enteredFrom
+
+    if (typeof Storage !== "undefined") {
+      if (sessionStorage.getItem(`projectPageNavigationStartedAt`)) {
+        enteredFrom = sessionStorage.getItem(`projectPageNavigationStartedAt`)
+      }
+    }
+
+    let projectsInThisCategory = []
+    let indexOfThisPoject
+
+    projects.nodes
+      .sort((a, b) => {
+        const positionA = a.position
+        const positionB = b.position
+        let comparision = 0
+        if (positionA > positionB) {
+          comparision = 1
+        } else if (positionA < positionB) {
+          comparision = -1
+        }
+        return comparision
+      })
+      .map(project => {
+        if (
+          //not a specific category
+          enteredFrom === `/all` ||
+          enteredFrom === `/` ||
+          enteredFrom === undefined ||
+          enteredFrom === false
+        ) {
+          projectsInThisCategory.push(project)
+          return
+        } else {
+          if (project.projectCategory === thisProjectData.projectCategory) {
+            projectsInThisCategory.push(project)
+          }
+        }
+      })
+
+    projectsInThisCategory.map((project, i) => {
+      if (project.id === thisProjectData.id) {
+        indexOfThisPoject = i
+      }
+      return
+    })
+
+    this.setState(prevState => ({
+      otherProjectsInThisCategory: [...projectsInThisCategory],
+    }))
+
+    this.setState(prevState => ({
+      indexOfCurrentProject: indexOfThisPoject,
+    }))
 
     //Arrows turned into navigation
     const endOfThePage = document.querySelector("#project-page-end")
@@ -196,7 +191,7 @@ class ProjectPage extends Component {
           }
         }
 
-        //if first project
+        //if first project in array
         if (indexOfCurrentProject === 0) {
           let lastProjectObject
           let lastProjectLink
