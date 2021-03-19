@@ -61,7 +61,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Sayos Architects`,
-        short_name: `Sayos`,
+        short_name: `Sayos Architects`,
         start_url: `/`,
         background_color: `#0c0c0c`,
         theme_color: `#0c0c0c`,
