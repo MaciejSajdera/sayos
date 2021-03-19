@@ -17,10 +17,13 @@ main {
   }
 
   .swiper-slide {
-    transition: width 0.7s cubic-bezier(0.39, -0.45, 0.63, 0.62),
-      transform 0.7s linear;
+    // transition: width 0.7s cubic-bezier(0.39, -0.45, 0.63, 0.62),
+    //   transform 0.7s linear;
+
+    transition: width 0.5s linear, transform 0.5s linear;
+
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
 
     @media screen and (min-width: 992px) {
       &:hover {

@@ -8,8 +8,7 @@ import { CgArrowUp, CgArrowDown } from "react-icons/cg"
 import { IconContext } from "react-icons"
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
-
-import { Location } from "@reach/router"
+import gsap from "gsap"
 
 import BackgroundImage from "gatsby-background-image"
 
@@ -18,16 +17,21 @@ class ProjectPage extends Component {
     super(props)
     this.state = {
       isLogoBackgroundDark: false,
-      arrowRightLinksToNextProject: false,
-      otherProjectInThisCategory: [],
+      otherProjectsInThisCategory: [],
       indexOfCurrentProject: 0,
-      arrowRightLinkDestinationState: ``,
+      arrowRightLinkDestinationState: null,
+      arrowLeftLinkDestinationState: null,
+      nextProjectObjectState: {},
+      prevProjectObjectState: {},
     }
   }
 
+  // componentWillUnmount() {
+  //   alert("The component is going to be unmounted")
+  // }
+
   componentDidMount() {
     /***NAVIGATION BETWEEN PROJECTS IN THE SAME CATEGORY***/
-
     let { projects } = this.props.data
     const { thisProjectData } = this.props.pageContext
     let enteredFrom
@@ -57,7 +61,8 @@ class ProjectPage extends Component {
         if (
           enteredFrom === `/all` ||
           enteredFrom === `/` ||
-          enteredFrom === undefined
+          enteredFrom === undefined ||
+          enteredFrom === false
         ) {
           projectsInThisCategory.push(project)
           return
@@ -76,7 +81,7 @@ class ProjectPage extends Component {
     })
 
     this.setState(prevState => ({
-      otherProjectInThisCategory: [...projectsInThisCategory],
+      otherProjectsInThisCategory: [...projectsInThisCategory],
     }))
 
     this.setState(prevState => ({
@@ -87,10 +92,12 @@ class ProjectPage extends Component {
     const arrowButtonLeft = document.querySelector(".box-bt-left")
     const arrowButtonRight = document.querySelector(".box-bt-right")
 
-    arrowButtonRight.classList.add("arrow-entered")
+    setTimeout(() => {
+      arrowButtonRight.classList.add("arrow-entered")
+    }, 250)
 
-    //Scroll Up Arrow
-    const targetScrollUpArrow = document.querySelector(".lazyload-wrapper") //top section
+    //Show Arrow left after scrolldown
+    const targetScrollUpArrow = document.querySelector(".project-content-top") //top section
     const scrollUpArrow = document.querySelector(".box-bt-left")
 
     function callbackScrollUpArrow(entries, observer) {
@@ -118,95 +125,169 @@ class ProjectPage extends Component {
       observerScrollUpArrow.observe(targetScrollUpArrow)
     }
 
-    //Scroll Down Arrow
-    const targetScrollDownArrow = document.querySelector("#project-page-end")
-
+    //Arrows turned into navigation
+    const endOfThePage = document.querySelector("#project-page-end")
     const scrollDownArrow = document.querySelector(".box-bt-right")
 
-    const callbackScrollDownArrow = (entries, observer) => {
+    const callbackEndOfPage = (entries, observer) => {
       entries.forEach(entry => {
         let arrowRightLinkDestination
+        let arrowLeftLinkDestination
 
-        if (
-          this.state.indexOfCurrentProject >=
-          this.state.otherProjectInThisCategory.length - 1
-        ) {
-          let firstProject
+        let otherProjectsInThisCategory = this.state.otherProjectsInThisCategory
+        let indexOfCurrentProject = this.state.indexOfCurrentProject
+
+        let prevProjectObject =
+          otherProjectsInThisCategory[indexOfCurrentProject - 1]
+        let nextProjectObject =
+          otherProjectsInThisCategory[indexOfCurrentProject + 1]
+
+        let nextProjectPlaceholderImageSrc
+        let prevProjectPlaceholderImageSrc
+
+        //if last project
+        if (indexOfCurrentProject >= otherProjectsInThisCategory.length - 1) {
+          let firstProjectObject
+          let firstProjectLink
+
+          firstProjectObject = otherProjectsInThisCategory[0]
+
+          let prevProjectLink
 
           thisProjectData.locale === "pl"
-            ? (firstProject = `/${this.state.otherProjectInThisCategory[0].projectCategory}/${this.state.otherProjectInThisCategory[0].slug}`)
-            : (firstProject = `/${thisProjectData.locale}/${this.state.otherProjectInThisCategory[0].projectCategory}/${this.state.otherProjectInThisCategory[0].slug}`)
+            ? (firstProjectLink = `${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
+            : (firstProjectLink = `${thisProjectData.locale}/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
 
-          arrowRightLinkDestination = firstProject
+          arrowRightLinkDestination = firstProjectLink
+          nextProjectPlaceholderImageSrc =
+            firstProjectObject.fullScreenPhoto.fluid.src
+
+          thisProjectData.locale === "pl"
+            ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+            : (prevProjectLink = `${thisProjectData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+
+          arrowLeftLinkDestination = prevProjectLink
+          prevProjectPlaceholderImageSrc =
+            prevProjectObject.fullScreenPhoto.fluid.src
         } else {
-          let nextProject
+          let nextProjectLink
 
           thisProjectData.locale === "pl"
-            ? (nextProject = `/${
-                this.state.otherProjectInThisCategory[
-                  this.state.indexOfCurrentProject + 1
-                ].projectCategory
-              }/${
-                this.state.otherProjectInThisCategory[
-                  this.state.indexOfCurrentProject + 1
-                ].slug
-              }`)
-            : (nextProject = `/${thisProjectData.locale}/${
-                this.state.otherProjectInThisCategory[
-                  this.state.indexOfCurrentProject + 1
-                ].projectCategory
-              }/${
-                this.state.otherProjectInThisCategory[
-                  this.state.indexOfCurrentProject + 1
-                ].slug
-              }`)
+            ? (nextProjectLink = `${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
+            : (nextProjectLink = `${thisProjectData.locale}/${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
 
-          arrowRightLinkDestination = nextProject
+          arrowRightLinkDestination = nextProjectLink
+          nextProjectPlaceholderImageSrc =
+            nextProjectObject.fullScreenPhoto.fluid.src
+
+          let prevProjectLink
+
+          if (indexOfCurrentProject > 0) {
+            thisProjectData.locale === "pl"
+              ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+              : (prevProjectLink = `${thisProjectData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+
+            arrowLeftLinkDestination = prevProjectLink
+            prevProjectPlaceholderImageSrc =
+              prevProjectObject.fullScreenPhoto.fluid.src
+
+            console.log(this.state)
+          }
+        }
+
+        //if first project
+        if (indexOfCurrentProject === 0) {
+          let lastProjectObject
+          let lastProjectLink
+
+          lastProjectObject =
+            otherProjectsInThisCategory[
+              this.state.otherProjectsInThisCategory.length - 1
+            ]
+
+          thisProjectData.locale === "pl"
+            ? (lastProjectLink = `${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
+            : (lastProjectLink = `${thisProjectData.locale}/${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
+
+          arrowLeftLinkDestination = lastProjectLink
+          prevProjectPlaceholderImageSrc =
+            lastProjectObject.fullScreenPhoto.fluid.src
         }
 
         if (entry.intersectionRatio > 0.5) {
           scrollDownArrow.classList.remove("arrow-unrotated-right")
           scrollDownArrow.classList.add("arrow-rotated-right")
-          // this.setState({ arrowRightLinksToNextProject: true })
+
+          scrollUpArrow.classList.remove("arrow-unrotated-left")
+          scrollUpArrow.classList.add("arrow-rotated-left")
 
           scrollDownArrow.querySelector(
             "#linkToTheNextProject"
           ).style.pointerEvents = `initial`
 
-          // scrollDownArrow.querySelector(
-          //   "#linkToTheNextProject"
-          // ).href = arrowRightLinkDestination
+          scrollUpArrow.querySelector(
+            "#linkToThePrevProject"
+          ).style.pointerEvents = `initial`
+
+          const nextPagePlaceholder = document.querySelector(
+            "#next-project-page__placeholder"
+          )
+
+          const prevPagePlaceholder = document.querySelector(
+            "#prev-project-page__placeholder"
+          )
+
+          nextPagePlaceholder.style.backgroundImage = `url(${nextProjectPlaceholderImageSrc})`
+          prevPagePlaceholder.style.backgroundImage = `url(${prevProjectPlaceholderImageSrc})`
 
           this.setState(prevState => ({
             arrowRightLinkDestinationState: arrowRightLinkDestination,
+          }))
+
+          this.setState(prevState => ({
+            arrowLeftLinkDestinationState: arrowLeftLinkDestination,
+          }))
+
+          this.setState(prevState => ({
+            nextProjectObjectState: nextProjectObject,
+          }))
+
+          this.setState(prevState => ({
+            prevProjectObjectState: prevProjectObject,
           }))
         }
 
         if (entry.intersectionRatio < 0.5) {
           scrollDownArrow.classList.remove("arrow-rotated-right")
           scrollDownArrow.classList.add("arrow-unrotated-right")
-          // this.setState({ arrowRightLinksToNextProject: false })
+
+          scrollUpArrow.classList.remove("arrow-rotated-left")
+          scrollUpArrow.classList.add("arrow-unrotated-left")
 
           scrollDownArrow.querySelector(
             "#linkToTheNextProject"
+          ).style.pointerEvents = `none`
+
+          scrollUpArrow.querySelector(
+            "#linkToThePrevProject"
           ).style.pointerEvents = `none`
         }
       })
     }
 
-    let optionsScrollDownArrow = {
+    let optionsEndOfPage = {
       root: document.querySelector("#scrollArea"),
-      rootMargin: "100px",
+      rootMargin: "50px",
       threshold: 0.7,
     }
 
-    let observerScrollDownArrow = new IntersectionObserver(
-      callbackScrollDownArrow,
-      optionsScrollDownArrow
+    let observerEndOfPage = new IntersectionObserver(
+      callbackEndOfPage,
+      optionsEndOfPage
     )
 
-    if (targetScrollDownArrow) {
-      observerScrollDownArrow.observe(targetScrollDownArrow)
+    if (endOfThePage) {
+      observerEndOfPage.observe(endOfThePage)
     }
 
     /***LOGO COLOR CHANGE */
@@ -251,6 +332,8 @@ class ProjectPage extends Component {
   }
 
   render() {
+    window.scrollTop = 0
+
     let {
       projects,
       menuRightProject,
@@ -271,21 +354,87 @@ class ProjectPage extends Component {
     this.nextSectionRef = createRef()
 
     const handleArrowPrev = e => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
+      if (
+        !e.target.closest(".arrow-box").classList.contains("arrow-rotated-left")
+      ) {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
+      }
     }
     const handleArrowNext = e => {
       let pageHeight = window.innerHeight
-      window.scrollBy({
-        top: pageHeight,
-        behavior: "smooth",
+
+      if (
+        !e.target
+          .closest(".arrow-box")
+          .classList.contains("arrow-rotated-right")
+      ) {
+        window.scrollBy({
+          top: pageHeight,
+          behavior: "smooth",
+        })
+      }
+    }
+
+    const arrowBoxes = document.querySelectorAll(".arrow-box")
+
+    const hideArrowBoxes = () => {
+      arrowBoxes.forEach(box => {
+        box.classList.remove("arrow-entered")
       })
     }
 
+    const prevPagePlaceholder = document.querySelector(
+      "#prev-project-page__placeholder"
+    )
+
+    const nextPagePlaceholder = document.querySelector(
+      "#next-project-page__placeholder"
+    )
+
+    const exitToNextProject = () => {
+      if (document) {
+        // Preventing overflow here make the animation smoother
+        // document.body.style.overflow = "hidden"
+      }
+      const currentPage = document.querySelector("#project-page__wrapper")
+
+      currentPage.style.transform = `translateX(-100%)`
+
+      hideArrowBoxes()
+
+      nextPagePlaceholder.style.transform = `translateX(0%)`
+    }
+
+    const exitToPrevProject = () => {
+      if (document) {
+        // Preventing overflow here make the animation smoother
+        // document.body.style.overflow = "hidden"
+      }
+      const currentPage = document.querySelector("#project-page__wrapper")
+
+      currentPage.style.transform = `translateX(100%)`
+
+      hideArrowBoxes()
+
+      prevPagePlaceholder.style.transform = `translateX(0%)`
+    }
+
+    const entryTransition = {
+      delay: 2.2, // Wait 1.5 seconds before entering
+      appearAfter: 0.2,
+      // length: 1,
+      length: 0,
+
+      trigger: ({ node, e, exit, entry }) => {
+        console.log("We are entering")
+      },
+    }
+
     return (
-      <div>
+      <>
         <Header isLogoBackgroundDark={this.state.isLogoBackgroundDark} />
         <Menu
           dataMenu={menuRightProject}
@@ -301,20 +450,36 @@ class ProjectPage extends Component {
         />
 
         <div className={`arrow-box box-bt-left`} onClick={handleArrowPrev}>
-          <div className={`menu-trigger`}>
-            <IconContext.Provider
-              value={{ color: "white", size: "4em", height: "100" }}
-            >
-              <CgArrowUp />
-            </IconContext.Provider>
-          </div>
+          <TransitionLink
+            exit={{
+              trigger: ({ exit, node }) => exitToPrevProject(exit, node),
+              length: 2.2,
+            }}
+            entry={entryTransition}
+            id={`linkToThePrevProject`}
+            to={`/${this.state.arrowLeftLinkDestinationState}`}
+            state={{ prevPath: this.props.location.pathname }}
+          >
+            <div className={`menu-trigger`}>
+              <IconContext.Provider
+                value={{ color: "white", size: "4em", height: "100" }}
+              >
+                <CgArrowUp />
+              </IconContext.Provider>
+            </div>
+          </TransitionLink>
         </div>
 
         <div className={`arrow-box box-bt-right`} onClick={handleArrowNext}>
           <TransitionLink
+            exit={{
+              trigger: ({ exit, node }) => exitToNextProject(exit, node),
+              length: 2.2,
+            }}
+            entry={entryTransition}
             id={`linkToTheNextProject`}
-            to={this.state.arrowRightLinkDestinationState}
-            state={{ prevPath: `previousProject` }}
+            to={`/${this.state.arrowRightLinkDestinationState}`}
+            state={{ prevPath: this.props.location.pathname }}
           >
             <div className={`menu-trigger`}>
               <IconContext.Provider
@@ -326,113 +491,122 @@ class ProjectPage extends Component {
           </TransitionLink>
         </div>
 
-        <LazyLoad ref={this.topRef} className={`project-content-top`}>
-          <div
-            className={`slide-bg-fullscreen`}
-            css={{
-              backgroundImage: `url(
+        <div id={`prev-project-page__placeholder`}></div>
+        <div id={`next-project-page__placeholder`}></div>
+
+        <div
+          id={`project-page__wrapper`}
+          className={`test ${this.props.transitionStatus}`}
+        >
+          <div ref={this.topRef} className={`project-content-top`}>
+            <div
+              className={`slide-bg-fullscreen`}
+              css={{
+                backgroundImage: `url(
                               ${thisProjectData.fullScreenPhoto.fluid.src}
                             )`,
-            }}
-          ></div>
-        </LazyLoad>
+              }}
+            ></div>
+          </div>
 
-        <div className="project-content-middle" ref={this.nextSectionRef}>
-          <div className="content section-left">
-            <div className="content-wrapper">
-              <div className="text-container">
-                <h2>{thisProjectData.titlePart1}</h2>
-                <h2>{thisProjectData.titlePart2}</h2>
-                <div className="project-description">
-                  <p>{thisProjectData.projectDescription}</p>
-                  <p>
-                    {thisProjectData.areaText}:{" "}
-                    <strong>{thisProjectData.areaValue}</strong>
-                  </p>
+          <div className="project-content-middle" ref={this.nextSectionRef}>
+            <div className="content section-left">
+              <div className="content-wrapper">
+                <div className="text-container">
+                  <h2>{thisProjectData.titlePart1}</h2>
+                  <h2>{thisProjectData.titlePart2}</h2>
+                  <div className="project-description">
+                    <p>{thisProjectData.projectDescription}</p>
+                    <p>
+                      {thisProjectData.areaText}:{" "}
+                      <strong>{thisProjectData.areaValue}</strong>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div
+              className="content section-right"
+              css={{
+                backgroundImage: `url(
+                                      ${thisProjectData.secondaryPhoto.fluid.src}
+                                    )`,
+                backgroundSize: `cover`,
+                backgroundPosition: `center`,
+              }}
+            ></div>
+
+            <span
+              id="project-content-middle-end"
+              css={{
+                height: `1em`,
+                width: `100%`,
+                display: `block`,
+                position: `absolute`,
+                bottom: `1em`,
+              }}
+            ></span>
           </div>
 
           <div
-            className="content section-right"
+            className="project-page-content-bottom"
             css={{
-              backgroundImage: `url(
-                                      ${thisProjectData.secondaryPhoto.fluid.src}
-                                    )`,
-              backgroundSize: `cover`,
-              backgroundPosition: `center`,
+              display: `flex`,
+              flexWrap: `wrap`,
             }}
-          ></div>
-
+          >
+            {thisProjectData.gallery.map((element, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`visualization-tile visualization-tile__width-${element.width}`}
+                  css={{
+                    backgroundImage: `url(
+                                        ${element.visualizationImage.fluid.src}
+                                      )`,
+                    backgroundSize: `cover`,
+                    backgroundPosition: `bottom`,
+                    width: `${element.width === 1 ? `100%` : ""} ${
+                      element.width === 2 ? `50%` : ""
+                    } ${element.width === 3 ? `33.33%` : ""}`,
+                    height: `50em`,
+                    display: `flex`,
+                    flexFlow: `column`,
+                    justifyContent: `flex-end`,
+                  }}
+                >
+                  {element.visualizationImageText ? (
+                    <p
+                      css={{
+                        minHeight: `4em`,
+                        padding: `1em`,
+                        display: `flex`,
+                        alignSelf: `flex-end`,
+                        alignItems: `center`,
+                      }}
+                    >
+                      {element.visualizationImageText}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )
+            })}
+          </div>
           <span
-            id="project-content-middle-end"
+            id="project-page-end"
             css={{
               height: `1em`,
-              width: `100%`,
               display: `block`,
               position: `absolute`,
-              bottom: `1em`,
+              bottom: `0`,
             }}
           ></span>
         </div>
-
-        <div
-          className="project-page-content-bottom"
-          css={{
-            display: `flex`,
-            flexWrap: `wrap`,
-          }}
-        >
-          {thisProjectData.gallery.map((element, index) => {
-            return (
-              <div
-                key={index}
-                className={`visualization-tile visualization-tile__width-${element.width}`}
-                css={{
-                  backgroundImage: `url(
-                                        ${element.visualizationImage.fluid.src}
-                                      )`,
-                  backgroundSize: `cover`,
-                  backgroundPosition: `bottom`,
-                  width: `${element.width === 1 ? `100%` : ""} ${
-                    element.width === 2 ? `50%` : ""
-                  } ${element.width === 3 ? `33.33%` : ""}`,
-                  height: `50em`,
-                  display: `flex`,
-                  flexFlow: `column`,
-                  justifyContent: `flex-end`,
-                }}
-              >
-                {element.visualizationImageText ? (
-                  <p
-                    css={{
-                      minHeight: `4em`,
-                      padding: `1em`,
-                      display: `flex`,
-                      alignSelf: `flex-end`,
-                      alignItems: `center`,
-                    }}
-                  >
-                    {element.visualizationImageText}
-                  </p>
-                ) : (
-                  ""
-                )}
-              </div>
-            )
-          })}
-        </div>
-        <span
-          id="project-page-end"
-          css={{
-            height: `1em`,
-            display: `block`,
-            position: `absolute`,
-            bottom: `0`,
-          }}
-        ></span>
-      </div>
+        {/* project-page__wrapper */}
+      </>
     )
   }
 }

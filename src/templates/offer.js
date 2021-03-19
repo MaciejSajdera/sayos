@@ -53,12 +53,18 @@ const Offer = props => {
                 : `/${offer.slug}/${houseProject.locale}/${houseProject.slug}`
             }
           >
-            <LazyLoadImage
+            <div
+              className={`offer-logos-wrapper__logo`}
               // alt={image.alt}
               // height={image.height}
-              effect="blur"
-              src={offer.offerArchitectsLogo.fixed.src} // use normal <img> attributes as props
+              // effect="blur"
+              // src={offer.offerArchitectsLogo.fixed.src} // use normal <img> attributes as props
               // width={image.width}
+              css={{
+                backgroundImage: `url(
+                              ${offer.offerArchitectsLogo.fixed.src}
+                            )`,
+              }}
             />
             <div className="text-on-hover">
               <p className="project-slogan">{houseProject.pageName}</p>
@@ -73,12 +79,18 @@ const Offer = props => {
                 : `/${offer.slug}/${interiorProject.locale}/${interiorProject.slug}`
             }
           >
-            <LazyLoadImage
+            <div
+              className={`offer-logos-wrapper__logo`}
               // alt={image.alt}
               // height={image.height}
-              effect="blur"
-              src={offer.offerInteriorsLogo.fixed.src} // use normal <img> attributes as props
+              // effect="blur"
+              // src={offer.offerInteriorsLogo.fixed.src} // use normal <img> attributes as props
               // width={image.width}
+              css={{
+                backgroundImage: `url(
+                              ${offer.offerInteriorsLogo.fixed.src}
+                            )`,
+              }}
             />
 
             <div className="text-on-hover">
@@ -94,12 +106,18 @@ const Offer = props => {
                 : `/${offer.slug}/${designProject.locale}/${designProject.slug}`
             }
           >
-            <LazyLoadImage
+            <div
+              className={`offer-logos-wrapper__logo`}
               // alt={image.alt}
               // height={image.height}
-              effect="blur"
-              src={offer.offerDesignLogo.fixed.src} // use normal <img> attributes as props
+              // effect="blur"
+              // src={offer.offerDesignLogo.fixed.src} // use normal <img> attributes as props
               // width={image.width}
+              css={{
+                backgroundImage: `url(
+                              ${offer.offerDesignLogo.fixed.src}
+                            )`,
+              }}
             />
             <div className="text-on-hover">
               <p className="project-slogan">{designProject.pageName}</p>

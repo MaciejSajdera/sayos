@@ -7,9 +7,9 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
+// html {
+//   scroll-behavior: smooth;
+// }
 
 body {
   -webkit-touch-callout: none;
@@ -19,7 +19,7 @@ body {
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.4s ease-in;
+  // transition: all 0.4s ease-in;
 }
 
 .tl-wrapper {

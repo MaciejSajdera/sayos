@@ -182,8 +182,6 @@ class HeroCarousel extends React.Component {
 
           const currentSwiperPositionValue = swiperPositionValuesArray[4]
 
-          //helper function for sliding slide into viewport
-
           if (this.state.transitionLinkTarget === 1) {
             const firstSlideBgImage = firstSlide.querySelector(
               ".slide-bg-fullscreen"
@@ -340,7 +338,7 @@ class HeroCarousel extends React.Component {
       navigation: true,
       lazy: false,
       parallax: true,
-      speed: 50,
+      speed: 1100,
       touchRatio: 0.2,
       slidesPerView: 1,
       mousewheel: {
