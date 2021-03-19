@@ -61,12 +61,12 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `gatsby-starter-default`,
-        short_name: `starter`,
+        short_name: `Sayos Architects`,
         start_url: `/`,
         background_color: `#0c0c0c`,
         theme_color: `#0c0c0c`,
         display: `minimal-ui`,
-        icon: `src/images/short-logo.png`, // This path is relative to the root of the site.
+        icon: `src/images/manifest-logo.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
