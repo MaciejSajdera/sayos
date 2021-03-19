@@ -15,6 +15,10 @@
     background: #0c0c0c;
     background-image: none !important;
 
+    .read-more {
+      display: none;
+    }
+
     .slide-container {
       height: 55vh;
       overflow: scroll;
