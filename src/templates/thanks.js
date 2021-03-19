@@ -4,7 +4,7 @@ import Header from "../components/Header/header"
 const Thanks = props => {
   let { thanks } = props.data
 
-  console.log(props.transitionStatus)
+  // console.log(props.transitionStatus)
 
   return (
     <>

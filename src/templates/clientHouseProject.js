@@ -37,7 +37,7 @@ const ClientHouseProject = props => {
   const context = useContext(myContext)
 
   useEffect(() => {
-    context.navToggled ? context.handleNavToggle() : console.log("nav open")
+    context.navToggled ? context.handleNavToggle() : ``
   }, [])
 
   return (

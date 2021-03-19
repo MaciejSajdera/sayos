@@ -48,7 +48,7 @@ class HeroCarousel extends React.Component {
         .classList.contains("swiper-slide-active")
     ) {
       this.setState({ transitionLinkTarget: 1 })
-      console.log("1szy od lewej")
+      // console.log("1szy od lewej")
     }
 
     if (
@@ -57,7 +57,7 @@ class HeroCarousel extends React.Component {
         .classList.contains("swiper-slide-next")
     ) {
       this.setState({ transitionLinkTarget: 2 })
-      console.log("srodkowy")
+      // console.log("srodkowy")
     }
 
     if (
@@ -72,7 +72,7 @@ class HeroCarousel extends React.Component {
         .closest(".swiper-slide")
         .classList.add("swiper-slide-last-in-viewport")
       this.setState({ transitionLinkTarget: 3 })
-      console.log("ostatni")
+      // console.log("ostatni")
     }
 
     if (
@@ -81,7 +81,7 @@ class HeroCarousel extends React.Component {
         .classList.contains("swiper-slide-prev")
     ) {
       this.setState({ transitionLinkTarget: 4 })
-      console.log("1szy od lewej")
+      // console.log("1szy od lewej")
     }
   }
 
@@ -141,7 +141,7 @@ class HeroCarousel extends React.Component {
 
     let exitTransition
 
-    console.log(`my templateLocation: ${templateLocation.pathname}`)
+    // console.log(`my templateLocation: ${templateLocation.pathname}`)
 
     const TRANSITION_LENGTH = 1.1
 
@@ -209,9 +209,9 @@ class HeroCarousel extends React.Component {
 
             firstSlide.style.width = `100%`
 
-            console.log(
-              `We are exiting 1, target: ${firstSlideBgImage.classList}`
-            )
+            // console.log(
+            //   `We are exiting 1, target: ${firstSlideBgImage.classList}`
+            // )
           }
 
           if (this.state.transitionLinkTarget === 2) {
@@ -243,7 +243,7 @@ class HeroCarousel extends React.Component {
             firstSlide.style.width = `0%`
             middleSlide.style.width = `100%`
 
-            console.log("We are exiting 2")
+            // console.log("We are exiting 2")
           }
 
           if (this.state.transitionLinkTarget === 3) {
@@ -285,7 +285,7 @@ class HeroCarousel extends React.Component {
             middleSlide.style.width = `0%`
             lastSlide.style.width = `100%`
 
-            console.log("We are exiting 3")
+            // console.log("We are exiting 3")
           }
 
           if (this.state.transitionLinkTarget === 4) {
@@ -307,9 +307,9 @@ class HeroCarousel extends React.Component {
             prevSlideBgImage.style.transform = `scale(1)`
             prevSlide.style.width = `100%`
 
-            console.log(
-              `We are exiting 4, target: ${prevSlideBgImage.classList}`
-            )
+            // console.log(
+            //   `We are exiting 4, target: ${prevSlideBgImage.classList}`
+            // )
           }
         },
       })
@@ -318,7 +318,7 @@ class HeroCarousel extends React.Component {
     const entryTransition = {
       delay: TRANSITION_LENGTH, // Wait 1.5 seconds before entering
       trigger: () => {
-        console.log("We are entering")
+        // console.log("We are entering")
         if (document && window) {
           // Ensuring we're at the top of the page when the page loads
           // prevents any additional JANK when the transition ends.

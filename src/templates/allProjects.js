@@ -19,9 +19,7 @@ class allProjects extends React.Component {
   }
 
   componentDidMount() {
-    this.context.navToggled
-      ? this.context.handleNavToggle()
-      : console.log("nav open")
+    this.context.navToggled ? this.context.handleNavToggle() : ``
   }
 
   render() {

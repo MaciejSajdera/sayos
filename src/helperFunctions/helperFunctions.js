@@ -30,7 +30,3 @@ export function getStyle(el, styleProp) {
     return value
   }
 }
-
-export function checkIfWorks(myLog) {
-  console.log(myLog)
-}

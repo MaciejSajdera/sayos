@@ -192,7 +192,7 @@ class ProjectPage extends Component {
             prevProjectPlaceholderImageSrc =
               prevProjectObject.fullScreenPhoto.fluid.src
 
-            console.log(this.state)
+            // console.log(this.state)
           }
         }
 
@@ -430,10 +430,6 @@ class ProjectPage extends Component {
       appearAfter: 0.2,
       // length: 1,
       length: 0,
-
-      trigger: ({ node, e, exit, entry }) => {
-        console.log("We are entering")
-      },
     }
 
     return (

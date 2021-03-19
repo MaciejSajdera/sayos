@@ -18,9 +18,7 @@ class allProjectsInterior extends React.Component {
   }
 
   componentDidMount() {
-    this.context.navToggled
-      ? this.context.handleNavToggle()
-      : console.log("nav open")
+    this.context.navToggled ? this.context.handleNavToggle() : ``
   }
 
   render() {
@@ -47,7 +45,7 @@ class allProjectsInterior extends React.Component {
       return interiorsCollection
     })
 
-    console.log(interiorsCollection)
+    // console.log(interiorsCollection)
 
     return (
       <>
