@@ -1,9 +1,8 @@
 import React, { useState } from "react"
-import { Link, useStaticQuery } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 import myContext from "../../../context"
 import ContactForm from "../ContactForm/ContactForm"
-import { element } from "prop-types"
 
 const Menu = ({
   dataMenu,
@@ -99,11 +98,19 @@ const Menu = ({
                 </div>
 
                 <div className="icons icons__mobile">
+                  <a href={`${dataMenu.behanceLink}`} target="_blank">
+                    <img src={dataMenu.behanceicon.fixed.src} alt="" />
+                  </a>
+
+                  <a href={`${dataMenu.pinterestLink}`} target="_blank">
+                    <img src={dataMenu.pinteresticon.fixed.src} alt="" />
+                  </a>
+
                   <a href={`${dataMenu.instagramLink}`} target="_blank">
                     <img src={dataMenu.instagramicon.fixed.src} alt="" />
                   </a>
 
-                  <a href={`${dataMenu.instagramLink}`} target="_blank">
+                  <a href={`${dataMenu.facebookLink}`} target="_blank">
                     <img src={dataMenu.facebookicon.fixed.src} alt="" />
                   </a>
                 </div>
@@ -191,6 +198,17 @@ const Menu = ({
                       <h3>{dataMenuLeft.aboutHeader}</h3>
                     </Link>
 
+                    <Link
+                      className={`will-be-hidden`}
+                      to={
+                        about.locale === "pl"
+                          ? `/publikacje`
+                          : `/${about.locale}/media`
+                      }
+                    >
+                      <h3>{dataMenuLeft.publicationsHeader}</h3>
+                    </Link>
+
                     {/* <div className="menu-grouped-items">
                           <h3>{dataMenuLeft.individualCustomer}</h3>
 
@@ -265,8 +283,16 @@ const Menu = ({
                         <img src={dataMenu.instagramicon.fixed.src} alt="" />
                       </a>
 
-                      <a href={`${dataMenu.instagramLink}`} target="_blank">
+                      <a href={`${dataMenu.facebookLink}`} target="_blank">
                         <img src={dataMenu.facebookicon.fixed.src} alt="" />
+                      </a>
+
+                      <a href={`${dataMenu.behanceLink}`} target="_blank">
+                        <img src={dataMenu.behanceicon.fixed.src} alt="" />
+                      </a>
+
+                      <a href={`${dataMenu.pinterestLink}`} target="_blank">
+                        <img src={dataMenu.pinteresticon.fixed.src} alt="" />
                       </a>
                     </div>
                   </div>

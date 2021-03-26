@@ -2,18 +2,19 @@ import React from "react"
 import { Link, graphql, Img } from "gatsby"
 import { LazyLoadImage } from "react-lazy-load-image-component"
 
+import Menu from "../components/Menu/menu"
+import Header from "../components/Header/header"
+import PublicationsCarousel from "../components/PublicationsCarousel/PublicationsCarousel"
+
 import myContext from "../../context"
 
-import Header from "../components/Header/header"
-import Menu from "../components/Menu/menu"
-import HeroCarousel from "../components/HeroCarousel/HeroCarousel"
-
-class allProjectsInterior extends React.Component {
+class allProjects extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       locale: this.props.data.menuRightIndex.locale,
+      bgcolor: "",
     }
   }
 
@@ -38,16 +39,14 @@ class allProjectsInterior extends React.Component {
 
     const menuStyle = `menuStyleAbsolute`
 
-    let interiorsCollection = []
+    let allCollection = []
 
     projects.nodes.map(project => {
-      if (project.projectCategory === category.categorySecond) {
-        interiorsCollection.push(project)
+      if (project) {
+        allCollection.push(project)
       }
-      return interiorsCollection
+      return allCollection
     })
-
-    // console.log(interiorsCollection)
 
     return (
       <>
@@ -65,87 +64,23 @@ class allProjectsInterior extends React.Component {
           offer={offer}
         />
 
-        <HeroCarousel
-          projects={interiorsCollection}
-          pageLocation={"allProjectsInterior"}
+        <PublicationsCarousel
+          projects={allCollection}
+          pageLocation={"allPublications"}
           templateLocation={this.props.location}
         />
-
-        {/* <main className={`all-grid`}>
-          <div className="all-grid-bg">
-            {projects.nodes
-              .filter(node => {
-                return node.projectCategory === category.categorySecond
-              })
-              .sort((a, b) => {
-                const positionA = a.position
-                const positionB = b.position
-                let comparision = 0
-                if (positionA > positionB) {
-                  comparision = 1
-                } else if (positionA < positionB) {
-                  comparision = -1
-                }
-                return comparision
-              })
-              .map((element, index) => (
-                <div
-                  className={`single-project-tile ${
-                    index % 5 && index > 0 ? `` : `big-project-tile`
-                  }`}
-                  key={index}
-                >
-                  <Link
-                    to={
-                      element.locale === "pl"
-                        ? `/${element.projectCategory}/${element.slug}`
-                        : `/${element.locale}/${element.projectCategory}/${element.slug}`
-                    }
-                    key={index}
-                  >
-                    <LazyLoadImage
-                      // alt={image.alt}
-                      // height={image.height}
-                      effect="blur"
-                      src={element.fullScreenPhoto.fluid.src} // use normal <img> attributes as props
-                      // width={image.width}
-                      style={{
-                        transitionDelay: `${0 + index / 10}s`,
-                      }}
-                    />
-
-                    <div className={`title-container`}>
-                      <h2 className={`project-title-1`}>
-                        {element.titlePart1}
-                      </h2>
-                      <h2 className={`project-title-2`}>
-                        {element.titlePart2}
-                      </h2>
-
-                      <div className="text-on-hover">
-                        <p className="project-slogan">
-                          {element.projectSlogan}
-                        </p>
-                        <p className="read-more">{element.readMore}</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              ))}
-          </div>
-        </main> */}
       </>
     )
   }
 }
 
-allProjectsInterior.contextType = myContext
+allProjects.contextType = myContext
 
-export default allProjectsInterior
+export default allProjects
 
 export const query = graphql`
-  query allProjectsInteriorData($locale: String!) {
-    projects: allDatoCmsProject(filter: { locale: { eq: $locale } }) {
+  query allPublicationsData($locale: String!) {
+    projects: allDatoCmsPublication(filter: { locale: { eq: $locale } }) {
       nodes {
         slug
         locale
@@ -153,7 +88,6 @@ export const query = graphql`
         position
         projectCategory
         titlePart1
-        titlePart2
         readMore
         projectSlogan
         fullScreenPhoto {
@@ -163,25 +97,7 @@ export const query = graphql`
             srcSet
           }
         }
-        secondaryPhoto {
-          fluid {
-            src
-            base64
-            srcSet
-          }
-        }
         projectDescription
-        areaText
-        areaValue
-        gallery {
-          visualizationImage {
-            fluid {
-              src
-            }
-          }
-          visualizationImageText
-          width
-        }
       }
     }
     menuRightIndex: datoCmsMenuRight(locale: { eq: $locale }) {

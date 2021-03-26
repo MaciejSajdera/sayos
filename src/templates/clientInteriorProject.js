@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from "react"
+import { graphql } from "gatsby"
 import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore, {
   Navigation,
@@ -32,12 +33,13 @@ const ClientInteriorProject = props => {
     about,
     category,
     offer,
+    publications,
   } = props.data
 
   const context = useContext(myContext)
 
   useEffect(() => {
-    context.navToggled ? context.handleNavToggle() : ``
+    context.navToggled ? context.handleNavToggle() : console.log("navToggled")
   }, [])
 
   // console.log(props.transitionStatus)
@@ -53,6 +55,7 @@ const ClientInteriorProject = props => {
         interiorProject={interiorProject}
         category={category}
         offer={offer}
+        publications={publications}
       />
 
       <div className={`subpage subpage-offer`}>
@@ -145,6 +148,20 @@ export const query = graphql`
         }
       }
       facebookLink
+      behanceicon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      behanceLink
+      pinteresticon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      pinterestLink
     }
     menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
       projectsHeader
@@ -157,6 +174,7 @@ export const query = graphql`
       individualSubfield1
       individualSubfield2
       contactHeader
+      publicationsHeader
     }
 
     about: datoCmsAbout(locale: { eq: $locale }) {

@@ -15,12 +15,13 @@ const Offer = props => {
     designProject,
     category,
     offer,
+    publications,
   } = props.data
 
   const context = useContext(myContext)
 
   useEffect(() => {
-    context.navToggled ? context.handleNavToggle() : ``
+    context.navToggled ? context.handleNavToggle() : console.log("navToggled")
   }, [])
 
   return (
@@ -34,10 +35,13 @@ const Offer = props => {
         interiorProject={interiorProject}
         category={category}
         offer={offer}
+        publications={publications}
       />
 
       <div
-        className={`subpage subpage-offer`}
+        className={`subpage subpage-offer ${
+          props.transitionStatus === `entered` ? `subpage-content-entered` : ``
+        }`}
         css={{
           backgroundImage: `url(
                                       ${offer.offerBackgroundImage.fluid.src}
@@ -160,6 +164,20 @@ export const query = graphql`
         }
       }
       facebookLink
+      behanceicon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      behanceLink
+      pinteresticon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      pinterestLink
     }
 
     menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
@@ -173,6 +191,7 @@ export const query = graphql`
       individualSubfield1
       individualSubfield2
       contactHeader
+      publicationsHeader
     }
 
     houseProject: datoCmsHouseProjectForClient(locale: { eq: $locale }) {

@@ -1,5 +1,6 @@
 import React from "react"
 import Header from "../components/Header/header"
+import { graphql } from "gatsby"
 
 const Thanks = props => {
   let { thanks } = props.data
@@ -64,6 +65,20 @@ export const query = graphql`
         }
       }
       facebookLink
+      behanceicon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      behanceLink
+      pinteresticon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      pinterestLink
     }
     menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
       projectsHeader
@@ -75,6 +90,7 @@ export const query = graphql`
       individualSubfield1
       individualSubfield2
       contactHeader
+      publicationsHeader
     }
   }
 `

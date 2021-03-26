@@ -125,6 +125,20 @@ export const query = graphql`
         }
       }
       facebookLink
+      behanceicon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      behanceLink
+      pinteresticon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      pinterestLink
     }
 
     menuLeftIndex: datoCmsMenuLeft(locale: { eq: $locale }) {
@@ -139,6 +153,7 @@ export const query = graphql`
       individualSubfield2
       contactHeader
       locale
+      publicationsHeader
     }
 
     about: datoCmsAbout(locale: { eq: $locale }) {

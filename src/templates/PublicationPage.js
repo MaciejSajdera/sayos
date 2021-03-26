@@ -1,6 +1,8 @@
 import React, { Component, createRef } from "react"
 import { StaticQuery, graphql, Link } from "gatsby"
+import bgLogo from "../images/sayos-bg-logo.png"
 import TransitionLink from "gatsby-plugin-transition-link"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 import "react-lazy-load-image-component/src/effects/blur.css"
 import Consumer from "../../context"
 import { CgArrowUp, CgArrowDown } from "react-icons/cg"
@@ -10,7 +12,7 @@ import Menu from "../components/Menu/menu"
 
 import BackgroundImage from "gatsby-background-image"
 
-class ProjectPage extends Component {
+class PublicationPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,6 +26,30 @@ class ProjectPage extends Component {
     }
   }
 
+  // handleArrowPrev = e => {
+  //   if (
+  //     !e.target.closest(".arrow-box").classList.contains("arrow-rotated-left")
+  //   ) {
+  //     window.scrollTo({
+  //       top: 0,
+  //       behavior: "smooth",
+  //     })
+  //   }
+  // }
+
+  // handleArrowNext = e => {
+  //   let pageHeight = window.innerHeight
+
+  //   if (
+  //     !e.target.closest(".arrow-box").classList.contains("arrow-rotated-right")
+  //   ) {
+  //     window.scrollBy({
+  //       top: pageHeight,
+  //       behavior: "smooth",
+  //     })
+  //   }
+  // }
+
   componentDidMount() {
     /***ARROWS */
     const arrowButtonLeft = document.querySelector(".box-bt-left")
@@ -31,6 +57,7 @@ class ProjectPage extends Component {
 
     setTimeout(() => {
       arrowButtonRight.classList.add("arrow-entered")
+      arrowButtonLeft.classList.add("arrow-entered")
     }, 250)
 
     //Show Arrow left after scrolldown
@@ -64,20 +91,20 @@ class ProjectPage extends Component {
 
     /***NAVIGATION BETWEEN PROJECTS IN THE SAME CATEGORY***/
     window.scrollTop = 0
-    let { projects } = this.props.data
-    const { thisProjectData } = this.props.pageContext
+    let { publications } = this.props.data
+    const { thisPublicationData } = this.props.pageContext
     let enteredFrom
 
-    if (typeof Storage !== "undefined") {
-      if (sessionStorage.getItem(`projectPageNavigationStartedAt`)) {
-        enteredFrom = sessionStorage.getItem(`projectPageNavigationStartedAt`)
-      }
-    }
+    // if (typeof Storage !== "undefined") {
+    //   if (sessionStorage.getItem(`projectPageNavigationStartedAt`)) {
+    //     enteredFrom = sessionStorage.getItem(`projectPageNavigationStartedAt`)
+    //   }
+    // }
 
     let projectsInThisCategory = []
     let indexOfThisPoject
 
-    projects.nodes
+    publications.nodes
       .sort((a, b) => {
         const positionA = a.position
         const positionB = b.position
@@ -100,14 +127,14 @@ class ProjectPage extends Component {
           projectsInThisCategory.push(project)
           return
         } else {
-          if (project.projectCategory === thisProjectData.projectCategory) {
+          if (project.projectCategory === thisPublicationData.projectCategory) {
             projectsInThisCategory.push(project)
           }
         }
       })
 
     projectsInThisCategory.map((project, i) => {
-      if (project.id === thisProjectData.id) {
+      if (project.id === thisPublicationData.id) {
         indexOfThisPoject = i
       }
       return
@@ -155,17 +182,17 @@ class ProjectPage extends Component {
 
           let prevProjectLink
 
-          thisProjectData.locale === "pl"
+          thisPublicationData.locale === "pl"
             ? (firstProjectLink = `${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
-            : (firstProjectLink = `${thisProjectData.locale}/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
+            : (firstProjectLink = `${thisPublicationData.locale}/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
 
           arrowRightLinkDestination = firstProjectLink
           nextProjectPlaceholderImageSrc =
             firstProjectObject.fullScreenPhoto.fluid.src
 
-          thisProjectData.locale === "pl"
+          thisPublicationData.locale === "pl"
             ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
-            : (prevProjectLink = `${thisProjectData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+            : (prevProjectLink = `${thisPublicationData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
 
           arrowLeftLinkDestination = prevProjectLink
           prevProjectPlaceholderImageSrc =
@@ -173,9 +200,9 @@ class ProjectPage extends Component {
         } else {
           let nextProjectLink
 
-          thisProjectData.locale === "pl"
+          thisPublicationData.locale === "pl"
             ? (nextProjectLink = `${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
-            : (nextProjectLink = `${thisProjectData.locale}/${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
+            : (nextProjectLink = `${thisPublicationData.locale}/${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
 
           arrowRightLinkDestination = nextProjectLink
           nextProjectPlaceholderImageSrc =
@@ -184,9 +211,9 @@ class ProjectPage extends Component {
           let prevProjectLink
 
           if (indexOfCurrentProject > 0) {
-            thisProjectData.locale === "pl"
+            thisPublicationData.locale === "pl"
               ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
-              : (prevProjectLink = `${thisProjectData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+              : (prevProjectLink = `${thisPublicationData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
 
             arrowLeftLinkDestination = prevProjectLink
             prevProjectPlaceholderImageSrc =
@@ -206,9 +233,9 @@ class ProjectPage extends Component {
               this.state.otherProjectsInThisCategory.length - 1
             ]
 
-          thisProjectData.locale === "pl"
+          thisPublicationData.locale === "pl"
             ? (lastProjectLink = `${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
-            : (lastProjectLink = `${thisProjectData.locale}/${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
+            : (lastProjectLink = `${thisPublicationData.locale}/${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
 
           arrowLeftLinkDestination = lastProjectLink
           prevProjectPlaceholderImageSrc =
@@ -350,92 +377,67 @@ class ProjectPage extends Component {
       publications,
     } = this.props.data
 
-    const { thisProjectData } = this.props.pageContext
+    const { thisPublicationData } = this.props.pageContext
 
     const menuStyle = `menuStyleFixed`
 
     this.topRef = createRef()
     this.nextSectionRef = createRef()
 
-    const handleArrowPrev = e => {
-      if (
-        !e.target.closest(".arrow-box").classList.contains("arrow-rotated-left")
-      ) {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        })
-      }
-    }
-    const handleArrowNext = e => {
-      let pageHeight = window.innerHeight
+    // const hideArrowBoxes = () => {
+    //   const arrowBoxes = document.querySelectorAll(".arrow-box")
 
-      if (
-        !e.target
-          .closest(".arrow-box")
-          .classList.contains("arrow-rotated-right")
-      ) {
-        window.scrollBy({
-          top: pageHeight,
-          behavior: "smooth",
-        })
-      }
-    }
+    //   arrowBoxes.forEach(box => {
+    //     box.classList.remove("arrow-entered")
+    //   })
+    // }
 
-    const hideArrowBoxes = () => {
-      const arrowBoxes = document.querySelectorAll(".arrow-box")
+    // const exitToNextProject = () => {
+    //   if (document) {
+    //     // Preventing overflow here make the animation smoother
+    //     // document.body.style.overflow = "hidden"
+    //   }
+    //   const currentPage = document.querySelector("#project-page__wrapper")
 
-      arrowBoxes.forEach(box => {
-        box.classList.remove("arrow-entered")
-      })
-    }
+    //   currentPage.style.transform = `translateX(-100%)`
 
-    const exitToNextProject = () => {
-      if (document) {
-        // Preventing overflow here make the animation smoother
-        // document.body.style.overflow = "hidden"
-      }
-      const currentPage = document.querySelector("#project-page__wrapper")
+    //   hideArrowBoxes()
 
-      currentPage.style.transform = `translateX(-100%)`
+    //   const nextPagePlaceholder = document.querySelector(
+    //     "#next-project-page__placeholder"
+    //   )
 
-      hideArrowBoxes()
+    //   nextPagePlaceholder.style.transform = `translateX(0%)`
+    // }
 
-      const nextPagePlaceholder = document.querySelector(
-        "#next-project-page__placeholder"
-      )
+    // const exitToPrevProject = () => {
+    //   if (document) {
+    //     // Preventing overflow here make the animation smoother
+    //     // document.body.style.overflow = "hidden"
+    //   }
+    //   const currentPage = document.querySelector("#project-page__wrapper")
 
-      nextPagePlaceholder.style.transform = `translateX(0%)`
-    }
+    //   currentPage.style.transform = `translateX(100%)`
 
-    const exitToPrevProject = () => {
-      if (document) {
-        // Preventing overflow here make the animation smoother
-        // document.body.style.overflow = "hidden"
-      }
-      const currentPage = document.querySelector("#project-page__wrapper")
+    //   hideArrowBoxes()
 
-      currentPage.style.transform = `translateX(100%)`
+    //   const prevPagePlaceholder = document.querySelector(
+    //     "#prev-project-page__placeholder"
+    //   )
 
-      hideArrowBoxes()
+    //   prevPagePlaceholder.style.transform = `translateX(0%)`
+    // }
 
-      const prevPagePlaceholder = document.querySelector(
-        "#prev-project-page__placeholder"
-      )
-
-      prevPagePlaceholder.style.transform = `translateX(0%)`
-    }
-
-    const entryTransition = {
-      delay: 2.2, // Wait 1.5 seconds before entering
-      appearAfter: 0.2,
-      // length: 1,
-      length: 0,
-    }
+    // const entryTransition = {
+    //   delay: 2.2, // Wait 1.5 seconds before entering
+    //   appearAfter: 0.2,
+    //   // length: 1,
+    //   length: 0,
+    // }
 
     return (
       <>
-        <Header isLogoBackgroundDark={this.state.isLogoBackgroundDark} />
+        <Header isLogoBackgroundDark={true} />
         <Menu
           dataMenu={menuRightProject}
           dataMenuLeft={menuLeftProject}
@@ -450,13 +452,20 @@ class ProjectPage extends Component {
           publications={publications}
         />
 
-        <div className={`arrow-box box-bt-left`} onClick={handleArrowPrev}>
-          <TransitionLink
-            exit={{
-              trigger: ({ exit, node }) => exitToPrevProject(exit, node),
-              length: 2.2,
-            }}
-            entry={entryTransition}
+        <div className={`arrow-box box-bt-left`}>
+          <AniLink
+            cover
+            direction="right"
+            duration={2.2}
+            bg={`
+             url(${bgLogo})
+             center / cover   /* position / size */
+             no-repeat        /* repeat */
+             fixed            /* attachment */
+             padding-box      /* origin */
+             content-box      /* clip */
+             black            /* color */
+           `}
             id={`linkToThePrevProject`}
             to={`/${this.state.arrowLeftLinkDestinationState}`}
             state={{ prevPath: this.props.location.pathname }}
@@ -468,16 +477,28 @@ class ProjectPage extends Component {
                 <CgArrowUp />
               </IconContext.Provider>
             </div>
-          </TransitionLink>
+          </AniLink>
         </div>
 
-        <div className={`arrow-box box-bt-right`} onClick={handleArrowNext}>
-          <TransitionLink
-            exit={{
-              trigger: ({ exit, node }) => exitToNextProject(exit, node),
-              length: 2.2,
-            }}
-            entry={entryTransition}
+        <div className={`arrow-box box-bt-right`}>
+          <AniLink
+            // exit={{
+            //   trigger: ({ exit, node }) => exitToNextProject(exit, node),
+            //   length: 2.2,
+            // }}
+            // entry={entryTransition}
+            cover
+            direction="left"
+            duration={2.2}
+            bg={`
+              url(${bgLogo})
+              center / cover   /* position / size */
+              no-repeat        /* repeat */
+              fixed            /* attachment */
+              padding-box      /* origin */
+              content-box      /* clip */
+              black            /* color */
+            `}
             id={`linkToTheNextProject`}
             to={`/${this.state.arrowRightLinkDestinationState}`}
             state={{ prevPath: this.props.location.pathname }}
@@ -489,7 +510,7 @@ class ProjectPage extends Component {
                 <CgArrowDown />
               </IconContext.Provider>
             </div>
-          </TransitionLink>
+          </AniLink>
         </div>
 
         <div id={`prev-project-page__placeholder`}></div>
@@ -497,30 +518,62 @@ class ProjectPage extends Component {
 
         <div
           id={`project-page__wrapper`}
-          className={`test ${this.props.transitionStatus}`}
+          className={`publication-page__wrapper ${this.props.transitionStatus}`}
         >
           <div ref={this.topRef} className={`project-content-top`}>
             <div
               className={`slide-bg-fullscreen`}
               css={{
                 backgroundImage: `url(
-                              ${thisProjectData.fullScreenPhoto.fluid.src}
+                              ${thisPublicationData.publicationScreenshot.fluid.src}
                             )`,
               }}
-            ></div>
+            >
+              <a
+                href={`${thisPublicationData.linkToPublication}`}
+                target="_blank"
+              ></a>
+            </div>
+
+            <div className="content-wrapper">
+              <div className="text-container">
+                <h2>{thisPublicationData.titlePart1}</h2>
+                <div className="project-description">
+                  <p>{thisPublicationData.projectDescription}</p>
+                  <p class="link-holder">
+                    <a
+                      href={`${thisPublicationData.linkToPublication}`}
+                      target="_blank"
+                    >
+                      LINK
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="project-content-middle" ref={this.nextSectionRef}>
+          <span
+            id="project-page-end"
+            css={{
+              height: `1em`,
+              display: `block`,
+              position: `absolute`,
+              bottom: `0`,
+            }}
+          ></span>
+
+          {/* <div className="project-content-middle" ref={this.nextSectionRef}>
             <div className="content section-left">
               <div className="content-wrapper">
                 <div className="text-container">
-                  <h2>{thisProjectData.titlePart1}</h2>
-                  <h2>{thisProjectData.titlePart2}</h2>
+                  <h2>{thisPublicationData.titlePart1}</h2>
+                  <h2>{thisPublicationData.titlePart2}</h2>
                   <div className="project-description">
-                    <p>{thisProjectData.projectDescription}</p>
+                    <p>{thisPublicationData.projectDescription}</p>
                     <p>
-                      {thisProjectData.areaText}:{" "}
-                      <strong>{thisProjectData.areaValue}</strong>
+                      {thisPublicationData.areaText}:{" "}
+                      <strong>{thisPublicationData.areaValue}</strong>
                     </p>
                   </div>
                 </div>
@@ -531,7 +584,7 @@ class ProjectPage extends Component {
               className="content section-right"
               css={{
                 backgroundImage: `url(
-                                      ${thisProjectData.secondaryPhoto.fluid.src}
+                                      ${thisPublicationData.secondaryPhoto.fluid.src}
                                     )`,
                 backgroundSize: `cover`,
                 backgroundPosition: `center`,
@@ -557,7 +610,7 @@ class ProjectPage extends Component {
               flexWrap: `wrap`,
             }}
           >
-            {thisProjectData.gallery.map((element, index) => {
+            {thisPublicationData.gallery.map((element, index) => {
               return (
                 <div
                   key={index}
@@ -604,7 +657,7 @@ class ProjectPage extends Component {
               position: `absolute`,
               bottom: `0`,
             }}
-          ></span>
+          ></span> */}
         </div>
         {/* project-page__wrapper */}
       </>
@@ -612,18 +665,17 @@ class ProjectPage extends Component {
   }
 }
 
-export default ProjectPage
+export default PublicationPage
 
 export const query = graphql`
-  query thisProjectData($locale: String!) {
-    projects: allDatoCmsProject(filter: { locale: { eq: $locale } }) {
+  query thisPublicationData($locale: String!) {
+    publications: allDatoCmsPublication(filter: { locale: { eq: $locale } }) {
       nodes {
         slug
         locale
         id
         position
         titlePart1
-        titlePart2
         readMore
         fullScreenPhoto {
           fluid {
@@ -632,7 +684,7 @@ export const query = graphql`
             srcSet
           }
         }
-        secondaryPhoto {
+        publicationScreenshot {
           fluid {
             src
             base64
@@ -641,17 +693,7 @@ export const query = graphql`
         }
         projectCategory
         projectDescription
-        areaText
-        areaValue
-        gallery {
-          visualizationImage {
-            fluid {
-              src
-            }
-          }
-          visualizationImageText
-          width
-        }
+        linkToPublication
       }
     }
 

@@ -14,12 +14,13 @@ const About = props => {
     interiorProject,
     category,
     offer,
+    publications,
   } = props.data
 
   const context = useContext(myContext)
 
   useEffect(() => {
-    context.navToggled ? context.handleNavToggle() : ``
+    context.navToggled ? context.handleNavToggle() : console.log("navToggled")
   }, [])
 
   return (
@@ -33,6 +34,7 @@ const About = props => {
         interiorProject={interiorProject}
         category={category}
         offer={offer}
+        publications={publications}
       />
 
       <div className={`subpage about`}>
@@ -94,6 +96,20 @@ export const query = graphql`
         }
       }
       facebookLink
+      behanceicon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      behanceLink
+      pinteresticon {
+        fixed(height: 35) {
+          src
+          base64
+        }
+      }
+      pinterestLink
     }
     menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
       projectsHeader
@@ -106,6 +122,7 @@ export const query = graphql`
       individualSubfield1
       individualSubfield2
       contactHeader
+      publicationsHeader
     }
 
     houseProject: datoCmsHouseProjectForClient(locale: { eq: $locale }) {

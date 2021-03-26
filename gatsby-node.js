@@ -24,6 +24,15 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     })
   })
 
+  locales.forEach(locale => {
+    const prefix = locale === "pl" ? `publikacje` : `${locale}/media`
+    createPage({
+      path: `/${prefix}`,
+      component: path.resolve(`src/templates/allPublications.js`),
+      context: { locale },
+    })
+  })
+
   const aboutPageQuery = await graphql(`
     query aboutPageQuery {
       pl: allDatoCmsAbout(filter: { locale: { eq: "pl" } }) {
@@ -550,6 +559,93 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         // thisProjectData: item,
         locale: item.locale,
         // fullScreenPhoto: item.fullScreenPhoto
+      },
+    })
+  })
+
+  const publicationsQuery = await graphql(`
+    query myData {
+      pl: allDatoCmsPublication(filter: { locale: { eq: "pl" } }) {
+        nodes {
+          slug
+          locale
+          id
+          position
+          projectCategory
+          titlePart1
+          readMore
+          fullScreenPhoto {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          publicationScreenshot {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          projectDescription
+          linkToPublication
+        }
+      }
+
+      en: allDatoCmsPublication(filter: { locale: { eq: "en" } }) {
+        nodes {
+          slug
+          locale
+          id
+          position
+          projectCategory
+          titlePart1
+          readMore
+          fullScreenPhoto {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          publicationScreenshot {
+            fluid {
+              src
+              base64
+              srcSet
+            }
+          }
+          projectDescription
+          linkToPublication
+        }
+      }
+    }
+  `)
+
+  //with category prefix
+  publicationsQuery.data.pl.nodes.forEach(item => {
+    let url = `${item.projectCategory}/${item.slug}`
+    createPage({
+      path: url,
+      component: path.resolve(`src/templates/PublicationPage.js`),
+      context: {
+        thisPublicationData: item,
+        locale: item.locale,
+        fullScreenPhoto: item.fullScreenPhoto,
+      },
+    })
+  })
+
+  publicationsQuery.data.en.nodes.forEach(item => {
+    let url = `/${item.locale}/${item.projectCategory}/${item.slug}`
+    createPage({
+      path: url,
+      component: path.resolve(`src/templates/PublicationPage.js`),
+      context: {
+        thisPublicationData: item,
+        locale: item.locale,
+        fullScreenPhoto: item.fullScreenPhoto,
       },
     })
   })
