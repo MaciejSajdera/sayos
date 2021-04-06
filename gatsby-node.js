@@ -370,6 +370,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           id
           position
           projectCategory
+          title
           titlePart1
           titlePart2
           readMore
@@ -409,6 +410,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           id
           position
           projectCategory
+          title
           titlePart1
           titlePart2
           readMore

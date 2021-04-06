@@ -444,7 +444,7 @@ class ProjectPage extends Component {
             },
             {
               property: `og:title`,
-              content: `${thisProjectData.titlePart1} ${thisProjectData.titlePart2} - Sayos Architects`,
+              content: `${thisProjectData.title} - Sayos Architects`,
             },
             {
               property: `og:description`,

@@ -2,6 +2,7 @@ import React, { Component, createRef } from "react"
 import { StaticQuery, graphql, Link } from "gatsby"
 import bgLogo from "../images/sayos-bg-logo.png"
 import TransitionLink from "gatsby-plugin-transition-link"
+import { Helmet } from "react-helmet"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import "react-lazy-load-image-component/src/effects/blur.css"
 import Consumer from "../../context"
@@ -437,6 +438,34 @@ class PublicationPage extends Component {
 
     return (
       <>
+        <Helmet
+          meta={[
+            {
+              name: `description`,
+              content: thisPublicationData.projectDescription,
+            },
+            {
+              property: `og:title`,
+              content: `${thisPublicationData.titlePart1} - Sayos Architects`,
+            },
+            {
+              property: `og:description`,
+              content: thisPublicationData.projectDescription,
+            },
+            {
+              property: `og:image`,
+              content: thisPublicationData.publicationScreenshot.fluid.src,
+            },
+            {
+              name: `twitter:title`,
+              content: `${thisPublicationData.titlePart1} ${thisPublicationData.titlePart2} - Sayos Architects`,
+            },
+            {
+              name: `twitter:description`,
+              content: thisPublicationData.projectDescription,
+            },
+          ]}
+        />
         <Header isLogoBackgroundDark={true} />
         <Menu
           dataMenu={menuRightProject}
@@ -540,7 +569,7 @@ class PublicationPage extends Component {
                 <h2>{thisPublicationData.titlePart1}</h2>
                 <div className="project-description">
                   <p>{thisPublicationData.projectDescription}</p>
-                  <p class="link-holder">
+                  <p className={`link-holder`}>
                     <a
                       href={`${thisPublicationData.linkToPublication}`}
                       target="_blank"
