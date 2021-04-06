@@ -3,6 +3,7 @@ import { StaticQuery, graphql, Link } from "gatsby"
 import TransitionLink from "gatsby-plugin-transition-link"
 import "react-lazy-load-image-component/src/effects/blur.css"
 import Consumer from "../../context"
+import { Helmet } from "react-helmet"
 import { CgArrowUp, CgArrowDown } from "react-icons/cg"
 import { IconContext } from "react-icons"
 import Header from "../components/Header/header"
@@ -435,6 +436,34 @@ class ProjectPage extends Component {
 
     return (
       <>
+        <Helmet
+          meta={[
+            {
+              name: `description`,
+              content: thisProjectData.projectDescription,
+            },
+            {
+              property: `og:title`,
+              content: `${thisProjectData.titlePart1} ${thisProjectData.titlePart2} - Sayos Architects`,
+            },
+            {
+              property: `og:description`,
+              content: thisProjectData.projectDescription,
+            },
+            {
+              property: `og:image`,
+              content: thisProjectData.fullScreenPhoto.fluid.src,
+            },
+            {
+              name: `twitter:title`,
+              content: `${thisProjectData.titlePart1} ${thisProjectData.titlePart2} - Sayos Architects`,
+            },
+            {
+              name: `twitter:description`,
+              content: thisProjectData.projectDescription,
+            },
+          ]}
+        />
         <Header isLogoBackgroundDark={this.state.isLogoBackgroundDark} />
         <Menu
           dataMenu={menuRightProject}
@@ -622,6 +651,7 @@ export const query = graphql`
         locale
         id
         position
+        title
         titlePart1
         titlePart2
         readMore

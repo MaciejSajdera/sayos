@@ -32,10 +32,9 @@ function SEO({ lang, meta, image: metaImage, pathname }) {
   )
   const title = datoCmsSite.globalSeo.siteName
   const metaDescription = datoCmsSite.globalSeo.fallbackSeo.description
-  const image =
-    metaImage && metaImage.src
-      ? `${site.siteMetadata.siteURL}${metaImage.src}`
-      : null
+  const image = datoCmsSite.globalSeo.fallbackSeo.image
+    ? `${datoCmsSite.globalSeo.fallbackSeo.image.url}`
+    : null
   const canonical = pathname ? `${site.siteMetadata.siteURL}${pathname}` : null
   return (
     <Helmet
@@ -70,6 +69,10 @@ function SEO({ lang, meta, image: metaImage, pathname }) {
         {
           property: `og:description`,
           content: metaDescription,
+        },
+        {
+          property: `og:image`,
+          content: image,
         },
         {
           property: `og:type`,
