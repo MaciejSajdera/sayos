@@ -30,6 +30,9 @@
 .about-header {
   opacity: 0;
   transition: all 0.3s ease-in-out;
+  margin-bottom: 2em;
+  font-size: 1.2rem;
+  text-transform: lowercase;
 }
 
 .about-header-entered {

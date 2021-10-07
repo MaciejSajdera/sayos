@@ -45,15 +45,15 @@ const About = props => {
               : ``
           }`}
         >
-          <h1
+          <h2
             className={`about-header ${
               props.transitionStatus === `entered` ? `about-header-entered` : ``
             }`}
           >
             {about.aboutTitle}
-          </h1>
+          </h2>
           <p
-            className={`about-content ${
+            className={`about-content text-content ${
               props.transitionStatus === `entered`
                 ? `about-content-entered`
                 : ``
