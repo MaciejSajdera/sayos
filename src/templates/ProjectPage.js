@@ -535,6 +535,16 @@ class ProjectPage extends Component {
                 backgroundImage: `url(
                               ${thisProjectData.fullScreenPhoto.fluid.src}
                             )`,
+
+                "@media (max-width: 992px)": {
+                  height: `0`,
+                  backgroundSize: `contain`,
+                  paddingTop: `${
+                    (thisProjectData.fullScreenPhoto.height /
+                      thisProjectData.fullScreenPhoto.width) *
+                    100
+                  }%`,
+                },
               }}
             ></div>
           </div>
@@ -604,6 +614,16 @@ class ProjectPage extends Component {
                     display: `flex`,
                     flexFlow: `column`,
                     justifyContent: `flex-end`,
+
+                    "@media (max-width: 992px)": {
+                      height: `0`,
+                      backgroundSize: `contain`,
+                      paddingTop: `${
+                        (element.visualizationImage.height /
+                          element.visualizationImage.width) *
+                        100
+                      }%`,
+                    },
                   }}
                 >
                   {element.visualizationImageText ? (
@@ -678,6 +698,8 @@ export const query = graphql`
             fluid {
               src
             }
+            width
+            height
           }
           visualizationImageText
           width

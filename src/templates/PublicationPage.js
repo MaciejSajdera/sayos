@@ -712,6 +712,8 @@ export const query = graphql`
             base64
             srcSet
           }
+          height
+          width
         }
         publicationScreenshot {
           fluid {
