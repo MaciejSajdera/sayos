@@ -1,66 +1,105 @@
-import { Link, useStaticQuery } from "gatsby"
-import PropTypes from "prop-types"
-import React from 'react'
+import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import { Location } from "@reach/router"
 
-const Header = ({ setNavState, navActive }) => {
+import myContext from "../../../context"
 
+const Header = ({ logoLight, isLogoBackgroundDark }) => {
   const data = useStaticQuery(graphql`
-  query MyLogoQuery {
-    allDatoCmsHeaderLogo {
-      edges {
-        node {
-          logoImage {
-            url
-            title
+    query MyLogoQuery {
+      dark: datoCmsHeaderLogo {
+        logoImage {
+          fixed {
+            src
+            base64
+          }
+        }
+      }
+
+      light: datoCmsHeaderLogoLight {
+        logoImage {
+          fixed {
+            base64
+            src
           }
         }
       }
     }
-  }
   `)
 
+  let darkLogo = data.dark.logoImage.fixed.src
+  let lightLogo = data.light.logoImage.fixed.src
+
+  // const darkBackgroundElement = document.querySelector(
+  //   ".project-content-middle"
+  // )
+
+  // function callback(entries, observer) {
+  //   entries.forEach(entry => {
+  //     if (entry.isIntersecting) {
+  //       document.querySelector(".logo-top").classList.add("test")
+  //     } else {
+  //       document.querySelector(".logo-top").classList.remove("test")
+  //     }
+  //   })
+  // }
+
+  // let observer = new IntersectionObserver(callback)
+
+  // if (darkBackgroundElement) {
+  //   observer.observe(darkBackgroundElement)
+  // }
 
   return (
-    <header>
+    <>
+      <myContext.Consumer>
+        {({ handleNavToggle, navToggled, set }) => (
+          <a className={`logo-link`} href={`/`}>
+            <header>
+              <div className="menu-wrapper">
+                <div className={`logo-container`}>
+                  <Location>
+                    {({ location }) => {
+                      if (navToggled) {
+                        return (
+                          <div className={`logo-top logo-menu-open`}>
+                            <img src={lightLogo} alt="Sayos Architects Logo" />
+                          </div>
+                        )
+                      }
 
-      <Link to="/">
-      <div className={`logo-container`}>
-
-        {data.allDatoCmsHeaderLogo.edges.map((file, index) => (
-        
-            <div className={`logo-top`} id={file.node.logoImage.title} key={index}>
-              <img src={file.node.logoImage.url}></img>
-            </div>
-
-      ))}
-
-      </div>
-      </Link>
-
-      <div className={`menu-container`}>
-        <div className="menu-box" onClick={() => { navActive ? setNavState(false) : setNavState(true)}}>
-
-
-          <a href="#" className={`menu-trigger ${navActive ? "active" : ""}`} id={`menu10`} >
-            <span></span>
-            <span></span>
-            <span></span>
+                      if (logoLight) {
+                        return (
+                          <div className={`logo-top`}>
+                            <img src={lightLogo} alt="Sayos Architects Logo" />
+                          </div>
+                        )
+                      }
+                      if (isLogoBackgroundDark) {
+                        return (
+                          <div
+                            className={`logo-top logo-top--on-dark-background`}
+                          >
+                            <img src={lightLogo} alt="Sayos Architects Logo" />
+                          </div>
+                        )
+                      } else {
+                        return (
+                          <div className={`logo-top`}>
+                            <img src={darkLogo} alt="Sayos Architects Logo" />
+                          </div>
+                        )
+                      }
+                    }}
+                  </Location>
+                </div>
+              </div>
+            </header>
           </a>
-
-        </div>
-      </div>
-
-    </header>
+        )}
+      </myContext.Consumer>
+    </>
   )
-
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Header

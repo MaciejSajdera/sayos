@@ -2,7 +2,14 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;

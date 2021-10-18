@@ -1,0 +1,145 @@
+.subpage-offer {
+  filter: grayscale(100%);
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  @media screen and (max-width: 992px) {
+    background: #0c0c0c;
+    background-image: none !important;
+
+    .read-more {
+      display: none;
+    }
+
+    .slide-container {
+      height: 55vh;
+      overflow: scroll;
+
+      h2 {
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.offer-logos-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: auto;
+
+  @media screen and (max-width: 500px) {
+    position: fixed;
+    flex-flow: column;
+    justify-content: space-between;
+    height: 70%;
+  }
+
+  @media screen and (min-width: 992px) {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__logo {
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    @media screen and (max-width: 992px) {
+      height: 50px;
+      background-size: 50%;
+    }
+  }
+
+  a {
+    display: flex;
+    flex-flow: column;
+    z-index: 1;
+    height: 300px;
+    width: 100%;
+    padding: 1em;
+    align-self: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+
+    @media screen and (max-height: 750px) {
+      height: 150px;
+    }
+
+    @media screen and (min-height: 750px) {
+      height: 100%;
+    }
+
+    &:hover {
+      @media screen and (min-width: 992px) {
+        background-color: rgba(0, 0, 0, 0.6);
+
+        .text-on-hover {
+          opacity: 1;
+          transform: translateY(0%);
+
+          .read-more {
+            &:after {
+              width: 35%;
+              bottom: -10px;
+            }
+          }
+        }
+      }
+    }
+    .text-on-hover {
+      transition: all 0.75s cubic-bezier(0.2, 0.44, 0.54, 0.87);
+      margin-top: 1.5em;
+
+      text-align: center;
+
+      @media screen and (min-width: 992px) {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+
+      @media screen and (max-height: 750px) {
+        margin-top: 0.5em;
+      }
+
+      .project-slogan {
+        // width: 90%;
+        margin-bottom: 2.5em;
+
+        @media screen and (max-height: 750px) {
+          margin-bottom: 0.5em;
+        }
+      }
+
+      .read-more {
+        position: relative;
+        text-transform: uppercase;
+
+        &:after {
+          content: "";
+          background: #fff;
+          height: 2px;
+          width: 37.5%;
+          position: absolute;
+          bottom: -4px;
+          transition: all 0.375s linear;
+          left: 50%;
+          transform: translate(-50%, 0);
+
+          @media screen and (min-width: 992px) {
+            width: 0em;
+          }
+        }
+      }
+    }
+  }
+}

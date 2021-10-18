@@ -1,4 +1,17 @@
 @import "../components/Header/header.scss";
 @import "../components/Main/main.scss";
 @import "../components/Menu/menu.scss";
+@import "../components/ContactForm/contactform.scss";
+@import "../styles/projects.scss";
+@import "../styles/about.scss";
+@import "../styles/client-house-projects.scss";
+@import "../styles/all-projects.scss";
+@import "../styles/offer.scss";
+
 @import "../styles/global.scss";
+@import "../styles/variables.scss";
+
+@import "../../node_modules/swiper/swiper.scss";
+
+@import "../../node_modules/swiper/components/navigation/navigation.scss";
+@import "../../node_modules/swiper/components/pagination/pagination.scss";
