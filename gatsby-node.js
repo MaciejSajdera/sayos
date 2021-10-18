@@ -380,6 +380,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               base64
               srcSet
             }
+            height
+            width
           }
           secondaryPhoto {
             fluid {
@@ -387,6 +389,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               base64
               srcSet
             }
+            height
+            width
           }
           projectDescription
           areaText
@@ -396,6 +400,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               fluid {
                 src
               }
+              width
+              height
             }
             visualizationImageText
             width
@@ -420,6 +426,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               base64
               srcSet
             }
+            height
+            width
           }
           secondaryPhoto {
             fluid {
@@ -427,6 +435,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               base64
               srcSet
             }
+            height
+            width
           }
           projectDescription
           areaText
@@ -437,6 +447,8 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               fluid {
                 src
               }
+              width
+              height
             }
             visualizationImageText
             width

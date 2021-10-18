@@ -178,6 +178,8 @@ export const query = graphql`
             fluid {
               src
             }
+            width
+            height
           }
           visualizationImageText
           width
