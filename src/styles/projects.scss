@@ -195,12 +195,6 @@
     height: 100vh;
   }
 
-  .content {
-    @media screen and (min-width: 1200px) {
-      width: 50%;
-    }
-  }
-
   .section-left {
     background-color: rgb(26, 26, 26);
     display: flex;
@@ -209,6 +203,10 @@
 
     @media screen and (max-width: 992px) {
       order: 2;
+    }
+
+    @media screen and (min-width: 1200px) {
+      width: 55%;
     }
 
     h2,
@@ -242,7 +240,7 @@
       }
 
       @media screen and (min-width: 1200px) {
-        padding: 0 4.5em;
+        padding: 0 2.5rem 0 10rem;
       }
     }
   }
@@ -252,6 +250,11 @@
       order: 1;
       height: 25em;
     }
+
+    @media screen and (min-width: 1200px) {
+      width: 45%;
+    }
+
     .secondary-project-image {
       height: 100%;
 
