@@ -1,11 +1,12 @@
-import React, { useEffect, useContext } from "react"
 import { Link, graphql } from "gatsby"
+import React, { useContext, useEffect } from "react"
+import myContext from "../../context"
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
-import myContext from "../../context"
-import { LazyLoadImage } from "react-lazy-load-image-component"
 
 const Offer = props => {
+  console.log(props)
+
   let {
     about,
     menuRightProject,
@@ -16,6 +17,7 @@ const Offer = props => {
     category,
     offer,
     publications,
+    pageContext,
   } = props.data
 
   const context = useContext(myContext)
@@ -53,9 +55,9 @@ const Offer = props => {
         <div className="offer-logos-wrapper">
           <Link
             to={
-              about.locale === "pl"
+              props.pageContext.locale === "pl"
                 ? `/${offer.slug}/${houseProject.slug}`
-                : `/${offer.slug}/${houseProject.locale}/${houseProject.slug}`
+                : `en/${offer.slug}/${houseProject.slug}`
             }
           >
             <div
@@ -79,9 +81,9 @@ const Offer = props => {
 
           <Link
             to={
-              about.locale === "pl"
+              props.pageContext.locale === "pl"
                 ? `/${offer.slug}/${interiorProject.slug}`
-                : `/${offer.slug}/${interiorProject.locale}/${interiorProject.slug}`
+                : `en/${offer.slug}/${interiorProject.slug}`
             }
           >
             <div
@@ -106,9 +108,9 @@ const Offer = props => {
 
           <Link
             to={
-              about.locale === "pl"
+              props.pageContext.locale === "pl"
                 ? `/${offer.slug}/${designProject.slug}`
-                : `/${offer.slug}/${designProject.locale}/${designProject.slug}`
+                : `en/${offer.slug}/${designProject.slug}`
             }
           >
             <div
