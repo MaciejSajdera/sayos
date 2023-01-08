@@ -103,7 +103,7 @@ class PublicationPage extends Component {
     // }
 
     let projectsInThisCategory = []
-    let indexOfThisPoject
+    let indexOfThisProject
 
     publications.nodes
       .sort((a, b) => {
@@ -136,7 +136,7 @@ class PublicationPage extends Component {
 
     projectsInThisCategory.map((project, i) => {
       if (project.id === thisPublicationData.id) {
-        indexOfThisPoject = i
+        indexOfThisProject = i
       }
       return
     })
@@ -146,7 +146,7 @@ class PublicationPage extends Component {
     }))
 
     this.setState(prevState => ({
-      indexOfCurrentProject: indexOfThisPoject,
+      indexOfCurrentProject: indexOfThisProject,
     }))
 
     //Arrows turned into navigation
@@ -468,6 +468,7 @@ class PublicationPage extends Component {
         />
         <Header isLogoBackgroundDark={true} />
         <Menu
+          locale={this.props.pageContext.locale}
           dataMenu={menuRightProject}
           dataMenuLeft={menuLeftProject}
           dataProjects={projects}
@@ -552,7 +553,7 @@ class PublicationPage extends Component {
           <div ref={this.topRef} className={`project-content-top`}>
             <div
               className={`slide-bg-fullscreen`}
-              css={{
+              style={{
                 backgroundImage: `url(
                               ${thisPublicationData.publicationScreenshot.fluid.src}
                             )`,
@@ -584,7 +585,7 @@ class PublicationPage extends Component {
 
           <span
             id="project-page-end"
-            css={{
+            style={{
               height: `1em`,
               display: `block`,
               position: `absolute`,
@@ -611,7 +612,7 @@ class PublicationPage extends Component {
 
             <div
               className="content section-right"
-              css={{
+              style={{
                 backgroundImage: `url(
                                       ${thisPublicationData.secondaryPhoto.fluid.src}
                                     )`,
@@ -622,7 +623,7 @@ class PublicationPage extends Component {
 
             <span
               id="project-content-middle-end"
-              css={{
+              style={{
                 height: `1em`,
                 width: `100%`,
                 display: `block`,
@@ -634,7 +635,7 @@ class PublicationPage extends Component {
 
           <div
             className="project-page-content-bottom"
-            css={{
+            style={{
               display: `flex`,
               flexWrap: `wrap`,
             }}
@@ -644,7 +645,7 @@ class PublicationPage extends Component {
                 <div
                   key={index}
                   className={`visualization-tile visualization-tile__width-${element.width}`}
-                  css={{
+                  style={{
                     backgroundImage: `url(
                                         ${element.visualizationImage.fluid.src}
                                       )`,
@@ -661,7 +662,7 @@ class PublicationPage extends Component {
                 >
                   {element.visualizationImageText ? (
                     <p
-                      css={{
+                      style={{
                         minHeight: `4em`,
                         padding: `1em`,
                         display: `flex`,
@@ -680,7 +681,7 @@ class PublicationPage extends Component {
           </div>
           <span
             id="project-page-end"
-            css={{
+            style={{
               height: `1em`,
               display: `block`,
               position: `absolute`,
@@ -698,10 +699,10 @@ export default PublicationPage
 
 export const query = graphql`
   query thisPublicationData($locale: String!) {
-    publications: allDatoCmsPublication(filter: { locale: { eq: $locale } }) {
+    publications: allDatoCmsPublication(filter: { locales: { eq: $locale } }) {
       nodes {
         slug
-        locale
+        locales
         id
         position
         titlePart1
@@ -728,7 +729,7 @@ export const query = graphql`
       }
     }
 
-    menuRightProject: datoCmsMenuRight(locale: { eq: $locale }) {
+    menuRightProject: datoCmsMenuRight(locale: $locale) {
       adressData1
       adressData2
       phoneNumber
@@ -762,7 +763,7 @@ export const query = graphql`
       }
       pinterestLink
     }
-    menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
+    menuLeftProject: datoCmsMenuLeft(locale: $locale) {
       projectsHeader
       projectsSubfield1
       projectsSubfield2
@@ -776,11 +777,11 @@ export const query = graphql`
       publicationsHeader
     }
 
-    about: datoCmsAbout(locale: { eq: $locale }) {
+    about: datoCmsAbout(locale: $locale) {
       aboutTitle
       aboutContent
       slug
-      locale
+      locales
     }
 
     logoData: datoCmsHeaderLogoLight {
@@ -792,33 +793,33 @@ export const query = graphql`
       }
     }
 
-    houseProject: datoCmsHouseProjectForClient(locale: { eq: $locale }) {
+    houseProject: datoCmsHouseProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    interiorProject: datoCmsInteriorProjectForClient(locale: { eq: $locale }) {
+    interiorProject: datoCmsInteriorProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    category: datoCmsCategory(locale: { eq: $locale }) {
+    category: datoCmsCategory(locale: $locale) {
       categoryFirst
       categorySecond
-      locale
+      locales
     }
 
-    offer: datoCmsOffer(locale: { eq: $locale }) {
+    offer: datoCmsOffer(locale: $locale) {
       offerBackgroundImage {
         fluid {
           src
@@ -843,7 +844,7 @@ export const query = graphql`
           src
         }
       }
-      locale
+      locales
       slug
     }
   }

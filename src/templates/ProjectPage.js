@@ -1,19 +1,19 @@
-import React, { Component, createRef } from "react"
-import { StaticQuery, graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import TransitionLink from "gatsby-plugin-transition-link"
-import "react-lazy-load-image-component/src/effects/blur.css"
-import Consumer from "../../context"
+import React, { createRef } from "react"
 import { Helmet } from "react-helmet"
-import { CgArrowUp, CgArrowDown } from "react-icons/cg"
 import { IconContext } from "react-icons"
+import { CgArrowDown, CgArrowUp } from "react-icons/cg"
+import "react-lazy-load-image-component/src/effects/blur.css"
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
 
-import BackgroundImage from "gatsby-background-image"
-
-class ProjectPage extends Component {
+class ProjectPage extends React.Component {
   constructor(props) {
     super(props)
+
+    console.log(props)
+
     this.state = {
       isLogoBackgroundDark: false,
       otherProjectsInThisCategory: [],
@@ -26,6 +26,8 @@ class ProjectPage extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
+
     /***ARROWS */
     const arrowButtonLeft = document.querySelector(".box-bt-left")
     const arrowButtonRight = document.querySelector(".box-bt-right")
@@ -76,7 +78,7 @@ class ProjectPage extends Component {
     }
 
     let projectsInThisCategory = []
-    let indexOfThisPoject
+    let indexOfThisProject
 
     projects.nodes
       .sort((a, b) => {
@@ -109,7 +111,7 @@ class ProjectPage extends Component {
 
     projectsInThisCategory.map((project, i) => {
       if (project.id === thisProjectData.id) {
-        indexOfThisPoject = i
+        indexOfThisProject = i
       }
       return
     })
@@ -119,7 +121,7 @@ class ProjectPage extends Component {
     }))
 
     this.setState(prevState => ({
-      indexOfCurrentProject: indexOfThisPoject,
+      indexOfCurrentProject: indexOfThisProject,
     }))
 
     //Arrows turned into navigation
@@ -338,6 +340,8 @@ class ProjectPage extends Component {
   }
 
   render() {
+    console.log(this.props)
+
     let {
       projects,
       menuRightProject,
@@ -466,6 +470,7 @@ class ProjectPage extends Component {
         />
         <Header isLogoBackgroundDark={this.state.isLogoBackgroundDark} />
         <Menu
+          locale={this.props.pageContext.locale}
           dataMenu={menuRightProject}
           dataMenuLeft={menuLeftProject}
           dataProjects={projects}
@@ -531,7 +536,7 @@ class ProjectPage extends Component {
           <div ref={this.topRef} className={`project-content-top`}>
             <div
               className={`slide-bg-fullscreen`}
-              css={{
+              style={{
                 backgroundImage: `url(
                               ${thisProjectData.fullScreenPhoto.fluid.src}
                             )`,
@@ -568,7 +573,7 @@ class ProjectPage extends Component {
 
             <div
               className="content section-right"
-              css={{
+              style={{
                 backgroundImage: `url(
                                       ${thisProjectData.secondaryPhoto.fluid.src}
                                     )`,
@@ -579,7 +584,7 @@ class ProjectPage extends Component {
 
             <span
               id="project-content-middle-end"
-              css={{
+              style={{
                 height: `1em`,
                 width: `100%`,
                 display: `block`,
@@ -591,7 +596,7 @@ class ProjectPage extends Component {
 
           <div
             className="project-page-content-bottom"
-            css={{
+            style={{
               display: `flex`,
               flexWrap: `wrap`,
             }}
@@ -601,7 +606,7 @@ class ProjectPage extends Component {
                 <div
                   key={index}
                   className={`visualization-tile visualization-tile__width-${element.width}`}
-                  css={{
+                  style={{
                     backgroundImage: `url(
                                         ${element.visualizationImage.fluid.src}
                                       )`,
@@ -628,7 +633,7 @@ class ProjectPage extends Component {
                 >
                   {element.visualizationImageText ? (
                     <p
-                      css={{
+                      style={{
                         minHeight: `4em`,
                         padding: `1em`,
                         display: `flex`,
@@ -647,7 +652,7 @@ class ProjectPage extends Component {
           </div>
           <span
             id="project-page-end"
-            css={{
+            style={{
               height: `1em`,
               display: `block`,
               position: `absolute`,
@@ -665,10 +670,10 @@ export default ProjectPage
 
 export const query = graphql`
   query thisProjectData($locale: String!) {
-    projects: allDatoCmsProject(filter: { locale: { eq: $locale } }) {
+    projects: allDatoCmsProject(filter: { locales: { eq: $locale } }) {
       nodes {
         slug
-        locale
+        locales
         id
         position
         title
@@ -707,7 +712,7 @@ export const query = graphql`
       }
     }
 
-    menuRightProject: datoCmsMenuRight(locale: { eq: $locale }) {
+    menuRightProject: datoCmsMenuRight(locale: $locale) {
       adressData1
       adressData2
       phoneNumber
@@ -741,7 +746,7 @@ export const query = graphql`
       }
       pinterestLink
     }
-    menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
+    menuLeftProject: datoCmsMenuLeft(locale: $locale) {
       projectsHeader
       projectsSubfield1
       projectsSubfield2
@@ -755,11 +760,11 @@ export const query = graphql`
       publicationsHeader
     }
 
-    about: datoCmsAbout(locale: { eq: $locale }) {
+    about: datoCmsAbout(locale: $locale) {
       aboutTitle
       aboutContent
       slug
-      locale
+      locales
     }
 
     logoData: datoCmsHeaderLogoLight {
@@ -771,33 +776,33 @@ export const query = graphql`
       }
     }
 
-    houseProject: datoCmsHouseProjectForClient(locale: { eq: $locale }) {
+    houseProject: datoCmsHouseProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    interiorProject: datoCmsInteriorProjectForClient(locale: { eq: $locale }) {
+    interiorProject: datoCmsInteriorProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    category: datoCmsCategory(locale: { eq: $locale }) {
+    category: datoCmsCategory(locale: $locale) {
       categoryFirst
       categorySecond
-      locale
+      locales
     }
 
-    offer: datoCmsOffer(locale: { eq: $locale }) {
+    offer: datoCmsOffer(locale: $locale) {
       offerBackgroundImage {
         fluid {
           src
@@ -822,8 +827,8 @@ export const query = graphql`
           src
         }
       }
-      locale
       slug
+      locales
     }
   }
 `

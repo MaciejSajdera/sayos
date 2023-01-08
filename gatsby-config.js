@@ -8,12 +8,12 @@ module.exports = {
     logo: `src/images/short-logo.png`,
   },
   plugins: [
-    `gatsby-plugin-glamor`,
+    // `gatsby-plugin-glamor`,
     `gatsby-plugin-root-import`,
     `gatsby-plugin-transition-link`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
-    `gatsby-transformer-sharp`,
+    // `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: "gatsby-plugin-sass",

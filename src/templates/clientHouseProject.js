@@ -46,6 +46,7 @@ const ClientHouseProject = props => {
     <>
       <Header logoLight />
       <Menu
+        locale={props.pageContext.locale}
         dataMenu={menuRightProject}
         dataMenuLeft={menuLeftProject}
         about={about}
@@ -111,27 +112,27 @@ export default ClientHouseProject
 
 export const query = graphql`
   query HouseProjectData($locale: String!) {
-    houseProject: datoCmsHouseProjectForClient(locale: { eq: $locale }) {
+    houseProject: datoCmsHouseProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    interiorProject: datoCmsInteriorProjectForClient(locale: { eq: $locale }) {
+    interiorProject: datoCmsInteriorProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    menuRightProject: datoCmsMenuRight(locale: { eq: $locale }) {
+    menuRightProject: datoCmsMenuRight(locale: $locale) {
       adressData1
       adressData2
       phoneNumber
@@ -165,7 +166,7 @@ export const query = graphql`
       }
       pinterestLink
     }
-    menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
+    menuLeftProject: datoCmsMenuLeft(locale: $locale) {
       projectsHeader
       projectsSubfield1
       projectsSubfield2
@@ -179,11 +180,11 @@ export const query = graphql`
       publicationsHeader
     }
 
-    about: datoCmsAbout(locale: { eq: $locale }) {
+    about: datoCmsAbout(locale: $locale) {
       aboutTitle
       aboutContent
       slug
-      locale
+      locales
     }
 
     logoData: datoCmsHeaderLogoLight {
@@ -194,13 +195,13 @@ export const query = graphql`
         }
       }
     }
-    category: datoCmsCategory(locale: { eq: $locale }) {
+    category: datoCmsCategory(locale: $locale) {
       categoryFirst
       categorySecond
-      locale
+      locales
     }
 
-    offer: datoCmsOffer(locale: { eq: $locale }) {
+    offer: datoCmsOffer(locale: $locale) {
       offerBackgroundImage {
         fluid {
           src
@@ -225,8 +226,8 @@ export const query = graphql`
           src
         }
       }
-      locale
       slug
+      locales
     }
   }
 `

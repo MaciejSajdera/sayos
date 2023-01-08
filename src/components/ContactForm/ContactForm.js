@@ -38,7 +38,7 @@ const ContactForm = ({ handleContactFormToggle, props }) => {
 
   const data = useStaticQuery(graphql`
     query MyContactFormQuery {
-      pl: datoCmsContactForm(locale: { eq: "pl" }) {
+      pl: datoCmsContactForm(locale: "pl") {
         formHeader
         topic
         topicOptions {
@@ -52,7 +52,7 @@ const ContactForm = ({ handleContactFormToggle, props }) => {
         submitText
       }
 
-      en: datoCmsContactForm(locale: { eq: "en" }) {
+      en: datoCmsContactForm(locale: "en") {
         formHeader
         topic
         topicOptions {

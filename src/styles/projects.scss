@@ -1,4 +1,4 @@
-@import "../styles/variables.scss";
+// @import "../styles/variables.scss";
 
 .fullscreen-project-image {
   height: 100vh;
@@ -222,7 +222,7 @@
         text-align: justify;
         font-weight: 300;
         line-height: 1.4;
-        @include fluid-type($min_width, $max_width, 17px, 19px);
+        // @include fluid-type($min_width, $max_width, 17px, 19px);
       }
     }
 
@@ -304,7 +304,7 @@
     line-height: 1.4;
     margin-bottom: 0;
 
-    @include fluid-type($min_width, $max_width, 24px, 46px);
+    // @include fluid-type($min_width, $max_width, 24px, 46px);
 
     &:nth-child(2) {
       margin-bottom: 0.5em;

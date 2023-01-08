@@ -299,7 +299,7 @@ class HeroCarousel extends React.Component {
   //https://www.gatsbyjs.com/blog/2018-12-04-per-link-gatsby-page-transitions-with-transitionlink/
 
   render() {
-    let { projects, templateLocation, pageLocation } = this.props
+    let { projects, templateLocation, pageLocation, locale } = this.props
 
     // const setZIndexForBgInTopSlider = () => {
     //   console.log("test")
@@ -375,9 +375,9 @@ class HeroCarousel extends React.Component {
                                black            /* color */
                              `}
                     to={
-                      element.locale === "pl"
+                      locale === "pl"
                         ? `/${element.projectCategory}/${element.slug}`
-                        : `/${element.locale}/${element.projectCategory}/${element.slug}`
+                        : `/en/${element.projectCategory}/${element.slug}`
                     }
                     // exit={this.myExitTransition()}
                     // entry={this.entryTransition}
@@ -385,7 +385,7 @@ class HeroCarousel extends React.Component {
                     state={{ prevPath: templateLocation.pathname }}
                     // onWheel={this.handleWheel}
                     className={`slide-bg-fullscreen slide-home-page`}
-                    css={{
+                    style={{
                       backgroundImage: `url(
                             ${element.fullScreenPhoto.fluid.src}
                           )`,

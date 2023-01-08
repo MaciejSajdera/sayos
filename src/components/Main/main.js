@@ -404,9 +404,9 @@
 //                 >
 //                   <TransitionLink
 //                     to={
-//                       element.locale === "pl"
+//                       element.locales === "pl"
 //                         ? `${element.projectCategory}/${element.slug}`
-//                         : `/${element.locale}/${element.projectCategory}/${element.slug}`
+//                         : `/${element.locales}/${element.projectCategory}/${element.slug}`
 //                     }
 //                     exit={myExitTransition()}
 //                     entry={entryTransition}
@@ -419,7 +419,7 @@
 //                             : `move-left`
 //                         }
 //                         `}
-//                     css={{
+//                     style={{
 //                       backgroundImage: `url(
 //                             ${element.fullScreenPhoto.fluid.src}
 //                           )`,

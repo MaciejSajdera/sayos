@@ -27,6 +27,7 @@ const About = props => {
     <>
       <Header logoLight />
       <Menu
+        locale={props.pageContext.locale}
         dataMenu={menuRightProject}
         dataMenuLeft={menuLeftProject}
         about={about}
@@ -71,13 +72,13 @@ export default About
 
 export const query = graphql`
   query aboutData($locale: String!) {
-    about: datoCmsAbout(locale: { eq: $locale }) {
+    about: datoCmsAbout(locale: $locale) {
       aboutTitle
       aboutContent
       slug
-      locale
+      locales
     }
-    menuRightProject: datoCmsMenuRight(locale: { eq: $locale }) {
+    menuRightProject: datoCmsMenuRight(locale: $locale) {
       adressData1
       adressData2
       phoneNumber
@@ -111,7 +112,7 @@ export const query = graphql`
       }
       pinterestLink
     }
-    menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
+    menuLeftProject: datoCmsMenuLeft(locale: $locale) {
       projectsHeader
       projectsSubfield1
       projectsSubfield2
@@ -125,33 +126,33 @@ export const query = graphql`
       publicationsHeader
     }
 
-    houseProject: datoCmsHouseProjectForClient(locale: { eq: $locale }) {
+    houseProject: datoCmsHouseProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    interiorProject: datoCmsInteriorProjectForClient(locale: { eq: $locale }) {
+    interiorProject: datoCmsInteriorProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    category: datoCmsCategory(locale: { eq: $locale }) {
+    category: datoCmsCategory(locale: $locale) {
       categoryFirst
       categorySecond
-      locale
+      locales
     }
 
-    offer: datoCmsOffer(locale: { eq: $locale }) {
+    offer: datoCmsOffer(locale: $locale) {
       offerBackgroundImage {
         fluid {
           src
@@ -176,8 +177,8 @@ export const query = graphql`
           src
         }
       }
-      locale
       slug
+      locales
     }
   }
 `

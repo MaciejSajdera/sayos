@@ -1,13 +1,15 @@
-import React from "react"
 import { graphql } from "gatsby"
+import React from "react"
 
-import Menu from "../components/Menu/menu"
 import Header from "../components/Header/header"
 import HeroCarousel from "../components/HeroCarousel/HeroCarousel"
+import Menu from "../components/Menu/menu"
 
 class Home extends React.Component {
   constructor(props) {
     super(props)
+
+    console.log(props)
 
     this.state = {
       locale: this.props.data.menuRightIndex.locale,
@@ -42,6 +44,7 @@ class Home extends React.Component {
       <>
         <Header />
         <Menu
+          locale={this.props.pageContext.locale}
           dataMenu={menuRightIndex}
           dataMenuLeft={menuLeftIndex}
           dataProjects={projects}
@@ -54,6 +57,7 @@ class Home extends React.Component {
           offer={offer}
         />
         <HeroCarousel
+          locale={this.props.pageContext.locale}
           projects={allCollection}
           pageLocation={"homePage"}
           templateLocation={this.props.location}
@@ -67,10 +71,10 @@ export default Home
 
 export const query = graphql`
   query allProjectsDataHome($locale: String!) {
-    projects: allDatoCmsProject(filter: { locale: { eq: $locale } }) {
+    projects: allDatoCmsProject(filter: { locales: { eq: $locale } }) {
       nodes {
         slug
-        locale
+        locales
         id
         position
         projectCategory
@@ -108,7 +112,7 @@ export const query = graphql`
         }
       }
     }
-    menuRightIndex: datoCmsMenuRight(locale: { eq: $locale }) {
+    menuRightIndex: datoCmsMenuRight(locale: $locale) {
       adressData1
       adressData2
       phoneNumber
@@ -143,7 +147,7 @@ export const query = graphql`
       pinterestLink
     }
 
-    menuLeftIndex: datoCmsMenuLeft(locale: { eq: $locale }) {
+    menuLeftIndex: datoCmsMenuLeft(locale: $locale) {
       projectsHeader
       projectsSubfield1
       projectsSubfield2
@@ -154,15 +158,15 @@ export const query = graphql`
       individualSubfield1
       individualSubfield2
       contactHeader
-      locale
+      locales
       publicationsHeader
     }
 
-    about: datoCmsAbout(locale: { eq: $locale }) {
+    about: datoCmsAbout(locale: $locale) {
       aboutTitle
       aboutContent
       slug
-      locale
+      locales
     }
 
     logoData: datoCmsHeaderLogoLight {
@@ -174,33 +178,33 @@ export const query = graphql`
       }
     }
 
-    houseProject: datoCmsHouseProjectForClient(locale: { eq: $locale }) {
+    houseProject: datoCmsHouseProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    interiorProject: datoCmsInteriorProjectForClient(locale: { eq: $locale }) {
+    interiorProject: datoCmsInteriorProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    category: datoCmsCategory(locale: { eq: $locale }) {
+    category: datoCmsCategory(locale: $locale) {
       categoryFirst
       categorySecond
-      locale
+      locales
     }
 
-    offer: datoCmsOffer(locale: { eq: $locale }) {
+    offer: datoCmsOffer(locale: $locale) {
       offerBackgroundImage {
         fluid {
           src
@@ -225,8 +229,8 @@ export const query = graphql`
           src
         }
       }
-      locale
       slug
+      locales
     }
   }
 `

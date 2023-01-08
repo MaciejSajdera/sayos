@@ -5,6 +5,7 @@ import myContext from "../../../context"
 import ContactForm from "../ContactForm/ContactForm"
 
 const Menu = ({
+  locale,
   dataMenu,
   dataMenuLeft,
   dataProjects,
@@ -123,11 +124,7 @@ const Menu = ({
                   >
                     <div className="menu-grouped-items will-be-hidden">
                       <Link
-                        to={
-                          about.locale === "pl"
-                            ? `/all`
-                            : `/${about.locale}/all`
-                        }
+                        to={locale === "pl" ? `/all` : `/${locale}/all`}
                         onClick={() => {
                           rememberWhereEnteredFrom(`/all`)
                         }}
@@ -137,17 +134,17 @@ const Menu = ({
 
                       <Link
                         to={
-                          category.locale === "pl"
+                          locale === "pl"
                             ? `/${category.categoryFirst}`
-                            : `/${about.locale}/${category.categoryFirst}`
+                            : `/${locale}/${category.categoryFirst}`
                         }
                         onClick={() => {
-                          category.locale === "pl"
+                          locale === "pl"
                             ? rememberWhereEnteredFrom(
                                 `/${category.categoryFirst}`
                               )
                             : rememberWhereEnteredFrom(
-                                `/${about.locale}/${category.categoryFirst}`
+                                `/${locale}/${category.categoryFirst}`
                               )
                         }}
                       >
@@ -158,17 +155,17 @@ const Menu = ({
 
                       <Link
                         to={
-                          category.locale === "pl"
+                          locale === "pl"
                             ? `/${category.categorySecond}`
-                            : `/${about.locale}/${category.categorySecond}`
+                            : `/${locale}/${category.categorySecond}`
                         }
                         onClick={() => {
-                          category.locale === "pl"
+                          locale === "pl"
                             ? rememberWhereEnteredFrom(
                                 `/${category.categorySecond}`
                               )
                             : rememberWhereEnteredFrom(
-                                `/${about.locale}/${category.categorySecond}`
+                                `/${locale}/${category.categorySecond}`
                               )
                         }}
                       >
@@ -190,9 +187,9 @@ const Menu = ({
                     <Link
                       className={`will-be-hidden`}
                       to={
-                        about.locale === "pl"
+                        locale === "pl"
                           ? `/${about.slug}`
-                          : `/${about.locale}/${about.slug}`
+                          : `/${locale}/${about.slug}`
                       }
                     >
                       <h3>{dataMenuLeft.aboutHeader}</h3>
@@ -200,11 +197,7 @@ const Menu = ({
 
                     <Link
                       className={`will-be-hidden`}
-                      to={
-                        about.locale === "pl"
-                          ? `/publikacje`
-                          : `/${about.locale}/media`
-                      }
+                      to={locale === "pl" ? `/publikacje` : `/${locale}/media`}
                     >
                       <h3>{dataMenuLeft.publicationsHeader}</h3>
                     </Link>
@@ -212,11 +205,11 @@ const Menu = ({
                     {/* <div className="menu-grouped-items">
                           <h3>{dataMenuLeft.individualCustomer}</h3>
 
-                          <Link to={ about.locale === "pl" ? `/${houseProject.slug}` : `/${houseProject.locale}/${houseProject.slug}`}>
+                          <Link to={ locale === "pl" ? `/${houseProject.slug}` : `/${houseProject.locale}/${houseProject.slug}`}>
                           <p>{dataMenuLeft.individualSubfield1}</p>
                           </Link>
 
-                          <Link to={ about.locale === "pl" ? `/${interiorProject.slug}` : `/${interiorProject.locale}/${interiorProject.slug}`}>
+                          <Link to={ locale === "pl" ? `/${interiorProject.slug}` : `/${interiorProject.locale}/${interiorProject.slug}`}>
                           <p className={`${isOpen ? "title-hidden" : ""}`}>{dataMenuLeft.individualSubfield2}</p>
                           </Link>
 

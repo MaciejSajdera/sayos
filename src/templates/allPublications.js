@@ -8,7 +8,7 @@ import PublicationsCarousel from "../components/PublicationsCarousel/Publication
 
 import myContext from "../../context"
 
-class allProjects extends React.Component {
+class allPublications extends React.Component {
   constructor(props) {
     super(props)
 
@@ -52,6 +52,7 @@ class allProjects extends React.Component {
       <>
         <Header />
         <Menu
+          locale={this.props.pageContext.locale}
           dataMenu={menuRightIndex}
           dataMenuLeft={menuLeftIndex}
           dataProjects={projects}
@@ -68,22 +69,23 @@ class allProjects extends React.Component {
           projects={allCollection}
           pageLocation={"allPublications"}
           templateLocation={this.props.location}
+          locale={this.props.pageContext.locale}
         />
       </>
     )
   }
 }
 
-allProjects.contextType = myContext
+allPublications.contextType = myContext
 
-export default allProjects
+export default allPublications
 
 export const query = graphql`
   query allPublicationsData($locale: String!) {
-    projects: allDatoCmsPublication(filter: { locale: { eq: $locale } }) {
+    projects: allDatoCmsPublication(filter: { locales: { eq: $locale } }) {
       nodes {
         slug
-        locale
+        locales
         id
         position
         projectCategory
@@ -100,7 +102,7 @@ export const query = graphql`
         projectDescription
       }
     }
-    menuRightIndex: datoCmsMenuRight(locale: { eq: $locale }) {
+    menuRightIndex: datoCmsMenuRight(locale: $locale) {
       adressData1
       adressData2
       phoneNumber
@@ -135,7 +137,7 @@ export const query = graphql`
       pinterestLink
     }
 
-    menuLeftIndex: datoCmsMenuLeft(locale: { eq: $locale }) {
+    menuLeftIndex: datoCmsMenuLeft(locale: $locale) {
       projectsHeader
       projectsSubfield1
       projectsSubfield2
@@ -146,15 +148,15 @@ export const query = graphql`
       individualSubfield1
       individualSubfield2
       contactHeader
-      locale
+      locales
       publicationsHeader
     }
 
-    about: datoCmsAbout(locale: { eq: $locale }) {
+    about: datoCmsAbout(locale: $locale) {
       aboutTitle
       aboutContent
       slug
-      locale
+      locales
     }
 
     logoData: datoCmsHeaderLogoLight {
@@ -166,33 +168,33 @@ export const query = graphql`
       }
     }
 
-    houseProject: datoCmsHouseProjectForClient(locale: { eq: $locale }) {
+    houseProject: datoCmsHouseProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    interiorProject: datoCmsInteriorProjectForClient(locale: { eq: $locale }) {
+    interiorProject: datoCmsInteriorProjectForClient(locale: $locale) {
       pageName
       slug
-      locale
+      locales
       modularContent {
         slideNumber
         slideHeader
         slideMainText
       }
     }
-    category: datoCmsCategory(locale: { eq: $locale }) {
+    category: datoCmsCategory(locale: $locale) {
       categoryFirst
       categorySecond
-      locale
+      locales
     }
 
-    offer: datoCmsOffer(locale: { eq: $locale }) {
+    offer: datoCmsOffer(locale: $locale) {
       offerBackgroundImage {
         fluid {
           src
@@ -217,7 +219,7 @@ export const query = graphql`
           src
         }
       }
-      locale
+      locales
       slug
     }
   }

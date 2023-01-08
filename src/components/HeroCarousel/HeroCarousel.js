@@ -1,19 +1,17 @@
-import React, { useState } from "react"
-
-import LazyLoad from "react-lazyload"
+import React from "react"
 
 import TransitionLink from "gatsby-plugin-transition-link"
 
 import { getStyle } from "../../helperFunctions/helperFunctions"
 
-import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore, {
-  Navigation,
-  Lazy,
-  Parallax,
   Keyboard,
+  Lazy,
   Mousewheel,
+  Navigation,
+  Parallax,
 } from "swiper"
+import { Swiper, SwiperSlide } from "swiper/react"
 SwiperCore.use([Navigation, Mousewheel, Keyboard, Lazy, Parallax])
 
 class HeroCarousel extends React.Component {
@@ -295,7 +293,7 @@ class HeroCarousel extends React.Component {
   //https://www.gatsbyjs.com/blog/2018-12-04-per-link-gatsby-page-transitions-with-transitionlink/
 
   render() {
-    let { projects, templateLocation, pageLocation } = this.props
+    let { projects, templateLocation, pageLocation, locale } = this.props
 
     // const setZIndexForBgInTopSlider = () => {
     //   console.log("test")
@@ -359,9 +357,9 @@ class HeroCarousel extends React.Component {
                 >
                   <TransitionLink
                     to={
-                      element.locale === "pl"
+                      locale === "pl"
                         ? `/${element.projectCategory}/${element.slug}`
-                        : `/${element.locale}/${element.projectCategory}/${element.slug}`
+                        : `/en/${element.projectCategory}/${element.slug}`
                     }
                     exit={this.myExitTransition()}
                     entry={this.entryTransition}
@@ -369,7 +367,7 @@ class HeroCarousel extends React.Component {
                     state={{ prevPath: templateLocation.pathname }}
                     // onWheel={this.handleWheel}
                     className={`slide-bg-fullscreen slide-home-page`}
-                    css={{
+                    style={{
                       backgroundImage: `url(
                             ${element.fullScreenPhoto.fluid.src}
                           )`,

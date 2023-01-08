@@ -1,13 +1,5 @@
 import React from "react"
 
-// const defaultContextValue = {
-//   data: {
-//     // set your initial data shape here
-//     navToggled: false,
-//   },
-//   set: () => {},
-// }
-
 const myContext = React.createContext({
   navToggled: false,
 })
@@ -54,7 +46,6 @@ class ContextProviderComponent extends React.Component {
   render() {
     return (
       <myContext.Provider value={this.state}>
-        {" "}
         {this.props.children}
       </myContext.Provider>
     )

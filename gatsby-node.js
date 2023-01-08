@@ -1,137 +1,137 @@
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const locales = ["pl", "en"]
 
-  const componentTemplate = path.resolve(`src/templates/home.js`)
+  const homeTemplate = path.resolve(`src/templates/home.js`)
 
   locales.forEach(locale => {
     const prefix = locale === "pl" ? "" : `${locale}`
     createPage({
       path: `/${prefix}`,
-      component: componentTemplate,
+      component: homeTemplate,
       context: { locale },
     })
   })
+
+  const allProjectsTemplate = path.resolve(`src/templates/allProjects.js`)
 
   locales.forEach(locale => {
     const prefix = locale === "pl" ? `all` : `${locale}/all`
     createPage({
       path: `/${prefix}`,
-      component: path.resolve(`src/templates/allProjects.js`),
+      component: allProjectsTemplate,
       context: { locale },
     })
   })
+
+  const allPublicationsTemplate = path.resolve(
+    `src/templates/allPublications.js`
+  )
 
   locales.forEach(locale => {
     const prefix = locale === "pl" ? `publikacje` : `${locale}/media`
     createPage({
       path: `/${prefix}`,
-      component: path.resolve(`src/templates/allPublications.js`),
+      component: allPublicationsTemplate,
       context: { locale },
     })
   })
 
   const aboutPageQuery = await graphql(`
     query aboutPageQuery {
-      pl: allDatoCmsAbout(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsAbout(filter: { locales: { eq: "pl" } }) {
         nodes {
           aboutTitle
           aboutContent
           slug
-          locale
+          locales
         }
       }
-      en: allDatoCmsAbout(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsAbout(filter: { locales: { eq: "en" } }) {
         nodes {
           aboutTitle
           aboutContent
           slug
-          locale
+          locales
         }
       }
     }
   `)
 
   aboutPageQuery.data.pl.nodes.forEach(item => {
-    const prefix =
-      item.locale === "pl" ? `${item.slug}` : `${item.locale}/${item.slug}`
     createPage({
-      path: `/${prefix}`,
+      path: `/${item.slug}`,
       component: path.resolve(`src/templates/about.js`),
       context: {
         aboutData: item.aboutTitle,
-        locale: item.locale,
+        locale: "pl",
       },
     })
   })
 
   aboutPageQuery.data.en.nodes.forEach(item => {
-    const prefix = `${item.locale}/${item.slug}`
     createPage({
-      path: `/${prefix}`,
+      path: `/en/${item.slug}`,
       component: path.resolve(`src/templates/about.js`),
       context: {
         aboutData: item,
         aboutTitle: item.aboutTitle,
-        locale: item.locale,
+        locale: "en",
       },
     })
   })
 
   const thankYouPageQuery = await graphql(`
     query thankYouPageQuery {
-      pl: allDatoCmsThankYou(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsThankYou(filter: { locales: { eq: "pl" } }) {
         nodes {
           thankYouTitle
           thankYouContent
           slug
-          locale
+          locales
         }
       }
-      en: allDatoCmsThankYou(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsThankYou(filter: { locales: { eq: "en" } }) {
         nodes {
           thankYouTitle
           thankYouContent
           slug
-          locale
+          locales
         }
       }
     }
   `)
 
   thankYouPageQuery.data.pl.nodes.forEach(item => {
-    let url = `/${item.slug}`
     createPage({
-      path: url,
+      path: `/${item.slug}`,
       component: path.resolve(`src/templates/thanks.js`),
       context: {
         thankYouData: item.thankYouTitle,
-        locale: item.locale,
+        locale: "pl",
       },
     })
   })
 
   thankYouPageQuery.data.en.nodes.forEach(item => {
-    let url = `/${item.slug}`
     createPage({
-      path: url,
+      path: `/en/${item.slug}`,
       component: path.resolve(`src/templates/thanks.js`),
       context: {
         thankYouData: item,
         thankYouTitle: item.thankYouTitle,
-        locale: item.locale,
+        locale: "en",
       },
     })
   })
 
   const offerPageQuery = await graphql(`
     query thankYouPageQuery {
-      pl: allDatoCmsOffer(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsOffer(filter: { locales: { eq: "pl" } }) {
         nodes {
           slug
-          locale
+          locales
           offerBackgroundImage {
             fluid {
               src
@@ -158,10 +158,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           }
         }
       }
-      en: allDatoCmsOffer(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsOffer(filter: { locales: { eq: "en" } }) {
         nodes {
           slug
-          locale
+          locales
           offerBackgroundImage {
             fluid {
               src
@@ -192,23 +192,21 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   `)
 
   offerPageQuery.data.pl.nodes.forEach(item => {
-    let url = `/${item.slug}`
     createPage({
-      path: url,
+      path: `/${item.slug}`,
       component: path.resolve(`src/templates/offer.js`),
       context: {
-        locale: item.locale,
+        locale: "pl",
       },
     })
   })
 
   offerPageQuery.data.en.nodes.forEach(item => {
-    let url = `/${item.slug}`
     createPage({
-      path: url,
+      path: `/en/${item.slug}`,
       component: path.resolve(`src/templates/offer.js`),
       context: {
-        locale: item.locale,
+        locale: "en",
       },
     })
   })
@@ -216,7 +214,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   //for getting slug to offer type pages
   const offerPageSlugNamePL = await graphql(`
     query OfferPageSlugNameQuery {
-      pl: datoCmsOffer(locale: { eq: "pl" }) {
+      pl: datoCmsOffer(locale: "pl") {
         slug
       }
     }
@@ -224,7 +222,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   const offerPageSlugNameEN = await graphql(`
     query OfferPageSlugNameQuery {
-      en: datoCmsOffer(locale: { eq: "en" }) {
+      en: datoCmsOffer(locale: "en") {
         slug
       }
     }
@@ -232,18 +230,18 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   const houseProjectQuery = await graphql(`
     query HouseProject {
-      pl: allDatoCmsHouseProjectForClient(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsHouseProjectForClient(filter: { locales: { eq: "pl" } }) {
         nodes {
           pageName
           slug
-          locale
+          locales
         }
       }
-      en: allDatoCmsHouseProjectForClient(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsHouseProjectForClient(filter: { locales: { eq: "en" } }) {
         nodes {
           pageName
           slug
-          locale
+          locales
         }
       }
     }
@@ -256,38 +254,42 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: path.resolve(`src/templates/clientHouseProject.js`),
       context: {
         houseProjectData: item.pageName,
-        locale: item.locale,
+        locale: "pl",
       },
     })
   })
 
   houseProjectQuery.data.en.nodes.forEach(item => {
-    let url = `${offerPageSlugNameEN.data.en.slug}/${item.locale}/${item.slug}`
+    let url = `/en/${offerPageSlugNameEN.data.en.slug}/${item.slug}`
     createPage({
       path: url,
       component: path.resolve(`src/templates/clientHouseProject.js`),
       context: {
         // thankYouData: item,
         // thankYouTitle: item.thankYouTitle,
-        locale: item.locale,
+        locale: "en",
       },
     })
   })
 
   const interiorProjectQuery = await graphql(`
     query interiorProject {
-      pl: allDatoCmsInteriorProjectForClient(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsInteriorProjectForClient(
+        filter: { locales: { eq: "pl" } }
+      ) {
         nodes {
           pageName
           slug
-          locale
+          locales
         }
       }
-      en: allDatoCmsInteriorProjectForClient(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsInteriorProjectForClient(
+        filter: { locales: { eq: "en" } }
+      ) {
         nodes {
           pageName
           slug
-          locale
+          locales
         }
       }
     }
@@ -300,38 +302,38 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: path.resolve(`src/templates/clientInteriorProject.js`),
       context: {
         interiorProjectData: item.pageName,
-        locale: item.locale,
+        locale: "pl",
       },
     })
   })
 
   interiorProjectQuery.data.en.nodes.forEach(item => {
-    let url = `${offerPageSlugNameEN.data.en.slug}/${item.locale}/${item.slug}`
+    let url = `/en/${offerPageSlugNameEN.data.en.slug}/${item.slug}`
     createPage({
       path: url,
       component: path.resolve(`src/templates/clientInteriorProject.js`),
       context: {
         // thankYouData: item,
         // thankYouTitle: item.thankYouTitle,
-        locale: item.locale,
+        locale: "en",
       },
     })
   })
 
   const designProjectQuery = await graphql(`
     query designProject {
-      pl: allDatoCmsDesignProjectForClient(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsDesignProjectForClient(filter: { locales: { eq: "pl" } }) {
         nodes {
           pageName
           slug
-          locale
+          locales
         }
       }
-      en: allDatoCmsDesignProjectForClient(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsDesignProjectForClient(filter: { locales: { eq: "en" } }) {
         nodes {
           pageName
           slug
-          locale
+          locales
         }
       }
     }
@@ -344,29 +346,29 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: path.resolve(`src/templates/clientDesignProject.js`),
       context: {
         designProjectData: item.pageName,
-        locale: item.locale,
+        locale: "pl",
       },
     })
   })
 
   designProjectQuery.data.en.nodes.forEach(item => {
-    let url = `${offerPageSlugNameEN.data.en.slug}/${item.locale}/${item.slug}`
+    let url = `/en/${offerPageSlugNameEN.data.en.slug}/${item.slug}`
     createPage({
       path: url,
       component: path.resolve(`src/templates/clientDesignProject.js`),
       context: {
         designProjectData: item.pageName,
-        locale: item.locale,
+        locale: "en",
       },
     })
   })
 
   const projectsQuery = await graphql(`
     query myData {
-      pl: allDatoCmsProject(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsProject(filter: { locales: { eq: "pl" } }) {
         nodes {
           slug
-          locale
+          locales
           id
           position
           projectCategory
@@ -409,10 +411,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         }
       }
 
-      en: allDatoCmsProject(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsProject(filter: { locales: { eq: "en" } }) {
         nodes {
           slug
-          locale
+          locales
           id
           position
           projectCategory
@@ -466,20 +468,20 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: path.resolve(`src/templates/ProjectPage.js`),
       context: {
         thisProjectData: item,
-        locale: item.locale,
+        locale: "pl",
         fullScreenPhoto: item.fullScreenPhoto,
       },
     })
   })
 
   projectsQuery.data.en.nodes.forEach(item => {
-    let url = `/${item.locale}/${item.projectCategory}/${item.slug}`
+    let url = `/en/${item.projectCategory}/${item.slug}`
     createPage({
       path: url,
       component: path.resolve(`src/templates/ProjectPage.js`),
       context: {
         thisProjectData: item,
-        locale: item.locale,
+        locale: "en",
         fullScreenPhoto: item.fullScreenPhoto,
       },
     })
@@ -489,16 +491,16 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   const categoriesFirstQuery = await graphql(`
     query interiorProject {
-      pl: allDatoCmsCategory(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsCategory(filter: { locales: { eq: "pl" } }) {
         nodes {
           categoryFirst
-          locale
+          locales
         }
       }
-      en: allDatoCmsCategory(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsCategory(filter: { locales: { eq: "en" } }) {
         nodes {
           categoryFirst
-          locale
+          locales
         }
       }
     }
@@ -506,16 +508,16 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   const categoriesSecondQuery = await graphql(`
     query interiorProject {
-      pl: allDatoCmsCategory(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsCategory(filter: { locales: { eq: "pl" } }) {
         nodes {
           categorySecond
-          locale
+          locales
         }
       }
-      en: allDatoCmsCategory(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsCategory(filter: { locales: { eq: "en" } }) {
         nodes {
           categorySecond
-          locale
+          locales
         }
       }
     }
@@ -529,21 +531,21 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: path.resolve(`src/templates/allProjectsHouse.js`),
       context: {
         // thisProjectData: item,
-        locale: item.locale,
+        locale: "pl",
         // fullScreenPhoto: item.fullScreenPhoto
       },
     })
   })
 
   categoriesFirstQuery.data.en.nodes.forEach(item => {
-    let url = `/${item.locale}/${item.categoryFirst}`
+    let url = `/en/${item.categoryFirst}`
 
     createPage({
       path: url,
       component: path.resolve(`src/templates/allProjectsHouse.js`),
       context: {
         // thisProjectData: item,
-        locale: item.locale,
+        locale: "en",
         // fullScreenPhoto: item.fullScreenPhoto
       },
     })
@@ -557,21 +559,21 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: path.resolve(`src/templates/allProjectsInterior.js`),
       context: {
         // thisProjectData: item,
-        locale: item.locale,
+        locale: "pl",
         // fullScreenPhoto: item.fullScreenPhoto
       },
     })
   })
 
   categoriesSecondQuery.data.en.nodes.forEach(item => {
-    let url = `/${item.locale}/${item.categorySecond}`
+    let url = `/en/${item.categorySecond}`
 
     createPage({
       path: url,
       component: path.resolve(`src/templates/allProjectsInterior.js`),
       context: {
         // thisProjectData: item,
-        locale: item.locale,
+        locale: "en",
         // fullScreenPhoto: item.fullScreenPhoto
       },
     })
@@ -579,10 +581,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   const publicationsQuery = await graphql(`
     query myData {
-      pl: allDatoCmsPublication(filter: { locale: { eq: "pl" } }) {
+      pl: allDatoCmsPublication(filter: { locales: { eq: "pl" } }) {
         nodes {
           slug
-          locale
+          locales
           id
           position
           projectCategory
@@ -607,10 +609,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         }
       }
 
-      en: allDatoCmsPublication(filter: { locale: { eq: "en" } }) {
+      en: allDatoCmsPublication(filter: { locales: { eq: "en" } }) {
         nodes {
           slug
-          locale
+          locales
           id
           position
           projectCategory
@@ -645,20 +647,20 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: path.resolve(`src/templates/PublicationPage.js`),
       context: {
         thisPublicationData: item,
-        locale: item.locale,
+        locale: "pl",
         fullScreenPhoto: item.fullScreenPhoto,
       },
     })
   })
 
   publicationsQuery.data.en.nodes.forEach(item => {
-    let url = `/${item.locale}/${item.projectCategory}/${item.slug}`
+    let url = `/en/${item.projectCategory}/${item.slug}`
     createPage({
       path: url,
       component: path.resolve(`src/templates/PublicationPage.js`),
       context: {
         thisPublicationData: item,
-        locale: item.locale,
+        locale: "en",
         fullScreenPhoto: item.fullScreenPhoto,
       },
     })

@@ -1,4 +1,4 @@
-@import "../styles/variables.scss";
+// @import "../styles/variables.scss";
 
 main {
   .swiper-wrapper {
@@ -208,7 +208,7 @@ main.allProjectsInterior {
   h2 {
     color: #fff;
     // font-size: 2rem;
-    @include fluid-type($min_width, $max_width, 28px, 48px);
+    // @include fluid-type($min_width, $max_width, 28px, 48px);
     width: 100%;
     // letter-spacing: 1px;
     // transition: all 0.5s ease-in-out;

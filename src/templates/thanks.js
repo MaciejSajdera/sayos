@@ -40,13 +40,13 @@ export default Thanks
 
 export const query = graphql`
   query thanksData($locale: String!) {
-    thanks: datoCmsThankYou(locale: { eq: $locale }) {
+    thanks: datoCmsThankYou(locale: $locale) {
       thankYouTitle
       thankYouContent
       slug
-      locale
+      locales
     }
-    menuRightProject: datoCmsMenuRight(locale: { eq: $locale }) {
+    menuRightProject: datoCmsMenuRight(locale: $locale) {
       adressData1
       adressData2
       phoneNumber
@@ -80,7 +80,7 @@ export const query = graphql`
       }
       pinterestLink
     }
-    menuLeftProject: datoCmsMenuLeft(locale: { eq: $locale }) {
+    menuLeftProject: datoCmsMenuLeft(locale: $locale) {
       projectsHeader
       projectsSubfield1
       projectsSubfield2
