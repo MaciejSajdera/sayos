@@ -31,14 +31,7 @@ class Home extends React.Component {
 
     const menuStyle = `menuStyleAbsolute`
 
-    let allCollection = []
-
-    projects.nodes.map(project => {
-      if (project) {
-        allCollection.push(project)
-      }
-      return allCollection
-    })
+    let allCollection = [...projects.nodes]
 
     return (
       <>
@@ -71,7 +64,7 @@ export default Home
 
 export const query = graphql`
   query allProjectsDataHome($locale: String!) {
-    projects: allDatoCmsProject(filter: { locales: { eq: $locale } }) {
+    projects: allDatoCmsProject(locale: $locale) {
       nodes {
         slug
         locales

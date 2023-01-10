@@ -185,7 +185,7 @@ class PublicationPage extends Component {
 
           thisPublicationData.locale === "pl"
             ? (firstProjectLink = `${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
-            : (firstProjectLink = `${thisPublicationData.locale}/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
+            : (firstProjectLink = `en/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
 
           arrowRightLinkDestination = firstProjectLink
           nextProjectPlaceholderImageSrc =
@@ -193,7 +193,7 @@ class PublicationPage extends Component {
 
           thisPublicationData.locale === "pl"
             ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
-            : (prevProjectLink = `${thisPublicationData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+            : (prevProjectLink = `en/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
 
           arrowLeftLinkDestination = prevProjectLink
           prevProjectPlaceholderImageSrc =
@@ -699,7 +699,7 @@ export default PublicationPage
 
 export const query = graphql`
   query thisPublicationData($locale: String!) {
-    publications: allDatoCmsPublication(filter: { locales: { eq: $locale } }) {
+    publications: allDatoCmsPublication(locale: $locale) {
       nodes {
         slug
         locales

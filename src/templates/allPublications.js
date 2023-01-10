@@ -39,14 +39,8 @@ class allPublications extends React.Component {
 
     const menuStyle = `menuStyleAbsolute`
 
-    let allCollection = []
+    let allCollection = [...projects.nodes]
 
-    projects.nodes.map(project => {
-      if (project) {
-        allCollection.push(project)
-      }
-      return allCollection
-    })
 
     return (
       <>
@@ -82,7 +76,7 @@ export default allPublications
 
 export const query = graphql`
   query allPublicationsData($locale: String!) {
-    projects: allDatoCmsPublication(filter: { locales: { eq: $locale } }) {
+    projects: allDatoCmsPublication(locale: $locale) {
       nodes {
         slug
         locales

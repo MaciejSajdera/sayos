@@ -36,15 +36,15 @@ class allProjectsInterior extends React.Component {
       offer,
     } = this.props.data
 
+    console.log(this.props.data)
+
     const menuStyle = `menuStyleAbsolute`
 
-    let interiorsCollection = []
-
-    projects.nodes.map(project => {
+    let interiorsCollection = projects.nodes.map(project => {
       if (project.projectCategory === category.categorySecond) {
-        interiorsCollection.push(project)
+        return project
       }
-      return interiorsCollection
+      return null
     })
 
     // console.log(interiorsCollection)
@@ -147,7 +147,7 @@ export default allProjectsInterior
 
 export const query = graphql`
   query allProjectsInteriorData($locale: String!) {
-    projects: allDatoCmsProject(filter: { locales: { eq: $locale } }) {
+    projects: allDatoCmsProject(locale: $locale) {
       nodes {
         slug
         locales

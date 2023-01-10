@@ -2,10 +2,11 @@ import React, { useEffect, useContext } from "react"
 import { Link, graphql } from "gatsby"
 import Menu from "../components/Menu/menu"
 import Header from "../components/Header/header"
-
 import myContext from "../../context"
 
 const About = props => {
+  console.log(props)
+
   let {
     about,
     menuRightProject,
@@ -76,7 +77,6 @@ export const query = graphql`
       aboutTitle
       aboutContent
       slug
-      locales
     }
     menuRightProject: datoCmsMenuRight(locale: $locale) {
       adressData1

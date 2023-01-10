@@ -69,6 +69,9 @@ class ProjectPage extends React.Component {
     window.scrollTop = 0
     let { projects } = this.props.data
     const { thisProjectData } = this.props.pageContext
+
+    console.log(thisProjectData)
+
     let enteredFrom
 
     if (typeof Storage !== "undefined") {
@@ -160,7 +163,7 @@ class ProjectPage extends React.Component {
 
           thisProjectData.locale === "pl"
             ? (firstProjectLink = `${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
-            : (firstProjectLink = `${thisProjectData.locale}/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
+            : (firstProjectLink = `en/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
 
           arrowRightLinkDestination = firstProjectLink
           nextProjectPlaceholderImageSrc =
@@ -168,7 +171,7 @@ class ProjectPage extends React.Component {
 
           thisProjectData.locale === "pl"
             ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
-            : (prevProjectLink = `${thisProjectData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+            : (prevProjectLink = `en/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
 
           arrowLeftLinkDestination = prevProjectLink
           prevProjectPlaceholderImageSrc =
@@ -178,7 +181,7 @@ class ProjectPage extends React.Component {
 
           thisProjectData.locale === "pl"
             ? (nextProjectLink = `${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
-            : (nextProjectLink = `${thisProjectData.locale}/${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
+            : (nextProjectLink = `en/${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
 
           arrowRightLinkDestination = nextProjectLink
           nextProjectPlaceholderImageSrc =
@@ -189,13 +192,11 @@ class ProjectPage extends React.Component {
           if (indexOfCurrentProject > 0) {
             thisProjectData.locale === "pl"
               ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
-              : (prevProjectLink = `${thisProjectData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+              : (prevProjectLink = `en/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
 
             arrowLeftLinkDestination = prevProjectLink
             prevProjectPlaceholderImageSrc =
               prevProjectObject.fullScreenPhoto.fluid.src
-
-            // console.log(this.state)
           }
         }
 
@@ -211,7 +212,7 @@ class ProjectPage extends React.Component {
 
           thisProjectData.locale === "pl"
             ? (lastProjectLink = `${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
-            : (lastProjectLink = `${thisProjectData.locale}/${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
+            : (lastProjectLink = `en/${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
 
           arrowLeftLinkDestination = lastProjectLink
           prevProjectPlaceholderImageSrc =
@@ -670,7 +671,7 @@ export default ProjectPage
 
 export const query = graphql`
   query thisProjectData($locale: String!) {
-    projects: allDatoCmsProject(filter: { locales: { eq: $locale } }) {
+    projects: allDatoCmsProject(locale: $locale) {
       nodes {
         slug
         locales

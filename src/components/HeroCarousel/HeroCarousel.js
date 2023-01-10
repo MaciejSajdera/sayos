@@ -337,63 +337,74 @@ class HeroCarousel extends React.Component {
       <main className={`${pageLocation}`}>
         <Swiper {...SwiperConfigs}>
           {projects
-            .sort((a, b) => {
-              const positionA = a.position
-              const positionB = b.position
-              let comparision = 0
-              if (positionA > positionB) {
-                comparision = 1
-              } else if (positionA < positionB) {
-                comparision = -1
-              }
-              return comparision
-            })
-            .map((element, index) => {
-              return (
-                <SwiperSlide
-                  key={index}
-                  id={`slide-id-${index}`}
-                  // onMouseLeave={this.handleOnMouseLeave}
-                >
-                  <TransitionLink
-                    to={
-                      locale === "pl"
-                        ? `/${element.projectCategory}/${element.slug}`
-                        : `/en/${element.projectCategory}/${element.slug}`
-                    }
-                    exit={this.myExitTransition()}
-                    entry={this.entryTransition}
-                    onClick={this.handleTransitionLinkType}
-                    state={{ prevPath: templateLocation.pathname }}
-                    // onWheel={this.handleWheel}
-                    className={`slide-bg-fullscreen slide-home-page`}
-                    style={{
-                      backgroundImage: `url(
+            ? projects
+                ?.sort((a, b) => {
+                  if (!a || !b) {
+                    return
+                  }
+
+                  const positionA = a.position
+                  const positionB = b.position
+                  let comparision = 0
+                  if (positionA > positionB) {
+                    comparision = 1
+                  } else if (positionA < positionB) {
+                    comparision = -1
+                  }
+                  return comparision
+                })
+                ?.map((element, index) => {
+                  if (!element) {
+                    return
+                  }
+
+                  return (
+                    <SwiperSlide
+                      key={index}
+                      id={`slide-id-${index}`}
+                      // onMouseLeave={this.handleOnMouseLeave}
+                    >
+                      {/* {console.log(element.projectCategory)} */}
+                      <TransitionLink
+                        to={
+                          locale === "pl"
+                            ? `/${element.projectCategory}/${element.slug}`
+                            : `/en/${element.projectCategory}/${element.slug}`
+                        }
+                        exit={this.myExitTransition()}
+                        entry={this.entryTransition}
+                        onClick={this.handleTransitionLinkType}
+                        state={{ prevPath: templateLocation.pathname }}
+                        // onWheel={this.handleWheel}
+                        className={`slide-bg-fullscreen slide-home-page`}
+                        style={{
+                          backgroundImage: `url(
                             ${element.fullScreenPhoto.fluid.src}
                           )`,
-                    }}
-                  >
-                    <div className={`title-wrapper`}>
-                      <div className={`title-container`}>
-                        <h2 className={`project-title-1`}>
-                          {element.titlePart1}
-                        </h2>
-                        <h2 className={`project-title-2`}>
-                          {element.titlePart2}
-                        </h2>
+                        }}
+                      >
+                        <div className={`title-wrapper`}>
+                          <div className={`title-container`}>
+                            <h2 className={`project-title-1`}>
+                              {element.titlePart1}
+                            </h2>
+                            <h2 className={`project-title-2`}>
+                              {element.titlePart2}
+                            </h2>
 
-                        <div className="text-on-hover">
-                          <p className="project-slogan">
-                            {element.projectSlogan}
-                          </p>
-                          <p className="read-more">{element.readMore}</p>
+                            <div className="text-on-hover">
+                              <p className="project-slogan">
+                                {element.projectSlogan}
+                              </p>
+                              <p className="read-more">{element.readMore}</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </TransitionLink>
-                </SwiperSlide>
-              )
-            })}
+                      </TransitionLink>
+                    </SwiperSlide>
+                  )
+                })
+            : null}
         </Swiper>
       </main>
     )

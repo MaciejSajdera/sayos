@@ -38,14 +38,17 @@ class allProjectsHouse extends React.Component {
 
     const menuStyle = `menuStyleAbsolute`
 
-    let housesCollection = []
-
-    projects.nodes.map(project => {
+    const housesCollection = projects.nodes.map(project => {
+      console.log(project.projectCategory)
       if (project.projectCategory === category.categoryFirst) {
-        housesCollection.push(project)
+        return project
       }
-      return housesCollection
+      return null
     })
+
+    console.log(this.props.data)
+    console.log(category.categoryFirst)
+    console.log(housesCollection)
 
     return (
       <>
@@ -145,7 +148,7 @@ export default allProjectsHouse
 
 export const query = graphql`
   query allProjectsHouseData($locale: String!) {
-    projects: allDatoCmsProject(filter: { locales: { eq: $locale } }) {
+    projects: allDatoCmsProject(locale: $locale) {
       nodes {
         slug
         locales

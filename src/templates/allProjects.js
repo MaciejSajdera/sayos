@@ -146,7 +146,7 @@ export default allProjects
 
 export const query = graphql`
   query allProjectsData($locale: String!) {
-    projects: allDatoCmsProject(filter: { locales: { eq: $locale } }) {
+    projects: allDatoCmsProject(locale: $locale) {
       nodes {
         slug
         locales
