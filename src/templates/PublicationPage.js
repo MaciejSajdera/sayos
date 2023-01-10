@@ -1,17 +1,13 @@
-import React, { Component, createRef } from "react"
-import { StaticQuery, graphql, Link } from "gatsby"
-import bgLogo from "../images/sayos-bg-logo.png"
-import TransitionLink from "gatsby-plugin-transition-link"
-import { Helmet } from "react-helmet"
+import { graphql } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
-import "react-lazy-load-image-component/src/effects/blur.css"
-import Consumer from "../../context"
-import { CgArrowUp, CgArrowDown } from "react-icons/cg"
+import React, { Component, createRef } from "react"
+import { Helmet } from "react-helmet"
 import { IconContext } from "react-icons"
+import { CgArrowDown, CgArrowUp } from "react-icons/cg"
+import "react-lazy-load-image-component/src/effects/blur.css"
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"
-
-import BackgroundImage from "gatsby-background-image"
+import bgLogo from "../images/sayos-bg-logo.png"
 
 class PublicationPage extends Component {
   constructor(props) {

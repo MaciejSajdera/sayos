@@ -1,8 +1,8 @@
-import React, { useEffect, useContext } from "react"
-import { Link, graphql } from "gatsby"
-import Menu from "../components/Menu/menu"
-import Header from "../components/Header/header"
+import { graphql } from "gatsby"
+import React, { useContext, useEffect } from "react"
 import myContext from "../../context"
+import Header from "../components/Header/header"
+import Menu from "../components/Menu/menu"
 
 const About = props => {
   console.log(props)

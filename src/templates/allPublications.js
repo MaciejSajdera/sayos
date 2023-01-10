@@ -1,9 +1,8 @@
+import { graphql } from "gatsby"
 import React from "react"
-import { Link, graphql, Img } from "gatsby"
-import { LazyLoadImage } from "react-lazy-load-image-component"
 
-import Menu from "../components/Menu/menu"
 import Header from "../components/Header/header"
+import Menu from "../components/Menu/menu"
 import PublicationsCarousel from "../components/PublicationsCarousel/PublicationsCarousel"
 
 import myContext from "../../context"
@@ -40,7 +39,6 @@ class allPublications extends React.Component {
     const menuStyle = `menuStyleAbsolute`
 
     let allCollection = [...projects.nodes]
-
 
     return (
       <>

@@ -1,10 +1,9 @@
+import { graphql } from "gatsby"
 import React from "react"
-import { Link, graphql, Img } from "gatsby"
-import { LazyLoadImage } from "react-lazy-load-image-component"
 
-import Menu from "../components/Menu/menu"
 import Header from "../components/Header/header"
 import HeroCarousel from "../components/HeroCarousel/HeroCarousel"
+import Menu from "../components/Menu/menu"
 
 import myContext from "../../context"
 

@@ -1,14 +1,14 @@
-import React, { useEffect, useContext } from "react"
 import { graphql } from "gatsby"
-import { Swiper, SwiperSlide } from "swiper/react"
+import React, { useContext, useEffect } from "react"
 import SwiperCore, {
-  Navigation,
-  Pagination,
-  Scrollbar,
   A11y,
   EffectFade,
   Mousewheel,
+  Navigation,
+  Pagination,
+  Scrollbar,
 } from "swiper"
+import { Swiper, SwiperSlide } from "swiper/react"
 
 import Header from "../components/Header/header"
 import Menu from "../components/Menu/menu"

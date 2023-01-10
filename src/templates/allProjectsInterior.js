@@ -1,12 +1,11 @@
+import { graphql } from "gatsby"
 import React from "react"
-import { Link, graphql, Img } from "gatsby"
-import { LazyLoadImage } from "react-lazy-load-image-component"
 
 import myContext from "../../context"
 
 import Header from "../components/Header/header"
-import Menu from "../components/Menu/menu"
 import HeroCarousel from "../components/HeroCarousel/HeroCarousel"
+import Menu from "../components/Menu/menu"
 
 class allProjectsInterior extends React.Component {
   constructor(props) {

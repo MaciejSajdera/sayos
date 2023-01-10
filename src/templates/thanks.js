@@ -1,6 +1,6 @@
+import { graphql } from "gatsby"
 import React from "react"
 import Header from "../components/Header/header"
-import { graphql } from "gatsby"
 
 const Thanks = props => {
   let { thanks } = props.data

@@ -1,5 +1,5 @@
-import React from "react"
 import PropTypes from "prop-types"
+import React from "react"
 import LoaderSVG from "./images/rolling.svg"
 
 import LoaderLogo from "./images/sayos-logo-light-cropped_100.png"
