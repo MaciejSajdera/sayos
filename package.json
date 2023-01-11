@@ -13,6 +13,7 @@
     "gatsby-plugin-image": "^3.0.0",
     "gatsby-plugin-layout": "^1.3.10",
     "gatsby-plugin-manifest": "^5.3.1",
+    "gatsby-plugin-netlify": "^5.1.0",
     "gatsby-plugin-offline": "^6.3.1",
     "gatsby-plugin-react-helmet": "^6.3.0",
     "gatsby-plugin-sass": "^6.3.1",
