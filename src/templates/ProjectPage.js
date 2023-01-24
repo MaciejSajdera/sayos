@@ -12,8 +12,6 @@ class ProjectPage extends React.Component {
   constructor(props) {
     super(props)
 
-    console.log(props)
-
     this.state = {
       isLogoBackgroundDark: false,
       otherProjectsInThisCategory: [],
@@ -26,8 +24,6 @@ class ProjectPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
-
     /***ARROWS */
     const arrowButtonLeft = document.querySelector(".box-bt-left")
     const arrowButtonRight = document.querySelector(".box-bt-right")
@@ -69,8 +65,6 @@ class ProjectPage extends React.Component {
     window.scrollTop = 0
     let { projects } = this.props.data
     const { thisProjectData } = this.props.pageContext
-
-    console.log(thisProjectData)
 
     let enteredFrom
 
@@ -161,17 +155,16 @@ class ProjectPage extends React.Component {
 
           let prevProjectLink
 
-          thisProjectData.locale === "pl"
+          this.props.pageContext.locale === "pl"
             ? (firstProjectLink = `${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
-            : (firstProjectLink = `en/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
+            : (firstProjectLink = `${this.props.pageContext.locale}/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
 
-          arrowRightLinkDestination = firstProjectLink
           nextProjectPlaceholderImageSrc =
             firstProjectObject.fullScreenPhoto.fluid.src
 
-          thisProjectData.locale === "pl"
+          this.props.pageContext.locale === "pl"
             ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
-            : (prevProjectLink = `en/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+            : (prevProjectLink = `${this.props.pageContext.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
 
           arrowLeftLinkDestination = prevProjectLink
           prevProjectPlaceholderImageSrc =
@@ -179,9 +172,12 @@ class ProjectPage extends React.Component {
         } else {
           let nextProjectLink
 
-          thisProjectData.locale === "pl"
+          console.log(this.props.pageContext.locale)
+          console.log(nextProjectObject)
+
+          this.props.pageContext.locale === "pl"
             ? (nextProjectLink = `${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
-            : (nextProjectLink = `en/${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
+            : (nextProjectLink = `${this.props.pageContext.locale}/${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
 
           arrowRightLinkDestination = nextProjectLink
           nextProjectPlaceholderImageSrc =
@@ -190,9 +186,9 @@ class ProjectPage extends React.Component {
           let prevProjectLink
 
           if (indexOfCurrentProject > 0) {
-            thisProjectData.locale === "pl"
+            this.props.pageContext.locale === "pl"
               ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
-              : (prevProjectLink = `en/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+              : (prevProjectLink = `${this.props.pageContext.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
 
             arrowLeftLinkDestination = prevProjectLink
             prevProjectPlaceholderImageSrc =
@@ -210,9 +206,9 @@ class ProjectPage extends React.Component {
               this.state.otherProjectsInThisCategory.length - 1
             ]
 
-          thisProjectData.locale === "pl"
+          this.props.pageContext.locale === "pl"
             ? (lastProjectLink = `${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
-            : (lastProjectLink = `en/${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
+            : (lastProjectLink = `${this.props.pageContext.locale}/${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
 
           arrowLeftLinkDestination = lastProjectLink
           prevProjectPlaceholderImageSrc =
@@ -341,8 +337,6 @@ class ProjectPage extends React.Component {
   }
 
   render() {
-    console.log(this.props)
-
     let {
       projects,
       menuRightProject,
@@ -356,7 +350,8 @@ class ProjectPage extends React.Component {
       publications,
     } = this.props.data
 
-    const { thisProjectData } = this.props.pageContext
+    const thisProjectData = this.props.pageContext.thisProjectData
+    const locale = this.props.pageContext.locale
 
     const menuStyle = `menuStyleFixed`
 
@@ -402,7 +397,6 @@ class ProjectPage extends React.Component {
         // document.body.style.overflow = "hidden"
       }
       const currentPage = document.querySelector("#project-page__wrapper")
-
       currentPage.style.transform = `translateX(-100%)`
 
       hideArrowBoxes()
@@ -542,7 +536,7 @@ class ProjectPage extends React.Component {
                               ${thisProjectData.fullScreenPhoto.fluid.src}
                             )`,
 
-                "@media (max-width: 992px)": {
+                "@media (maxWidth: 992px)": {
                   height: `0`,
                   backgroundSize: `contain`,
                   paddingTop: `${
@@ -621,7 +615,7 @@ class ProjectPage extends React.Component {
                     flexFlow: `column`,
                     justifyContent: `flex-end`,
 
-                    "@media (max-width: 992px)": {
+                    "@media (maxWidth: 992px)": {
                       height: `0`,
                       backgroundSize: `contain`,
                       paddingTop: `${

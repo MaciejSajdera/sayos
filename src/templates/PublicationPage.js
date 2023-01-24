@@ -179,17 +179,17 @@ class PublicationPage extends Component {
 
           let prevProjectLink
 
-          thisPublicationData.locale === "pl"
+          this.props.pageContext.locale === "pl"
             ? (firstProjectLink = `${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
-            : (firstProjectLink = `en/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
+            : (firstProjectLink = `${this.props.pageContext.locale}/${firstProjectObject.projectCategory}/${firstProjectObject.slug}`)
 
           arrowRightLinkDestination = firstProjectLink
           nextProjectPlaceholderImageSrc =
             firstProjectObject.fullScreenPhoto.fluid.src
 
-          thisPublicationData.locale === "pl"
+          this.props.pageContext.locale === "pl"
             ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
-            : (prevProjectLink = `en/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+            : (prevProjectLink = `${this.props.pageContext.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
 
           arrowLeftLinkDestination = prevProjectLink
           prevProjectPlaceholderImageSrc =
@@ -197,9 +197,9 @@ class PublicationPage extends Component {
         } else {
           let nextProjectLink
 
-          thisPublicationData.locale === "pl"
+          this.props.pageContext.locale === "pl"
             ? (nextProjectLink = `${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
-            : (nextProjectLink = `${thisPublicationData.locale}/${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
+            : (nextProjectLink = `${this.props.pageContext.locale}/${nextProjectObject.projectCategory}/${nextProjectObject.slug}`)
 
           arrowRightLinkDestination = nextProjectLink
           nextProjectPlaceholderImageSrc =
@@ -208,9 +208,9 @@ class PublicationPage extends Component {
           let prevProjectLink
 
           if (indexOfCurrentProject > 0) {
-            thisPublicationData.locale === "pl"
+            this.props.pageContext.locale === "pl"
               ? (prevProjectLink = `${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
-              : (prevProjectLink = `${thisPublicationData.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
+              : (prevProjectLink = `${this.props.pageContext.locale}/${prevProjectObject.projectCategory}/${prevProjectObject.slug}`)
 
             arrowLeftLinkDestination = prevProjectLink
             prevProjectPlaceholderImageSrc =
@@ -230,9 +230,9 @@ class PublicationPage extends Component {
               this.state.otherProjectsInThisCategory.length - 1
             ]
 
-          thisPublicationData.locale === "pl"
+          this.props.pageContext.locale === "pl"
             ? (lastProjectLink = `${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
-            : (lastProjectLink = `${thisPublicationData.locale}/${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
+            : (lastProjectLink = `${this.props.pageContext.locale}/${lastProjectObject.projectCategory}/${lastProjectObject.slug}`)
 
           arrowLeftLinkDestination = lastProjectLink
           prevProjectPlaceholderImageSrc =

@@ -254,6 +254,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       context: {
         houseProjectData: item.pageName,
         locale: "pl",
+        test: "test",
       },
     })
   })
